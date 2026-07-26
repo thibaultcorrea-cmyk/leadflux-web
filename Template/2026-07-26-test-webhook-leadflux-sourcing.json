@@ -1,0 +1,2919 @@
+{
+  "test": {
+    "date": "2026-07-26",
+    "objet": "Test du webhook de sourcing Leadflux",
+    "endpoint": "https://breath-n8n.com/webhook-test/leadflux-sourcing",
+    "methode": "POST",
+    "environnement": "test (webhook-test, pas production)",
+    "lance_par": "Claude Code"
+  },
+  "requete": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "corps": {
+      "secteurs": [
+        "Conseil",
+        "Services B2B",
+        "Recrutement"
+      ],
+      "localisation": "Île-de-France",
+      "taille": {
+        "min": 3,
+        "max": 15
+      },
+      "chiffreAffaires": {
+        "min": 500000,
+        "max": 5000000
+      },
+      "poste": [
+        "Dirigeant",
+        "CEO",
+        "Fondateur"
+      ],
+      "exclusions": [
+        "DSI interne"
+      ],
+      "volume": 50,
+      "source": "test-claude-code"
+    }
+  },
+  "reponse": {
+    "httpStatus": 200,
+    "tempsReponse": "0.48 s",
+    "tailleOctets": 49282,
+    "nbResultats": 100,
+    "schemaObserve": {
+      "racine": "tableau d objets",
+      "person": [
+        "name",
+        "email",
+        "jobTitle"
+      ],
+      "company": [
+        "name",
+        "industry",
+        "description",
+        "keywords",
+        "size",
+        "technologies",
+        "address"
+      ],
+      "address": [
+        "city",
+        "country"
+      ]
+    },
+    "donnees": [
+      {
+        "person": {
+          "name": "Marion Aubert",
+          "email": "marion.aubert@example-test.com",
+          "jobTitle": "Directeur associé"
+        },
+        "company": {
+          "name": "Aubert Stratégie",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Salesforce",
+            "Slack"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Marchand",
+          "email": "julien.marchand@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Atelier Marchand",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Muller",
+          "email": "fabien.muller@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Institut de Formation Muller",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Moodle",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Sophie Simon",
+          "email": "sophie.simon@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Altitude Conseil Bordeaux",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Salesforce",
+            "Slack"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Perrot",
+          "email": "julien.perrot@example-test.com",
+          "jobTitle": "Gérant"
+        },
+        "company": {
+          "name": "Manufacture Perrot",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Simon",
+          "email": "hugo.simon@example-test.com",
+          "jobTitle": "Associé fondateur"
+        },
+        "company": {
+          "name": "Simon Stratégie",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Clara Robert",
+          "email": "clara.robert@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Robert Fabrication",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Shopify",
+            "Mailchimp"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Pierre Bernard",
+          "email": "pierre.bernard@example-test.com",
+          "jobTitle": "Directrice générale"
+        },
+        "company": {
+          "name": "Bernard BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Mathieu Dubois",
+          "email": "mathieu.dubois@example-test.com",
+          "jobTitle": "Directrice des ventes"
+        },
+        "company": {
+          "name": "Dubois BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "SAP",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Alexandre Richard",
+          "email": "alexandre.richard@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Centre de Formation Richard",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Inès Petit",
+          "email": "ines.petit@example-test.com",
+          "jobTitle": "Notaire associée"
+        },
+        "company": {
+          "name": "Cabinet Petit",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Lyon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Mathieu Dubois",
+          "email": "mathieu.dubois@example-test.com",
+          "jobTitle": "Associée"
+        },
+        "company": {
+          "name": "Dubois Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Mathieu Girard",
+          "email": "mathieu.girard@example-test.com",
+          "jobTitle": "Avocate associée"
+        },
+        "company": {
+          "name": "Cabinet Girard Expertise",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Sage"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Chloé Marchand",
+          "email": "chloe.marchand@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Manufacture Marchand",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Lyon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julie Blanc",
+          "email": "julie.blanc@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Cabinet Blanc",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Laura Robert",
+          "email": "laura.robert@example-test.com",
+          "jobTitle": "Associée"
+        },
+        "company": {
+          "name": "Robert Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Clara Girard",
+          "email": "clara.girard@example-test.com",
+          "jobTitle": "Directeur associé"
+        },
+        "company": {
+          "name": "Altitude Conseil Paris",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "1 (solo)",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Vincent Leroy",
+          "email": "vincent.leroy@example-test.com",
+          "jobTitle": "Directrice générale"
+        },
+        "company": {
+          "name": "Négoce Leroy",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Salesforce",
+            "SAP"
+          ],
+          "address": {
+            "city": "Lyon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Dubois",
+          "email": "fabien.dubois@example-test.com",
+          "jobTitle": "Associé fondateur"
+        },
+        "company": {
+          "name": "Cabinet Dubois Conseil",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Nantes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Marion Rousseau",
+          "email": "marion.rousseau@example-test.com",
+          "jobTitle": "Gérant"
+        },
+        "company": {
+          "name": "Atelier Rousseau",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Mailchimp",
+            "Odoo"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Léa Michel",
+          "email": "lea.michel@example-test.com",
+          "jobTitle": "Directrice recrutement"
+        },
+        "company": {
+          "name": "Michel Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Antoine Blanc",
+          "email": "antoine.blanc@example-test.com",
+          "jobTitle": "Gérante"
+        },
+        "company": {
+          "name": "Académie Blanc",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Marion Lefevre",
+          "email": "marion.lefevre@example-test.com",
+          "jobTitle": "Associé fondateur"
+        },
+        "company": {
+          "name": "Lefevre Stratégie",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "1 (solo)",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Léa Bernard",
+          "email": "lea.bernard@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Institut de Formation Bernard",
+          "industry": "Formation professionnelle",
+          "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Moodle",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Yanis Durand",
+          "email": "yanis.durand@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Durand & Partenaires",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Sage"
+          ],
+          "address": {
+            "city": "Montpellier",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Vincent Girard",
+          "email": "vincent.girard@example-test.com",
+          "jobTitle": "Gérante"
+        },
+        "company": {
+          "name": "Académie Girard",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Moodle",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Karim Robert",
+          "email": "karim.robert@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Institut de Formation Robert",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Moodle",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Emma Lefevre",
+          "email": "emma.lefevre@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Institut de Formation Lefevre",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Le Mans",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Romain Faure",
+          "email": "romain.faure@example-test.com",
+          "jobTitle": "Directrice des ventes"
+        },
+        "company": {
+          "name": "Faure BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Toulouse",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Inès Girard",
+          "email": "ines.girard@example-test.com",
+          "jobTitle": "Consultante senior"
+        },
+        "company": {
+          "name": "Girard & Associés",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Chloé Dumont",
+          "email": "chloe.dumont@example-test.com",
+          "jobTitle": "Directeur associé"
+        },
+        "company": {
+          "name": "Dumont & Associés",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Toulouse",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Manon Henry",
+          "email": "manon.henry@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Henry Fabrication",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Shopify",
+            "Mailchimp"
+          ],
+          "address": {
+            "city": "Metz",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Nicolas Dumont",
+          "email": "nicolas.dumont@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Atelier Dumont Création",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Toulouse",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Marion Girard",
+          "email": "marion.girard@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Girard & Partenaires",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Toulouse",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Antoine Nicolas",
+          "email": "antoine.nicolas@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Étude Nicolas",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Lille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Louise Fontaine",
+          "email": "louise.fontaine@example-test.com",
+          "jobTitle": "Associée"
+        },
+        "company": {
+          "name": "Cabinet Fontaine RH",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Le Mans",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Garnier",
+          "email": "julien.garnier@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Manufacture Garnier",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Mailchimp",
+            "Odoo"
+          ],
+          "address": {
+            "city": "Le Mans",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Garnier",
+          "email": "fabien.garnier@example-test.com",
+          "jobTitle": "Directeur commercial"
+        },
+        "company": {
+          "name": "Négoce Garnier",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Salesforce",
+            "SAP"
+          ],
+          "address": {
+            "city": "Grenoble",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Vincent Simon",
+          "email": "vincent.simon@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Atelier Simon",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Angers",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julie Lambert",
+          "email": "julie.lambert@example-test.com",
+          "jobTitle": "Notaire associée"
+        },
+        "company": {
+          "name": "Lambert & Partenaires",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Alexandre Rousseau",
+          "email": "alexandre.rousseau@example-test.com",
+          "jobTitle": "Gérante"
+        },
+        "company": {
+          "name": "Centre de Formation Rousseau",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Romain Belaïd",
+          "email": "romain.belaid@example-test.com",
+          "jobTitle": "Notaire associée"
+        },
+        "company": {
+          "name": "Cabinet Belaïd",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Metz",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Aïcha Lambert",
+          "email": "aicha.lambert@example-test.com",
+          "jobTitle": "Consultante senior"
+        },
+        "company": {
+          "name": "Altitude Conseil Nice",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "1 (solo)",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Romain Fontaine",
+          "email": "romain.fontaine@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Fontaine & Associés",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "1 (solo)",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Clara Belaïd",
+          "email": "clara.belaid@example-test.com",
+          "jobTitle": "Directrice pédagogique"
+        },
+        "company": {
+          "name": "Institut de Formation Belaïd",
+          "industry": "Formation professionnelle",
+          "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Clara Simon",
+          "email": "clara.simon@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Centre de Formation Simon",
+          "industry": "Formation professionnelle",
+          "description": "Formation continue en compétences managériales pour cadres de PME.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Moodle",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Nantes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Sophie Bernard",
+          "email": "sophie.bernard@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Bernard Formation",
+          "industry": "Formation professionnelle",
+          "description": "Formation continue en compétences managériales pour cadres de PME.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Moodle",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Manon Garnier",
+          "email": "manon.garnier@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Cabinet Garnier",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Sage"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Pierre Lefevre",
+          "email": "pierre.lefevre@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Lefevre Talents",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Manon Aubert",
+          "email": "manon.aubert@example-test.com",
+          "jobTitle": "Associée"
+        },
+        "company": {
+          "name": "Cabinet Aubert RH",
+          "industry": "Recrutement et management de transition",
+          "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Marion Marchand",
+          "email": "marion.marchand@example-test.com",
+          "jobTitle": "Directeur commercial"
+        },
+        "company": {
+          "name": "Marchand BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "SAP",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Robert",
+          "email": "hugo.robert@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Cabinet Robert Expertise",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Lille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Maxime Durand",
+          "email": "maxime.durand@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Étude Durand",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Lille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Alexandre Simon",
+          "email": "alexandre.simon@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Cabinet Simon Expertise",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Sage"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Nicolas Garnier",
+          "email": "nicolas.garnier@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Étude Garnier",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Lille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Léa Henry",
+          "email": "lea.henry@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Négoce Henry",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Nancy",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Sarah Denis",
+          "email": "sarah.denis@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Atelier Denis Création",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Aubert",
+          "email": "hugo.aubert@example-test.com",
+          "jobTitle": "Directrice de production"
+        },
+        "company": {
+          "name": "Atelier Aubert Création",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Odoo",
+            "Shopify"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Sophie Simon",
+          "email": "sophie.simon@example-test.com",
+          "jobTitle": "Directeur général"
+        },
+        "company": {
+          "name": "Simon Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Bordeaux",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julie Richard",
+          "email": "julie.richard@example-test.com",
+          "jobTitle": "Directrice recrutement"
+        },
+        "company": {
+          "name": "Richard Talents",
+          "industry": "Recrutement et management de transition",
+          "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Richard",
+          "email": "julien.richard@example-test.com",
+          "jobTitle": "Directrice des ventes"
+        },
+        "company": {
+          "name": "Négoce Richard",
+          "industry": "Commerce et distribution B2B",
+          "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Louise Simon",
+          "email": "louise.simon@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Négoce Simon",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Inès Dubois",
+          "email": "ines.dubois@example-test.com",
+          "jobTitle": "Directrice recrutement"
+        },
+        "company": {
+          "name": "Cabinet Dubois RH",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Roussel",
+          "email": "fabien.roussel@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Cabinet Roussel Expertise",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Duval",
+          "email": "fabien.duval@example-test.com",
+          "jobTitle": "Directrice pédagogique"
+        },
+        "company": {
+          "name": "Institut de Formation Duval",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Moodle",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Le Mans",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Garnier",
+          "email": "julien.garnier@example-test.com",
+          "jobTitle": "Consultante senior"
+        },
+        "company": {
+          "name": "Garnier Stratégie",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Paris",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Nicolas Petit",
+          "email": "nicolas.petit@example-test.com",
+          "jobTitle": "Directrice de production"
+        },
+        "company": {
+          "name": "Atelier Petit Création",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Mailchimp",
+            "Odoo"
+          ],
+          "address": {
+            "city": "Dijon",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Louise Bernard",
+          "email": "louise.bernard@example-test.com",
+          "jobTitle": "Directrice recrutement"
+        },
+        "company": {
+          "name": "Bernard Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Clara Faure",
+          "email": "clara.faure@example-test.com",
+          "jobTitle": "Directrice pédagogique"
+        },
+        "company": {
+          "name": "Académie Faure",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Moodle",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Henry",
+          "email": "hugo.henry@example-test.com",
+          "jobTitle": "Directeur général"
+        },
+        "company": {
+          "name": "Henry Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Clermont-Ferrand",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Yanis Richard",
+          "email": "yanis.richard@example-test.com",
+          "jobTitle": "Associé fondateur"
+        },
+        "company": {
+          "name": "Altitude Conseil Metz",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Conseil en performance opérationnelle pour entreprises de services.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Metz",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Inès Petit",
+          "email": "ines.petit@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Petit Talents",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Nancy",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Thomas Muller",
+          "email": "thomas.muller@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Atelier Muller",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Shopify",
+            "Mailchimp"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Louise Lambert",
+          "email": "louise.lambert@example-test.com",
+          "jobTitle": "Associée"
+        },
+        "company": {
+          "name": "Lambert Talents",
+          "industry": "Recrutement et management de transition",
+          "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Henry",
+          "email": "julien.henry@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Henry Formation",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Chloé Dubois",
+          "email": "chloe.dubois@example-test.com",
+          "jobTitle": "Architecte associé"
+        },
+        "company": {
+          "name": "Étude Dubois",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Cegid",
+            "Sage"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Belaïd",
+          "email": "fabien.belaid@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Belaïd BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "Salesforce",
+            "SAP"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Sarah Fontaine",
+          "email": "sarah.fontaine@example-test.com",
+          "jobTitle": "Directrice générale"
+        },
+        "company": {
+          "name": "Fontaine Industrie",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "SAP",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Antoine Lambert",
+          "email": "antoine.lambert@example-test.com",
+          "jobTitle": "Consultante senior"
+        },
+        "company": {
+          "name": "Cabinet Lambert Conseil",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Rouen",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Amandine Girard",
+          "email": "amandine.girard@example-test.com",
+          "jobTitle": "Gérant"
+        },
+        "company": {
+          "name": "Girard Fabrication",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Shopify",
+            "Mailchimp"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Fabien Perrot",
+          "email": "fabien.perrot@example-test.com",
+          "jobTitle": "Directeur associé"
+        },
+        "company": {
+          "name": "Altitude Conseil Marseille",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Salesforce",
+            "Slack"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Guerin",
+          "email": "julien.guerin@example-test.com",
+          "jobTitle": "Directrice générale"
+        },
+        "company": {
+          "name": "Guerin BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "SAP",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Amandine Bernard",
+          "email": "amandine.bernard@example-test.com",
+          "jobTitle": "Directrice pédagogique"
+        },
+        "company": {
+          "name": "Institut de Formation Bernard",
+          "industry": "Formation professionnelle",
+          "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "HubSpot",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Nantes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Antoine Henry",
+          "email": "antoine.henry@example-test.com",
+          "jobTitle": "Directeur général"
+        },
+        "company": {
+          "name": "Cabinet Henry RH",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Le Mans",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Romain Moreau",
+          "email": "romain.moreau@example-test.com",
+          "jobTitle": "Directrice pédagogique"
+        },
+        "company": {
+          "name": "Centre de Formation Moreau",
+          "industry": "Formation professionnelle",
+          "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Moodle",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Strasbourg",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Pierre Garnier",
+          "email": "pierre.garnier@example-test.com",
+          "jobTitle": "Directrice des ventes"
+        },
+        "company": {
+          "name": "Négoce Garnier",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "15-30 employés",
+          "technologies": [
+            "SAP",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Chloé Dubois",
+          "email": "chloe.dubois@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Dubois BtoB",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Salesforce",
+            "SAP"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julien Simon",
+          "email": "julien.simon@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Atelier Simon",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Shopify",
+            "Mailchimp"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Karim Blanc",
+          "email": "karim.blanc@example-test.com",
+          "jobTitle": "Fondateur"
+        },
+        "company": {
+          "name": "Blanc Talents",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Angers",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Leroy",
+          "email": "hugo.leroy@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Leroy Stratégie",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "1 (solo)",
+          "technologies": [
+            "HubSpot",
+            "Notion"
+          ],
+          "address": {
+            "city": "Reims",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Julie Dubois",
+          "email": "julie.dubois@example-test.com",
+          "jobTitle": "Directeur associé"
+        },
+        "company": {
+          "name": "Altitude Conseil Clermont-Ferrand",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Clermont-Ferrand",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Léa Robert",
+          "email": "lea.robert@example-test.com",
+          "jobTitle": "Associé fondateur"
+        },
+        "company": {
+          "name": "Cabinet Robert Conseil",
+          "industry": "Conseil (stratégie, RH, IA)",
+          "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+          "keywords": [
+            "conseil",
+            "consulting",
+            "stratégie",
+            "accompagnement",
+            "transformation"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Notion",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Lille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Louise Aubert",
+          "email": "louise.aubert@example-test.com",
+          "jobTitle": "Directrice générale"
+        },
+        "company": {
+          "name": "Aubert Distribution",
+          "industry": "Commerce et distribution B2B",
+          "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Sage",
+            "Salesforce"
+          ],
+          "address": {
+            "city": "Clermont-Ferrand",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Vincent Aubert",
+          "email": "vincent.aubert@example-test.com",
+          "jobTitle": "Directeur général"
+        },
+        "company": {
+          "name": "Aubert Recrutement",
+          "industry": "Recrutement et management de transition",
+          "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "LinkedIn Recruiter",
+            "HubSpot"
+          ],
+          "address": {
+            "city": "Marseille",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Chloé Rousseau",
+          "email": "chloe.rousseau@example-test.com",
+          "jobTitle": "Expert-comptable associé"
+        },
+        "company": {
+          "name": "Cabinet Rousseau Expertise",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Pennylane",
+            "Sage"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Emma Michel",
+          "email": "emma.michel@example-test.com",
+          "jobTitle": "Responsable formation"
+        },
+        "company": {
+          "name": "Centre de Formation Michel",
+          "industry": "Formation professionnelle",
+          "description": "Formation continue en compétences managériales pour cadres de PME.",
+          "keywords": [
+            "formation",
+            "pédagogie",
+            "certification",
+            "apprentissage",
+            "compétences"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Moodle",
+            "Zoom"
+          ],
+          "address": {
+            "city": "Clermont-Ferrand",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Yanis Dumont",
+          "email": "yanis.dumont@example-test.com",
+          "jobTitle": "Fondatrice"
+        },
+        "company": {
+          "name": "Dumont Fabrication",
+          "industry": "Artisanat et production à forte valeur ajoutée",
+          "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+          "keywords": [
+            "fabrication",
+            "artisanat",
+            "atelier",
+            "manufacture",
+            "production",
+            "décoration"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Mailchimp",
+            "Odoo"
+          ],
+          "address": {
+            "city": "Nice",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Hugo Henry",
+          "email": "hugo.henry@example-test.com",
+          "jobTitle": "Directeur général"
+        },
+        "company": {
+          "name": "Henry Management de Transition",
+          "industry": "Recrutement et management de transition",
+          "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+          "keywords": [
+            "recrutement",
+            "RH",
+            "talents",
+            "chasseur de têtes",
+            "management de transition"
+          ],
+          "size": "3-8 employés",
+          "technologies": [
+            "Boond Manager",
+            "LinkedIn Recruiter"
+          ],
+          "address": {
+            "city": "Grenoble",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Laura Denis",
+          "email": "laura.denis@example-test.com",
+          "jobTitle": "Directrice des ventes"
+        },
+        "company": {
+          "name": "Denis Distribution",
+          "industry": "Commerce et distribution B2B",
+          "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+          "keywords": [
+            "distribution",
+            "grossiste",
+            "commerce",
+            "négoce",
+            "fournisseur",
+            "BtoB"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Salesforce",
+            "SAP"
+          ],
+          "address": {
+            "city": "Rennes",
+            "country": "France"
+          }
+        }
+      },
+      {
+        "person": {
+          "name": "Thomas Petit",
+          "email": "thomas.petit@example-test.com",
+          "jobTitle": "Avocate associée"
+        },
+        "company": {
+          "name": "Petit & Partenaires",
+          "industry": "Professions libérales structurées (comptabilité, juridique, architecture)",
+          "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+          "keywords": [
+            "cabinet",
+            "comptable",
+            "juridique",
+            "expertise",
+            "architecture",
+            "notarial"
+          ],
+          "size": "8-15 employés",
+          "technologies": [
+            "Pennylane",
+            "Notion"
+          ],
+          "address": {
+            "city": "Angers",
+            "country": "France"
+          }
+        }
+      }
+    ]
+  }
+}

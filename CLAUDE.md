@@ -59,13 +59,35 @@ Structure issue de la concertation du 14/07/2026, pas une copie du frontend Lova
 | Onglet | Route prévue | Statut | Contenu / rôle |
 |---|---|---|---|
 | **Tableau** | `/tableau` | Conservé | Vue d'ensemble / dashboard. Contient un widget "Par secteur" |
-| **Recherche** | `/recherche` | Conservé | Formulaire de critères de sourcing (secteur, localisation, poste, taille, CA), lance le sourcing Apify |
 | **Prospects** | `/prospects` | Conservé | Liste des leads sourcés, sélection d'un lead pour lancer la rédaction d'email |
 | **Emails** | `/emails` | Conservé, avec évolution | L'onglet le plus modifié. Voir détail ci-dessous |
+| **Recherche** | - | **Retiré de la navigation** (26/07/2026) | N'est plus un onglet. Voir ci-dessous |
 | **Analyse** | - | **Supprimé** | Tableau détaillé par secteur/CA/taille jugé superflu pour l'ICP OxIAgen. Trop proche d'un outil BI. Le widget "Par secteur" du Tableau suffit |
 
 Les routes ci-dessus sont une proposition de nommage cohérente avec les onglets. Elles ne sont
 pas encore actées : à confirmer avec Thibault avant de créer les dossiers dans `app/`.
+
+### La recherche n'est plus un onglet
+
+Décision du 26/07/2026, prise en maquette. Elle **remplace** ce que dit le récap projet du
+14/07, qui listait Recherche parmi les onglets.
+
+La recherche est une **action**, pas une destination. Le formulaire des cinq critères
+(secteur, localisation, poste, taille, chiffre d'affaires, tous en menus déroulants) vit
+dans une **modale**, ouverte depuis :
+
+- le bouton « Nouvelle recherche » du Tableau ;
+- le bouton « Nouvelle recherche » de la page de résultats ;
+- le lien « Modifier les critères » de la barre de critères, au-dessus des résultats.
+
+Conséquence sur la navigation : la barre latérale ne contient plus que **Tableau, Prospects,
+Emails**. Sur la page de résultats de sourcing, c'est **Prospects** qui est l'onglet actif,
+puisque le résultat d'un sourcing est une liste de prospects. À revoir si les résultats de
+sourcing gagnent un jour leur propre page distincte de la liste des prospects.
+
+Le tableau de résultats porte une colonne de sélection multiple à gauche (avec case
+« tout sélectionner » et action groupée « Prospecter la sélection ») et une colonne Actions
+à droite : Prospecter, Ajouter, Modifier, Supprimer.
 
 ### Onglet Emails : la partie à construire avec le plus de soin
 
