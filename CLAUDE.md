@@ -104,6 +104,51 @@ l'onglet Emails, structuré par **statut par prospect** et non par historique d'
 C'est cette logique de statut qui structure l'onglet. Ne jamais réintroduire de compteur
 "taux d'envoi" ou de KPI qui suppose un envoi automatique.
 
+#### Maquette retenue (26/07/2026) : tableau à onglets de statut
+
+Trois variantes ont été maquettées (volet de lecture, kanban, tableau). **La variante tableau
+est retenue**, cohérente avec la page de résultats de sourcing.
+
+- **Onglets de statut** en haut : Tous, Brouillons à valider, Validés et envoyés, A répondu,
+  chacun avec son compteur. Composant `Tabs` de shadcn, soulignement doré sur l'onglet actif.
+- **Colonnes** : sélection multiple, Prospect (nom + entreprise), Objet de l'email, Statut
+  (badge), Dernière activité, Actions.
+- **Colonne Actions**, dans cet ordre : **Aperçu** (icône œil, en premier volontairement),
+  puis l'action principale qui **dépend du statut**, puis Modifier et Supprimer.
+
+| Statut de la ligne | Action principale | Icône |
+|---|---|---|
+| Brouillon à valider | Valider | `send` |
+| A répondu | Répondre | `reply` |
+| Validé et envoyé | Relancer | `repeat-2` |
+
+#### Fenêtre d'aperçu de l'email
+
+Ouverte par le bouton Aperçu. Modale de 720px (longueur de ligne de lecture conforme au
+design system) contenant : identité du prospect, badge de statut, ligne de contexte
+(régénéré quand, humanisation, rappel qu'aucun envoi n'est automatique), destinataire,
+objet, **corps complet de l'email**, et l'encart indiquant la version du PDF de connaissance
+client utilisée.
+
+Barre d'action de la modale : à gauche deux boutons **Annuler / Rétablir** (`undo-2` /
+`redo-2`) pour naviguer dans les régénérations successives ; à droite Modifier, Régénérer,
+et Valider et envoyer.
+
+**Conséquence sur le modèle de données** : l'annuler-rétablir suppose de conserver **chaque
+génération**, pas seulement la dernière. Prévoir une table de versions rattachée à l'email
+plutôt qu'un champ texte écrasé à chaque régénération. À caler avant de figer le schéma
+Drizzle.
+
+**Garde-fou à ne pas oublier** : les boutons d'action groupée ("Valider et envoyer la
+sélection" ici, "Prospecter la sélection" sur la page de résultats) recréent en pratique
+l'envoi automatique que le produit interdit, puisque personne ne lit vingt emails avant de
+cliquer une fois. Si ces boutons sont implémentés, ils doivent passer par une étape de
+confirmation qui fait défiler les emails un par un. Point ouvert, à trancher avec Thibault.
+
+**Accessibilité** : les boutons icône seule (Aperçu, Modifier, Supprimer, Annuler, Rétablir)
+exigent une infobulle et un `aria-label`. Prévoir aussi l'état désactivé d'Annuler et
+Rétablir sur un brouillon jamais régénéré.
+
 ---
 
 ## 4. Logique métier non négociable
