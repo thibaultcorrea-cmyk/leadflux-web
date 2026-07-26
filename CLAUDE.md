@@ -30,6 +30,7 @@ Il permet à un client OxIAgen (PME structurée ou solopreneur qualifié) de :
 |---|---|
 | Framework | Next.js 16 (App Router, TypeScript) |
 | CSS | Tailwind CSS v4 (`@theme inline`, pas de `tailwind.config.js`) |
+| Composants UI | **shadcn/ui** (obligatoire, voir section 6), retokenisé sur la DA OxIAgen |
 | ORM / DB | Drizzle ORM + PostgreSQL (Docker en local) |
 | Auth | **Better Auth** (décision actée le 14/07/2026, ni Supabase ni auth Lovable) |
 | Package manager | pnpm (Node >= 20) |
@@ -41,6 +42,9 @@ Il permet à un client OxIAgen (PME structurée ou solopreneur qualifié) de :
   Le vrai modèle (prospects, emails, statuts, clients, comptes) reste à concevoir.
 - `app/layout.tsx` contient encore les metadata par défaut de `create-next-app` (à corriger)
 - Better Auth n'est **pas encore installé**
+- shadcn/ui n'est **pas encore initialisé** (pas de `components.json`, pas de dossier
+  `components/ui/`). Première étape avant tout travail d'UI : `pnpm dlx shadcn@latest init`,
+  puis retokeniser le thème généré sur la palette de `design.md`.
 - Aucune cible de déploiement ou d'hébergement tranchée
 
 **Maquette** : `Macket_de_site.pen` (fichier Pencil, à ouvrir via les outils MCP `pencil`,
@@ -132,15 +136,50 @@ prescrit du texte blanc sur `#D89727`, soit 2,6:1, sous le minimum WCAG AA. Util
 `ink-900` (`#23181C`) sur le doré, soit 6,6:1. Même règle pour les liens dorés sur fond clair :
 `accent-700` (`#946315`), jamais `accent-500`.
 
-**Pattern UI** : shadcn/ui comme référence d'UX de composants (structure carte + formulaire,
-label visible au-dessus du champ, erreur sous le champ concerné, toggle afficher/masquer sur les
-mots de passe). Le style visuel vient de la DA OxIAgen, pas du thème shadcn par défaut.
+### Règle UI : toujours partir de shadcn/ui
+
+**Tout composant d'interface se construit à partir de shadcn/ui.** Ce n'est pas une suggestion,
+c'est la règle par défaut du projet. Ne jamais réinventer un composant qui existe déjà dans le
+registre shadcn (bouton, champ, carte, dialogue, tableau, onglets, menu, toast, etc.).
+
+Le partage des rôles est net :
+
+| Ce qui vient de shadcn | Ce qui vient de la DA OxIAgen |
+|---|---|
+| Structure du composant et sémantique HTML | Couleurs, typo, radius, ombres |
+| Comportements et états (focus, hover, disabled, loading, erreur) | Intensité et discrétion des effets |
+| Accessibilité (Radix : rôles ARIA, navigation clavier, focus trap) | Le "premium accessible", pas de néon ni de 3D |
+| Patterns de formulaire (label visible au-dessus, erreur sous le champ, toggle mot de passe) | Le ton des libellés et des messages |
+
+Autrement dit : **shadcn décide de la mécanique, la DA décide de l'apparence.** Ne jamais livrer
+un écran avec le thème shadcn par défaut (gris neutres, `zinc`), il faut le retoken sur la palette
+de `design.md`.
+
+**Serveur MCP shadcn** : défini dans `.mcp.json` à la racine de ce dossier.
+
+```json
+{ "mcpServers": { "shadcn": { "command": "npx", "args": ["shadcn@latest", "mcp"] } } }
+```
+
+Il faut lancer Claude Code **depuis `site/`** pour qu'il soit chargé, et approuver le serveur au
+démarrage. Une fois actif, l'utiliser pour chercher le composant et son exemple officiel **avant**
+d'écrire du code d'UI, plutôt que d'écrire un composant de mémoire. Le skill `ui-ux-pro-max`
+s'appuie aussi sur ce MCP.
+
+Ordre de travail sur toute nouvelle UI :
+1. Chercher le composant dans le MCP shadcn (structure et exemple de référence)
+2. L'installer via la CLI shadcn plutôt que de le recopier à la main
+3. Appliquer les tokens de `design.md` (jamais de hex brut dans le composant)
+4. Vérifier la checklist accessibilité de la section 6 de `design.md`
 
 ---
 
 ## 7. Conventions de code propres à ce dossier
 
 - App Router uniquement (`app/`), jamais `pages/`
+- Composants d'UI : toujours shadcn/ui en base (cf. section 6). Jamais de composant maison quand
+  l'équivalent existe dans le registre. Les primitives shadcn vivent dans `components/ui/`, les
+  composants métier Leadflux dans `components/`
 - Un composant par section, en `.tsx`
 - Tokens de la DA en CSS variables via `@theme inline` dans `app/globals.css`, jamais de hex brut
   dans un composant
