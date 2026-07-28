@@ -5,6 +5,8 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { AuthProvider } from "./components/AuthProvider";
 import { headers } from "next/headers";
+import { AppSidebarUser } from "@/components/shared/sidebars/app-sidebar";
+import { showUserInitials, showUserRoleLabel } from "@/lib/user-session";
 
 /**
  * Layout de l'espace connecté : sidebar persistante + zone de contenu.
@@ -20,12 +22,18 @@ export default async function PrivateLayout({
 
   if (!session) redirect("/");
 
+  const currentUser = {
+    name: session.user.name,
+    role: showUserRoleLabel(session.user),
+    initials: showUserInitials(session.user.name),
+  } satisfies AppSidebarUser;
+
 
   return (
     <AuthProvider session={session}>
       <TooltipProvider>
         <SidebarProvider>
-          <PrivateSidebar />
+          <PrivateSidebar currentUser={currentUser} />
           <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>
       </TooltipProvider>

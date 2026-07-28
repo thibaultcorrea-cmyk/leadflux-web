@@ -4,6 +4,7 @@ import { LayoutDashboard, Mail, Radar, Users } from "lucide-react";
 
 import {
   AppSidebar,
+  AppSidebarUser,
   type AppSidebarNavItem,
 } from "@/components/shared/sidebars/app-sidebar";
 import { currentUser } from "../mocks/current-user";
@@ -21,7 +22,10 @@ const NAV_ITEMS: AppSidebarNavItem[] = [
   { label: "Emails", href: "/emails", icon: Mail },
 ];
 
-export function PrivateSidebar() {
+export function PrivateSidebar({ currentUser }: { currentUser: AppSidebarUser }) {
+
+
+
   return (
     <AppSidebar
       brand={{ label: "Leadflux", icon: Radar, href: "/tableau" }}
