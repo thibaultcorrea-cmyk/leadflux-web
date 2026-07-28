@@ -1,1 +1,230 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    /* Familles de police — DA Leadflux (design.md §2). font-sans/font-heading
+       pilotent les composants shadcn génériques ; font-display/font-serif
+       sont à appliquer explicitement sur les vrais titres H1-H3 et l'accroche. */
+    --font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
+    --font-heading: var(--font-inter), "Helvetica Neue", sans-serif;
+    --font-ui: var(--font-inter), "Helvetica Neue", sans-serif;
+    --font-display: var(--font-league-gothic), "Oswald", sans-serif;
+    --font-serif: var(--font-playfair), Georgia, serif;
+
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+
+    /* Palette étendue de marque (design.md §1) — tints/shades pour hover,
+       disabled, surfaces. Ne jamais utiliser de hex brut dans un composant :
+       toujours passer par bg-primary-500, text-ink-700, etc. */
+    --color-primary-50: #f7eef1;
+    --color-primary-100: #ead7de;
+    --color-primary-200: #d2aebc;
+    --color-primary-300: #b8859a;
+    --color-primary-400: #9b5c77;
+    --color-primary-500: #6f2e45;
+    --color-primary-600: #58233a;
+    --color-primary-700: #43142a;
+    --color-primary-800: #330f20;
+    --color-primary-900: #220a15;
+
+    --color-secondary-50: #f6f0f2;
+    --color-secondary-100: #ebdee3;
+    --color-secondary-200: #d7bdc8;
+    --color-secondary-300: #c29cad;
+    --color-secondary-400: #a98a94;
+    --color-secondary-500: #8e6b7a;
+    --color-secondary-600: #745662;
+    --color-secondary-700: #5a424c;
+    --color-secondary-800: #402e36;
+    --color-secondary-900: #271b20;
+
+    --color-background-100: #fff9ef;
+    --color-background-200: #f5efe6;
+    --color-background-300: #e9e1d4;
+
+    --color-accent-50: #fcf3e1;
+    --color-accent-100: #f8e4bc;
+    --color-accent-200: #f0c87a;
+    --color-accent-300: #e7ac4e;
+    --color-accent-400: #dfa02e;
+    --color-accent-500: #d89727;
+    --color-accent-600: #b87d1d;
+    --color-accent-700: #946315;
+    --color-accent-800: #6f4a10;
+    --color-accent-900: #4a310b;
+
+    --color-ink-900: #23181c;
+    --color-ink-700: #4a3b41;
+    --color-ink-500: #77656c;
+    --color-ink-300: #b3a4aa;
+    --color-ink-100: #e4dbdd;
+
+    --color-success: #2f6b4f;
+    --color-warning: #b87d1d;
+    --color-error: #a83232;
+    --color-info: #43142a;
+
+    /* Échelle typographique (design.md §2) */
+    --text-display-xl: 4.5rem;
+    --text-display-xl--line-height: 0.95;
+    --text-display-xl--letter-spacing: 0.01em;
+
+    --text-display-lg: 3rem;
+    --text-display-lg--line-height: 1;
+    --text-display-lg--letter-spacing: 0.01em;
+
+    --text-display-md: 2rem;
+    --text-display-md--line-height: 1.05;
+    --text-display-md--letter-spacing: 0.015em;
+
+    --text-display-sm: 1.5rem;
+    --text-display-sm--line-height: 1.1;
+    --text-display-sm--letter-spacing: 0.02em;
+
+    --text-lead: 1.25rem;
+    --text-lead--line-height: 1.5;
+
+    --text-body-lg: 1.125rem;
+    --text-body-lg--line-height: 1.6;
+
+    --text-body: 1rem;
+    --text-body--line-height: 1.6;
+
+    --text-body-sm: 0.875rem;
+    --text-body-sm--line-height: 1.5;
+
+    --text-caption: 0.75rem;
+    --text-caption--line-height: 1.4;
+    --text-caption--letter-spacing: 0.02em;
+
+    /* Radius mesuré (design.md §3) — valeurs fixes, pas une échelle
+       proportionnelle à un seul --radius de base */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
+
+    /* Ombres discrètes (design.md §3) — jamais de drop-shadow lourde */
+    --shadow-xs: 0 1px 2px 0 rgb(35 24 28 / 0.04);
+    --shadow-sm: 0 1px 3px 0 rgb(35 24 28 / 0.06), 0 1px 2px -1px rgb(35 24 28 / 0.06);
+    --shadow-md: 0 4px 8px -2px rgb(35 24 28 / 0.08), 0 2px 4px -2px rgb(35 24 28 / 0.06);
+    --shadow-lg: 0 12px 24px -6px rgb(35 24 28 / 0.10), 0 4px 8px -4px rgb(35 24 28 / 0.06);
+
+    --container-content: 72rem;
+    --container-narrow: 48rem;
+}
+
+:root {
+    --background: #fffcf7;
+    --foreground: #23181c;
+    --card: #fff9ef;
+    --card-foreground: #23181c;
+    --popover: #fffcf7;
+    --popover-foreground: #23181c;
+    --primary: #d89727;
+    --primary-foreground: #23181c;
+    --secondary: #f7eef1;
+    --secondary-foreground: #43142a;
+    --muted: #f5efe6;
+    --muted-foreground: #77656c;
+    --accent: #f5efe6;
+    --accent-foreground: #43142a;
+    --destructive: #a83232;
+    --border: #e9e1d4;
+    --input: #e9e1d4;
+    --ring: #e7ac4e;
+    --chart-1: #d89727;
+    --chart-2: #43142a;
+    --chart-3: #8e6b7a;
+    --chart-4: #2f6b4f;
+    --chart-5: #77656c;
+    --radius: 0.5rem;
+    --sidebar: #43142a;
+    --sidebar-foreground: #fffcf7;
+    --sidebar-primary: #d89727;
+    --sidebar-primary-foreground: #23181c;
+    --sidebar-accent: #58233a;
+    --sidebar-accent-foreground: #fffcf7;
+    --sidebar-border: #330f20;
+    --sidebar-ring: #e7ac4e;
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
