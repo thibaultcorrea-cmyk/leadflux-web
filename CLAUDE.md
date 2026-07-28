@@ -254,6 +254,24 @@ l'arborescence qui y est décrite (`hooks/`, `types/`, `services/`, `components/
 règle de réutilisation des composants avant d'en créer de nouveaux. À consulter et appliquer
 avant toute intervention.
 
+### Librairies imposées : pas d'alternative maison
+
+Trois briques sont non négociables. Ne jamais réimplémenter à la main ce qu'elles couvrent
+(pas de `fetch` dans un `useEffect`, pas de tri/pagination écrits soi-même, pas de state de
+formulaire géré à la main) :
+
+| Besoin | Librairie imposée | Ce que ça remplace |
+|---|---|---|
+| Requêtes / état serveur | **TanStack Query** (`@tanstack/react-query`) | `useEffect` + `fetch`, cache maison, états loading/error à la main |
+| Tableaux | **TanStack Table** (`@tanstack/react-table`) | `.map()` sur `<tr>`, tri/filtre/pagination maison |
+| Formulaires | **React Hook Form + Zod** (`@hookform/resolvers`) | `useState` par champ, validation impérative |
+
+Le rendu reste shadcn/ui (`Table`, `Input`, `Label`…) : ces librairies fournissent la logique
+(headless), shadcn fournit le markup et l'accessibilité, `design.md` fournit l'apparence.
+
+Le tableau générique se construit une fois dans `components/shared/tables/` et se réutilise :
+chaque page fournit ses colonnes (`ColumnDef[]`) et ses données, jamais son propre `<table>`.
+
 - App Router uniquement (`app/`), jamais `pages/`
 - Composants d'UI : toujours shadcn/ui en base (cf. section 6). Jamais de composant maison quand
   l'équivalent existe dans le registre. Les primitives shadcn vivent dans `components/ui/`, les

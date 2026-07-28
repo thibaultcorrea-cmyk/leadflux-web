@@ -93,6 +93,7 @@
     --color-ink-100: #e4dbdd;
 
     --color-success: #2f6b4f;
+    --color-success-50: #e9f1ec;
     --color-warning: #b87d1d;
     --color-error: #a83232;
     --color-info: #43142a;
@@ -151,9 +152,12 @@
 :root {
     --background: #fffcf7;
     --foreground: #23181c;
-    --card: #fff9ef;
+    /* Cartes et panneaux en blanc pur sur le fond porcelaine : c'est ce que
+       montrent les maquettes Connexion et Tableau. background-100 (#FFF9EF)
+       reste disponible pour les surfaces imbriquées dans une carte. */
+    --card: #ffffff;
     --card-foreground: #23181c;
-    --popover: #fffcf7;
+    --popover: #ffffff;
     --popover-foreground: #23181c;
     --primary: #d89727;
     --primary-foreground: #23181c;
@@ -177,7 +181,7 @@
     --sidebar-foreground: #fffcf7;
     --sidebar-primary: #d89727;
     --sidebar-primary-foreground: #23181c;
-    --sidebar-accent: #58233a;
+    --sidebar-accent: #330f20;
     --sidebar-accent-foreground: #fffcf7;
     --sidebar-border: #330f20;
     --sidebar-ring: #e7ac4e;
