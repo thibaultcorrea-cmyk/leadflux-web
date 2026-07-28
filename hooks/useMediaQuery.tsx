@@ -1,21 +1,24 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 export function useMediaQuery(query: string) {
-    const [value, setValue] = useState(false);
+    // useSyncExternalStore plutôt qu'un useEffect + setState : la media query est
+    // une source externe, la lire en snapshot évite les rendus en cascade.
+    const subscribe = useCallback(
+        (onChange: () => void) => {
+            const result = matchMedia(query);
+            result.addEventListener('change', onChange);
 
-    useEffect(() => {
-        function onChange(event: MediaQueryListEvent) {
-            setValue(event.matches);
-        }
+            return () => result.removeEventListener('change', onChange);
+        },
+        [query]
+    );
 
-        const result = matchMedia(query);
-        result.addEventListener('change', onChange);
-        setValue(result.matches);
-
-        return () => result.removeEventListener('change', onChange);
-    }, [query]);
-
-    return value;
+    // Snapshot serveur à `false` : matchMedia n'existe pas au rendu SSR.
+    return useSyncExternalStore(
+        subscribe,
+        () => matchMedia(query).matches,
+        () => false
+    );
 }
