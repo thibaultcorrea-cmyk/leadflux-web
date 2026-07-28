@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:drop": "npx drizzle-kit drop",
+    "db:sync": "npm run db:generate && npm run db:migrate",
+    "db:seed": "tsx ./db/seeds/seeds.ts",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

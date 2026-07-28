@@ -8,6 +8,13 @@
       "when": 1785264943433,
       "tag": "0000_special_punisher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1785267894621,
+      "tag": "0001_real_nighthawk",
+      "breakpoints": true
     }
   ]
 }

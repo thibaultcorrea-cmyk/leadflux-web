@@ -6,6 +6,10 @@ const envSchema = z.object({
     DATABASE_URL: z.string().default("postgresql://leadflux:password@localhost:5432/leadflux"),
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     NEXT_PUBLIC_APP_URL: z.url().default("http://localhost:3000"),
+    ADMIN_EMAIL: z.string().email().default("[EMAIL_ADDRESS]"),
+    ADMIN_PASSWORD: z.string().min(1).default("passw@rd2026"),
+    ADMIN_NAME: z.string().default("Admin"),
+    ADMIN_IMAGE_URL: z.url().default(""),
 
 });
 
