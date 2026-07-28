@@ -222,6 +222,11 @@ Autrement dit : **shadcn décide de la mécanique, la DA décide de l'apparence.
 un écran avec le thème shadcn par défaut (gris neutres, `zinc`), il faut le retoken sur la palette
 de `design.md`.
 
+**Skill obligatoire pour tout développement frontend** : avant d'écrire ou de modifier du code
+UI (page, composant, style), toujours invoquer le skill `ui-ux-pro-max`. Il s'appuie sur le MCP
+shadcn pour la structure des composants ; la DA `design.md` reste la source de vérité pour les
+couleurs, la typo et les espacements.
+
 **Serveur MCP shadcn** : défini dans `.mcp.json` à la racine de ce dossier.
 
 ```json
@@ -242,6 +247,12 @@ Ordre de travail sur toute nouvelle UI :
 ---
 
 ## 7. Conventions de code propres à ce dossier
+
+**Convention de structure des pages obligatoire** : voir
+`.claude/rules/convention-code.md`. Toute page créée ou modifiée dans `app/` doit respecter
+l'arborescence qui y est décrite (`hooks/`, `types/`, `services/`, `components/`, `tests/`) et la
+règle de réutilisation des composants avant d'en créer de nouveaux. À consulter et appliquer
+avant toute intervention.
 
 - App Router uniquement (`app/`), jamais `pages/`
 - Composants d'UI : toujours shadcn/ui en base (cf. section 6). Jamais de composant maison quand
