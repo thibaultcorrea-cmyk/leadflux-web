@@ -6133,7 +6133,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -7363,7 +7364,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -8303,7 +8305,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -10290,7 +10293,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -11124,7 +11128,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -14612,7 +14617,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -18400,7 +18406,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -20249,7 +20256,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -22451,7 +22459,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -26110,7 +26119,8 @@
                           "fill": "#EBDEE3",
                           "content": "Tableau",
                           "fontFamily": "$font-ui",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -29839,7 +29849,8 @@
                               "width": "fill_container",
                               "content": "marion.aubert@aubert-strategie.fr",
                               "fontFamily": "$font-ui",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
