@@ -7,7 +7,8 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=500,1000 --screenshot=/private/tmp/claude-501/-Users-assadi-Projects-Next-leadflux-web/74adf620-8a2f-49e6-becb-51691db07640/scratchpad/w500.png http://localhost:3210/tableau)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=500,1000 --screenshot=/private/tmp/claude-501/-Users-assadi-Projects-Next-leadflux-web/74adf620-8a2f-49e6-becb-51691db07640/scratchpad/w500b.png http://localhost:3210/tableau)",
       "Bash(echo \"lint exit: $?\")",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(npm run *)"
     ]
   }
 }
