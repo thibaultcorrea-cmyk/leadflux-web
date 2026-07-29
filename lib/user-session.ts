@@ -5,8 +5,6 @@
  * @returns string: "Admin" or "" for regular users
  */
 export const showUserRoleLabel = (user: any) => {
-    console.log(user);
-
     return user?.isAdmin ? "Admin" : "";
 }
 
