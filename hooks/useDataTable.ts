@@ -2,10 +2,12 @@
 
 import {
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
   type ColumnDef,
+  type ColumnFiltersState,
   type PaginationState,
   type RowSelectionState,
   type SortingState,
@@ -24,6 +26,11 @@ export type UseDataTableOptions<TData, TValue = unknown> = {
   pageSize?: number;
   initialSorting?: SortingState;
   initialColumnVisibility?: VisibilityState;
+  /**
+   * Filtres pilotés depuis l'extérieur (URL via nuqs, formulaire de recherche…).
+   * La source de vérité reste l'appelant : le tableau ne les modifie jamais.
+   */
+  columnFilters?: ColumnFiltersState;
 };
 
 export type UseDataTableResult<TData> = {
@@ -53,6 +60,7 @@ export function useDataTable<TData, TValue = unknown>({
   pageSize = 10,
   initialSorting = [],
   initialColumnVisibility = {},
+  columnFilters,
 }: UseDataTableOptions<TData, TValue>): UseDataTableResult<TData> {
   const [sorting, setSorting] = useState<SortingState>(initialSorting);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -72,6 +80,7 @@ export function useDataTable<TData, TValue = unknown>({
       sorting,
       rowSelection,
       columnVisibility,
+      ...(columnFilters ? { columnFilters } : {}),
       ...(enablePagination ? { pagination } : {}),
     },
     enableRowSelection,
@@ -84,25 +93,30 @@ export function useDataTable<TData, TValue = unknown>({
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     ...(enablePagination
       ? { getPaginationRowModel: getPaginationRowModel() }
       : {}),
   });
 
-  const previousData = useRef(data);
+  // Un nouveau jeu de données (nouveau sourcing) ou un nouveau filtre change ce
+  // qui est affiché : rester en page 3 montrerait une page vide.
+  const filtersKey = JSON.stringify(columnFilters ?? []);
+  const previousInputs = useRef({ data, filtersKey });
   useEffect(() => {
-    if (previousData.current === data) return;
-    previousData.current = data;
-    // Nouveau jeu de données (nouveau sourcing, filtre appliqué) : rester en
-    // page 3 afficherait une page vide.
+    const previous = previousInputs.current;
+    if (previous.data === data && previous.filtersKey === filtersKey) return;
+    previousInputs.current = { data, filtersKey };
     table.setPageIndex(0);
-  }, [data, table]);
+  }, [data, filtersKey, table]);
 
+  // Sélection **filtrée** : une ligne cochée puis masquée par un filtre ne doit
+  // pas rester dans une action groupée, sinon on agit sur ce qu'on ne voit pas.
   // Recalculé à chaque rendu, comme le reste des modèles TanStack Table :
-  // mémoïser ici donnerait une sélection périmée après un tri ou un changement de page.
+  // mémoïser ici donnerait une sélection périmée après un tri ou un filtre.
   const selectedRows = table
-    .getSelectedRowModel()
+    .getFilteredSelectedRowModel()
     .rows.map((row) => row.original);
 
   const resetSelection = useCallback(() => table.resetRowSelection(), [table]);

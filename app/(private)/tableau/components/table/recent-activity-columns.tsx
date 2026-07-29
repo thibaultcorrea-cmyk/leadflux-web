@@ -2,7 +2,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { StatusBadge } from "../status-badge";
+import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import type { RecentActivityRow } from "../../types/tableau";
 
 export const recentActivityColumns: ColumnDef<RecentActivityRow>[] = [
@@ -27,7 +27,7 @@ export const recentActivityColumns: ColumnDef<RecentActivityRow>[] = [
     accessorKey: "status",
     header: "Statut",
     size: 150,
-    cell: ({ row }) => <StatusBadge status={row.original.status} />,
+    cell: ({ row }) => <EmailStatusBadge status={row.original.status} />,
   },
   {
     accessorKey: "activityLabel",
