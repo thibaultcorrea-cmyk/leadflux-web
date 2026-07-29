@@ -10,13 +10,15 @@ import {
 type DropdownLayerProps = {
   children: React.ReactNode;
   trigger: React.ReactElement<unknown>;
+  align?: "start" | "center" | "end";
+  side?: "top" | "bottom" | "left" | "right" | "inline-start" | "inline-end";
 }
 
-const DropdownLayer = ({ children, trigger }: DropdownLayerProps) => {
+const DropdownLayer = ({ children, trigger, align, side }: DropdownLayerProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={trigger} />
-      <DropdownMenuContent align="end" side="right">
+      <DropdownMenuContent align={align} side={side}>
         {children}
       </DropdownMenuContent>
     </DropdownMenu>

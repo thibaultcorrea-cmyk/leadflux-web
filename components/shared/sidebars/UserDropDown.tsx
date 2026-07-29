@@ -6,6 +6,7 @@ import DropdownLayer from "../Dropdown/DropdownLayer";
 import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { CreditCardIcon, SettingsIcon, UserIcon } from "lucide-react";
 import { LogoutButton } from "../Buttons/LogoutButtons";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 
 
@@ -31,8 +32,10 @@ const Trigger = ({ user }: { user: AppSidebarUser }) => {
 
 
 const UserDropDown = ({ user }: { user: AppSidebarUser }) => {
+
+    const mobile = useIsMobile()
     return (
-        <DropdownLayer trigger={Trigger({ user })} >
+        <DropdownLayer trigger={Trigger({ user })} align={mobile ? "center" : "end"} side={mobile ? "top" : "right"}>
             <DropdownMenuItem>
                 <UserIcon />
                 Profile
