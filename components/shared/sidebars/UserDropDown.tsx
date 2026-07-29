@@ -37,13 +37,10 @@ const UserDropDown = ({ user }: { user: AppSidebarUser }) => {
                 <UserIcon />
                 Profile
             </DropdownMenuItem>
-            <DropdownMenuItem>
-                <CreditCardIcon />
-                Billing
-            </DropdownMenuItem>
+
             <DropdownMenuItem>
                 <SettingsIcon />
-                Settings
+                Paramètres
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive">
