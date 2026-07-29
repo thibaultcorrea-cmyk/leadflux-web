@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import UserDropDown from "./UserDropDown";
 
 export type AppSidebarNavItem = {
   label: string;
@@ -110,21 +111,7 @@ export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
       </SidebarContent>
 
       <SidebarFooter className="p-3 group-data-[collapsible=icon]:p-2">
-        <div className="flex items-center gap-2.5 rounded-md bg-sidebar-accent p-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-1.5">
-          <Avatar className="size-[30px] after:border-transparent">
-            <AvatarFallback className="bg-primary-400 text-xs font-semibold text-sidebar-foreground">
-              {user.initials}
-            </AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 group-data-[collapsible=icon]:hidden">
-            <p className="truncate text-[13px] font-medium text-sidebar-foreground">
-              {user.name}
-            </p>
-            <p className="truncate text-[11px] text-secondary-300">
-              {user.role}
-            </p>
-          </div>
-        </div>
+        <UserDropDown user={user} />
       </SidebarFooter>
     </Sidebar>
   );
