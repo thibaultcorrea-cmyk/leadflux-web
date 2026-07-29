@@ -1,13 +1,10 @@
-import { Search } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { NewSearchButton } from "@/components/shared/Buttons/NewSearchButton";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { FunnelPanel } from "./components/funnel-panel";
 import { KpiCard } from "./components/kpi-card";
 import { SavedSearchesPanel } from "./components/saved-searches-panel";
 import { RecentActivityPanel } from "./components/table/recent-activity-panel";
 import { kpis } from "./mocks/kpis";
-import { NewSearchButton } from "./components/NewSearchButton";
 
 export default function TableauPage() {
   return (

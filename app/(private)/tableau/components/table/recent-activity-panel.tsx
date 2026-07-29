@@ -1,11 +1,21 @@
+"use client";
+
 import Link from "next/link";
 
 import { DataTable } from "@/components/shared/tables/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useDataTable } from "@/hooks/useDataTable";
 import { recentActivity } from "../../mocks/recent-activity";
+import type { RecentActivityRow } from "../../types/tableau";
 import { recentActivityColumns } from "./recent-activity-columns";
 
 export function RecentActivityPanel() {
+  const { table } = useDataTable<RecentActivityRow>({
+    data: recentActivity,
+    columns: recentActivityColumns,
+    getRowId: (row) => row.id,
+  });
+
   return (
     <Card className="gap-3.5 ring-border [--card-spacing:--spacing(5)]">
       <CardHeader className="flex flex-row items-center justify-between gap-4">
@@ -21,8 +31,7 @@ export function RecentActivityPanel() {
       </CardHeader>
       <CardContent>
         <DataTable
-          columns={recentActivityColumns}
-          data={recentActivity}
+          table={table}
           emptyMessage="Aucune activité pour le moment."
         />
       </CardContent>

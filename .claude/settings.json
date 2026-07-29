@@ -8,7 +8,15 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=500,1000 --screenshot=/private/tmp/claude-501/-Users-assadi-Projects-Next-leadflux-web/74adf620-8a2f-49e6-becb-51691db07640/scratchpad/w500b.png http://localhost:3210/tableau)",
       "Bash(echo \"lint exit: $?\")",
       "Bash(git commit -m ' *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "mcp__shadcn__get_item_examples_from_registries",
+      "Bash(npx tsc *)",
+      "Bash(curl -s -i -X POST http://localhost:3000/api/auth/sign-in/email -H 'Content-Type: application/json' -d '{\"email\":\"user@leadflux.com\",\"password\":\"password\"}' -c cookies.txt)",
+      "Bash(ls ~/Library/Caches/ms-playwright 2>/dev/null | head; ls ~/.cache/ms-playwright 2>/dev/null | head; which chromium google-chrome 2>/dev/null; ls \"/Applications/Google Chrome.app\" >/dev/null 2>&1 && echo \"chrome-app-present\")",
+      "Read(//Applications/Google Chrome.app/**)",
+      "Bash(node -e \"console.log\\(typeof WebSocket\\)\")",
+      "Bash(node shot.mjs cookies.txt http://localhost:3000/prospects prospects.png)",
+      "Bash(git stash *)"
     ]
   }
 }
