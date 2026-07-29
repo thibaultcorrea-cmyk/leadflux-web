@@ -7,6 +7,7 @@ import { KpiCard } from "./components/kpi-card";
 import { SavedSearchesPanel } from "./components/saved-searches-panel";
 import { RecentActivityPanel } from "./components/table/recent-activity-panel";
 import { kpis } from "./mocks/kpis";
+import { NewSearchButton } from "./components/NewSearchButton";
 
 export default function TableauPage() {
   return (
@@ -24,10 +25,8 @@ export default function TableauPage() {
             </p>
           </div>
         </div>
-        <Button size="lg" className="h-11 gap-2 px-5 text-[15px]">
-          <Search className="size-[17px]" aria-hidden />
-          Nouvelle recherche
-        </Button>
+
+        <NewSearchButton />
       </header>
 
       <section aria-label="Indicateurs clés">

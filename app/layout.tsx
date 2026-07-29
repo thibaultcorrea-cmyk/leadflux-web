@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, League_Gothic, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ModalProvider } from "@/components/shared/Modals/ModalProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,7 +44,11 @@ export default function RootLayout({
         leagueGothic.variable
       )}
     >
-      <body>{children}</body>
+      <body>
+        <ModalProvider>
+          {children}
+        </ModalProvider>
+      </body>
     </html>
   );
 }
