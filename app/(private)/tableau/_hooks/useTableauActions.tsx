@@ -7,7 +7,7 @@ export const useTableauActions = () => {
     const controller = useModalController()
 
     const openNewSearchModal = () => {
-        controller.open(<h1>hello</h1>)
+        controller.open({ components: <h1>hello</h1>, disablePointerDismissal: true })
     }
 
 

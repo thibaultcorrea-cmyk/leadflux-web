@@ -6,22 +6,25 @@ import { useContext } from "react"
 export const useModalController = () => {
     const { isOpen, payload, setState } = useContext(modalContext)
 
-    const open = (
+    const open = ({ components, payload, disablePointerDismissal }: {
         components: ModalContextType["components"],
-        payload?: ModalContextType["payload"]
+        payload?: ModalContextType["payload"],
+        disablePointerDismissal?: boolean
+    }
+
     ) => {
         setState?.({
             isOpen: true,
             components,
-            payload
+            payload,
+            disablePointerDismissal
         })
     }
 
     const close = () => {
         setState?.({
             isOpen: false,
-
-
+            disablePointerDismissal: false,
         })
         setTimeout(() => {
             setState?.({
