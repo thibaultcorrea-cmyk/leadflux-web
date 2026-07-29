@@ -16,7 +16,10 @@
       "Read(//Applications/Google Chrome.app/**)",
       "Bash(node -e \"console.log\\(typeof WebSocket\\)\")",
       "Bash(node shot.mjs cookies.txt http://localhost:3000/prospects prospects.png)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"remote-debugging-port=9222\")",
+      "Bash(git check-ignore *)"
     ]
   }
 }
