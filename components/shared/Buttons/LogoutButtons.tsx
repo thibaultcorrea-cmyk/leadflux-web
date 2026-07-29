@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import { useAuthenticationClient } from "@/hooks/useAuthenticationClient"
 import { cn } from "@/lib/utils"
 import { LogOutIcon } from "lucide-react"
