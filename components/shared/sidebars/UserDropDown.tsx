@@ -5,6 +5,7 @@ import { AppSidebarUser } from "./app-sidebar";
 import DropdownLayer from "../Dropdown/DropdownLayer";
 import { DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon } from "lucide-react";
+import { LogoutButton } from "../Buttons/LogoutButtons";
 
 
 
@@ -46,8 +47,7 @@ const UserDropDown = ({ user }: { user: AppSidebarUser }) => {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive">
-                <LogOutIcon />
-                Se déconnecter
+                <LogoutButton />
             </DropdownMenuItem>
 
         </DropdownLayer>
