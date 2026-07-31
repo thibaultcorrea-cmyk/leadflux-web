@@ -1,5 +1,6 @@
 const resolvers = {
     Query: {
+        funnelSteps: () => [],
         prospects: () => [],
     },
 

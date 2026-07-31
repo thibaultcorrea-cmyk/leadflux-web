@@ -1,6 +1,22 @@
 
 const typeDefs = `#graphql
 
+type FunnelStepItem {
+   id: String!
+   label: String!
+   value: Int!
+   tone: String!
+   
+}
+
+
+
+type Step {
+    id: ID!
+    title: String!
+    description: String!
+}
+
 interface Adress {
     id: ID!
     city: String!
@@ -37,6 +53,8 @@ interface Prospect {
 type Query {
     prospects: [Prospect!]
     prospect(id: ID!): Prospect
+    funnelSteps: [FunnelStepItem!]!
+    
 }
     
 `
