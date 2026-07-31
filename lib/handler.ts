@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server"
 
 
+export const errorHandler = (error: Error, methodName?: string) => {
+
+    console.error(`Something went wrong on ${methodName ?? "unknown method"}`, error)
+
+}
+
 
 export const errorApiHandler = (error: unknown) => {
 
