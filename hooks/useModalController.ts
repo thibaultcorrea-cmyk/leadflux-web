@@ -6,10 +6,11 @@ import { useContext } from "react"
 export const useModalController = () => {
     const { isOpen, payload, setState } = useContext(modalContext)
 
-    const open = ({ components, payload, disablePointerDismissal }: {
+    const open = ({ components, payload, disablePointerDismissal, contentClassName }: {
         components: ModalContextType["components"],
         payload?: ModalContextType["payload"],
-        disablePointerDismissal?: boolean
+        disablePointerDismissal?: boolean,
+        contentClassName?: string
     }
 
     ) => {
@@ -17,7 +18,8 @@ export const useModalController = () => {
             isOpen: true,
             components,
             payload,
-            disablePointerDismissal
+            disablePointerDismissal,
+            contentClassName
         })
     }
 
@@ -29,6 +31,7 @@ export const useModalController = () => {
         setTimeout(() => {
             setState?.({
                 components: null,
+                contentClassName: undefined,
                 payload: undefined
             })
         }, 1000)

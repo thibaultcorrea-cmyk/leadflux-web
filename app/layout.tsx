@@ -3,6 +3,7 @@ import { Inter, League_Gothic, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ModalProvider } from "@/components/shared/Modals/ModalProvider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,9 +46,13 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ModalProvider>
-          {children}
-        </ModalProvider>
+        {/* nuqs : les filtres d'écran (statut des emails…) vivent dans l'URL,
+            donc une vue filtrée se partage et se recharge à l'identique. */}
+        <NuqsAdapter>
+          <ModalProvider>
+            {children}
+          </ModalProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

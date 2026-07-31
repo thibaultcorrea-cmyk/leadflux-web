@@ -24,6 +24,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         isOpen: false,
         disablePointerDismissal: false,
         components: null,
+        contentClassName: undefined,
         payload: undefined,
 
     })
@@ -43,6 +44,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
             setModalState({
                 isOpen: false,
                 components: null,
+                contentClassName: undefined,
                 payload: undefined,
             })
         }
@@ -54,7 +56,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         <Dialog disablePointerDismissal={state.disablePointerDismissal} open={state.isOpen} onOpenChange={closeModal}>
             {children}
 
-            <DialogContent>
+            <DialogContent className={state.contentClassName}>
                 {state.components}
             </DialogContent>
         </Dialog>

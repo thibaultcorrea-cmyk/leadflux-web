@@ -1,11 +1,9 @@
+import type { EmailStatus } from "@/components/shared/badges/email-status-badge";
 import type { LucideIcon } from "lucide-react";
 
-/**
- * Statut d'un email, par prospect. Ce sont les trois seuls statuts du produit :
- * aucun envoi n'est automatique, donc pas de notion de "taux d'envoi"
- * (cf. CLAUDE.md §3).
- */
-export type EmailStatus = "brouillon" | "envoye" | "repondu";
+// Le statut d'email est partagé avec l'onglet Emails : il vit dans le composant
+// de badge commun plutôt que dans les types d'une page.
+export type { EmailStatus } from "@/components/shared/badges/email-status-badge";
 
 export type Kpi = {
   id: string;
