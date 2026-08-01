@@ -28,3 +28,6 @@ export type FunnelStep = {
 };
 
 export type SavedSearchReturn = SavedSearchItem
+
+
+

@@ -29,3 +29,15 @@ export const GET_SAVED_SEARCH_QUERY = gql`
     }
   }
 `
+
+export const GET_RECENTLY_ACTIVITY_QUERY = gql`
+    query RecentlyActivity{
+    recentlyActivity {
+      id
+      action
+      timestamp
+      user
+    }
+  }
+`
+

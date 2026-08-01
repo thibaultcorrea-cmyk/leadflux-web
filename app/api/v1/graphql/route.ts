@@ -6,7 +6,14 @@ import {
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import resolvers from "./resolvers";
 import typeDefs from "./schema";
+import { buildSchema } from 'drizzle-graphql';
 import { isDevMode } from "@/lib/utils";
+import * as schemas from "@/db/schemas";
+import { db } from "@/db";
+
+
+
+
 
 // Apollo Sandbox embarqué : accessible en GET sur /api/graphql/v1 en dev uniquement.
 // En production, page d'accueil neutre sans explorateur ni introspection.
@@ -14,7 +21,12 @@ const landingPagePlugin = isDevMode
     ? ApolloServerPluginLandingPageLocalDefault({ embed: true })
     : ApolloServerPluginLandingPageProductionDefault({ embed: false });
 
+
+
+
+
 const server = new ApolloServer({
+
     typeDefs,
     resolvers,
     introspection: isDevMode,
