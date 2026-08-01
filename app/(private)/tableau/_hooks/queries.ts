@@ -34,9 +34,10 @@ export const GET_RECENTLY_ACTIVITY_QUERY = gql`
     query RecentlyActivity{
     recentlyActivity {
       id
-      action
+      prospect
+      company
+      status
       timestamp
-      user
     }
   }
 `

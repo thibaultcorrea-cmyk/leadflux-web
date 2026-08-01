@@ -18,7 +18,7 @@ export type RecentlyActivityItem = {
     prospect: string;
     company: string;
     status: string;
-    activityTimeElapsedAt: string;
+    timestamp: string;
 }
 
 

@@ -22,7 +22,7 @@ type RecentlyActivityItem {
     prospect: String!
     company: String!
     status: String!
-    activityTimeElapsedAt: String!
+    timestamp: String!
 }
 
 
