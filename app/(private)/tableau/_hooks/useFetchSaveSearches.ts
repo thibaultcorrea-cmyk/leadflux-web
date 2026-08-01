@@ -8,7 +8,12 @@ const useFetchSaveSearches = () => {
         queryKey: [QueryKey.GET_SAVED_SEARCH],
         queryFn: retrieveSavedSearch,
     });
-    return;
+    return {
+        savedSearches: data?.lastSearchResults ?? [],
+        isError,
+        isLoading,
+        refetch,
+    }
 }
 
 export default useFetchSaveSearches;

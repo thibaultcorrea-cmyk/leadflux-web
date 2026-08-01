@@ -1,10 +1,13 @@
 "use client"
 
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 export const CardSkeleton = () => {
 
     return (
-        <div className="flex flex-col items-center justify-center gap-2 animate-pulse bg-accent rounded-lg p-4 min-h-42 w-full"></div>
+        <Skeleton className="min-h-32 w-full rounded-lg" />
+
     );
 
 

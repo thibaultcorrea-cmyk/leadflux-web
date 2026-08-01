@@ -1,9 +1,13 @@
 "use client"
 
-const Loading = () => {
-    return <div className="flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-900"></div>
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const SavedSearchSectionLoading = ({ count }: { count?: number }) => {
+    const nb = count ?? 10;
+    return <div className="flex flex-col gap-2.5">
+        {Array.from({ length: nb }).map((_, index) => (
+            <Skeleton className="h-15 w-full" key={index} />
+        ))}
     </div>
 }
 
-export default Loading;
