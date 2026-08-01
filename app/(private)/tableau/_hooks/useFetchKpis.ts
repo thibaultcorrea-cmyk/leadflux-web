@@ -6,7 +6,7 @@ import { retrieveKpis } from "../services/api-services";
 import { parser } from "../components/schema/parser";
 
 
-const useGetKpis = () => {
+const useFetchKpis = () => {
     const { data, isError, isLoading, refetch } = useQuery({
         queryKey: [QueryKey.GET_KPIS],
         queryFn: retrieveKpis,
@@ -20,4 +20,4 @@ const useGetKpis = () => {
     };
 }
 
-export default useGetKpis;
+export default useFetchKpis;

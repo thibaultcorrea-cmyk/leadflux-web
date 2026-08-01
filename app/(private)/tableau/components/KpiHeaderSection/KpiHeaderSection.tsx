@@ -1,15 +1,15 @@
 "use client"
 
 import { Suspense } from "react";
-import useGetKpis from "../../_hooks/useGetKpis";
 import { KpiCard } from "../kpi-card";
 import { KpiSectionLoading } from "./loading";
+import useFetchKpis from "../../_hooks/useFetchKpis";
 
 
 
 
 const KpiHeaderSection = () => {
-    const { kpis, isError, isLoading, refetch } = useGetKpis();
+    const { kpis, isError, isLoading, refetch } = useFetchKpis();
     if (isLoading) return <KpiSectionLoading />
 
     return (
