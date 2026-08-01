@@ -20,7 +20,15 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(pkill -f \"remote-debugging-port=9222\")",
       "Bash(git check-ignore *)",
-      "mcp__shadcn__search_items_in_registries"
+      "mcp__shadcn__search_items_in_registries",
+      "Bash(node -e \"console.log\\(Object.keys\\(require\\('/Users/assadi/Projects/Next/leadflux-web/node_modules/@apollo/server/package.json'\\).exports\\).filter\\(k=>k.includes\\('landingPage'\\)\\)\\)\")",
+      "Bash(npx next *)",
+      "Bash(curl -s -o /dev/null http://localhost:3111)",
+      "Bash(curl -s -H \"Accept: text/html\" http://localhost:3111/api/graphql/v1)",
+      "Bash(curl -s -X POST http://localhost:3111/api/graphql/v1 -H 'Content-Type: application/json' -d '{\"query\":\"{ __schema { queryType { name } } }\"}')",
+      "Bash(kill %1)",
+      "Bash(curl -s -H \"Accept: text/html\" http://localhost:3000/api/graphql/v1)",
+      "Bash(curl -s -X POST http://localhost:3000/api/graphql/v1 -H 'Content-Type: application/json' -d '{\"query\":\"{ __schema { queryType { name } } }\"}')"
     ]
   }
 }
