@@ -1,7 +1,7 @@
 import { NewSearchButton } from "@/components/shared/Buttons/NewSearchButton";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { FunnelPanel } from "./components/funnel-panel";
-import { SavedSearchesPanel } from "./components/saved-searches-panel";
+import { SavedSearchesPanel } from "./components/SaveSearches/saved-searches-panel";
 import { RecentActivityPanel } from "./components/table/recent-activity-panel";
 import KpiHeaderSection from "./components/KpiHeaderSection/KpiHeaderSection";
 

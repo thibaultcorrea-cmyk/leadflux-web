@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { savedSearches } from "../mocks/saved-searches";
+import { savedSearches } from "../../mocks/saved-searches";
 
 export function SavedSearchesPanel() {
   return (
