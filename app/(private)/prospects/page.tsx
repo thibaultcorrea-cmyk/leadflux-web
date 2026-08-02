@@ -17,7 +17,7 @@ export default function ProspectsPage() {
     <div className="flex flex-col gap-5 p-6 lg:p-8">
       <ProspectsHeader subtitle="Résultats du sourcing lancé aujourd'hui à 10h42" />
       <CriteriaBar criteria={searchCriteria} />
-      <ProspectsTablePanel data={prospects} />
+      <ProspectsTablePanel />
     </div>
   );
 }
