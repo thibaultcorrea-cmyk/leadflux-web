@@ -40,7 +40,7 @@ export function ProspectsTablePanel({ data }: { data: Prospect[] }) {
   return (
     <section
       aria-label="Résultats du sourcing"
-      className="flex flex-col gap-3.5 rounded-xl border border-border bg-card p-5"
+      className="flex flex-col gap-3.5 rounded-xl border border-border bg-card p-5 relative"
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="flex items-baseline gap-2.5">

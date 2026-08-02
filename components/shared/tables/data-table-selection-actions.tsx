@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 type DataTableSelectionActionsProps<TData> = {
   selectedRows: TData[];
   actions: DataTableBulkAction<TData>[];
+  side?: "top" | "bottom";
+  align?: "start" | "center" | "end";
   onClearSelection?: () => void;
 };
 
@@ -22,6 +24,8 @@ type DataTableSelectionActionsProps<TData> = {
 export function DataTableSelectionActions<TData>({
   selectedRows,
   actions,
+  side,
+  align,
   onClearSelection,
 }: DataTableSelectionActionsProps<TData>) {
   const count = selectedRows.length;
@@ -33,42 +37,8 @@ export function DataTableSelectionActions<TData>({
 
 
   return (
-    /* <div className="flex flex-wrap items-center gap-2.5">
-       <Badge className="h-auto bg-accent-50 px-2.5 py-1 text-xs font-semibold text-accent-700">
-         {count} sélectionné{count > 1 ? "s" : ""}
-       </Badge>
- 
-       {actions.map((action) => {
-         const Icon = action.icon;
- 
-         return (
-           <Button
-             key={action.id}
-             type="button"
-             size="lg"
-             className="gap-2 px-3.5 text-[13px] font-semibold"
-             onClick={() => action.onSelect(selectedRows)}
-           >
-             {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
-             {action.label}
-           </Button>
-         );
-       })}
- 
-       {onClearSelection ? (
-         <Button
-           type="button"
-           variant="ghost"
-           size="lg"
-           className="px-2.5 text-[13px] text-ink-500"
-           onClick={onClearSelection}
-         >
-           Annuler la sélection
-         </Button>
-       ) : null}
-     </div>*/
 
-    <ActionBar open={open} onOpenChange={onClearSelection}  >
+    <ActionBar open={open} onOpenChange={onClearSelection} side={side || "bottom"} align={align || "center"} >
       <ActionBarSelection >
         {count} sélectionné{count > 1 ? "s" : ""}
 
