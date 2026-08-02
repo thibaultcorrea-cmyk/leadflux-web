@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { modalContext, ModalContextType } from "./ModalContext"
+import { cn } from "@/lib/utils"
 
 
 
@@ -53,10 +54,10 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 
 
     return <Provider value={{ ...state, setState: setModalState }}>
-        <Dialog disablePointerDismissal={state.disablePointerDismissal} open={state.isOpen} onOpenChange={closeModal}>
+        <Dialog disablePointerDismissal={state.disablePointerDismissal} open={state.isOpen} onOpenChange={closeModal}  >
             {children}
 
-            <DialogContent className={state.contentClassName}>
+            <DialogContent className={cn("w-fit", state.contentClassName)}>
                 {state.components}
             </DialogContent>
         </Dialog>
