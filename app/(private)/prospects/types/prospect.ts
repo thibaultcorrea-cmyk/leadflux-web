@@ -14,6 +14,8 @@ export type Prospect = {
   headcountLabel: string;
   /** Borne basse de la tranche : sert au tri, jamais à l'affichage. */
   headcountMin: number;
+  headcountMax: number;
+
 };
 
 /** Critère de la recherche en cours, affiché en puce au-dessus des résultats. */

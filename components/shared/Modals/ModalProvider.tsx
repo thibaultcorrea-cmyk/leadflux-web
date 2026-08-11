@@ -57,7 +57,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         <Dialog disablePointerDismissal={state.disablePointerDismissal} open={state.isOpen} onOpenChange={closeModal}  >
             {children}
 
-            <DialogContent className={cn("w-fit", state.contentClassName)}>
+            <DialogContent className={cn("w-full", state.contentClassName)}>
                 {state.components}
             </DialogContent>
         </Dialog>
