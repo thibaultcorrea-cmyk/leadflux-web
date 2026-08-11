@@ -12,12 +12,21 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { SearchFormInputs } from "./SearchFormInputs";
+import { useModalController } from "@/hooks/useModalController";
+import { CardContent } from "@/components/ui/card";
 
 
 
 export const SearchProspectForm = () => {
 
     const { form } = useSearchProspectForm()
+
+    const modalController = useModalController()
+
+    const close = () => {
+        modalController.close()
+    }
+
     const industries = [{
         value: "1",
         label: "Industrie 1"
@@ -34,7 +43,7 @@ export const SearchProspectForm = () => {
 
     }
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)}  >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-[38rem]" >
             <DialogHeader>
                 <DialogTitle className="font-display text-2xl tracking-[0.02em] text-primary-700">
                     Nouvelle recherche

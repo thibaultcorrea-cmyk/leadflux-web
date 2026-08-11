@@ -39,12 +39,12 @@ const SelectController = ({
                 <Field>
                     {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
                     <Select {...field}>
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full py-5">
                             <SelectValue placeholder={label} />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="p-1">
                             {options.map((option) => (
-                                <SelectItem key={option.value} value={option.value}>
+                                <SelectItem className="py-2" key={option.value} value={option.value}>
                                     {option.label}
                                 </SelectItem>
                             ))}
