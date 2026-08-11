@@ -1,3 +1,4 @@
+import { ProspectServicesImpl } from "@/features/prospects/services";
 import { KpisServices } from "@/features/stats/kpis/services";
 
 const resolvers = {
@@ -6,7 +7,7 @@ const resolvers = {
         recentlyActivity: () => KpisServices.getRecentlyActivity(),
         lastSearchResults: () => KpisServices.getLastSearchResults(),
         emailSendChart: () => KpisServices.getEmailSendChart(),
-        prospects: () => [],
+        prospects: () => ProspectServicesImpl.collections(),
     },
 
 };

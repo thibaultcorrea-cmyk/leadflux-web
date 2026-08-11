@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { sectors } from "./sectors";
+import { industries } from "./industry";
 import { addresses } from "./addresses";
 import { companies } from "./companies";
 import { keywords, companyKeywords } from "./keywords";
@@ -19,7 +19,7 @@ import { user } from "./authSchema";
  * les regrouper ici l'evite completement, aucune table n'important ce fichier.
  */
 
-export const sectorRelations = relations(sectors, ({ many }) => ({
+export const industryRelations = relations(industries, ({ many }) => ({
   companies: many(companies),
 }));
 
@@ -28,9 +28,9 @@ export const addressRelations = relations(addresses, ({ many }) => ({
 }));
 
 export const companyRelations = relations(companies, ({ one, many }) => ({
-  sector: one(sectors, {
-    fields: [companies.sectorId],
-    references: [sectors.id],
+  industry: one(industries, {
+    fields: [companies.industryId],
+    references: [industries.id],
   }),
   address: one(addresses, {
     fields: [companies.addressId],

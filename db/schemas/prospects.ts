@@ -69,3 +69,6 @@ export const prospects = pgTable(
 
   ],
 );
+
+
+export type ProspectSqlInfer = typeof prospects.$inferSelect

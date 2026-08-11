@@ -7,8 +7,8 @@ import {
   index,
   unique,
 } from "drizzle-orm/pg-core";
-import { sectors } from "./sectors";
 import { addresses } from "./addresses";
+import { industries } from "./industry";
 
 /**
  * Entreprise sourcee. Porte l'identite de l'entreprise, jamais l'etat de
@@ -38,7 +38,7 @@ export const companies = pgTable(
 
     // --- Secteur : chaine brute conservee + reference canonique
     industryRaw: text("industry_raw"),
-    sectorId: uuid("sector_id").references(() => sectors.id, {
+    industryId: uuid("industry_id").references(() => industries.id, {
       onDelete: "set null",
     }),
 
@@ -52,6 +52,7 @@ export const companies = pgTable(
       onDelete: "set null",
     }),
 
+
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()
@@ -64,7 +65,7 @@ export const companies = pgTable(
     unique("companies_name_city_unique")
       .on(table.nameKey, table.cityKey)
       .nullsNotDistinct(),
-    index("companies_sector_id_idx").on(table.sectorId),
+    index("companies_industry_id_idx").on(table.industryId),
     index("companies_headcount_min_idx").on(table.headcountMin),
   ],
 );

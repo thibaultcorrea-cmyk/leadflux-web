@@ -15,6 +15,13 @@
       "when": 1785658266564,
       "tag": "0001_light_wolf_cub",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786477903061,
+      "tag": "0002_nasty_sage",
+      "breakpoints": true
     }
   ]
 }

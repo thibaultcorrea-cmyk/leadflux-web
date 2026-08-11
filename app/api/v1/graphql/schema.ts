@@ -80,8 +80,31 @@ type Prospect {
     updatedAt: String!
 }
 
+type Person {
+  id: ID!
+    name: String!
+    email: String!
+    jobTitle: String!
+    company: Company
+    createdAt: String!
+    updatedAt: String!
+    
+}
+
+
+
+
+type LeadProspect{
+    person: Person!
+    company: Company!
+    technologies: [String!]
+    address: Adress
+    size: String
+    
+}
+
 type Query {
-    prospects: [Prospect!]
+    prospects: [LeadProspect!]
     prospect(id: ID!): Prospect
     kpis: [KpiItem!]!
     recentlyActivity: [RecentlyActivityItem!]!

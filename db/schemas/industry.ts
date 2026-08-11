@@ -8,8 +8,8 @@ import { pgTable, uuid, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core
  * conservee telle quelle dans companies.industry_raw : cette table ne contient
  * que la valeur canonique.
  */
-export const sectors = pgTable(
-  "sectors",
+export const industries = pgTable(
+  "industries",
   {
     id: uuid("id").primaryKey().defaultRandom(),
     /** Libelle canonique affiche, ex. « Conseil ». */

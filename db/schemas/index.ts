@@ -3,7 +3,7 @@ export * from "./healthCheck";
 
 // Domaine Leadflux : prospects est la table racine, les autres sont ses entites
 // normalisees. Relations regroupees dans relations.ts (cf. commentaire du fichier).
-export * from "./sectors";
+export * from "./industry";
 export * from "./addresses";
 export * from "./companies";
 export * from "./keywords";
