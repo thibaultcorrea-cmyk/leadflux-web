@@ -1,7 +1,6 @@
 "use client"
 
 import { Label } from "@/components/ui/label"
-import { Input } from "@base-ui/react"
 import { Control, Controller } from "react-hook-form"
 import {
     Field,
@@ -11,6 +10,7 @@ import {
     FieldLabel,
 
 } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
 
 
 const InputController = ({
@@ -19,12 +19,14 @@ const InputController = ({
     label,
     type,
     description,
+    placeholder
 }: {
     control: Control<any>
     name: string
     label: string
     type: string
     description?: string
+    placeholder?: string
 }) => {
     return (
         <Controller
@@ -33,7 +35,7 @@ const InputController = ({
             render={({ field }) => (
                 <Field>
                     {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
-                    <Input id={name} {...field} type={type} placeholder={label} />
+                    <Input id={name} {...field} type={type} placeholder={placeholder} />
                     {
                         description && <FieldDescription>
                             {description}

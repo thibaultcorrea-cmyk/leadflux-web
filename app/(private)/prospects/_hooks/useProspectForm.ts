@@ -14,8 +14,10 @@ const formSchema = z.object({
     headcountMax: z.number(),
 })
 
+export type ProspectFormValues = z.infer<typeof formSchema>
 
-export const useProspectForm = () => {
+
+export const useProspectForm = ({ defaultValues }: { defaultValues?: Partial<ProspectFormValues> }) => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -27,6 +29,7 @@ export const useProspectForm = () => {
             headcountLabel: "",
             headcountMin: 0,
             headcountMax: 0,
+            ...defaultValues
         },
     })
 

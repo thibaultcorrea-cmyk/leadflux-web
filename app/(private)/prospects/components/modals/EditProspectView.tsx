@@ -18,7 +18,7 @@ export const EditProspectModal = ({ prospect }: EditProspectModalProps) => {
     const description = "Modifier les informations de la recherche";
     const confirmLabel = "Modifier";
 
-    const { form } = useProspectForm()
+    const { form } = useProspectForm({ defaultValues: prospect })
 
     const tone = "default";
 
