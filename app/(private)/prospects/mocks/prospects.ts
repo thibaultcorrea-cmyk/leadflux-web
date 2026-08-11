@@ -14,6 +14,7 @@ export const prospects: Prospect[] = [
     city: "Dijon",
     headcountLabel: "3-8 salariés",
     headcountMin: 3,
+    headcountMax: 8,
   },
   {
     id: "p-02",
@@ -24,6 +25,7 @@ export const prospects: Prospect[] = [
     city: "Bordeaux",
     headcountLabel: "3-8 salariés",
     headcountMin: 3,
+    headcountMax: 8,
   },
   {
     id: "p-03",
@@ -34,6 +36,7 @@ export const prospects: Prospect[] = [
     city: "Bordeaux",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-04",
@@ -44,6 +47,7 @@ export const prospects: Prospect[] = [
     city: "Bordeaux",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-05",
@@ -54,6 +58,7 @@ export const prospects: Prospect[] = [
     city: "Dijon",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-06",
@@ -64,6 +69,7 @@ export const prospects: Prospect[] = [
     city: "Rouen",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-07",
@@ -74,6 +80,7 @@ export const prospects: Prospect[] = [
     city: "Strasbourg",
     headcountLabel: "3-8 salariés",
     headcountMin: 3,
+    headcountMax: 8,
   },
   {
     id: "p-08",
@@ -84,6 +91,7 @@ export const prospects: Prospect[] = [
     city: "Paris",
     headcountLabel: "1 salarié",
     headcountMin: 1,
+    headcountMax: 1,
   },
   {
     id: "p-09",
@@ -94,6 +102,7 @@ export const prospects: Prospect[] = [
     city: "Lyon",
     headcountLabel: "15-30 salariés",
     headcountMin: 15,
+    headcountMax: 30,
   },
   {
     id: "p-10",
@@ -104,6 +113,7 @@ export const prospects: Prospect[] = [
     city: "Nantes",
     headcountLabel: "3-8 salariés",
     headcountMin: 3,
+    headcountMax: 8,
   },
   {
     id: "p-11",
@@ -114,6 +124,7 @@ export const prospects: Prospect[] = [
     city: "Lille",
     headcountLabel: "1 salarié",
     headcountMin: 1,
+    headcountMax: 1,
   },
   {
     id: "p-12",
@@ -124,6 +135,7 @@ export const prospects: Prospect[] = [
     city: "Toulouse",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-13",
@@ -134,6 +146,7 @@ export const prospects: Prospect[] = [
     city: "Marseille",
     headcountLabel: "15-30 salariés",
     headcountMin: 15,
+    headcountMax: 30,
   },
   {
     id: "p-14",
@@ -144,6 +157,7 @@ export const prospects: Prospect[] = [
     city: "Rennes",
     headcountLabel: "3-8 salariés",
     headcountMin: 3,
+    headcountMax: 8,
   },
   {
     id: "p-15",
@@ -154,6 +168,7 @@ export const prospects: Prospect[] = [
     city: "Grenoble",
     headcountLabel: "8-15 salariés",
     headcountMin: 8,
+    headcountMax: 15,
   },
   {
     id: "p-16",
@@ -164,6 +179,7 @@ export const prospects: Prospect[] = [
     city: "Montpellier",
     headcountLabel: "1 salarié",
     headcountMin: 1,
+    headcountMax: 1,
   },
 ];
 

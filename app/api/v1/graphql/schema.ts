@@ -94,17 +94,51 @@ type Person {
 
 
 
-type LeadProspect{
-    person: Person!
-    company: Company!
-    technologies: [String!]
-    address: Adress
-    size: String
-    
+type ProspectAddress {
+    city: String!
+    country: String!
+}
+
+type ProspectSector {
+    name: String!
+}
+
+type ProspectPerson {
+    fullName: String!
+    email: String!
+    jobTitle: String!
+    linkedinUrl: String!
+    phone: String!
+}
+
+type ProspectCompany {
+    name: String!
+    description: String!
+    headcountMin: Int!
+    headcountMax: Int!
+    sector: ProspectSector!
+    address: ProspectAddress!
+}
+
+type LeadProspect {
+    person: ProspectPerson!
+    company: ProspectCompany!
+    lastSourcedAt: String!
+}
+
+type SearchResult {
+    prospect: LeadProspect!
+}
+
+type ProspectSearch {
+    id: ID!
+    launchedAt: String!
+    resultCount: Int!
+    results: [SearchResult!]!
 }
 
 type Query {
-    prospects: [LeadProspect!]
+    prospects: [ProspectSearch!]
     prospect(id: ID!): Prospect
     kpis: [KpiItem!]!
     recentlyActivity: [RecentlyActivityItem!]!
