@@ -7,7 +7,8 @@ const resolvers = {
         recentlyActivity: () => KpisServices.getRecentlyActivity(),
         lastSearchResults: () => KpisServices.getLastSearchResults(),
         emailSendChart: () => KpisServices.getEmailSendChart(),
-        prospects: () => ProspectServicesImpl.collections(),
+        searches: () => ProspectServicesImpl.collections({})
+        ,
     },
 
 };

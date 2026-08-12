@@ -18,7 +18,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -43,7 +43,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -68,7 +68,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -93,7 +93,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -118,7 +118,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -143,7 +143,7 @@
             "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -168,7 +168,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -193,7 +193,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -218,7 +218,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -243,7 +243,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -268,7 +268,7 @@
             "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -293,7 +293,7 @@
             "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -318,7 +318,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -343,7 +343,7 @@
             "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -368,7 +368,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -393,7 +393,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -418,7 +418,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 1,
             "headcountMax": 1,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -443,7 +443,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -468,7 +468,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -493,7 +493,7 @@
             "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -518,7 +518,7 @@
             "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -543,7 +543,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -568,7 +568,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 1,
             "headcountMax": 1,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -593,7 +593,7 @@
             "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -618,7 +618,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -643,7 +643,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -668,7 +668,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -693,7 +693,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -718,7 +718,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -743,7 +743,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -768,7 +768,7 @@
             "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -793,7 +793,7 @@
             "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -818,7 +818,7 @@
             "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -843,7 +843,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -868,7 +868,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -893,7 +893,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -918,7 +918,7 @@
             "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -943,7 +943,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -968,7 +968,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -993,7 +993,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1018,7 +1018,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1043,7 +1043,7 @@
             "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1068,7 +1068,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 1,
             "headcountMax": 1,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -1093,7 +1093,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 1,
             "headcountMax": 1,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -1118,7 +1118,7 @@
             "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1143,7 +1143,7 @@
             "description": "Formation continue en compétences managériales pour cadres de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1168,7 +1168,7 @@
             "description": "Formation continue en compétences managériales pour cadres de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1193,7 +1193,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1218,7 +1218,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1243,7 +1243,7 @@
             "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1268,7 +1268,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1293,7 +1293,7 @@
             "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1318,7 +1318,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1343,7 +1343,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1368,7 +1368,7 @@
             "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1393,7 +1393,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1418,7 +1418,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -1443,7 +1443,7 @@
             "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -1468,7 +1468,7 @@
             "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1493,7 +1493,7 @@
             "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1518,7 +1518,7 @@
             "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1543,7 +1543,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1568,7 +1568,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1593,7 +1593,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1618,7 +1618,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1643,7 +1643,7 @@
             "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -1668,7 +1668,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -1693,7 +1693,7 @@
             "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1718,7 +1718,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1743,7 +1743,7 @@
             "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1768,7 +1768,7 @@
             "description": "Conseil en performance opérationnelle pour entreprises de services.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -1793,7 +1793,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1818,7 +1818,7 @@
             "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -1843,7 +1843,7 @@
             "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -1868,7 +1868,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -1893,7 +1893,7 @@
             "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -1918,7 +1918,7 @@
             "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1943,7 +1943,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -1968,7 +1968,7 @@
             "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -1993,7 +1993,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -2018,7 +2018,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -2043,7 +2043,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -2068,7 +2068,7 @@
             "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -2093,7 +2093,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -2118,7 +2118,7 @@
             "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -2143,7 +2143,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 15,
             "headcountMax": 30,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -2168,7 +2168,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -2193,7 +2193,7 @@
             "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -2218,7 +2218,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -2243,7 +2243,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 1,
             "headcountMax": 1,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -2268,7 +2268,7 @@
             "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -2293,7 +2293,7 @@
             "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Conseil (stratégie, RH, IA)"
             },
             "address": {
@@ -2318,7 +2318,7 @@
             "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -2343,7 +2343,7 @@
             "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -2368,7 +2368,7 @@
             "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {
@@ -2393,7 +2393,7 @@
             "description": "Formation continue en compétences managériales pour cadres de PME.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Formation professionnelle"
             },
             "address": {
@@ -2418,7 +2418,7 @@
             "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Artisanat et production à forte valeur ajoutée"
             },
             "address": {
@@ -2443,7 +2443,7 @@
             "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
             "headcountMin": 3,
             "headcountMax": 8,
-            "sector": {
+            "industry": {
               "name": "Recrutement et management de transition"
             },
             "address": {
@@ -2468,7 +2468,7 @@
             "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Commerce et distribution B2B"
             },
             "address": {
@@ -2493,7 +2493,7 @@
             "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
             "headcountMin": 8,
             "headcountMax": 15,
-            "sector": {
+            "industry": {
               "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
             },
             "address": {

@@ -6,7 +6,7 @@ export const prospectSchema = z.object({
     company: z.string(),
     contactName: z.string(),
     contactRole: z.string(),
-    sector: z.string(),
+    industry: z.string(),
     city: z.string(),
     headcountLabel: z.string(),
     headcountMin: z.number(),

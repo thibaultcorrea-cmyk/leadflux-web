@@ -8,7 +8,7 @@ export type Prospect = {
   /** Décideur identifié pour l'entreprise. */
   contactName: string;
   contactRole: string;
-  sector: string;
+  industry: string;
   city: string;
   /** Libellé affiché de la tranche d'effectif, ex. « 3-8 salariés ». */
   headcountLabel: string;

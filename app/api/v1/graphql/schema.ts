@@ -99,7 +99,7 @@ type ProspectAddress {
     country: String!
 }
 
-type ProspectSector {
+type ProspectIndustry {
     name: String!
 }
 
@@ -116,7 +116,7 @@ type ProspectCompany {
     description: String!
     headcountMin: Int!
     headcountMax: Int!
-    sector: ProspectSector!
+    industry: ProspectIndustry!
     address: ProspectAddress!
 }
 
@@ -138,7 +138,7 @@ type ProspectSearch {
 }
 
 type Query {
-    prospects: [ProspectSearch!]
+    searches: [ProspectSearch!]
     prospect(id: ID!): Prospect
     kpis: [KpiItem!]!
     recentlyActivity: [RecentlyActivityItem!]!

@@ -21,7 +21,7 @@ export type ProspectCompany = {
   description: string;
   headcountMin: number;
   headcountMax: number;
-  sector: ProspectSector;
+  industry: ProspectSector;
 };
 
 export type ProspectPerson = {

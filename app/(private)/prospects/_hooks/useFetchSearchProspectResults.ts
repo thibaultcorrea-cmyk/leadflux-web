@@ -13,14 +13,22 @@ export const useFetchSearchProspectResults = () => {
 
     const prospects = useMemo(() => {
         if (!data) return []
-        return parseSearchResults(data.searches)
+        const results = data.searches[0]
+        if (!results) return []
+        return parseSearchResults(results.results)
 
+    }, [data])
+
+    const resultCount = useMemo(() => {
+        if (!data) return 0
+        return data.searches.resultCount
     }, [data])
 
     return {
         prospects,
         isLoading,
-        error
+        error,
+        resultCount
     }
 
 

@@ -7,7 +7,7 @@ export const QueryKey = {
 
 export const GET_SEARCH_PROSPECTS_QUERY = gql`
     query Prospect {
- prospects {
+ searches {
     id
     launchedAt
     resultCount
@@ -21,15 +21,15 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
           phone
         }
         company {
+          name
+          description
+          headcountMax
+          headcountMin
           address {
             city
             country
           }
-          description
-          headcountMax
-          headcountMin
-          name
-          sector {
+          industry {
             name
           }
         }

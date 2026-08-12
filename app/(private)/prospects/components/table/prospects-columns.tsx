@@ -9,7 +9,7 @@ import type { DataTableRowAction } from "@/components/shared/tables/types";
 import type { Prospect } from "../../types/prospect";
 import { CompanyCell } from "./cells/company-cell";
 import { DecisionMakerCell } from "./cells/decision-maker-cell";
-import { SectorCell } from "./cells/sector-cell";
+import { IndustryCell } from "./cells/sector-cell";
 import { TextCell } from "./cells/text-cell";
 
 /**
@@ -49,13 +49,13 @@ export function getProspectsColumns(
       ),
     },
     {
-      accessorKey: "sector",
+      accessorKey: "industry",
       size: 165,
       meta: { label: "Secteur" },
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Secteur" />
       ),
-      cell: ({ row }) => <SectorCell sector={row.original.sector} />,
+      cell: ({ row }) => <IndustryCell industry={row.original.industry} />,
     },
     {
       accessorKey: "city",
