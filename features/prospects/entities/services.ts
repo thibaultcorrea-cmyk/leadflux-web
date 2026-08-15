@@ -1,7 +1,8 @@
-
+import { ProspectSqlInfer } from "@/db/schemas"
+import { CreateProspectDto } from "../dto/schema"
 
 export type ProspectServices = {
-    create: (prospect: any) => Promise<any>
+    create: (prospect: CreateProspectDto) => Promise<ProspectSqlInfer>
     collections: (query: any) => Promise<any[]>
     update: (prospect: Partial<any>) => Promise<any>
     delete: (id: string) => Promise<void>
