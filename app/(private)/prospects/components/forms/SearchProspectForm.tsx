@@ -15,6 +15,7 @@ import { SearchFormInputs } from "./SearchFormInputs";
 import { useModalController } from "@/hooks/useModalController";
 import { CardContent } from "@/components/ui/card";
 import { LeadFinderFormSchemaType } from "../../types/forms";
+import { useMutationSearchProspects } from "../../_hooks/useMutationProspect";
 
 
 
@@ -23,6 +24,7 @@ export const SearchProspectForm = () => {
     const { form } = useSearchProspectForm()
 
     const modalController = useModalController()
+    const { createSearchProspect } = useMutationSearchProspects()
 
     const close = () => {
         modalController.close()
@@ -30,9 +32,9 @@ export const SearchProspectForm = () => {
 
 
 
-    const onSubmit = (data: LeadFinderFormSchemaType) => {
-        console.log("onsubmit", data);
-
+    const onSubmit = async (data: LeadFinderFormSchemaType) => {
+        await createSearchProspect(data)
+        close()
     }
 
     console.log(form.formState.errors);

@@ -48,31 +48,7 @@ export const CREATE_SEARCH_PROSPECTS_MUTATION = gql`
       id
       launchedAt
       resultCount
-      results {
-        prospect {
-          person {
-            fullName
-            email
-            jobTitle
-            linkedinUrl
-            phone
-          }
-          company {
-            name
-            description
-            headcountMax
-            headcountMin
-            address {
-              city
-              country
-            }
-            industry {
-              name
-            }
-          }
-          lastSourcedAt
-        }
-      }
+  
     }
   }
 `

@@ -1,7 +1,7 @@
 import { LeadFinderFormSchemaType } from "../types/forms"
 import prospectsResponse from "@/app/api/v1/leads/mocks/prospects-response"
 import { API_BASE_URL, GRAPHQL_BASE_URL } from "@/core/params"
-import { GET_SEARCH_PROSPECTS_QUERY } from "../_hooks/queries"
+import { CREATE_SEARCH_PROSPECTS_MUTATION, GET_SEARCH_PROSPECTS_QUERY } from "../_hooks/queries"
 import request from "graphql-request"
 
 
@@ -23,4 +23,6 @@ export const fetchProspects = async () => {
     return request(GRAPHQL_BASE_URL, GET_SEARCH_PROSPECTS_QUERY);
 }
 
-
+export const createSearchProspects = async (inputs: LeadFinderFormSchemaType) => {
+    return request(GRAPHQL_BASE_URL, CREATE_SEARCH_PROSPECTS_MUTATION, inputs);
+}
