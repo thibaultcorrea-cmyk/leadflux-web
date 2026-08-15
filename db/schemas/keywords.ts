@@ -44,3 +44,8 @@ export const companyKeywords = pgTable(
     index("company_keywords_keyword_id_idx").on(table.keywordId),
   ],
 );
+
+export type KeywordSqlInfer = typeof keywords.$inferSelect
+export type KeywordSqlInsert = typeof keywords.$inferInsert
+
+

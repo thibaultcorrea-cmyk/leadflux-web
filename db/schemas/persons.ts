@@ -26,3 +26,7 @@ export const persons = pgTable(
   },
   (table) => [uniqueIndex("persons_email_key_idx").on(table.emailKey)],
 );
+
+
+export type PersonSqlInfer = typeof persons.$inferSelect
+export type PersonSqlInsert = typeof persons.$inferInsert

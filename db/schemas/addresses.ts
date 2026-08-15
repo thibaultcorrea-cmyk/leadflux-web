@@ -14,7 +14,7 @@ export const addresses = pgTable(
     /** city normalisee (minuscules, sans accents) : filtre et regroupement. */
     cityKey: text("city_key"),
     zip: text("zip"),
-    region: text("region"),
+    state: text("state"),
     country: text("country"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
@@ -24,3 +24,7 @@ export const addresses = pgTable(
   },
   (table) => [index("addresses_city_key_idx").on(table.cityKey)],
 );
+
+
+export type AddressSqlInfer = typeof addresses.$inferSelect
+export type AddressSqlInsert = typeof addresses.$inferInsert

@@ -20,7 +20,7 @@ export type ProspectSourcePayload = {
     keywords?: string[];
     size?: string;
     technologies?: string[];
-    address?: { city?: string; country?: string; zip?: string };
+    address?: { city?: string; country?: string; state?: string; zip?: string };
   };
 };
 
@@ -72,3 +72,4 @@ export const prospects = pgTable(
 
 
 export type ProspectSqlInfer = typeof prospects.$inferSelect
+export type ProspectSqlInsert = typeof prospects.$inferInsert

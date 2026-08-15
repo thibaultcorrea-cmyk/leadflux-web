@@ -47,3 +47,6 @@ export const companyTechnologies = pgTable(
     index("company_technologies_technology_id_idx").on(table.technologyId),
   ],
 );
+
+export type TechnologySqlInfer = typeof technologies.$inferSelect
+export type TechnologySqlInsert = typeof technologies.$inferInsert

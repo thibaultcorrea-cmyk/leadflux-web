@@ -69,3 +69,8 @@ export const companies = pgTable(
     index("companies_headcount_min_idx").on(table.headcountMin),
   ],
 );
+
+
+
+export type CompanySqlInfer = typeof companies.$inferSelect
+export type CompanySqlInsert = typeof companies.$inferInsert
