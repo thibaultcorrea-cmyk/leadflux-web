@@ -42,6 +42,10 @@ export const SearchProspectForm = () => {
         console.log("onsubmit");
 
     }
+
+    console.log(form.getValues());
+    console.log(form.formState.errors);
+
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-[38rem]" >
             <DialogHeader>
