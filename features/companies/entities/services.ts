@@ -7,7 +7,7 @@ export type CompanyServices = {
     collections: (query: any) => Promise<CompanySqlInfer[]>
     update: (company: Partial<CompanySqlInfer>) => Promise<CompanySqlInfer>
     delete: (id: string) => Promise<void>
-    deleteMultiple: (ids: string[]) => Promise<void>
-    truncate: () => Promise<void>
+    deleteMany: (ids: string[]) => Promise<void>
+    clear: () => Promise<void>
 
 }

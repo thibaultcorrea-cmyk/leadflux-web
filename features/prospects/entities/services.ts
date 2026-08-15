@@ -7,7 +7,7 @@ export type ProspectServices = {
     update: (prospect: Partial<any>) => Promise<any>
     delete: (id: string) => Promise<void>
     deleteMultiple: (id: string[]) => Promise<void>
-    truncate: () => Promise<void>
+    clear: () => Promise<void>
     search: (query: any) => Promise<any[]>
 
 }

@@ -13,6 +13,11 @@ const resolvers = {
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
+        clearSearchResults: async (): Promise<{ success: boolean, message: string }> => {
+            const result = await SearchProspectsServicesImpl.cleanAll()
+            const message = result ? "Search results cleared successfully" : "Failed to clear search results"
+            return { success: result, message }
+        },
     },
 
 };

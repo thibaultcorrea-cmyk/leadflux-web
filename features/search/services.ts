@@ -73,7 +73,14 @@ export const SearchProspectsServicesImpl: any = {
         return search
     },
 
-
+    cleanAll: async () => {
+        try {
+            await clearProspectsAndResults()
+            return true
+        } catch (error) {
+            return false
+        }
+    }
 }
 
 /**
@@ -200,10 +207,10 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
 }
 
 export const clearProspectsAndResults = async () => {
-    await SearchResultServicesImpl.truncate()
-    await ProspectServicesImpl.truncate()
-    await AddressServicesImpl.truncate()
-    await CompanyServicesImpl.truncate()
-    await PersonServicesImpl.truncate()
+    await SearchResultServicesImpl.clear()
+    await ProspectServicesImpl.clear()
+    await AddressServicesImpl.clear()
+    await CompanyServicesImpl.clear()
+    await PersonServicesImpl.clear()
     await SearchWriteRepositoriesImpl.truncate()
 }

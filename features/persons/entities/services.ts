@@ -7,7 +7,7 @@ export type PersonServices = {
     collections: (query: any) => Promise<PersonSqlInfer[]>
     update: (person: Partial<PersonSqlInfer>) => Promise<PersonSqlInfer>
     delete: (id: string) => Promise<void>
-    deleteMultiple: (ids: string[]) => Promise<void>
-    truncate: () => Promise<void>
+    deleteMany: (ids: string[]) => Promise<void>
+    clear: () => Promise<void>
 
 }

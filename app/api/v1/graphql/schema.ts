@@ -172,8 +172,14 @@ type SearchResultsCreated {
     resultCount: Int!
 }
 
+type SearchResultsCleared {
+    success: Boolean!
+    message: String!
+}
+
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
+    clearSearchResults: SearchResultsCleared
    
 }
 

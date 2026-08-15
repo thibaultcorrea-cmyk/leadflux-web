@@ -23,7 +23,7 @@ export const ProspectServicesImpl: ProspectServices = {
     deleteMultiple: async (ids) => {
         await ProspectWriteRepositoriesImpl.deleteMultiple(ids)
     },
-    truncate: async () => {
+    clear: async () => {
         await ProspectWriteRepositoriesImpl.truncate()
     },
     search: (query) => Promise.resolve(leadFinder),

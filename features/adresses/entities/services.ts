@@ -7,7 +7,7 @@ export type AddressServices = {
     collections: (query: any) => Promise<AddressSqlInfer[]>
     update: (address: Partial<AddressSqlInfer>) => Promise<AddressSqlInfer>
     delete: (id: string) => Promise<void>
-    deleteMultiple: (ids: string[]) => Promise<void>
-    truncate: () => Promise<void>
+    deleteMany: (ids: string[]) => Promise<void>
+    clear: () => Promise<void>
 
 }

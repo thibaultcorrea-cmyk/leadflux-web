@@ -24,10 +24,10 @@ export const SearchResultServicesImpl: SearchResultServices = {
     delete: async (key) => {
         throw new Error("Method not implemented.")
     },
-    deleteMultiple: async (keys) => {
+    deleteMany: async (keys) => {
         throw new Error("Method not implemented.")
     },
-    truncate: async () => {
-        throw new Error("Method not implemented.")
+    clear: async () => {
+        await SearchResultWriteRepositoriesImpl.truncate();
     },
 }

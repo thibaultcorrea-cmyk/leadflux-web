@@ -30,11 +30,11 @@ export const AddressServicesImpl: AddressServices = {
     delete: async (id: string) => {
         throw new Error("Method not implemented.")
     },
-    deleteMultiple: async (ids: string[]) => {
+    deleteMany: async (ids: string[]) => {
         throw new Error("Method not implemented.")
     },
-    truncate: async () => {
-        throw new Error("Method not implemented.")
+    clear: async () => {
+        await AddressWriteRepositoriesImpl.truncate()
     },
 }
 
