@@ -24,6 +24,7 @@ CREATE TABLE "emails" (
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+ALTER TABLE "prospects" ADD COLUMN "prospecting_consent" boolean DEFAULT true NOT NULL;--> statement-breakpoint
 ALTER TABLE "email_versions" ADD CONSTRAINT "email_versions_email_id_emails_id_fk" FOREIGN KEY ("email_id") REFERENCES "public"."emails"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "emails" ADD CONSTRAINT "emails_validated_by_user_id_fk" FOREIGN KEY ("validated_by") REFERENCES "public"."user"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 CREATE INDEX "email_versions_email_id_idx" ON "email_versions" USING btree ("email_id");--> statement-breakpoint

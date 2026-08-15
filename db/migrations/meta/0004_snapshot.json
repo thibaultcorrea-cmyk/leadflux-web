@@ -1,5 +1,5 @@
 {
-  "id": "f8454476-54ca-4a33-8bdf-aff88ae732d2",
+  "id": "9a7544c3-548c-4350-9cf9-4a96bde01237",
   "prevId": "8b1a9711-111b-4ddf-87e6-f8fcd7a6dd70",
   "version": "7",
   "dialect": "postgresql",
@@ -1320,6 +1320,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "prospecting_consent": {
+          "name": "prospecting_consent",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         },
         "created_at": {
           "name": "created_at",

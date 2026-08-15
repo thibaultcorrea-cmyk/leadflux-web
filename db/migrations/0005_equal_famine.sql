@@ -1,1 +1,0 @@
-ALTER TABLE "prospects" ADD COLUMN "prospecting_consent" boolean DEFAULT true NOT NULL;
