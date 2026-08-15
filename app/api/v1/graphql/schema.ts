@@ -148,7 +148,8 @@ type Query {
     
 }
 
-    
+
+
 `
 
 const mutationDefs = `#graphql
@@ -164,8 +165,16 @@ input CreateSearchInputs {
 
 }
 
+
+type SearchResultsCreated {
+    id: String!
+    launchedAt: String!
+    resultCount: Int!
+}
+
 type Mutation {
-    createSearchResults(inputs: CreateSearchInputs): [ProspectSearch!]
+    createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
+   
 }
 
 `

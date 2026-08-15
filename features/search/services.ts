@@ -34,12 +34,6 @@ export const SearchProspectsServicesImpl: any = {
         const criteriaLabel = `${criteriaData.jobTitle} - ${criteriaData.industry} - ${dateStr}`
 
         const { headcountMax, headcountMin } = criteriaEmployeeRangeFactory(criteriaData)
-        const search = await SearchWriteRepositoriesImpl.create({
-            name,
-            criteria: { ...criteriaData, headcountMax, headcountMin },
-            createdBy: currentUser.id,
-            criteriaLabel,
-        })
 
         // Now start search on leads sources and return result on real time
         const leadsResults = await LeadFinderMock()
@@ -51,6 +45,18 @@ export const SearchProspectsServicesImpl: any = {
             .filter((entry): entry is { result: PromiseFulfilledResult<Awaited<ReturnType<typeof peristCleanProspect>>>; position: number } => entry.result.status === "fulfilled")
             .map(({ result, position }) => ({ prospect: result.value, position }))
 
+        const prospects = fulfilledProspects.map(({ prospect }) => prospect)
+
+
+        const search = await SearchWriteRepositoriesImpl.create({
+            name,
+            criteria: { ...criteriaData, headcountMax, headcountMin },
+            createdBy: currentUser.id,
+            resultCount: prospects.length,
+            criteriaLabel,
+        })
+
+
         // link each persisted prospect to this search, keeping the source ranking as position
         await Promise.allSettled(
             fulfilledProspects.map(({ prospect, position }) =>
@@ -58,24 +64,14 @@ export const SearchProspectsServicesImpl: any = {
             ),
         )
 
-        const prospects = fulfilledProspects.map(({ prospect }) => prospect)
 
-        // after saving the leads, reflect the real result count on the search
-        const updatedSearch = await SearchWriteRepositoriesImpl.update({
-            id: search.id,
-            resultCount: prospects.length,
-        })
+
 
         // Mutation.createSearchResults returns [ProspectSearch!] : the schema
         // expects a list, and ProspectSearch.results a list of { prospect }
         // shaped from the raw source payload (no join needed, already stored
         // on each prospect row).
-        return [{
-            id: updatedSearch.id,
-            launchedAt: updatedSearch.launchedAt.toISOString(),
-            resultCount: updatedSearch.resultCount,
-            results: prospects.map((prospect) => ({ prospect: leadProspectFromProspect(prospect) })),
-        }]
+        return search
     },
 
 
@@ -172,6 +168,9 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
 
 export const persistProspectsFromLeadsApi = async (leadApiResults: LeadFinderApiResponse[]) => {
 
+    //Truncate prospect table first
+    await clearProspectsAndResults();
+
     const mappedData = await Promise.all(leadApiResults.map((lead) => leadsApiToProspectFactory(lead)))
     const results = await Promise.allSettled(mappedData.map((item) => peristCleanProspect(item)))
 
@@ -202,3 +201,10 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
     return prospectSaved
 }
 
+export const clearProspectsAndResults = async () => {
+    await ProspectServicesImpl.truncate()
+    await SearchResultServicesImpl.truncate()
+    await AddressServicesImpl.truncate()
+    await CompanyServicesImpl.truncate()
+    await PersonServicesImpl.truncate()
+}
