@@ -58,11 +58,11 @@ describe("EmailProspectsServicesImpl.updateStatus", () => {
         getCurrentUserMock.mockReset()
     })
 
-    it("horodate sent_at et validated_by en passant au statut sent", async () => {
+    it("horodate sent_at, validated_by et threadId en passant au statut sent", async () => {
         getCurrentUserMock.mockResolvedValue({ id: "user_1" })
         updateMock.mockResolvedValue({ id: "email_1", status: "sent" })
 
-        await EmailProspectsServicesImpl.updateStatus({ id: "email_1", status: "sent" })
+        await EmailProspectsServicesImpl.updateStatus({ id: "email_1", status: "sent", threadId: "thread_123" })
 
         expect(getCurrentUserMock).toHaveBeenCalledOnce()
         expect(updateMock).toHaveBeenCalledWith(
@@ -71,9 +71,19 @@ describe("EmailProspectsServicesImpl.updateStatus", () => {
                 status: "sent",
                 validatedBy: "user_1",
                 sentAt: expect.any(Date),
+                threadId: "thread_123",
                 lastActivityAt: expect.any(Date),
             }),
         )
+    })
+
+    it("rejette un passage a sent sans threadId, sans appeler le repository", async () => {
+        await expect(
+            EmailProspectsServicesImpl.updateStatus({ id: "email_1", status: "sent" }),
+        ).rejects.toBeTruthy()
+
+        expect(updateMock).not.toHaveBeenCalled()
+        expect(getCurrentUserMock).not.toHaveBeenCalled()
     })
 
     it("horodate replied_at en passant au statut replied, sans resoudre l'utilisateur courant", async () => {

@@ -53,6 +53,13 @@ export const emails = pgTable(
     }),
     sentAt: timestamp("sent_at"),
     repliedAt: timestamp("replied_at"),
+    /**
+     * Id du thread Gmail, retourne par le webhook n8n qui effectue l'envoi
+     * reel. Preuve de tracabilite de l'envoi : sans lui, "sent" n'est qu'une
+     * affirmation ; avec lui, on peut retrouver le thread pour verifier une
+     * reponse.
+     */
+    threadId: text("thread_id"),
 
     /**
      * Derniere activite (nouvelle version generee, envoi, reponse) : mise a

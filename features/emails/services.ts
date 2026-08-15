@@ -97,6 +97,7 @@ export const EmailProspectsServicesImpl: EmailServices = {
             const currentUser = await UserServices.getCurrentUser()
             patch.sentAt = now
             patch.validatedBy = currentUser.id
+            patch.threadId = data.threadId
         }
 
         if (data.status === "replied") {

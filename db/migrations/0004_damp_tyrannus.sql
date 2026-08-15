@@ -21,6 +21,7 @@ CREATE TABLE "emails" (
 	"validated_by" text,
 	"sent_at" timestamp,
 	"replied_at" timestamp,
+	"thread_id" text,
 	"last_activity_at" timestamp DEFAULT now() NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL

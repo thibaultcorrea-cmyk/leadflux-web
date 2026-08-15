@@ -1,5 +1,5 @@
 {
-  "id": "40bb8b93-ee5d-43e3-9279-46787d5c77bb",
+  "id": "64923388-ce3e-4bdf-aba1-f8a0d91fe39f",
   "prevId": "8b1a9711-111b-4ddf-87e6-f8fcd7a6dd70",
   "version": "7",
   "dialect": "postgresql",
@@ -784,6 +784,12 @@
         "replied_at": {
           "name": "replied_at",
           "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thread_id": {
+          "name": "thread_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },

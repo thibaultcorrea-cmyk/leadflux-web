@@ -54,10 +54,22 @@ describe("emailValidator.validate", () => {
 })
 
 describe("emailValidator.validateStatus", () => {
-    it("accepte une transition de statut valide", () => {
-        const result = emailValidator.validateStatus({ id: "email_1", status: "sent" })
+    it("accepte une transition vers replied sans threadId", () => {
+        const result = emailValidator.validateStatus({ id: "email_1", status: "replied" })
 
         expect(result.success).toBe(true)
+    })
+
+    it("accepte une transition vers sent avec threadId", () => {
+        const result = emailValidator.validateStatus({ id: "email_1", status: "sent", threadId: "thread_123" })
+
+        expect(result.success).toBe(true)
+    })
+
+    it("rejette une transition vers sent sans threadId", () => {
+        const result = emailValidator.validateStatus({ id: "email_1", status: "sent" })
+
+        expect(result.success).toBe(false)
     })
 
     it("rejette un statut hors de l'enum", () => {
@@ -67,7 +79,7 @@ describe("emailValidator.validateStatus", () => {
     })
 
     it("rejette une transition sans id", () => {
-        const result = emailValidator.validateStatus({ status: "sent" })
+        const result = emailValidator.validateStatus({ status: "sent", threadId: "thread_123" })
 
         expect(result.success).toBe(false)
     })

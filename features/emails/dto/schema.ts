@@ -15,6 +15,7 @@ export const EmailSchema = z.object({
     validatedBy: z.string().nullable(),
     sentAt: z.string().nullable(),
     repliedAt: z.string().nullable(),
+    threadId: z.string().nullable(),
     lastActivityAt: z.string(),
     createdAt: z.string(),
     updatedAt: z.string(),
@@ -40,9 +41,21 @@ export const createEmailSchema = z.object({
 export type CreateEmailDto = z.infer<typeof createEmailSchema>
 
 
+/**
+ * threadId obligatoire pour passer a "sent" : c'est la preuve d'envoi
+ * retournee par le webhook n8n (id du thread Gmail). Sans lui, "sent" ne
+ * serait qu'une affirmation sans tracabilite.
+ */
 export const updateEmailStatusSchema = z.object({
     id: z.string().min(1, "id est requis"),
     status: z.enum(EMAIL_STATUSES),
-})
+    threadId: z.string().optional(),
+}).refine(
+    (data) => data.status !== "sent" || Boolean(data.threadId),
+    {
+        message: "threadId est requis pour marquer un email comme envoye (retour du webhook n8n)",
+        path: ["threadId"],
+    },
+)
 
 export type UpdateEmailStatusDto = z.infer<typeof updateEmailStatusSchema>
