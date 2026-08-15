@@ -38,8 +38,8 @@ const SelectController = ({
             render={({ field }) => (
                 <Field>
                     {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
-                    <Select {...field} >
-                        <SelectTrigger className="w-full py-5">
+                    <Select name={field.name} value={field.value ?? null} onValueChange={field.onChange}>
+                        <SelectTrigger className="w-full py-5" onBlur={field.onBlur}>
                             <SelectValue placeholder={label} />
                         </SelectTrigger>
                         <SelectContent className="p-1">
