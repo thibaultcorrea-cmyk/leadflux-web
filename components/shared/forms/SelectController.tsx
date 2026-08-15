@@ -38,7 +38,7 @@ const SelectController = ({
             render={({ field }) => (
                 <Field>
                     {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
-                    <Select {...field}>
+                    <Select {...field} >
                         <SelectTrigger className="w-full py-5">
                             <SelectValue placeholder={label} />
                         </SelectTrigger>
