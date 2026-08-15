@@ -66,10 +66,51 @@ export const SearchProspectsServicesImpl: any = {
             resultCount: prospects.length,
         })
 
-        return updatedSearch
+        // Mutation.createSearchResults returns [ProspectSearch!] : the schema
+        // expects a list, and ProspectSearch.results a list of { prospect }
+        // shaped from the raw source payload (no join needed, already stored
+        // on each prospect row).
+        return [{
+            id: updatedSearch.id,
+            launchedAt: updatedSearch.launchedAt.toISOString(),
+            resultCount: updatedSearch.resultCount,
+            results: prospects.map((prospect) => ({ prospect: leadProspectFromProspect(prospect) })),
+        }]
     },
 
 
+}
+
+/**
+ * Reconstruit la forme GraphQL LeadProspect a partir du raw_payload stocke sur
+ * le prospect. linkedinUrl/phone/headcountMin/headcountMax ne sont pas dans le
+ * payload source aujourd'hui (cf. leadsApiToProspectFactory) : vides/0 en
+ * attendant qu'une vraie source les fournisse.
+ */
+const leadProspectFromProspect = (prospect: { rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date }) => {
+    const payload = prospect.rawPayload
+
+    return {
+        person: {
+            fullName: payload?.person.name ?? "",
+            email: payload?.person.email ?? "",
+            jobTitle: payload?.person.jobTitle ?? "",
+            linkedinUrl: "",
+            phone: "",
+        },
+        company: {
+            name: payload?.company.name ?? "",
+            description: payload?.company.description ?? "",
+            headcountMin: 0,
+            headcountMax: 0,
+            industry: { name: payload?.company.industry ?? "" },
+            address: {
+                city: payload?.company.address?.city ?? "",
+                country: payload?.company.address?.country ?? "",
+            },
+        },
+        lastSourcedAt: prospect.lastSourcedAt.toISOString(),
+    }
 }
 
 const criteriaEmployeeRangeFactory = (criteriaData: CreateSearchProspectsDto) => {

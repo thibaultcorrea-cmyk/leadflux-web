@@ -71,7 +71,7 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         getCurrentUserMock.mockReset().mockResolvedValue({ id: "user_1" })
         searchCreateMock.mockReset().mockResolvedValue({ id: "search_1" })
         searchUpdateMock.mockReset().mockImplementation((data: { id: string; resultCount: number }) =>
-            Promise.resolve({ id: data.id, resultCount: data.resultCount }),
+            Promise.resolve({ id: data.id, resultCount: data.resultCount, launchedAt: new Date("2026-01-01T00:00:00.000Z") }),
         )
         leadFinderMock.mockReset()
         addressCreateMock.mockReset().mockResolvedValue({ id: "address_1" })
@@ -80,7 +80,11 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         )
         personCreateMock.mockReset().mockResolvedValue({ id: "person_1" })
         prospectCreateMock.mockReset().mockImplementation((input: Record<string, unknown>) =>
-            Promise.resolve({ id: `prospect_${prospectCreateMock.mock.calls.length}`, ...input }),
+            Promise.resolve({
+                id: `prospect_${prospectCreateMock.mock.calls.length}`,
+                lastSourcedAt: new Date("2026-01-01T00:00:00.000Z"),
+                ...input,
+            }),
         )
         searchResultCreateMock.mockReset().mockResolvedValue({})
     })
@@ -108,7 +112,6 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         expect(companyCreateMock).toHaveBeenCalledTimes(2)
         expect(personCreateMock).toHaveBeenCalledTimes(2)
         expect(prospectCreateMock).toHaveBeenCalledTimes(2)
-        expect(result.prospects).toHaveLength(2)
         expect(searchResultCreateMock).toHaveBeenCalledTimes(2)
         expect(searchResultCreateMock).toHaveBeenCalledWith(
             expect.objectContaining({ searchId: "search_1", prospectId: "prospect_1", position: 0 }),
@@ -119,7 +122,16 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         expect(searchUpdateMock).toHaveBeenCalledWith(
             expect.objectContaining({ id: "search_1", resultCount: 2 }),
         )
-        expect(result.search).toEqual({ id: "search_1", resultCount: 2 })
+
+        // Mutation.createSearchResults renvoie [ProspectSearch!] : une liste
+        expect(result).toHaveLength(1)
+        const [prospectSearch] = result
+        expect(prospectSearch.id).toBe("search_1")
+        expect(prospectSearch.resultCount).toBe(2)
+        expect(prospectSearch.results).toHaveLength(2)
+        expect(prospectSearch.results[0].prospect.person.fullName).toBe("Person a")
+        expect(prospectSearch.results[0].prospect.company.name).toBe("Company a")
+        expect(prospectSearch.results[1].prospect.person.fullName).toBe("Person b")
     })
 
     it("rejette des criteres invalides sans creer de recherche ni interroger la source", async () => {
