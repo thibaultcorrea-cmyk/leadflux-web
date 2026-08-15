@@ -1,4 +1,4 @@
-import { EmailSqlInfer } from "@/db/schemas"
+import { EmailSqlInfer, EmailStatusValue } from "@/db/schemas"
 import { EmailServices } from "./entities/services"
 import { CreateEmailDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
@@ -16,6 +16,25 @@ export const EmailProspectsServicesImpl: EmailServices = {
         }
 
         return EmailWriteRepositoriesImpl.create(validated.data)
+    },
+
+    generate: async (inputs: CreateEmailDto) => {
+        const validated = emailValidator.validate(inputs)
+        if (!validated.success) {
+            throw validated.error
+        }
+        const status: EmailStatusValue = "draft"
+        // Call Agent Service to generate email content from knowlege base
+
+        //Create new version with status draft
+
+
+
+
+        throw new Error("Method not implemented.")
+    },
+    regenerate: async (id: string) => {
+        throw new Error("Method not implemented.")
     },
 
     collections: async (query: any) => {

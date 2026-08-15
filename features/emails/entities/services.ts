@@ -5,6 +5,8 @@ import { Email } from "./type"
 
 export type EmailServices = {
     create: (email: CreateEmailDto) => Promise<EmailSqlInfer>
+    generate: (email: CreateEmailDto) => Promise<string[]>
+    regenerate: (id: string) => Promise<any>
     collections: (query: any) => Promise<Email[]>
     update: (email: Partial<EmailSqlInfer>) => Promise<EmailSqlInfer>
     updateStatus: (input: UpdateEmailStatusDto) => Promise<EmailSqlInfer>
