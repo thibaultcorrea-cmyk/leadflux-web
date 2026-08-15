@@ -24,5 +24,5 @@ export const fetchProspects = async () => {
 }
 
 export const createSearchProspects = async (inputs: LeadFinderFormSchemaType) => {
-    return request(GRAPHQL_BASE_URL, CREATE_SEARCH_PROSPECTS_MUTATION, inputs);
+    return request(GRAPHQL_BASE_URL, CREATE_SEARCH_PROSPECTS_MUTATION, { inputs });
 }

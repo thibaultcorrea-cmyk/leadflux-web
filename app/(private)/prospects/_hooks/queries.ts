@@ -43,12 +43,12 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
 
 
 export const CREATE_SEARCH_PROSPECTS_MUTATION = gql`
-    mutation createSearchResults($inputs: CreateSearchInputs!) {
-    searches(inputs: $inputs) {
-      id
-      launchedAt
-      resultCount
-  
-    }
+mutation CreateSearchResults($inputs: CreateSearchInputs!) {
+  createSearchResults(inputs: $inputs) {
+    resultCount
+    id
+    launchedAt
+    
   }
+}
 `
