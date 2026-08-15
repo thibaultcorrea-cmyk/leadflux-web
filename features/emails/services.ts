@@ -5,6 +5,8 @@ import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
 import { EmailReadRepositoriesImpl } from "./repositories/read"
 import { UserServices } from "../users/services"
+import { EmailVersionWriteRepositoriesImpl } from "../emailVersions/repositories/write"
+import { AgentEmailService } from "../agent/email/service"
 
 
 
@@ -25,14 +27,40 @@ export const EmailProspectsServicesImpl: EmailServices = {
         }
         const status: EmailStatusValue = "draft"
         // Call Agent Service to generate email content from knowlege base
+        const agentResponse = await AgentEmailService.generate(inputs)
 
         //Create new version with status draft
+        const email = await EmailWriteRepositoriesImpl.create({
+            ...inputs,
+            status,
+        })
+        const version = await EmailVersionWriteRepositoriesImpl.create({
+            emailId: email.id,
+            body: [agentResponse.body],
+            subject: agentResponse.subject,
+            generatedAt: new Date(),
+            knowledgeVersion: agentResponse.knowledgeVersion,
+        })
 
+        return {
+            ...email,
+            version: {
+                ...version,
+            }
+        }
 
+    },
+    generateMany: async (inputs: CreateEmailDto[]) => {
+        const emails = await Promise.all(inputs.map(async (input) => {
+            return await EmailProspectsServicesImpl.generate(input)
+        }))
+        return emails
+    },
 
-
+    sendToProspect: async (ids: string[]) => {
         throw new Error("Method not implemented.")
     },
+
     regenerate: async (id: string) => {
         throw new Error("Method not implemented.")
     },
@@ -88,3 +116,4 @@ export const EmailProspectsServicesImpl: EmailServices = {
         await EmailWriteRepositoriesImpl.truncate()
     },
 }
+
