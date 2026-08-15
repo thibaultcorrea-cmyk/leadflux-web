@@ -11,6 +11,7 @@ import { useDataTable } from "@/hooks/useDataTable";
 import { useProspectsTableActions } from "../../_hooks/useProspectsTableActions";
 import type { Prospect } from "../../types/prospect";
 import { getProspectsColumns } from "./prospects-columns";
+import { useFetchSearchProspectResults } from "../../_hooks/useFetchSearchProspectResults";
 
 const PAGE_SIZE = 8;
 
@@ -22,14 +23,17 @@ const PAGE_SIZE = 8;
  * `components/shared/tables` ; cette page ne fournit que ses colonnes, ses
  * données et ses actions.
  */
-export function ProspectsTablePanel({ data }: { data: Prospect[] }) {
+export function ProspectsTablePanel() {
+
+  const { prospects, isLoading, error } = useFetchSearchProspectResults();
+
   const { rowActions, bulkActions } = useProspectsTableActions();
 
   const columns = useMemo(() => getProspectsColumns(rowActions), [rowActions]);
 
   const { table, selectedRows, resetSelection, totalCount } =
     useDataTable<Prospect>({
-      data,
+      data: prospects,
       columns,
       getRowId: (prospect) => prospect.id,
       enableRowSelection: true,
@@ -40,7 +44,7 @@ export function ProspectsTablePanel({ data }: { data: Prospect[] }) {
   return (
     <section
       aria-label="Résultats du sourcing"
-      className="flex flex-col gap-3.5 rounded-xl border border-border bg-card p-5"
+      className="flex flex-col gap-3.5 rounded-xl border border-border bg-card p-5 relative"
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="flex items-baseline gap-2.5">

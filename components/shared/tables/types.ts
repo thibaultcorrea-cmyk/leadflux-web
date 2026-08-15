@@ -34,6 +34,7 @@ export type DataTableBulkAction<TData> = {
   label: string;
   icon?: LucideIcon;
   onSelect: (rows: TData[]) => void;
+  className?: string;
 };
 
 declare module "@tanstack/react-table" {

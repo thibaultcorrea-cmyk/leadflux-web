@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ModalProvider } from "@/components/shared/Modals/ModalProvider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import TanstackQueryClientProvider from "@/components/shared/Providers/TanstackQueryClient";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,9 +50,11 @@ export default function RootLayout({
         {/* nuqs : les filtres d'écran (statut des emails…) vivent dans l'URL,
             donc une vue filtrée se partage et se recharge à l'identique. */}
         <NuqsAdapter>
-          <ModalProvider>
-            {children}
-          </ModalProvider>
+          <TanstackQueryClientProvider>
+            <ModalProvider>
+              {children}
+            </ModalProvider>
+          </TanstackQueryClientProvider>
         </NuqsAdapter>
       </body>
     </html>

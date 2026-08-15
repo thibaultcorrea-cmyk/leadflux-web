@@ -12,17 +12,25 @@
     "db:drop": "npx drizzle-kit drop",
     "db:sync": "npm run db:generate && npm run db:migrate",
     "db:seed": "tsx ./db/seeds/seeds.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "@as-integrations/next": "^4.1.0",
     "@base-ui/react": "^1.6.0",
+    "@graphql-tools/schema": "^10.0.38",
     "@hookform/resolvers": "^5.5.7",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
     "better-auth": "^1.6.25",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "drizzle-graphql": "^0.8.5",
     "drizzle-orm": "^0.45.2",
+    "graphql": "^16.14.2",
+    "graphql-request": "^7.4.0",
     "lucide-react": "^1.27.0",
     "motion": "^12.43.0",
     "next": "16.2.10",
@@ -40,6 +48,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.20.0",
@@ -50,6 +59,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }

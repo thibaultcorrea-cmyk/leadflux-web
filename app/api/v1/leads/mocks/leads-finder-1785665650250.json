@@ -1,0 +1,2509 @@
+[
+  {
+    "id": "f1716a3b-b107-415b-aab9-81e3bbe52d6f",
+    "launchedAt": "2026-08-10T09:12:00.000Z",
+    "resultCount": 100,
+    "results": [
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Marion Aubert",
+            "email": "marion.aubert@example-test.com",
+            "jobTitle": "Directeur associé",
+            "linkedinUrl": "https://www.linkedin.com/in/marion-aubert",
+            "phone": "+33 6 11 55 31 94"
+          },
+          "company": {
+            "name": "Aubert Stratégie",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Marchand",
+            "email": "julien.marchand@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-marchand",
+            "phone": "+33 6 55 52 42 88"
+          },
+          "company": {
+            "name": "Atelier Marchand",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Muller",
+            "email": "fabien.muller@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-muller",
+            "phone": "+33 6 27 22 10 96"
+          },
+          "company": {
+            "name": "Institut de Formation Muller",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Sophie Simon",
+            "email": "sophie.simon@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/sophie-simon",
+            "phone": "+33 6 50 57 76 81"
+          },
+          "company": {
+            "name": "Altitude Conseil Bordeaux",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Perrot",
+            "email": "julien.perrot@example-test.com",
+            "jobTitle": "Gérant",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-perrot",
+            "phone": "+33 6 36 31 61 41"
+          },
+          "company": {
+            "name": "Manufacture Perrot",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Simon",
+            "email": "hugo.simon@example-test.com",
+            "jobTitle": "Associé fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-simon",
+            "phone": "+33 6 82 80 33 56"
+          },
+          "company": {
+            "name": "Simon Stratégie",
+            "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Clara Robert",
+            "email": "clara.robert@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/clara-robert",
+            "phone": "+33 6 26 12 90 87"
+          },
+          "company": {
+            "name": "Robert Fabrication",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Pierre Bernard",
+            "email": "pierre.bernard@example-test.com",
+            "jobTitle": "Directrice générale",
+            "linkedinUrl": "https://www.linkedin.com/in/pierre-bernard",
+            "phone": "+33 6 14 15 59 82"
+          },
+          "company": {
+            "name": "Bernard BtoB",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Mathieu Dubois",
+            "email": "mathieu.dubois@example-test.com",
+            "jobTitle": "Directrice des ventes",
+            "linkedinUrl": "https://www.linkedin.com/in/mathieu-dubois",
+            "phone": "+33 6 59 69 13 25"
+          },
+          "company": {
+            "name": "Dubois BtoB",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Alexandre Richard",
+            "email": "alexandre.richard@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/alexandre-richard",
+            "phone": "+33 6 35 34 87 84"
+          },
+          "company": {
+            "name": "Centre de Formation Richard",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Inès Petit",
+            "email": "ines.petit@example-test.com",
+            "jobTitle": "Notaire associée",
+            "linkedinUrl": "https://www.linkedin.com/in/ines-petit",
+            "phone": "+33 6 71 61 95 71"
+          },
+          "company": {
+            "name": "Cabinet Petit",
+            "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Lyon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Mathieu Dubois",
+            "email": "mathieu.dubois@example-test.com",
+            "jobTitle": "Associée",
+            "linkedinUrl": "https://www.linkedin.com/in/mathieu-dubois-2",
+            "phone": "+33 6 12 47 61 38"
+          },
+          "company": {
+            "name": "Dubois Management de Transition",
+            "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Mathieu Girard",
+            "email": "mathieu.girard@example-test.com",
+            "jobTitle": "Avocate associée",
+            "linkedinUrl": "https://www.linkedin.com/in/mathieu-girard",
+            "phone": "+33 6 66 62 39 27"
+          },
+          "company": {
+            "name": "Cabinet Girard Expertise",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Chloé Marchand",
+            "email": "chloe.marchand@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/chloe-marchand",
+            "phone": "+33 6 93 76 72 80"
+          },
+          "company": {
+            "name": "Manufacture Marchand",
+            "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Lyon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julie Blanc",
+            "email": "julie.blanc@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/julie-blanc",
+            "phone": "+33 6 61 58 89 77"
+          },
+          "company": {
+            "name": "Cabinet Blanc",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Laura Robert",
+            "email": "laura.robert@example-test.com",
+            "jobTitle": "Associée",
+            "linkedinUrl": "https://www.linkedin.com/in/laura-robert",
+            "phone": "+33 6 73 30 25 93"
+          },
+          "company": {
+            "name": "Robert Management de Transition",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Clara Girard",
+            "email": "clara.girard@example-test.com",
+            "jobTitle": "Directeur associé",
+            "linkedinUrl": "https://www.linkedin.com/in/clara-girard",
+            "phone": "+33 6 17 95 37 56"
+          },
+          "company": {
+            "name": "Altitude Conseil Paris",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 1,
+            "headcountMax": 1,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Vincent Leroy",
+            "email": "vincent.leroy@example-test.com",
+            "jobTitle": "Directrice générale",
+            "linkedinUrl": "https://www.linkedin.com/in/vincent-leroy",
+            "phone": "+33 6 84 44 86 51"
+          },
+          "company": {
+            "name": "Négoce Leroy",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Lyon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Dubois",
+            "email": "fabien.dubois@example-test.com",
+            "jobTitle": "Associé fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-dubois",
+            "phone": "+33 6 50 17 80 35"
+          },
+          "company": {
+            "name": "Cabinet Dubois Conseil",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Nantes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Marion Rousseau",
+            "email": "marion.rousseau@example-test.com",
+            "jobTitle": "Gérant",
+            "linkedinUrl": "https://www.linkedin.com/in/marion-rousseau",
+            "phone": "+33 6 64 30 59 69"
+          },
+          "company": {
+            "name": "Atelier Rousseau",
+            "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Léa Michel",
+            "email": "lea.michel@example-test.com",
+            "jobTitle": "Directrice recrutement",
+            "linkedinUrl": "https://www.linkedin.com/in/lea-michel",
+            "phone": "+33 6 74 71 81 62"
+          },
+          "company": {
+            "name": "Michel Management de Transition",
+            "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Antoine Blanc",
+            "email": "antoine.blanc@example-test.com",
+            "jobTitle": "Gérante",
+            "linkedinUrl": "https://www.linkedin.com/in/antoine-blanc",
+            "phone": "+33 6 82 55 30 21"
+          },
+          "company": {
+            "name": "Académie Blanc",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Marion Lefevre",
+            "email": "marion.lefevre@example-test.com",
+            "jobTitle": "Associé fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/marion-lefevre",
+            "phone": "+33 6 81 40 78 73"
+          },
+          "company": {
+            "name": "Lefevre Stratégie",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 1,
+            "headcountMax": 1,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Léa Bernard",
+            "email": "lea.bernard@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/lea-bernard",
+            "phone": "+33 6 50 50 49 44"
+          },
+          "company": {
+            "name": "Institut de Formation Bernard",
+            "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Yanis Durand",
+            "email": "yanis.durand@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/yanis-durand",
+            "phone": "+33 6 21 59 66 65"
+          },
+          "company": {
+            "name": "Durand & Partenaires",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Montpellier",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Vincent Girard",
+            "email": "vincent.girard@example-test.com",
+            "jobTitle": "Gérante",
+            "linkedinUrl": "https://www.linkedin.com/in/vincent-girard",
+            "phone": "+33 6 64 27 55 73"
+          },
+          "company": {
+            "name": "Académie Girard",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Karim Robert",
+            "email": "karim.robert@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/karim-robert",
+            "phone": "+33 6 11 23 38 62"
+          },
+          "company": {
+            "name": "Institut de Formation Robert",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Emma Lefevre",
+            "email": "emma.lefevre@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/emma-lefevre",
+            "phone": "+33 6 18 58 47 53"
+          },
+          "company": {
+            "name": "Institut de Formation Lefevre",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Le Mans",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Romain Faure",
+            "email": "romain.faure@example-test.com",
+            "jobTitle": "Directrice des ventes",
+            "linkedinUrl": "https://www.linkedin.com/in/romain-faure",
+            "phone": "+33 6 58 52 31 42"
+          },
+          "company": {
+            "name": "Faure BtoB",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Toulouse",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Inès Girard",
+            "email": "ines.girard@example-test.com",
+            "jobTitle": "Consultante senior",
+            "linkedinUrl": "https://www.linkedin.com/in/ines-girard",
+            "phone": "+33 6 79 85 16 60"
+          },
+          "company": {
+            "name": "Girard & Associés",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Chloé Dumont",
+            "email": "chloe.dumont@example-test.com",
+            "jobTitle": "Directeur associé",
+            "linkedinUrl": "https://www.linkedin.com/in/chloe-dumont",
+            "phone": "+33 6 92 29 76 85"
+          },
+          "company": {
+            "name": "Dumont & Associés",
+            "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Toulouse",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Manon Henry",
+            "email": "manon.henry@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/manon-henry",
+            "phone": "+33 6 33 66 90 33"
+          },
+          "company": {
+            "name": "Henry Fabrication",
+            "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Metz",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Nicolas Dumont",
+            "email": "nicolas.dumont@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/nicolas-dumont",
+            "phone": "+33 6 78 15 29 12"
+          },
+          "company": {
+            "name": "Atelier Dumont Création",
+            "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Toulouse",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Marion Girard",
+            "email": "marion.girard@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/marion-girard",
+            "phone": "+33 6 64 86 42 25"
+          },
+          "company": {
+            "name": "Girard & Partenaires",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Toulouse",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Antoine Nicolas",
+            "email": "antoine.nicolas@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/antoine-nicolas",
+            "phone": "+33 6 44 49 85 37"
+          },
+          "company": {
+            "name": "Étude Nicolas",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Lille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Louise Fontaine",
+            "email": "louise.fontaine@example-test.com",
+            "jobTitle": "Associée",
+            "linkedinUrl": "https://www.linkedin.com/in/louise-fontaine",
+            "phone": "+33 6 68 67 31 91"
+          },
+          "company": {
+            "name": "Cabinet Fontaine RH",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Le Mans",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Garnier",
+            "email": "julien.garnier@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-garnier",
+            "phone": "+33 6 82 91 92 22"
+          },
+          "company": {
+            "name": "Manufacture Garnier",
+            "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Le Mans",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Garnier",
+            "email": "fabien.garnier@example-test.com",
+            "jobTitle": "Directeur commercial",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-garnier",
+            "phone": "+33 6 33 48 14 99"
+          },
+          "company": {
+            "name": "Négoce Garnier",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Grenoble",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Vincent Simon",
+            "email": "vincent.simon@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/vincent-simon",
+            "phone": "+33 6 42 46 91 75"
+          },
+          "company": {
+            "name": "Atelier Simon",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Angers",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julie Lambert",
+            "email": "julie.lambert@example-test.com",
+            "jobTitle": "Notaire associée",
+            "linkedinUrl": "https://www.linkedin.com/in/julie-lambert",
+            "phone": "+33 6 98 79 15 41"
+          },
+          "company": {
+            "name": "Lambert & Partenaires",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Alexandre Rousseau",
+            "email": "alexandre.rousseau@example-test.com",
+            "jobTitle": "Gérante",
+            "linkedinUrl": "https://www.linkedin.com/in/alexandre-rousseau",
+            "phone": "+33 6 66 14 72 49"
+          },
+          "company": {
+            "name": "Centre de Formation Rousseau",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Romain Belaïd",
+            "email": "romain.belaid@example-test.com",
+            "jobTitle": "Notaire associée",
+            "linkedinUrl": "https://www.linkedin.com/in/romain-belaid",
+            "phone": "+33 6 71 10 54 72"
+          },
+          "company": {
+            "name": "Cabinet Belaïd",
+            "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Metz",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Aïcha Lambert",
+            "email": "aicha.lambert@example-test.com",
+            "jobTitle": "Consultante senior",
+            "linkedinUrl": "https://www.linkedin.com/in/aicha-lambert",
+            "phone": "+33 6 67 56 45 87"
+          },
+          "company": {
+            "name": "Altitude Conseil Nice",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 1,
+            "headcountMax": 1,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Romain Fontaine",
+            "email": "romain.fontaine@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/romain-fontaine",
+            "phone": "+33 6 44 17 75 86"
+          },
+          "company": {
+            "name": "Fontaine & Associés",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 1,
+            "headcountMax": 1,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Clara Belaïd",
+            "email": "clara.belaid@example-test.com",
+            "jobTitle": "Directrice pédagogique",
+            "linkedinUrl": "https://www.linkedin.com/in/clara-belaid",
+            "phone": "+33 6 36 39 65 87"
+          },
+          "company": {
+            "name": "Institut de Formation Belaïd",
+            "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Clara Simon",
+            "email": "clara.simon@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/clara-simon",
+            "phone": "+33 6 59 92 84 67"
+          },
+          "company": {
+            "name": "Centre de Formation Simon",
+            "description": "Formation continue en compétences managériales pour cadres de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Nantes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Sophie Bernard",
+            "email": "sophie.bernard@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/sophie-bernard",
+            "phone": "+33 6 82 30 29 47"
+          },
+          "company": {
+            "name": "Bernard Formation",
+            "description": "Formation continue en compétences managériales pour cadres de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Manon Garnier",
+            "email": "manon.garnier@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/manon-garnier",
+            "phone": "+33 6 84 43 17 30"
+          },
+          "company": {
+            "name": "Cabinet Garnier",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Pierre Lefevre",
+            "email": "pierre.lefevre@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/pierre-lefevre",
+            "phone": "+33 6 33 37 70 13"
+          },
+          "company": {
+            "name": "Lefevre Talents",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Manon Aubert",
+            "email": "manon.aubert@example-test.com",
+            "jobTitle": "Associée",
+            "linkedinUrl": "https://www.linkedin.com/in/manon-aubert",
+            "phone": "+33 6 41 67 33 14"
+          },
+          "company": {
+            "name": "Cabinet Aubert RH",
+            "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Marion Marchand",
+            "email": "marion.marchand@example-test.com",
+            "jobTitle": "Directeur commercial",
+            "linkedinUrl": "https://www.linkedin.com/in/marion-marchand",
+            "phone": "+33 6 98 83 81 98"
+          },
+          "company": {
+            "name": "Marchand BtoB",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Robert",
+            "email": "hugo.robert@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-robert",
+            "phone": "+33 6 63 45 25 41"
+          },
+          "company": {
+            "name": "Cabinet Robert Expertise",
+            "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Lille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Maxime Durand",
+            "email": "maxime.durand@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/maxime-durand",
+            "phone": "+33 6 40 70 59 77"
+          },
+          "company": {
+            "name": "Étude Durand",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Lille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Alexandre Simon",
+            "email": "alexandre.simon@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/alexandre-simon",
+            "phone": "+33 6 68 12 30 95"
+          },
+          "company": {
+            "name": "Cabinet Simon Expertise",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Nicolas Garnier",
+            "email": "nicolas.garnier@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/nicolas-garnier",
+            "phone": "+33 6 91 92 37 69"
+          },
+          "company": {
+            "name": "Étude Garnier",
+            "description": "Cabinet d'architecture pour projets tertiaires et résidentiels haut de gamme.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Lille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Léa Henry",
+            "email": "lea.henry@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/lea-henry",
+            "phone": "+33 6 74 82 48 20"
+          },
+          "company": {
+            "name": "Négoce Henry",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Nancy",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Sarah Denis",
+            "email": "sarah.denis@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/sarah-denis",
+            "phone": "+33 6 55 50 11 66"
+          },
+          "company": {
+            "name": "Atelier Denis Création",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Aubert",
+            "email": "hugo.aubert@example-test.com",
+            "jobTitle": "Directrice de production",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-aubert",
+            "phone": "+33 6 72 34 45 10"
+          },
+          "company": {
+            "name": "Atelier Aubert Création",
+            "description": "Manufacture spécialisée dans la production de pièces sur-mesure pour professionnels.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Sophie Simon",
+            "email": "sophie.simon@example-test.com",
+            "jobTitle": "Directeur général",
+            "linkedinUrl": "https://www.linkedin.com/in/sophie-simon-2",
+            "phone": "+33 6 95 71 39 62"
+          },
+          "company": {
+            "name": "Simon Management de Transition",
+            "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Bordeaux",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julie Richard",
+            "email": "julie.richard@example-test.com",
+            "jobTitle": "Directrice recrutement",
+            "linkedinUrl": "https://www.linkedin.com/in/julie-richard",
+            "phone": "+33 6 83 64 95 41"
+          },
+          "company": {
+            "name": "Richard Talents",
+            "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Richard",
+            "email": "julien.richard@example-test.com",
+            "jobTitle": "Directrice des ventes",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-richard",
+            "phone": "+33 6 66 69 47 14"
+          },
+          "company": {
+            "name": "Négoce Richard",
+            "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Louise Simon",
+            "email": "louise.simon@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/louise-simon",
+            "phone": "+33 6 85 61 95 25"
+          },
+          "company": {
+            "name": "Négoce Simon",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Inès Dubois",
+            "email": "ines.dubois@example-test.com",
+            "jobTitle": "Directrice recrutement",
+            "linkedinUrl": "https://www.linkedin.com/in/ines-dubois",
+            "phone": "+33 6 95 86 13 85"
+          },
+          "company": {
+            "name": "Cabinet Dubois RH",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Roussel",
+            "email": "fabien.roussel@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-roussel",
+            "phone": "+33 6 78 39 63 85"
+          },
+          "company": {
+            "name": "Cabinet Roussel Expertise",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Duval",
+            "email": "fabien.duval@example-test.com",
+            "jobTitle": "Directrice pédagogique",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-duval",
+            "phone": "+33 6 37 58 57 21"
+          },
+          "company": {
+            "name": "Institut de Formation Duval",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Le Mans",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Garnier",
+            "email": "julien.garnier@example-test.com",
+            "jobTitle": "Consultante senior",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-garnier-2",
+            "phone": "+33 6 77 11 69 11"
+          },
+          "company": {
+            "name": "Garnier Stratégie",
+            "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Paris",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Nicolas Petit",
+            "email": "nicolas.petit@example-test.com",
+            "jobTitle": "Directrice de production",
+            "linkedinUrl": "https://www.linkedin.com/in/nicolas-petit",
+            "phone": "+33 6 16 60 94 23"
+          },
+          "company": {
+            "name": "Atelier Petit Création",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Dijon",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Louise Bernard",
+            "email": "louise.bernard@example-test.com",
+            "jobTitle": "Directrice recrutement",
+            "linkedinUrl": "https://www.linkedin.com/in/louise-bernard",
+            "phone": "+33 6 10 60 69 32"
+          },
+          "company": {
+            "name": "Bernard Management de Transition",
+            "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Clara Faure",
+            "email": "clara.faure@example-test.com",
+            "jobTitle": "Directrice pédagogique",
+            "linkedinUrl": "https://www.linkedin.com/in/clara-faure",
+            "phone": "+33 6 57 75 86 51"
+          },
+          "company": {
+            "name": "Académie Faure",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Henry",
+            "email": "hugo.henry@example-test.com",
+            "jobTitle": "Directeur général",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-henry",
+            "phone": "+33 6 59 42 87 79"
+          },
+          "company": {
+            "name": "Henry Management de Transition",
+            "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Clermont-Ferrand",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Yanis Richard",
+            "email": "yanis.richard@example-test.com",
+            "jobTitle": "Associé fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/yanis-richard",
+            "phone": "+33 6 73 87 60 16"
+          },
+          "company": {
+            "name": "Altitude Conseil Metz",
+            "description": "Conseil en performance opérationnelle pour entreprises de services.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Metz",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Inès Petit",
+            "email": "ines.petit@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/ines-petit-2",
+            "phone": "+33 6 29 92 13 77"
+          },
+          "company": {
+            "name": "Petit Talents",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Nancy",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Thomas Muller",
+            "email": "thomas.muller@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/thomas-muller",
+            "phone": "+33 6 36 36 31 52"
+          },
+          "company": {
+            "name": "Atelier Muller",
+            "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Louise Lambert",
+            "email": "louise.lambert@example-test.com",
+            "jobTitle": "Associée",
+            "linkedinUrl": "https://www.linkedin.com/in/louise-lambert",
+            "phone": "+33 6 54 95 58 23"
+          },
+          "company": {
+            "name": "Lambert Talents",
+            "description": "Chasseur de têtes spécialisé cadres et dirigeants de PME.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Henry",
+            "email": "julien.henry@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-henry",
+            "phone": "+33 6 39 17 46 18"
+          },
+          "company": {
+            "name": "Henry Formation",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Chloé Dubois",
+            "email": "chloe.dubois@example-test.com",
+            "jobTitle": "Architecte associé",
+            "linkedinUrl": "https://www.linkedin.com/in/chloe-dubois",
+            "phone": "+33 6 65 11 60 26"
+          },
+          "company": {
+            "name": "Étude Dubois",
+            "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Belaïd",
+            "email": "fabien.belaid@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-belaid",
+            "phone": "+33 6 63 30 91 62"
+          },
+          "company": {
+            "name": "Belaïd BtoB",
+            "description": "Distributeur B2B de fournitures professionnelles pour artisans et industriels.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Sarah Fontaine",
+            "email": "sarah.fontaine@example-test.com",
+            "jobTitle": "Directrice générale",
+            "linkedinUrl": "https://www.linkedin.com/in/sarah-fontaine",
+            "phone": "+33 6 12 49 66 22"
+          },
+          "company": {
+            "name": "Fontaine Industrie",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Antoine Lambert",
+            "email": "antoine.lambert@example-test.com",
+            "jobTitle": "Consultante senior",
+            "linkedinUrl": "https://www.linkedin.com/in/antoine-lambert",
+            "phone": "+33 6 35 20 51 45"
+          },
+          "company": {
+            "name": "Cabinet Lambert Conseil",
+            "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Rouen",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Amandine Girard",
+            "email": "amandine.girard@example-test.com",
+            "jobTitle": "Gérant",
+            "linkedinUrl": "https://www.linkedin.com/in/amandine-girard",
+            "phone": "+33 6 13 31 57 20"
+          },
+          "company": {
+            "name": "Girard Fabrication",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Fabien Perrot",
+            "email": "fabien.perrot@example-test.com",
+            "jobTitle": "Directeur associé",
+            "linkedinUrl": "https://www.linkedin.com/in/fabien-perrot",
+            "phone": "+33 6 69 83 81 87"
+          },
+          "company": {
+            "name": "Altitude Conseil Marseille",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Guerin",
+            "email": "julien.guerin@example-test.com",
+            "jobTitle": "Directrice générale",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-guerin",
+            "phone": "+33 6 34 21 37 27"
+          },
+          "company": {
+            "name": "Guerin BtoB",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Amandine Bernard",
+            "email": "amandine.bernard@example-test.com",
+            "jobTitle": "Directrice pédagogique",
+            "linkedinUrl": "https://www.linkedin.com/in/amandine-bernard",
+            "phone": "+33 6 54 76 46 24"
+          },
+          "company": {
+            "name": "Institut de Formation Bernard",
+            "description": "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Nantes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Antoine Henry",
+            "email": "antoine.henry@example-test.com",
+            "jobTitle": "Directeur général",
+            "linkedinUrl": "https://www.linkedin.com/in/antoine-henry",
+            "phone": "+33 6 43 83 12 57"
+          },
+          "company": {
+            "name": "Cabinet Henry RH",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Le Mans",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Romain Moreau",
+            "email": "romain.moreau@example-test.com",
+            "jobTitle": "Directrice pédagogique",
+            "linkedinUrl": "https://www.linkedin.com/in/romain-moreau",
+            "phone": "+33 6 93 80 25 37"
+          },
+          "company": {
+            "name": "Centre de Formation Moreau",
+            "description": "Centre de formation spécialisé dans la reconversion professionnelle.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Strasbourg",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Pierre Garnier",
+            "email": "pierre.garnier@example-test.com",
+            "jobTitle": "Directrice des ventes",
+            "linkedinUrl": "https://www.linkedin.com/in/pierre-garnier",
+            "phone": "+33 6 98 83 79 94"
+          },
+          "company": {
+            "name": "Négoce Garnier",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 15,
+            "headcountMax": 30,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Chloé Dubois",
+            "email": "chloe.dubois@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/chloe-dubois-2",
+            "phone": "+33 6 31 64 92 47"
+          },
+          "company": {
+            "name": "Dubois BtoB",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julien Simon",
+            "email": "julien.simon@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/julien-simon",
+            "phone": "+33 6 22 74 90 44"
+          },
+          "company": {
+            "name": "Atelier Simon",
+            "description": "Production artisanale à forte valeur ajoutée pour une clientèle B2B exigeante.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Karim Blanc",
+            "email": "karim.blanc@example-test.com",
+            "jobTitle": "Fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/karim-blanc",
+            "phone": "+33 6 12 83 30 65"
+          },
+          "company": {
+            "name": "Blanc Talents",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Angers",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Leroy",
+            "email": "hugo.leroy@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-leroy",
+            "phone": "+33 6 37 65 51 57"
+          },
+          "company": {
+            "name": "Leroy Stratégie",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 1,
+            "headcountMax": 1,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Reims",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Julie Dubois",
+            "email": "julie.dubois@example-test.com",
+            "jobTitle": "Directeur associé",
+            "linkedinUrl": "https://www.linkedin.com/in/julie-dubois",
+            "phone": "+33 6 51 74 93 41"
+          },
+          "company": {
+            "name": "Altitude Conseil Clermont-Ferrand",
+            "description": "Accompagnement des PME dans leurs projets de transformation organisationnelle.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Clermont-Ferrand",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Léa Robert",
+            "email": "lea.robert@example-test.com",
+            "jobTitle": "Associé fondateur",
+            "linkedinUrl": "https://www.linkedin.com/in/lea-robert",
+            "phone": "+33 6 52 36 26 81"
+          },
+          "company": {
+            "name": "Cabinet Robert Conseil",
+            "description": "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Conseil (stratégie, RH, IA)"
+            },
+            "address": {
+              "city": "Lille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Louise Aubert",
+            "email": "louise.aubert@example-test.com",
+            "jobTitle": "Directrice générale",
+            "linkedinUrl": "https://www.linkedin.com/in/louise-aubert",
+            "phone": "+33 6 15 99 59 89"
+          },
+          "company": {
+            "name": "Aubert Distribution",
+            "description": "Négoce de matériaux techniques pour le bâtiment, clientèle professionnelle.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Clermont-Ferrand",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Vincent Aubert",
+            "email": "vincent.aubert@example-test.com",
+            "jobTitle": "Directeur général",
+            "linkedinUrl": "https://www.linkedin.com/in/vincent-aubert",
+            "phone": "+33 6 97 17 31 59"
+          },
+          "company": {
+            "name": "Aubert Recrutement",
+            "description": "Management de transition pour PME en phase de croissance ou de restructuration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Marseille",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Chloé Rousseau",
+            "email": "chloe.rousseau@example-test.com",
+            "jobTitle": "Expert-comptable associé",
+            "linkedinUrl": "https://www.linkedin.com/in/chloe-rousseau",
+            "phone": "+33 6 74 43 22 82"
+          },
+          "company": {
+            "name": "Cabinet Rousseau Expertise",
+            "description": "Cabinet juridique spécialisé en droit des affaires pour PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Emma Michel",
+            "email": "emma.michel@example-test.com",
+            "jobTitle": "Responsable formation",
+            "linkedinUrl": "https://www.linkedin.com/in/emma-michel",
+            "phone": "+33 6 78 16 31 19"
+          },
+          "company": {
+            "name": "Centre de Formation Michel",
+            "description": "Formation continue en compétences managériales pour cadres de PME.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Formation professionnelle"
+            },
+            "address": {
+              "city": "Clermont-Ferrand",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Yanis Dumont",
+            "email": "yanis.dumont@example-test.com",
+            "jobTitle": "Fondatrice",
+            "linkedinUrl": "https://www.linkedin.com/in/yanis-dumont",
+            "phone": "+33 6 31 20 30 32"
+          },
+          "company": {
+            "name": "Dumont Fabrication",
+            "description": "Atelier de fabrication artisanale haut de gamme, vente en ligne et points de vente partenaires.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Artisanat et production à forte valeur ajoutée"
+            },
+            "address": {
+              "city": "Nice",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Hugo Henry",
+            "email": "hugo.henry@example-test.com",
+            "jobTitle": "Directeur général",
+            "linkedinUrl": "https://www.linkedin.com/in/hugo-henry-2",
+            "phone": "+33 6 54 82 75 97"
+          },
+          "company": {
+            "name": "Henry Management de Transition",
+            "description": "Cabinet de recrutement spécialisé dans les profils techniques pour PME industrielles.",
+            "headcountMin": 3,
+            "headcountMax": 8,
+            "sector": {
+              "name": "Recrutement et management de transition"
+            },
+            "address": {
+              "city": "Grenoble",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Laura Denis",
+            "email": "laura.denis@example-test.com",
+            "jobTitle": "Directrice des ventes",
+            "linkedinUrl": "https://www.linkedin.com/in/laura-denis",
+            "phone": "+33 6 33 10 78 52"
+          },
+          "company": {
+            "name": "Denis Distribution",
+            "description": "Grossiste spécialisé équipements pour professionnels de la restauration.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Commerce et distribution B2B"
+            },
+            "address": {
+              "city": "Rennes",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      },
+      {
+        "prospect": {
+          "person": {
+            "fullName": "Thomas Petit",
+            "email": "thomas.petit@example-test.com",
+            "jobTitle": "Avocate associée",
+            "linkedinUrl": "https://www.linkedin.com/in/thomas-petit",
+            "phone": "+33 6 65 74 91 79"
+          },
+          "company": {
+            "name": "Petit & Partenaires",
+            "description": "Cabinet d'expertise comptable dédié aux PME et professions libérales.",
+            "headcountMin": 8,
+            "headcountMax": 15,
+            "sector": {
+              "name": "Professions libérales structurées (comptabilité, juridique, architecture)"
+            },
+            "address": {
+              "city": "Angers",
+              "country": "France"
+            }
+          },
+          "lastSourcedAt": "2026-08-10T09:12:00.000Z"
+        }
+      }
+    ]
+  }
+]

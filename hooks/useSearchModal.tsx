@@ -14,6 +14,9 @@ export function useSearchModal() {
     open({
       components: <SearchCriteriaModalContent />,
       disablePointerDismissal: true,
+      contentClassName: "!min-w-fit"
+
+
     });
 
   return { openSearchModal };

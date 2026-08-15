@@ -1,0 +1,1 @@
+ALTER TABLE "addresses" RENAME COLUMN "region" TO "state";

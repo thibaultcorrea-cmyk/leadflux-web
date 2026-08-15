@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth"
 import { ENV } from "@/core/env"
-import { UserServices } from "@/backend/users/services"
+import { UserServices } from "@/features/users/services"
 
 const ADMIN_USER = {
     email: ENV.ADMIN_EMAIL,

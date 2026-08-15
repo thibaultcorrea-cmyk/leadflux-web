@@ -1,17 +1,15 @@
 import type { EmailStatus } from "@/components/shared/badges/email-status-badge";
-import type { LucideIcon } from "lucide-react";
+import { kpiSchema } from "../components/schema/kpisSchema";
+import z from "zod";
+import { SavedSearchItem } from "@/features/stats/entities/type";
 
 // Le statut d'email est partagé avec l'onglet Emails : il vit dans le composant
 // de badge commun plutôt que dans les types d'une page.
 export type { EmailStatus } from "@/components/shared/badges/email-status-badge";
 
-export type Kpi = {
-  id: string;
-  label: string;
-  value: string;
-  hint: string;
-  icon: LucideIcon;
-};
+export type Kpi = z.infer<typeof kpiSchema>;
+
+export type KpiApiReturn = Omit<Kpi, "icon">;
 
 export type RecentActivityRow = {
   id: string;
@@ -29,9 +27,7 @@ export type FunnelStep = {
   tone: "neutral" | "accent" | "success";
 };
 
-export type SavedSearch = {
-  id: string;
-  name: string;
-  criteria: string;
-  count: number;
-};
+export type SavedSearchReturn = SavedSearchItem
+
+
+

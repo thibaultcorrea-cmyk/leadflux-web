@@ -1,7 +1,9 @@
 "use client";
 
+import { SearchProspectForm } from "@/app/(private)/prospects/components/forms/SearchProspectForm";
 import { Button } from "@/components/ui/button";
 import {
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -23,21 +25,11 @@ export function SearchCriteriaModalContent() {
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle className="font-display text-2xl tracking-[0.02em] text-primary-700">
-          Nouvelle recherche
-        </DialogTitle>
-        <DialogDescription className="text-sm text-ink-700">
-          Le formulaire des cinq critères (secteur, localisation, poste, taille,
-          chiffre d&apos;affaires) arrive dans le prochain lot.
-        </DialogDescription>
-      </DialogHeader>
 
-      <DialogFooter>
-        <Button type="button" variant="outline" size="lg" onClick={close}>
-          Fermer
-        </Button>
-      </DialogFooter>
+
+      <SearchProspectForm />
+
+
     </>
   );
 }

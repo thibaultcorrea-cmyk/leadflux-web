@@ -105,6 +105,7 @@ export function useDataTable<TData, TValue = unknown>({
   const filtersKey = JSON.stringify(columnFilters ?? []);
   const previousInputs = useRef({ data, filtersKey });
   useEffect(() => {
+    if (data.length === 0) return
     const previous = previousInputs.current;
     if (previous.data === data && previous.filtersKey === filtersKey) return;
     previousInputs.current = { data, filtersKey };

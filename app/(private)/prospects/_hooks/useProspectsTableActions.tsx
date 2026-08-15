@@ -10,6 +10,7 @@ import type {
 } from "@/components/shared/tables/types";
 import { useModalController } from "@/hooks/useModalController";
 import type { Prospect } from "../types/prospect";
+import { EditProspectModal } from "../components/modals/EditProspectView";
 
 /**
  * Actions de la table de résultats : une seule source pour la colonne Actions
@@ -68,12 +69,11 @@ export function useProspectsTableActions() {
         onSelect: (prospect) =>
           open({
             components: (
-              <ConfirmModalContent
-                title="Modifier la fiche"
-                description={`L'édition de la fiche de ${prospect.company} arrivera avec le formulaire de prospect.`}
-                confirmLabel="Compris"
+              <EditProspectModal
+                prospect={prospect}
               />
             ),
+            contentClassName: "!min-w-fit"
           }),
       },
       {

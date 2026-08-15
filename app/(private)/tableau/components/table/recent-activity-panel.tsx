@@ -5,16 +5,24 @@ import Link from "next/link";
 import { DataTable } from "@/components/shared/tables/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useDataTable } from "@/hooks/useDataTable";
-import { recentActivity } from "../../mocks/recent-activity";
 import type { RecentActivityRow } from "../../types/tableau";
 import { recentActivityColumns } from "./recent-activity-columns";
+import { RecentActivityLoading } from "./recent-activity-loading";
+import useFetchRecentlyActivity from "../../_hooks/useFetchRecentlyActivity";
+import { recentActivity } from "../../mocks/recent-activity";
+
 
 export function RecentActivityPanel() {
+  const { isloading, isError, recentlyActivity } = useFetchRecentlyActivity();
   const { table } = useDataTable<RecentActivityRow>({
-    data: recentActivity,
+    data: isError || isloading ? [] : recentlyActivity,
     columns: recentActivityColumns,
     getRowId: (row) => row.id,
   });
+
+
+  if (isloading) return <RecentActivityLoading />
+  if (isError) return <p>Error</p>
 
   return (
     <Card className="gap-3.5 ring-border [--card-spacing:--spacing(5)]">

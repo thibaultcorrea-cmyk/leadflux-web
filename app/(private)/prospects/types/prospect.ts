@@ -8,12 +8,14 @@ export type Prospect = {
   /** Décideur identifié pour l'entreprise. */
   contactName: string;
   contactRole: string;
-  sector: string;
+  industry: string;
   city: string;
   /** Libellé affiché de la tranche d'effectif, ex. « 3-8 salariés ». */
   headcountLabel: string;
   /** Borne basse de la tranche : sert au tri, jamais à l'affichage. */
   headcountMin: number;
+  headcountMax: number;
+
 };
 
 /** Critère de la recherche en cours, affiché en puce au-dessus des résultats. */
