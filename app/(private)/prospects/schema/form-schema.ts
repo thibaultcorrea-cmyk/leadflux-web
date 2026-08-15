@@ -3,9 +3,9 @@ import { LeadFinderFormSchemaType } from "../types/forms";
 
 export const leadFinderFormSchema = z.object({
     industry: z.string().min(1, "Le secteur est requis."),
-    jobTitles: z.string().min(1, "La fonction est requise."),
-    country: z.string().min(1, "Le pays est requis."),
-    companyRange: z.string().min(1, "La taille de l'entreprise est requise."),
+    jobTitle: z.string().min(1, "La fonction est requise."),
+    location: z.string().min(1, "Le pays est requis."),
+    employeeRange: z.string().min(1, "La taille de l'entreprise est requise."),
     revenue: z.string().min(1, "Le revenu est requis."),
 })
 
@@ -13,8 +13,8 @@ export const leadFinderFormSchema = z.object({
 
 export const leadFinderFormDefaultValues = {
     industry: "",
-    jobTitles: "",
-    country: "",
-    companyRange: "",
+    jobTitle: "",
+    location: "",
+    employeeRange: "",
     revenue: "",
 } satisfies LeadFinderFormSchemaType;

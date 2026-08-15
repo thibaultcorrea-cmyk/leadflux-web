@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { SearchFormInputs } from "./SearchFormInputs";
 import { useModalController } from "@/hooks/useModalController";
 import { CardContent } from "@/components/ui/card";
+import { LeadFinderFormSchemaType } from "../../types/forms";
 
 
 
@@ -27,21 +28,14 @@ export const SearchProspectForm = () => {
         modalController.close()
     }
 
-    const industries = [{
-        value: "1",
-        label: "Industrie 1"
-    }, {
-        value: "2",
-        label: "Industrie 2"
-    }, {
-        value: "3",
-        label: "Industrie 3"
-    }]
 
-    const onSubmit = () => {
-        console.log("onsubmit");
+
+    const onSubmit = (data: LeadFinderFormSchemaType) => {
+        console.log("onsubmit", data);
 
     }
+
+    console.log(form.formState.errors);
 
 
 
