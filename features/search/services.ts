@@ -45,14 +45,13 @@ export const SearchProspectsServicesImpl: any = {
             .filter((entry): entry is { result: PromiseFulfilledResult<Awaited<ReturnType<typeof peristCleanProspect>>>; position: number } => entry.result.status === "fulfilled")
             .map(({ result, position }) => ({ prospect: result.value, position }))
 
-        const prospects = fulfilledProspects.map(({ prospect }) => prospect)
 
 
         const search = await SearchWriteRepositoriesImpl.create({
             name,
             criteria: { ...criteriaData, headcountMax, headcountMin },
             createdBy: currentUser.id,
-            resultCount: prospects.length,
+            resultCount: leadsResults.length,
             criteriaLabel,
         })
 
@@ -168,8 +167,7 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
 
 export const persistProspectsFromLeadsApi = async (leadApiResults: LeadFinderApiResponse[]) => {
 
-    //Truncate prospect table first
-    await clearProspectsAndResults();
+
 
     const mappedData = await Promise.all(leadApiResults.map((lead) => leadsApiToProspectFactory(lead)))
     const results = await Promise.allSettled(mappedData.map((item) => peristCleanProspect(item)))
@@ -202,9 +200,10 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
 }
 
 export const clearProspectsAndResults = async () => {
-    await ProspectServicesImpl.truncate()
     await SearchResultServicesImpl.truncate()
+    await ProspectServicesImpl.truncate()
     await AddressServicesImpl.truncate()
     await CompanyServicesImpl.truncate()
     await PersonServicesImpl.truncate()
+    await SearchWriteRepositoriesImpl.truncate()
 }
