@@ -14,6 +14,7 @@ import { CreateCompanyDto } from "@/features/companies/dto/schema"
 import { PersonServicesImpl } from "@/features/persons/services"
 import { CreatePersonDto } from "@/features/persons/dto/schema"
 import { ProspectServicesImpl } from "@/features/prospects/services"
+import { SearchResultServicesImpl } from "@/features/searchResults/services"
 
 
 
@@ -45,9 +46,19 @@ export const SearchProspectsServicesImpl: any = {
 
         // after getting leads results, we need to save them to the database
         const persistedResults = await persistProspectsFromLeadsApi(leadsResults)
-        const prospects = persistedResults
-            .filter((result): result is PromiseFulfilledResult<Awaited<ReturnType<typeof peristCleanProspect>>> => result.status === "fulfilled")
-            .map((result) => result.value)
+        const fulfilledProspects = persistedResults
+            .map((result, position) => ({ result, position }))
+            .filter((entry): entry is { result: PromiseFulfilledResult<Awaited<ReturnType<typeof peristCleanProspect>>>; position: number } => entry.result.status === "fulfilled")
+            .map(({ result, position }) => ({ prospect: result.value, position }))
+
+        // link each persisted prospect to this search, keeping the source ranking as position
+        await Promise.allSettled(
+            fulfilledProspects.map(({ prospect, position }) =>
+                SearchResultServicesImpl.create({ searchId: search.id, prospectId: prospect.id, position }),
+            ),
+        )
+
+        const prospects = fulfilledProspects.map(({ prospect }) => prospect)
 
         // after saving the leads, reflect the real result count on the search
         const updatedSearch = await SearchWriteRepositoriesImpl.update({

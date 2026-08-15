@@ -8,6 +8,7 @@ const addressCreateMock = vi.fn()
 const companyCreateMock = vi.fn()
 const personCreateMock = vi.fn()
 const prospectCreateMock = vi.fn()
+const searchResultCreateMock = vi.fn()
 
 vi.mock("../../users/services", () => ({
     UserServices: {
@@ -37,6 +38,9 @@ vi.mock("@/features/persons/services", () => ({
 }))
 vi.mock("@/features/prospects/services", () => ({
     ProspectServicesImpl: { create: (...args: unknown[]) => prospectCreateMock(...args) },
+}))
+vi.mock("@/features/searchResults/services", () => ({
+    SearchResultServicesImpl: { create: (...args: unknown[]) => searchResultCreateMock(...args) },
 }))
 
 import { SearchProspectsServicesImpl } from "../services"
@@ -76,8 +80,9 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         )
         personCreateMock.mockReset().mockResolvedValue({ id: "person_1" })
         prospectCreateMock.mockReset().mockImplementation((input: Record<string, unknown>) =>
-            Promise.resolve({ id: "prospect_1", ...input }),
+            Promise.resolve({ id: `prospect_${prospectCreateMock.mock.calls.length}`, ...input }),
         )
+        searchResultCreateMock.mockReset().mockResolvedValue({})
     })
 
     it("cree la recherche avec les criteres normalises", async () => {
@@ -104,6 +109,13 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
         expect(personCreateMock).toHaveBeenCalledTimes(2)
         expect(prospectCreateMock).toHaveBeenCalledTimes(2)
         expect(result.prospects).toHaveLength(2)
+        expect(searchResultCreateMock).toHaveBeenCalledTimes(2)
+        expect(searchResultCreateMock).toHaveBeenCalledWith(
+            expect.objectContaining({ searchId: "search_1", prospectId: "prospect_1", position: 0 }),
+        )
+        expect(searchResultCreateMock).toHaveBeenCalledWith(
+            expect.objectContaining({ searchId: "search_1", prospectId: "prospect_2", position: 1 }),
+        )
         expect(searchUpdateMock).toHaveBeenCalledWith(
             expect.objectContaining({ id: "search_1", resultCount: 2 }),
         )

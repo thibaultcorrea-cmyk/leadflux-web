@@ -28,6 +28,7 @@ import { PersonWriteRepositoriesImpl } from "@/features/persons/repositories/wri
 import { CompanyWriteRepositoriesImpl } from "@/features/companies/repositories/write"
 import { CompanyReadRepositoriesImpl } from "@/features/companies/repositories/read"
 import { AddressWriteRepositoriesImpl } from "@/features/adresses/repositories/write"
+import { SearchResultReadRepositoriesImpl } from "@/features/searchResults/repositories/read"
 
 describe("e2e search : searchProspects", () => {
     const createdSearchIds: string[] = []
@@ -101,6 +102,12 @@ describe("e2e search : searchProspects", () => {
         const company = await CompanyReadRepositoriesImpl.get(prospect.companyId)
         expect(company.name).toBe(`Lefevre Conseil ${uniqueSuffix}`)
         createdAddressIds.push(company.addressId!)
+
+        // search_results est cascade-supprime par la suppression du prospect ou
+        // de la recherche (FK on delete cascade des deux cotes), pas de cleanup
+        // dedie ici.
+        const searchResult = await SearchResultReadRepositoriesImpl.get({ searchId: result.search.id, prospectId: prospect.id })
+        expect(searchResult.position).toBe(0)
     })
 
     it("rejette des criteres invalides sans creer de recherche ni interroger la source", async () => {
