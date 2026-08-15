@@ -3,6 +3,7 @@ import leadFinder from "./mocks/leads-finder-1785665650250.json"
 import { prospectValidator } from "./dto/validator"
 import { CreateProspectDto } from "./dto/schema"
 import { ProspectWriteRepositoriesImpl } from "./repositories/write"
+import { SearchReadRepositoriesImpl } from "../search/repositories/read";
 
 
 
@@ -15,7 +16,7 @@ export const ProspectServicesImpl: ProspectServices = {
 
         return ProspectWriteRepositoriesImpl.create(validated.data)
     },
-    collections: (query) => Promise.resolve(leadFinder),
+    collections: (query) => SearchReadRepositoriesImpl.find(query),
     update: (prospect) => Promise.resolve([]),
     delete: async (id) => {
         await ProspectWriteRepositoriesImpl.delete(id)
