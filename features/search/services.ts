@@ -6,11 +6,14 @@ import { UserServices } from "../users/services"
 import { SearchWriteRepositoriesImpl } from "./repositories/write"
 import { LeadFinderMock } from "./mocks/lead-finder"
 import { LeadFinderApiResponse } from "./entities/type"
-import { AddressSqlInsert, CompanySqlInsert, PersonSqlInsert, ProspectSourcePayload } from "@/db/schemas"
-import { AddressWriteRepositoriesImpl } from "@/features/adresses/repositories/write"
-import { CompanyWriteRepositoriesImpl } from "@/features/companies/repositories/write"
-import { PersonWriteRepositoriesImpl } from "@/features/persons/repositories/write"
-import { ProspectWriteRepositoriesImpl } from "@/features/prospects/repositories/write"
+import { ProspectSourcePayload } from "@/db/schemas"
+import { AddressServicesImpl } from "@/features/adresses/services"
+import { CreateAddressDto } from "@/features/adresses/dto/schema"
+import { CompanyServicesImpl } from "@/features/companies/services"
+import { CreateCompanyDto } from "@/features/companies/dto/schema"
+import { PersonServicesImpl } from "@/features/persons/services"
+import { CreatePersonDto } from "@/features/persons/dto/schema"
+import { ProspectServicesImpl } from "@/features/prospects/services"
 
 
 
@@ -70,41 +73,28 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
     const { person, company } = lead
 
     const persondata = {
-        id: crypto.randomUUID(),
         fullName: person.name,
         email: person.email,
-        emailKey: person.email.trim().toLowerCase(),
         jobTitle: person.jobTitle,
-        phone: null,
-        linkedinUrl: null,
-    } satisfies PersonSqlInsert
+    } satisfies CreatePersonDto
 
     const addressData = {
-        id: crypto.randomUUID(),
         city: company.address.city,
-        cityKey: company.address.city.trim().toLowerCase(),
         country: company.address.country,
         state: company.address.state,
-        street: null,
-        zip: null,
-    } satisfies AddressSqlInsert
+    } satisfies CreateAddressDto
 
 
 
     const companyData = {
-        id: crypto.randomUUID(),
         name: company.name,
-        nameKey: company.name.trim().toLowerCase(),
-        cityKey: company.address.city.trim().toLowerCase(),
+        city: company.address.city,
         description: company.description,
-        website: null,
         industryRaw: company.industry,
-        industryId: null,
         sizeRaw: company.size,
         headcountMin: 0,
         headcountMax: 0,
-        addressId: addressData.id,
-    } satisfies CompanySqlInsert
+    } satisfies Omit<CreateCompanyDto, "addressId">
 
     const rawPayload = {
         person,
@@ -140,16 +130,16 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
 
     // First we need to save address
 
-    const addressSaved = await AddressWriteRepositoriesImpl.create(address)
+    const addressSaved = await AddressServicesImpl.create(address)
 
     // Then company
-    const companySaved = await CompanyWriteRepositoriesImpl.create({ ...company, addressId: addressSaved.id })
+    const companySaved = await CompanyServicesImpl.create({ ...company, addressId: addressSaved.id })
 
     // Then person
-    const personSaved = await PersonWriteRepositoriesImpl.create(person)
+    const personSaved = await PersonServicesImpl.create(person)
 
     // Then prospect
-    const prospectSaved = await ProspectWriteRepositoriesImpl.create({ personId: personSaved.id, companyId: companySaved.id, rawPayload })
+    const prospectSaved = await ProspectServicesImpl.create({ personId: personSaved.id, companyId: companySaved.id, rawPayload })
 
     return prospectSaved
 }
