@@ -1,12 +1,12 @@
+import { SearchProspectsServicesImpl } from "@/features/search/services"
 import { errorApiHandler } from "@/lib/handler"
 import { NextResponse } from "next/server"
-import { ProspectServicesImpl } from "@/features/prospects/services"
 
 export const POST = async () => {
 
     try {
 
-        const result = await ProspectServicesImpl.collections()
+        const result = await SearchProspectsServicesImpl.collections()
 
         return NextResponse.json(result)
 

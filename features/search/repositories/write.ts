@@ -1,12 +1,12 @@
 import { db } from "@/db"
-import { searches, SearchesTableInsert } from "@/db/schemas"
+import { searches, SearchesSqlInfer, SearchesSqlInsert } from "@/db/schemas"
 import { eq, inArray } from "drizzle-orm"
+import { ISearchWriteRepository } from "../entities/repository"
 
 
 
-export const SearchProspectsWriteRepositoriesImpl = {
-
-    create: async (data: SearchesTableInsert) => {
+export const SearchWriteRepositoriesImpl: ISearchWriteRepository = {
+    create: async (data: SearchesSqlInsert) => {
         const dt = new Date()
 
         const [result] = await db.insert(searches).values({
@@ -17,6 +17,14 @@ export const SearchProspectsWriteRepositoriesImpl = {
         return result
     },
 
+    update: async (data: Partial<SearchesSqlInfer>): Promise<SearchesSqlInfer> => {
+        const [result] = await db.update(searches).set({
+            ...data,
+
+        }).where(eq(searches.id, data.id!)).returning()
+
+        return result
+    },
 
     delete: async (id: string) => {
         await db.delete(searches).where(eq(searches.id, id))
@@ -28,6 +36,4 @@ export const SearchProspectsWriteRepositoriesImpl = {
     truncate: async () => {
         await db.delete(searches)
     },
-
-
 }

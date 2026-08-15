@@ -43,8 +43,8 @@ export const searches = pgTable("searches", {
   }),
 });
 
-export type SearchesTableInfer = typeof searches.$inferSelect
-export type SearchesTableInsert = typeof searches.$inferInsert
+export type SearchesSqlInfer = typeof searches.$inferSelect
+export type SearchesSqlInsert = typeof searches.$inferInsert
 
 /**
  * Apparition d'un prospect dans un sourcing. Un meme prospect peut ressortir de

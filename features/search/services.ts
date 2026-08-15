@@ -1,9 +1,9 @@
 import { dateNowIsoString } from "@/lib/date-format"
 import { CreateSearchProspectsDto } from "./dto/schema"
 import leadFinder from "./mocks/leads-finder-1785665650250.json"
-import { SearchProspectsWriteRepositoriesImpl } from "./repositories/write"
 import { searchProspectsValidator } from "./dto/validator"
 import { UserServices } from "../users/services"
+import { SearchWriteRepositoriesImpl } from "./repositories/write"
 
 
 
@@ -23,7 +23,7 @@ export const SearchProspectsServicesImpl: any = {
         const criteriaLabel = `${criteriaData.jobTitle} - ${criteriaData.industry} - ${dateStr}`
 
         const { headcountMax, headcountMin } = criteriaEmployeeRangeFactory(criteriaData)
-        const search = await SearchProspectsWriteRepositoriesImpl.create({
+        const search = await SearchWriteRepositoriesImpl.create({
             name,
             criteria: { ...criteriaData, headcountMax, headcountMin },
             createdBy: currentUser.id,
