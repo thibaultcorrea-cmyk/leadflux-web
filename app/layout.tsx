@@ -50,11 +50,11 @@ export default function RootLayout({
         {/* nuqs : les filtres d'écran (statut des emails…) vivent dans l'URL,
             donc une vue filtrée se partage et se recharge à l'identique. */}
         <NuqsAdapter>
-          <ModalProvider>
-            <TanstackQueryClientProvider>
+          <TanstackQueryClientProvider>
+            <ModalProvider>
               {children}
-            </TanstackQueryClientProvider>
-          </ModalProvider>
+            </ModalProvider>
+          </TanstackQueryClientProvider>
         </NuqsAdapter>
       </body>
     </html>
