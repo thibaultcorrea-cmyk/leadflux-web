@@ -74,8 +74,13 @@ redéfinir dans la feature.
 ### `entities/services.ts`
 Contrat du service : un type `<Feature>Services` qui déclare la forme publique que
 `services.ts` doit implémenter (`create`, `collections`, `update`, `delete`,
-`deleteMultiple`, `truncate`, …). Ce fichier fixe l'interface avant l'implémentation — même
+`deleteMany`, `clear`, …). Ce fichier fixe l'interface avant l'implémentation — même
 si les types internes restent `any` en attendant que la feature soit stabilisée.
+
+Nommage à respecter : `deleteMultiple` est remplacé par `deleteMany` partout (service et
+repository). `truncate` en revanche ne change qu'au niveau du service, où il devient `clear`
+(le nom exposé à l'appelant) ; la méthode de repository sous-jacente garde `truncate`, qui
+décrit l'opération SQL réelle (voir `features/search/`, référence de ce renommage).
 
 ### `repositories/read.ts` et `repositories/write.ts`
 Implémentations concrètes des interfaces d'`entities/repository.ts`, nommées
