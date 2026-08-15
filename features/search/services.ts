@@ -6,7 +6,11 @@ import { UserServices } from "../users/services"
 import { SearchWriteRepositoriesImpl } from "./repositories/write"
 import { LeadFinderMock } from "./mocks/lead-finder"
 import { LeadFinderApiResponse } from "./entities/type"
-import { AddressSqlInfer, CompanySqlInfer, ProspectSourcePayload, ProspectSqlInfer } from "@/db/schemas"
+import { AddressSqlInsert, CompanySqlInsert, PersonSqlInsert, ProspectSourcePayload } from "@/db/schemas"
+import { AddressWriteRepositoriesImpl } from "@/features/adresses/repositories/write"
+import { CompanyWriteRepositoriesImpl } from "@/features/companies/repositories/write"
+import { PersonWriteRepositoriesImpl } from "@/features/persons/repositories/write"
+import { ProspectWriteRepositoriesImpl } from "@/features/prospects/repositories/write"
 
 
 
@@ -69,22 +73,21 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
         id: crypto.randomUUID(),
         fullName: person.name,
         email: person.email,
-        emailKey: person.email,
+        emailKey: person.email.trim().toLowerCase(),
         jobTitle: person.jobTitle,
         phone: null,
-        linkedin_url: null,
-
-    }
+        linkedinUrl: null,
+    } satisfies PersonSqlInsert
 
     const addressData = {
         id: crypto.randomUUID(),
         city: company.address.city,
-        cityKey: company.address.city.toLowerCase(),
+        cityKey: company.address.city.trim().toLowerCase(),
         country: company.address.country,
         state: company.address.state,
         street: null,
         zip: null,
-    } as AddressSqlInfer
+    } satisfies AddressSqlInsert
 
 
 
@@ -101,7 +104,7 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
         headcountMin: 0,
         headcountMax: 0,
         addressId: addressData.id,
-    } satisfies Omit<CompanySqlInfer, 'createdAt' | 'updatedAt'>
+    } satisfies CompanySqlInsert
 
     const rawPayload = {
         person,
@@ -121,13 +124,10 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
 
 export const persistProspectsFromLeadsApi = async (leadApiResults: LeadFinderApiResponse[]) => {
 
+    const mappedData = await Promise.all(leadApiResults.map((lead) => leadsApiToProspectFactory(lead)))
+    const results = await Promise.allSettled(mappedData.map((item) => peristCleanProspect(item)))
 
-    const mappedData = leadApiResults.map((lead) => leadsApiToProspectFactory(lead))
-    const results = await Promise.allSettled(mappedData.map((item) => peristCleanProspect(item)));
-
-
-
-
+    return results
 }
 
 
@@ -138,22 +138,19 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
 
     const { person, company, address, rawPayload } = data
 
-    // First we need to save address 
+    // First we need to save address
 
-    const addressSaved = await AddressWriteRepository.create(address)
+    const addressSaved = await AddressWriteRepositoriesImpl.create(address)
 
     // Then company
-    const companySaved = await CompanyWriteRepository.create({ ...company, addressId: addressSaved.id })
+    const companySaved = await CompanyWriteRepositoriesImpl.create({ ...company, addressId: addressSaved.id })
 
     // Then person
-    const personSaved = await PersonWriteRepository.create({ ...person, companyId: companySaved.id })
-
+    const personSaved = await PersonWriteRepositoriesImpl.create(person)
 
     // Then prospect
-    const prospectSaved = await ProspectWriteRepository.create({ personId: personSaved.id, companyId: companySaved.id, addressId: addressSaved.id, rawPayload })
+    const prospectSaved = await ProspectWriteRepositoriesImpl.create({ personId: personSaved.id, companyId: companySaved.id, rawPayload })
 
-
-
-
+    return prospectSaved
 }
 

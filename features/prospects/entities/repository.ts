@@ -1,4 +1,4 @@
-import { ProspectSqlInfer } from "@/db/schemas"
+import { ProspectSqlInfer, ProspectSqlInsert } from "@/db/schemas"
 
 
 
@@ -12,7 +12,7 @@ export interface IProspectReadRepository {
 }
 
 export interface IProspectWriteRepository {
-    create: (prospect: ProspectSqlInfer) => Promise<ProspectSqlInfer>
+    create: (prospect: ProspectSqlInsert) => Promise<ProspectSqlInfer>
     update: (prospect: Partial<ProspectSqlInfer>) => Promise<ProspectSqlInfer>
     delete: (id: string) => Promise<void>
     deleteMultiple: (id: string[]) => Promise<void>
