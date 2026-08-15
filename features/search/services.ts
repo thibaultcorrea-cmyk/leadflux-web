@@ -66,7 +66,10 @@ export const SearchProspectsServicesImpl: any = {
             resultCount: prospects.length,
         })
 
-        return { search: updatedSearch, prospects }
+        return {
+            ...updatedSearch,
+            results: { prospects }
+        }
     },
 
 

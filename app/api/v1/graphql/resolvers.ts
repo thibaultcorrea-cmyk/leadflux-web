@@ -12,7 +12,7 @@ const resolvers = {
         //searches: () => ProspectServicesImpl.search({}),
     },
     Mutation: {
-        createSearchResults: (_: any, { inputs }: any) => SearchProspectsServicesImpl.searchProspects(inputs),
+        createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
     },
 
 };

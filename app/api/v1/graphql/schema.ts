@@ -152,7 +152,7 @@ type Query {
 
 const mutationDefs = `#graphql
 
-input SearchProspectInput {
+input CreateSearchInputs {
     industry: String!
     jobTitle: String!
     location: String!
@@ -164,7 +164,7 @@ input SearchProspectInput {
 }
 
 type Mutation {
-    createSearchResults(prospects: [SearchProspectInput!]!): [ProspectSearch!]
+    createSearchResults(inputs: CreateSearchInputs): [ProspectSearch!]
 }
 
 `

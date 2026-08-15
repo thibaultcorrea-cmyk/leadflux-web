@@ -43,7 +43,7 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
 
 
 export const CREATE_SEARCH_PROSPECTS_MUTATION = gql`
-    mutation CreateProspect($inputs: CreateSearchInputs!) {
+    mutation createSearchResults($inputs: CreateSearchInputs!) {
     searches(inputs: $inputs) {
       id
       launchedAt
