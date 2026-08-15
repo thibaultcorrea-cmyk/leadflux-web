@@ -13,11 +13,13 @@ import { user } from "./authSchema";
 
 /** Les cinq criteres de la modale de recherche, tels que saisis. */
 export type SearchCriteriaPayload = {
-  sector?: string;
-  location?: string;
-  jobTitle?: string;
-  headcount?: { min?: number; max?: number };
-  revenue?: { min?: number; max?: number };
+  jobTitle: string;
+  industry: string;
+  location: string;
+  headcountMin: number;
+  headcountMax: number;
+  revenue: string;
+  employeeRange: string;
 };
 
 /**
@@ -40,6 +42,9 @@ export const searches = pgTable("searches", {
     onDelete: "set null",
   }),
 });
+
+export type SearchesTableInfer = typeof searches.$inferSelect
+export type SearchesTableInsert = typeof searches.$inferInsert
 
 /**
  * Apparition d'un prospect dans un sourcing. Un meme prospect peut ressortir de

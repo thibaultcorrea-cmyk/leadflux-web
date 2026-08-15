@@ -11,4 +11,5 @@ export const ProspectServicesImpl: ProspectServices = {
     deleteMultiple: (ids) => Promise.resolve(),
     truncate: () => Promise.resolve(),
     search: (query) => Promise.resolve(leadFinder),
+
 }

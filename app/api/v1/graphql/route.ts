@@ -6,10 +6,9 @@ import {
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import resolvers from "./resolvers";
 import typeDefs from "./schema";
-import { buildSchema } from 'drizzle-graphql';
 import { isDevMode } from "@/lib/utils";
-import * as schemas from "@/db/schemas";
-import { db } from "@/db";
+
+
 
 
 

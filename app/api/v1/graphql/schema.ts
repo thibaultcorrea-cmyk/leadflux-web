@@ -152,6 +152,20 @@ type Query {
 
 const mutationDefs = `#graphql
 
+input SearchProspectInput {
+    industry: String!
+    jobTitle: String!
+    location: String!
+    headcountMin: Int
+    headcountMax: Int
+    revenue: String!
+    employeeRange: String!
+
+}
+
+type Mutation {
+    createSearchResults(prospects: [SearchProspectInput!]!): [ProspectSearch!]
+}
 
 `
 

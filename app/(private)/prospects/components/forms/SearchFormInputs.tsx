@@ -10,13 +10,13 @@ export const SearchFormInputs = ({ form }: { form: UseFormReturn<any> }) => {
         <div className="p-3 flex flex-col gap-5 w-full" >
             <FieldGroup className="grid grid-cols-2 gap-5 space-y-2" >
                 <SelectController form={form} name="industry" label="Secteur d'activité" options={industries} />
-                <SelectController form={form} name="industry" label="Poste du décideur" options={industries} />
+                <SelectController form={form} name="jobTitle" label="Poste du décideur" options={industries} />
             </FieldGroup>
             <FieldGroup className="grid grid-cols-2 gap-5 space-y-2" >
-                <SelectController form={form} name="industry" label="Localisation" options={industries} />
-                <SelectController form={form} name="industry" label="Taille de l'entreprise" options={industries} />
+                <SelectController form={form} name="location" label="Localisation" options={industries} />
+                <SelectController form={form} name="employeeRange" label="Taille de l'entreprise" options={industries} />
             </FieldGroup>
-            <SelectController form={form} name="industry" label="Chiffre d'affaire" options={industries} />
+            <SelectController form={form} name="revenue" label="Chiffre d'affaire" options={industries} />
 
         </div>
     )
