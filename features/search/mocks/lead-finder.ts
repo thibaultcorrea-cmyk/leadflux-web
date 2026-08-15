@@ -8,10 +8,6 @@ import leadsFinderJSON from "./leads-finder-1785665650250.json"
 
 export const LeadFinderMock = async (): Promise<LeadFinderApiResponse[]> => {
 
-    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
-    await delay(5000);
-
     return leadsFinderJSON as LeadFinderApiResponse[];
 
 
