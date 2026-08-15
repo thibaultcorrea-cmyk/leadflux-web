@@ -8,8 +8,6 @@ CREATE TABLE "industries" (
 ALTER TABLE "sectors" DISABLE ROW LEVEL SECURITY;--> statement-breakpoint
 DROP TABLE "sectors" CASCADE;--> statement-breakpoint
 ALTER TABLE "companies" RENAME COLUMN "sector_id" TO "industry_id";--> statement-breakpoint
-ALTER TABLE "companies" DROP CONSTRAINT "companies_sector_id_sectors_id_fk";
---> statement-breakpoint
 DROP INDEX "companies_sector_id_idx";--> statement-breakpoint
 DROP INDEX "prospects_is_kept_idx";--> statement-breakpoint
 CREATE UNIQUE INDEX "sectors_slug_idx" ON "industries" USING btree ("slug");--> statement-breakpoint

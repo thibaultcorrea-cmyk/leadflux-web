@@ -12,7 +12,9 @@
     "db:drop": "npx drizzle-kit drop",
     "db:sync": "npm run db:generate && npm run db:migrate",
     "db:seed": "tsx ./db/seeds/seeds.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
