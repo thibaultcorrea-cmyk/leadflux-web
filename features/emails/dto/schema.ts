@@ -7,7 +7,9 @@ export const EmailSchema = z.object({
     id: z.string(),
     prospectName: z.string(),
     prospectJob: z.string().nullable(),
+    prospectCompany: z.string().nullable(),
     prospectEmail: z.string(),
+    prospectLocation: z.string().nullable(),
     prospectingConsent: z.boolean(),
     status: z.enum(EMAIL_STATUSES),
     validatedBy: z.string().nullable(),
@@ -29,7 +31,9 @@ export type Email = z.infer<typeof EmailSchema>
 export const createEmailSchema = z.object({
     prospectName: z.string().min(1, "Le nom du prospect est requis"),
     prospectJob: z.string().optional(),
+    prospectCompany: z.string().optional(),
     prospectEmail: z.email("L'email du prospect est invalide"),
+    prospectLocation: z.string().optional(),
     prospectingConsent: z.boolean().optional(),
 })
 

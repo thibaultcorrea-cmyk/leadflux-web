@@ -5,11 +5,9 @@ import { IEmailReadRepository } from "../entities/repository"
 import { Email, EmailVersion } from "../entities/type"
 
 /**
- * Assemble la forme d'affichage (mocks/emails.ts) a partir des lignes SQL.
- * company/city n'existent pas sur emails (pas de relation vers prospects,
- * cf. db/schemas/emails.ts) : vides en attendant qu'une vraie source les
- * fournisse. lastActivityLabel est normalement calcule cote front (libelle
- * relatif, jamais stocke) ; faute d'un tel calcul ici, on renvoie l'ISO.
+ * Assemble la forme d'affichage (entities/type.ts) a partir des lignes SQL.
+ * lastActivityLabel est normalement calcule cote front (libelle relatif,
+ * jamais stocke) ; faute d'un tel calcul ici, on renvoie l'ISO.
  */
 const emailFromRow = (
     row: typeof emails.$inferSelect,
@@ -18,8 +16,8 @@ const emailFromRow = (
     id: row.id,
     contactName: row.prospectName,
     contactRole: row.prospectJob ?? "",
-    company: "",
-    city: "",
+    company: row.prospectCompany ?? "",
+    city: row.prospectLocation ?? "",
     recipient: row.prospectEmail,
     status: row.status,
     lastActivityAt: row.lastActivityAt.toISOString(),

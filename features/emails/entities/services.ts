@@ -1,6 +1,6 @@
 import { EmailSqlInfer } from "@/db/schemas"
 import { CreateEmailDto, UpdateEmailStatusDto } from "../dto/schema"
-import { Email } from "../mocks/emails"
+import { Email } from "./type"
 
 
 export type EmailServices = {

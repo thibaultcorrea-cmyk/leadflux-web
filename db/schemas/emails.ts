@@ -35,7 +35,9 @@ export const emails = pgTable(
 
     prospectName: text("prospect_name").notNull(),
     prospectJob: text("prospect_job"),
+    prospectCompany: text("prospect_company"),
     prospectEmail: text("prospect_email").notNull(),
+    prospectLocation: text("prospect_location"),
     /** Consentement de prospection recueilli pour ce contact (obligation RGPD). */
     prospectingConsent: boolean("prospecting_consent")
       .default(true)

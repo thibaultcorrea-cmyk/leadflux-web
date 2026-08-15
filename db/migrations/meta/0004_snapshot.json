@@ -1,5 +1,5 @@
 {
-  "id": "9a7544c3-548c-4350-9cf9-4a96bde01237",
+  "id": "40bb8b93-ee5d-43e3-9279-46787d5c77bb",
   "prevId": "8b1a9711-111b-4ddf-87e6-f8fcd7a6dd70",
   "version": "7",
   "dialect": "postgresql",
@@ -737,11 +737,23 @@
           "primaryKey": false,
           "notNull": false
         },
+        "prospect_company": {
+          "name": "prospect_company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "prospect_email": {
           "name": "prospect_email",
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "prospect_location": {
+          "name": "prospect_location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "prospecting_consent": {
           "name": "prospecting_consent",
