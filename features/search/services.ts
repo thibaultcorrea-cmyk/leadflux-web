@@ -40,16 +40,22 @@ export const SearchProspectsServicesImpl: any = {
             criteriaLabel,
         })
 
-        const search_id = search.id
-        // Now start search on leads sources and return result on real time 
+        // Now start search on leads sources and return result on real time
         const leadsResults = await LeadFinderMock()
 
+        // after getting leads results, we need to save them to the database
+        const persistedResults = await persistProspectsFromLeadsApi(leadsResults)
+        const prospects = persistedResults
+            .filter((result): result is PromiseFulfilledResult<Awaited<ReturnType<typeof peristCleanProspect>>> => result.status === "fulfilled")
+            .map((result) => result.value)
 
+        // after saving the leads, reflect the real result count on the search
+        const updatedSearch = await SearchWriteRepositoriesImpl.update({
+            id: search.id,
+            resultCount: prospects.length,
+        })
 
-
-
-
-
+        return { search: updatedSearch, prospects }
     },
 
 

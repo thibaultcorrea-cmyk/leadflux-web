@@ -70,3 +70,6 @@ export const searchResults = pgTable(
     index("search_results_prospect_id_idx").on(table.prospectId),
   ],
 );
+
+export type SearchResultSqlInfer = typeof searchResults.$inferSelect
+export type SearchResultSqlInsert = typeof searchResults.$inferInsert
