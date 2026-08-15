@@ -1,7 +1,8 @@
 import { db } from "@/db"
 import { emails } from "@/db/schemas"
-import { eq } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 import { IEmailReadRepository } from "../entities/repository"
+import { emailsMocks } from "../mocks/emails"
 
 export const EmailReadRepositoriesImpl: IEmailReadRepository = {
     get: async (id: string) => {
@@ -14,7 +15,8 @@ export const EmailReadRepositoriesImpl: IEmailReadRepository = {
         return result
     },
     find: async (query: any) => {
-        throw new Error("Method not implemented.")
+        return emailsMocks
+        //return db.select().from(emails).orderBy(desc(emails.lastActivityAt))
     },
     count: async (query: any) => {
         throw new Error("Method not implemented.")

@@ -1,0 +1,376 @@
+
+
+
+export type EmailStatus = "draft" | "sent" | "replied";
+
+/**
+ * Une génération de l'email. L'aperçu permet d'annuler / rétablir entre les
+ * régénérations successives, donc chaque génération est conservée : c'est une
+ * liste de versions, pas un champ écrasé à chaque fois (CLAUDE.md §3).
+ */
+export type EmailVersion = {
+  id: string;
+  subject: string;
+  /** Corps de l'email, un élément par paragraphe. */
+  body: string[];
+  /** Date de génération, ISO. */
+  generatedAt: string;
+  /** Version du PDF de connaissance client ayant servi à la rédaction. */
+  knowledgeVersion: string;
+};
+
+/**
+ * Un email suivi, rattaché à un prospect. Modèle d'écran uniquement : le schéma
+ * Drizzle réel reste à concevoir (CLAUDE.md §8, point 8).
+ */
+export type Email = {
+  id: string;
+  contactName: string;
+  contactRole: string;
+  company: string;
+  city: string;
+  recipient: string;
+  status: EmailStatus;
+  /** Date de la dernière activité, ISO : c'est elle qui sert au tri. */
+  lastActivityAt: string;
+  /** Libellé affiché de cette date, ex. « Il y a 12 min ». */
+  lastActivityLabel: string;
+  /** De la plus ancienne à la plus récente ; la dernière est la version courante. */
+  versions: EmailVersion[];
+};
+
+
+const KNOWLEDGE_V1 = "12/07/2026";
+
+/**
+ * Jeu de démonstration, repris de la maquette « Emails — Variante 3 ».
+ * Marion Aubert porte deux versions : c'est le cas qui rend l'annuler /
+ * rétablir de l'aperçu observable.
+ */
+export const emailsMocks: Email[] = [
+  {
+    id: "e-01",
+    contactName: "Marion Aubert",
+    contactRole: "Directeur associé",
+    company: "Aubert Stratégie",
+    city: "Dijon",
+    recipient: "marion.aubert@aubert-strategie.fr",
+    status: "draft",
+    lastActivityAt: "2026-07-29T10:30:00.000Z",
+    lastActivityLabel: "Il y a 12 min",
+    versions: [
+      {
+        id: "e-01-v1",
+        subject: "Un mot sur votre prospection",
+        body: [
+          "Bonjour Marion,",
+          "Aubert Stratégie accompagne des dirigeants de PME sur la transformation. Nous proposons un agent qui prend en charge la prospection sortante.",
+          "Seriez-vous disponible pour un échange la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-29T09:12:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+      {
+        id: "e-01-v2",
+        subject: "Votre approche du conseil en transformation",
+        body: [
+          "Bonjour Marion,",
+          "J'ai vu qu'Aubert Stratégie accompagne des dirigeants de PME sur la transformation depuis plusieurs années, avec une équipe de cinq personnes.",
+          "À cette taille, la prospection retombe presque toujours sur le dirigeant, entre deux missions client. C'est le premier poste qui saute quand le carnet se remplit.",
+          "Nous installons chez des cabinets comme le vôtre un agent qui source les entreprises correspondant à votre cible et prépare les emails de premier contact. Vous validez, vous n'écrivez plus.",
+          "Est-ce que 30 minutes la semaine prochaine vous conviendraient pour en parler ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-29T10:26:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-02",
+    contactName: "Sophie Simon",
+    contactRole: "Fondatrice",
+    company: "Altitude Conseil Bordeaux",
+    city: "Bordeaux",
+    recipient: "sophie.simon@altitude-conseil.fr",
+    status: "draft",
+    lastActivityAt: "2026-07-29T09:40:00.000Z",
+    lastActivityLabel: "Il y a 1 h",
+    versions: [
+      {
+        id: "e-02-v1",
+        subject: "Structurer la prospection d'Altitude Conseil",
+        body: [
+          "Bonjour Sophie,",
+          "Altitude Conseil intervient sur des missions de conseil en organisation auprès de PME régionales, avec une équipe resserrée.",
+          "Nous installons un agent qui source vos cibles et prépare les premiers emails. Vous relisez et validez, rien ne part sans vous.",
+          "Auriez-vous 30 minutes la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-29T09:40:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-03",
+    contactName: "Hugo Simon",
+    contactRole: "Associé fondateur",
+    company: "Simon Stratégie",
+    city: "Bordeaux",
+    recipient: "hugo.simon@simon-strategie.fr",
+    status: "draft",
+    lastActivityAt: "2026-07-29T07:35:00.000Z",
+    lastActivityLabel: "Il y a 3 h",
+    versions: [
+      {
+        id: "e-03-v1",
+        subject: "Trois leviers pour Simon Stratégie",
+        body: [
+          "Bonjour Hugo,",
+          "Votre cabinet travaille surtout par recommandation. C'est solide, mais difficile à cadencer quand une mission se termine.",
+          "Nous préparons chaque semaine une série de premiers contacts qualifiés, que vous validez un par un.",
+          "Un échange de 30 minutes vous irait-il ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-29T07:35:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-04",
+    contactName: "Fabien Dubois",
+    contactRole: "Directeur",
+    company: "Cabinet Dubois Conseil",
+    city: "Rouen",
+    recipient: "fabien.dubois@dubois-conseil.fr",
+    status: "draft",
+    lastActivityAt: "2026-07-29T05:30:00.000Z",
+    lastActivityLabel: "Il y a 5 h",
+    versions: [
+      {
+        id: "e-04-v1",
+        subject: "Le sortant chez Cabinet Dubois",
+        body: [
+          "Bonjour Fabien,",
+          "Le cabinet grandit, et la prospection sortante reste la tâche que personne n'a le temps de tenir dans la durée.",
+          "Notre agent la prépare pour vous : sourcing, rédaction, puis votre validation.",
+          "Disponible pour en parler la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-29T05:30:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-05",
+    contactName: "Laura Robert",
+    contactRole: "Associée",
+    company: "Robert Management de Transition",
+    city: "Strasbourg",
+    recipient: "laura.robert@robert-transition.fr",
+    status: "replied",
+    lastActivityAt: "2026-07-28T16:10:00.000Z",
+    lastActivityLabel: "Hier",
+    versions: [
+      {
+        id: "e-05-v1",
+        subject: "Management de transition et prospection",
+        body: [
+          "Bonjour Laura,",
+          "Le management de transition se vend par le réseau, mais le réseau seul plafonne vite.",
+          "Nous préparons vos premiers contacts sur des entreprises correspondant à vos missions types.",
+          "30 minutes pour en parler ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-27T09:00:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-06",
+    contactName: "Pierre Bernard",
+    contactRole: "Directrice générale",
+    company: "Bernard BtoB",
+    city: "Bordeaux",
+    recipient: "pierre.bernard@bernard-btob.fr",
+    status: "sent",
+    lastActivityAt: "2026-07-28T14:05:00.000Z",
+    lastActivityLabel: "Hier",
+    versions: [
+      {
+        id: "e-06-v1",
+        subject: "Votre distribution B2B et l'IA",
+        body: [
+          "Bonjour Pierre,",
+          "Votre activité de distribution repose sur un portefeuille de comptes à renouveler régulièrement.",
+          "Nous préparons les premiers contacts sur les entreprises qui ressemblent à vos meilleurs clients.",
+          "Un échange la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-28T13:40:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-07",
+    contactName: "Mathieu Dubois",
+    contactRole: "Directrice des ventes",
+    company: "Dubois BtoB",
+    city: "Dijon",
+    recipient: "mathieu.dubois@dubois-btob.fr",
+    status: "sent",
+    lastActivityAt: "2026-07-28T11:20:00.000Z",
+    lastActivityLabel: "Hier",
+    versions: [
+      {
+        id: "e-07-v1",
+        subject: "Automatiser votre suivi commercial",
+        body: [
+          "Bonjour Mathieu,",
+          "Le suivi commercial se perd souvent entre deux relances manuelles.",
+          "Nous préparons les emails de premier contact et les relances, que vous validez.",
+          "Disponible pour un échange ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-28T11:20:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-08",
+    contactName: "Clara Girard",
+    contactRole: "Directeur associé",
+    company: "Altitude Conseil Paris",
+    city: "Paris",
+    recipient: "clara.girard@altitude-paris.fr",
+    status: "replied",
+    lastActivityAt: "2026-07-23T09:15:00.000Z",
+    lastActivityLabel: "23/07",
+    versions: [
+      {
+        id: "e-08-v1",
+        subject: "Un point sur votre prospection",
+        body: [
+          "Bonjour Clara,",
+          "Vous êtes seule à porter le développement d'Altitude Conseil Paris.",
+          "Notre agent prend la partie répétitive : sourcing et premier email, préparés pour votre validation.",
+          "30 minutes la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-22T08:30:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-09",
+    contactName: "Vincent Leroy",
+    contactRole: "Gérant",
+    company: "Négoce Leroy",
+    city: "Lille",
+    recipient: "vincent.leroy@negoce-leroy.fr",
+    status: "sent",
+    lastActivityAt: "2026-07-22T15:45:00.000Z",
+    lastActivityLabel: "22/07",
+    versions: [
+      {
+        id: "e-09-v1",
+        subject: "Négoce Leroy et la prospection sortante",
+        body: [
+          "Bonjour Vincent,",
+          "Le négoce vit de volume, et le volume vient du nombre de contacts engagés chaque mois.",
+          "Nous préparons ces contacts pour vous, vous gardez la main sur ce qui part.",
+          "Un échange rapide ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-22T15:45:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-10",
+    contactName: "Élise Garnier",
+    contactRole: "Directrice générale",
+    company: "Garnier Formation",
+    city: "Nantes",
+    recipient: "elise.garnier@garnier-formation.fr",
+    status: "draft",
+    lastActivityAt: "2026-07-22T10:00:00.000Z",
+    lastActivityLabel: "22/07",
+    versions: [
+      {
+        id: "e-10-v1",
+        subject: "Remplir vos sessions de formation",
+        body: [
+          "Bonjour Élise,",
+          "Le remplissage des sessions dépend encore beaucoup du bouche-à-oreille.",
+          "Nous préparons des premiers contacts sur les entreprises qui forment déjà leurs équipes.",
+          "Un échange la semaine prochaine ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-22T10:00:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-11",
+    contactName: "Antoine Petit",
+    contactRole: "Fondateur",
+    company: "Petit Conseil RH",
+    city: "Lille",
+    recipient: "antoine.petit@petit-rh.fr",
+    status: "sent",
+    lastActivityAt: "2026-07-21T16:30:00.000Z",
+    lastActivityLabel: "21/07",
+    versions: [
+      {
+        id: "e-11-v1",
+        subject: "Votre conseil RH auprès des PME",
+        body: [
+          "Bonjour Antoine,",
+          "Vous accompagnez des PME sur leurs sujets RH, souvent en solo.",
+          "Notre agent prépare vos premiers contacts pour que la prospection ne dépende plus de votre disponibilité.",
+          "Disponible pour en parler ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-21T16:30:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+  {
+    id: "e-12",
+    contactName: "Julie Moreau",
+    contactRole: "Associée",
+    company: "Moreau Transition",
+    city: "Toulouse",
+    recipient: "julie.moreau@moreau-transition.fr",
+    status: "replied",
+    lastActivityAt: "2026-07-20T09:05:00.000Z",
+    lastActivityLabel: "20/07",
+    versions: [
+      {
+        id: "e-12-v1",
+        subject: "Vos missions de transition en 2026",
+        body: [
+          "Bonjour Julie,",
+          "Les missions de transition s'enchaînent rarement sans trou dans le planning.",
+          "Nous préparons en continu des premiers contacts qualifiés, que vous validez.",
+          "Un échange de 30 minutes ?",
+          "Thibault Correa, OxIAgen",
+        ],
+        generatedAt: "2026-07-19T14:20:00.000Z",
+        knowledgeVersion: KNOWLEDGE_V1,
+      },
+    ],
+  },
+];

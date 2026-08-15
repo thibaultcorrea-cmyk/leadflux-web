@@ -3,11 +3,12 @@ import { EmailServices } from "./entities/services"
 import { CreateEmailDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
+import { EmailReadRepositoriesImpl } from "./repositories/read"
 import { UserServices } from "../users/services"
 
 
 
-export const EmailServicesImpl: EmailServices = {
+export const EmailProspectsServicesImpl: EmailServices = {
     create: async (input: CreateEmailDto) => {
         const validated = emailValidator.validate(input)
         if (!validated.success) {
@@ -18,7 +19,7 @@ export const EmailServicesImpl: EmailServices = {
     },
 
     collections: async (query: any) => {
-        throw new Error("Method not implemented.")
+        return EmailReadRepositoriesImpl.find(query)
     },
     update: async (email) => {
         throw new Error("Method not implemented.")

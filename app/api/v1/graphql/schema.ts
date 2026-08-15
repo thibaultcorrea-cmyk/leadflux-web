@@ -137,8 +137,36 @@ type ProspectSearch {
     results: [SearchResult!]!
 }
 
+enum EmailProspectStatus {
+    draft
+    sent
+    replied
+}
+
+type EmailVersion {
+    id: ID!
+    subject: String!
+    body: String!
+    generatedAt: String!
+    knowledgeVersion: String!
+}
+
+type EmailProspect {
+    id: ID!
+    contactName: String
+    contactRole: String
+    company: String
+    city: String
+    recipient: String
+    status: EmailProspectStatus
+    lastActivityAt: String
+    lastActivityLabel: String
+    versions: [EmailVersion!]!
+}
+
 type Query {
     searches: [ProspectSearch!]
+    emailsProspects: [EmailProspect!]
     prospect(id: ID!): Prospect
     kpis: [KpiItem!]!
     recentlyActivity: [RecentlyActivityItem!]!

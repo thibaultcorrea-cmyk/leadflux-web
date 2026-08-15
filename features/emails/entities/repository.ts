@@ -5,7 +5,7 @@ import { EmailSqlInfer, EmailSqlInsert } from "@/db/schemas"
 
 export interface IEmailReadRepository {
     get: (id: string) => Promise<EmailSqlInfer>
-    find: (query: any) => Promise<EmailSqlInfer[]>
+    find: (query: any) => Promise<any[]>
     count?: (query: any) => Promise<number>
 
 }

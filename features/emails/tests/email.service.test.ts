@@ -17,9 +17,9 @@ vi.mock("../../users/services", () => ({
     },
 }))
 
-import { EmailServicesImpl } from "../services"
+import { EmailProspectsServicesImpl } from "../services"
 
-describe("EmailServicesImpl.create", () => {
+describe("EmailProspectsServicesImpl.create", () => {
     beforeEach(() => {
         createMock.mockReset()
         updateMock.mockReset()
@@ -29,7 +29,7 @@ describe("EmailServicesImpl.create", () => {
     it("transmet les donnees validees au repository", async () => {
         createMock.mockResolvedValue({ id: "email_1", prospectName: "Marion Aubert" })
 
-        await EmailServicesImpl.create({
+        await EmailProspectsServicesImpl.create({
             prospectName: "Marion Aubert",
             prospectEmail: "marion.aubert@aubert-strategie.fr",
         })
@@ -44,14 +44,14 @@ describe("EmailServicesImpl.create", () => {
 
     it("rejette une entree invalide sans appeler le repository", async () => {
         await expect(
-            EmailServicesImpl.create({ prospectEmail: "marion@example.com" } as never),
+            EmailProspectsServicesImpl.create({ prospectEmail: "marion@example.com" } as never),
         ).rejects.toBeTruthy()
 
         expect(createMock).not.toHaveBeenCalled()
     })
 })
 
-describe("EmailServicesImpl.updateStatus", () => {
+describe("EmailProspectsServicesImpl.updateStatus", () => {
     beforeEach(() => {
         createMock.mockReset()
         updateMock.mockReset()
@@ -62,7 +62,7 @@ describe("EmailServicesImpl.updateStatus", () => {
         getCurrentUserMock.mockResolvedValue({ id: "user_1" })
         updateMock.mockResolvedValue({ id: "email_1", status: "sent" })
 
-        await EmailServicesImpl.updateStatus({ id: "email_1", status: "sent" })
+        await EmailProspectsServicesImpl.updateStatus({ id: "email_1", status: "sent" })
 
         expect(getCurrentUserMock).toHaveBeenCalledOnce()
         expect(updateMock).toHaveBeenCalledWith(
@@ -79,7 +79,7 @@ describe("EmailServicesImpl.updateStatus", () => {
     it("horodate replied_at en passant au statut replied, sans resoudre l'utilisateur courant", async () => {
         updateMock.mockResolvedValue({ id: "email_1", status: "replied" })
 
-        await EmailServicesImpl.updateStatus({ id: "email_1", status: "replied" })
+        await EmailProspectsServicesImpl.updateStatus({ id: "email_1", status: "replied" })
 
         expect(getCurrentUserMock).not.toHaveBeenCalled()
         expect(updateMock).toHaveBeenCalledWith(
@@ -93,7 +93,7 @@ describe("EmailServicesImpl.updateStatus", () => {
 
     it("rejette une entree invalide sans appeler le repository", async () => {
         await expect(
-            EmailServicesImpl.updateStatus({ status: "sent" } as never),
+            EmailProspectsServicesImpl.updateStatus({ status: "sent" } as never),
         ).rejects.toBeTruthy()
 
         expect(updateMock).not.toHaveBeenCalled()
