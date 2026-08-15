@@ -11,4 +11,5 @@ export * from "./technologies";
 export * from "./persons";
 export * from "./prospects";
 export * from "./searches";
+export * from "./emails";
 export * from "./relations";
