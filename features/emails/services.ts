@@ -65,6 +65,8 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             }
             return { success: true, send: succeded.length, failed: failed.length }
         } catch (error) {
+            console.log(error);
+
             return { success: false, send: 0, failed: inputs.length }
         }
 
