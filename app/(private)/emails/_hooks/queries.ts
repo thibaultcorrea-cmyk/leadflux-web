@@ -1,0 +1,51 @@
+import { gql } from "graphql-request";
+
+
+export const QueryKey = {
+    GET_EMAIL_PROSPECTS: "get-email-prospects",
+} as const;
+
+export const GET_EMAIL_PROSPECTS_QUERY = gql`
+  query EmailsProspects {
+  emailsProspects {
+    id
+    status
+    contactName
+    company
+    contactRole
+    recipient
+    versions {
+      generatedAt
+      subject
+      body
+      id
+      knowledgeVersion
+    }
+    lastActivityLabel
+    lastActivityAt
+    city
+  }
+}
+
+`
+
+
+export const CREATE_EMAIL_PROSPECTS_MUTATION = gql`
+mutation CreateManyEmailProspects($input: CreateEmailContentInputs!) {
+  createManyEmailProspects(input: $input) {
+    success
+    send
+    failed
+  }
+}
+`
+
+export const UPDATE_EMAIL_PROSPECTS_MUTATION = gql`
+mutation UpdateEmailProspectStatus($input: UpdateEmailStatusDto!) {
+  updateEmailProspectStatus(input: $input) {
+    id
+    status
+  }
+}
+`
+
