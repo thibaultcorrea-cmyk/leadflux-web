@@ -6,18 +6,18 @@ import { cn } from "@/lib/utils";
  * aucun envoi n'est automatique, donc ni « envoi en cours » ni taux d'envoi
  * (CLAUDE.md §3).
  */
-export type EmailStatus = "brouillon" | "envoye" | "repondu";
+export type EmailStatus = "draft" | "sent" | "replied";
 
 export const EMAIL_STATUS_LABELS: Record<EmailStatus, string> = {
-  brouillon: "Brouillon à valider",
-  envoye: "Validé et envoyé",
-  repondu: "A répondu",
+  draft: "Brouillon à valider",
+  sent: "Validé et envoyé",
+  replied: "A répondu",
 };
 
 const STATUS_CLASSNAMES: Record<EmailStatus, string> = {
-  brouillon: "bg-accent-50 text-accent-700",
-  envoye: "bg-primary-50 text-primary-700",
-  repondu: "bg-success-50 text-success",
+  draft: "bg-accent-50 text-accent-700",
+  sent: "bg-primary-50 text-primary-700",
+  replied: "bg-success-50 text-success",
 };
 
 /**
