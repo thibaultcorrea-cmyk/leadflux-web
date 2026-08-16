@@ -67,10 +67,7 @@ export function getEmailsColumns(
         <DataTableColumnHeader column={column} title="Dernière activité" />
       ),
       cell: ({ row }) => (
-        <ActivityCell
-          label={row.original.lastActivityLabel}
-          isoDate={row.original.lastActivityAt}
-        />
+        <ActivityCell isoDate={row.original.lastActivityAt} />
       ),
     },
     createRowActionsColumn<Email>({ actions: rowActions, size: 240 }),

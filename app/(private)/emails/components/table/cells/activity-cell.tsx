@@ -1,14 +1,10 @@
+import { formatRelativeTime } from "@/lib/date-format";
+
 /**
  * Colonne Dernière activité. Le libellé relatif est affiché, la date exacte
  * reste disponible au survol — « Hier » ne dit pas quel jour.
  */
-export function ActivityCell({
-  label,
-  isoDate,
-}: {
-  label: string;
-  isoDate: string;
-}) {
+export function ActivityCell({ isoDate }: { isoDate: string }) {
   return (
     <time
       dateTime={isoDate}
@@ -18,7 +14,7 @@ export function ActivityCell({
       })}
       className="text-[13px] text-ink-700"
     >
-      {label}
+      {formatRelativeTime(isoDate)}
     </time>
   );
 }

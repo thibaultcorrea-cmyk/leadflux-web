@@ -13,5 +13,5 @@ export function useFetchEmails() {
         queryFn: () => fetchEmailProspectsApi()
 
     })
-    return { data, isLoading, error }
+    return { emails: data?.emailsProspects ?? [], isLoading, error }
 }

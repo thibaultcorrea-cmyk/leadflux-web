@@ -15,7 +15,7 @@ export const emails: Email[] = [
     company: "Aubert Stratégie",
     city: "Dijon",
     recipient: "marion.aubert@aubert-strategie.fr",
-    status: "brouillon",
+    status: "draft",
     lastActivityAt: "2026-07-29T10:30:00.000Z",
     lastActivityLabel: "Il y a 12 min",
     versions: [
@@ -54,7 +54,7 @@ export const emails: Email[] = [
     company: "Altitude Conseil Bordeaux",
     city: "Bordeaux",
     recipient: "sophie.simon@altitude-conseil.fr",
-    status: "brouillon",
+    status: "draft",
     lastActivityAt: "2026-07-29T09:40:00.000Z",
     lastActivityLabel: "Il y a 1 h",
     versions: [
@@ -80,7 +80,7 @@ export const emails: Email[] = [
     company: "Simon Stratégie",
     city: "Bordeaux",
     recipient: "hugo.simon@simon-strategie.fr",
-    status: "brouillon",
+    status: "draft",
     lastActivityAt: "2026-07-29T07:35:00.000Z",
     lastActivityLabel: "Il y a 3 h",
     versions: [
@@ -106,7 +106,7 @@ export const emails: Email[] = [
     company: "Cabinet Dubois Conseil",
     city: "Rouen",
     recipient: "fabien.dubois@dubois-conseil.fr",
-    status: "brouillon",
+    status: "draft",
     lastActivityAt: "2026-07-29T05:30:00.000Z",
     lastActivityLabel: "Il y a 5 h",
     versions: [
@@ -132,7 +132,7 @@ export const emails: Email[] = [
     company: "Robert Management de Transition",
     city: "Strasbourg",
     recipient: "laura.robert@robert-transition.fr",
-    status: "repondu",
+    status: "replied",
     lastActivityAt: "2026-07-28T16:10:00.000Z",
     lastActivityLabel: "Hier",
     versions: [
@@ -158,7 +158,7 @@ export const emails: Email[] = [
     company: "Bernard BtoB",
     city: "Bordeaux",
     recipient: "pierre.bernard@bernard-btob.fr",
-    status: "envoye",
+    status: "sent",
     lastActivityAt: "2026-07-28T14:05:00.000Z",
     lastActivityLabel: "Hier",
     versions: [
@@ -184,7 +184,7 @@ export const emails: Email[] = [
     company: "Dubois BtoB",
     city: "Dijon",
     recipient: "mathieu.dubois@dubois-btob.fr",
-    status: "envoye",
+    status: "sent",
     lastActivityAt: "2026-07-28T11:20:00.000Z",
     lastActivityLabel: "Hier",
     versions: [
@@ -210,7 +210,7 @@ export const emails: Email[] = [
     company: "Altitude Conseil Paris",
     city: "Paris",
     recipient: "clara.girard@altitude-paris.fr",
-    status: "repondu",
+    status: "replied",
     lastActivityAt: "2026-07-23T09:15:00.000Z",
     lastActivityLabel: "23/07",
     versions: [
@@ -236,7 +236,7 @@ export const emails: Email[] = [
     company: "Négoce Leroy",
     city: "Lille",
     recipient: "vincent.leroy@negoce-leroy.fr",
-    status: "envoye",
+    status: "sent",
     lastActivityAt: "2026-07-22T15:45:00.000Z",
     lastActivityLabel: "22/07",
     versions: [
@@ -262,7 +262,7 @@ export const emails: Email[] = [
     company: "Garnier Formation",
     city: "Nantes",
     recipient: "elise.garnier@garnier-formation.fr",
-    status: "brouillon",
+    status: "draft",
     lastActivityAt: "2026-07-22T10:00:00.000Z",
     lastActivityLabel: "22/07",
     versions: [
@@ -288,7 +288,7 @@ export const emails: Email[] = [
     company: "Petit Conseil RH",
     city: "Lille",
     recipient: "antoine.petit@petit-rh.fr",
-    status: "envoye",
+    status: "sent",
     lastActivityAt: "2026-07-21T16:30:00.000Z",
     lastActivityLabel: "21/07",
     versions: [
@@ -314,7 +314,7 @@ export const emails: Email[] = [
     company: "Moreau Transition",
     city: "Toulouse",
     recipient: "julie.moreau@moreau-transition.fr",
-    status: "repondu",
+    status: "replied",
     lastActivityAt: "2026-07-20T09:05:00.000Z",
     lastActivityLabel: "20/07",
     versions: [

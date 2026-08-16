@@ -7,11 +7,11 @@ import { EmailsTablePanel } from "./table/emails-table-panel"
 
 
 
-export default function EmailsClient() {
-    const { data, isLoading, error } = useFetchEmails()
-    const emails = data?.emailsProspects || []
 
-    console.log(data);
+export default function EmailsClient() {
+    const { emails, isLoading, error } = useFetchEmails()
+
+    console.log(emails);
 
 
     return (
