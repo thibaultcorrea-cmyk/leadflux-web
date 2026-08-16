@@ -104,14 +104,14 @@ export function EmailPreviewModal({
         </dl>
 
         <div className="flex flex-col gap-3 border-t border-border pt-4">
-          {version.body.map((paragraph, index) => (
-            <p
-              key={index}
-              className="text-sm leading-relaxed text-ink-700"
-            >
-              {paragraph}
-            </p>
-          ))}
+
+          <p
+
+            className="text-sm leading-relaxed text-ink-700 whitespace-pre-line"
+          >
+            {version.body}
+          </p>
+
         </div>
 
         <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
