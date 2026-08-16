@@ -1,5 +1,5 @@
 import { EmailSqlInfer, EmailStatusValue } from "@/db/schemas"
-import { EmailServices } from "./entities/services"
+import { EmailProspectsServices } from "./entities/services"
 import { CreateEmailDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
@@ -7,17 +7,18 @@ import { EmailReadRepositoriesImpl } from "./repositories/read"
 import { UserServices } from "../users/services"
 import { EmailVersionWriteRepositoriesImpl } from "../emailVersions/repositories/write"
 import { AgentEmailService } from "../agent/email/service"
+import { emailFromRow } from "./factory/email-factory"
 
 
 
-export const EmailProspectsServicesImpl: EmailServices = {
+export const EmailProspectsServicesImpl: EmailProspectsServices = {
     create: async (input: CreateEmailDto) => {
         const validated = emailValidator.validate(input)
         if (!validated.success) {
             throw validated.error
         }
+        return await EmailWriteRepositoriesImpl.create(validated.data)
 
-        return EmailWriteRepositoriesImpl.create(validated.data)
     },
 
     generate: async (inputs: CreateEmailDto) => {
@@ -42,13 +43,9 @@ export const EmailProspectsServicesImpl: EmailServices = {
             knowledgeVersion: agentResponse.knowledgeVersion,
         })
 
-        return {
-            ...email,
-            version: {
-                ...version,
-            }
-        }
+        const emailRow = emailFromRow(email, [version])
 
+        return emailRow
     },
     generateMany: async (inputs: CreateEmailDto[]) => {
         const emails = await Promise.all(inputs.map(async (input) => {
@@ -57,11 +54,18 @@ export const EmailProspectsServicesImpl: EmailServices = {
         return emails
     },
 
-    sendToProspect: async (ids: string[]) => {
+    send: async (id: string) => {
+        throw new Error("Method not implemented.")
+    },
+
+    sendMany: async (ids: string[]) => {
         throw new Error("Method not implemented.")
     },
 
     regenerate: async (id: string) => {
+        throw new Error("Method not implemented.")
+    },
+    regenerateMany: async (ids: string[]) => {
         throw new Error("Method not implemented.")
     },
 

@@ -19,8 +19,8 @@ const resolvers = {
             const message = result ? "Search results cleared successfully" : "Failed to clear search results"
             return { success: result, message }
         },
-        /*  addEmailToProspect: async (_: any, args: any) => EmailProspectsServicesImpl.create(args.input),
-          regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.collections(args.input),
+        generateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.generateMany(args.input),
+        /*  regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.collections(args.input),
           deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
           deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.input),
           clearEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.clear(),*/

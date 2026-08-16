@@ -12,7 +12,7 @@ export interface IEmailReadRepository {
      * find sert les memes donnees que le mock du front pour que le resolver
      * GraphQL emailsProspects ait une forme stable.
      */
-    find: (query: any) => Promise<Email[]>
+    find: (query: any) => Promise<any[]>
     count?: (query: any) => Promise<number>
 
 }

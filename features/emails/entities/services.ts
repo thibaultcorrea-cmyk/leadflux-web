@@ -3,12 +3,14 @@ import { CreateEmailDto, UpdateEmailStatusDto } from "../dto/schema"
 import { Email } from "./type"
 
 
-export type EmailServices = {
+export type EmailProspectsServices = {
     create: (email: CreateEmailDto) => Promise<EmailSqlInfer>
-    generate: (email: CreateEmailDto) => Promise<any>
+    generate: (email: CreateEmailDto) => Promise<Email>
     generateMany: (email: CreateEmailDto[]) => Promise<any[]>
-    sendToProspect: (ids: string[]) => Promise<void>
+    send: (id: string) => Promise<void>
+    sendMany: (ids: string[]) => Promise<void>
     regenerate: (id: string) => Promise<any>
+    regenerateMany: (ids: string[]) => Promise<any[]>
     collections: (query: any) => Promise<any[]>
     update: (email: Partial<EmailSqlInfer>) => Promise<EmailSqlInfer>
     updateStatus: (input: UpdateEmailStatusDto) => Promise<EmailSqlInfer>
