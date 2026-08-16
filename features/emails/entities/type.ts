@@ -35,3 +35,10 @@ export type Email = {
     /** De la plus ancienne à la plus récente ; la dernière est la version courante. */
     versions: EmailVersion[];
 };
+
+
+export type GenerateManyResult = {
+    success: boolean;
+    send: number;
+    failed: number;
+}

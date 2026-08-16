@@ -205,9 +205,29 @@ type SearchResultsCleared {
     message: String!
 }
 
+input ProspectInput {
+    prospectName: String
+    prospectEmail: String!
+    prospectJob: String
+    prospectCompany: String
+    prospectLocation: String
+    prospectingConsent: Boolean!
+}
+
+input CreateEmailContentInputs {
+    prospects: [ProspectInput!]!
+}
+
+type EmailProspectCreated {
+    success: Boolean!
+    send: Int
+    failed: Int
+}
+
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     clearSearchResults: SearchResultsCleared
+    generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
    
 }
 

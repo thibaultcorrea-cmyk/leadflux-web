@@ -1,12 +1,12 @@
 import { EmailSqlInfer } from "@/db/schemas"
 import { CreateEmailDto, UpdateEmailStatusDto } from "../dto/schema"
-import { Email } from "./type"
+import { Email, GenerateManyResult } from "./type"
 
 
 export type EmailProspectsServices = {
     create: (email: CreateEmailDto) => Promise<EmailSqlInfer>
     generate: (email: CreateEmailDto) => Promise<Email>
-    generateMany: (email: CreateEmailDto[]) => Promise<any[]>
+    generateMany: (email: CreateEmailDto[]) => Promise<GenerateManyResult>
     send: (id: string) => Promise<void>
     sendMany: (ids: string[]) => Promise<void>
     regenerate: (id: string) => Promise<any>

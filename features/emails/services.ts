@@ -44,14 +44,31 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         })
 
         const emailRow = emailFromRow(email, [version])
-
         return emailRow
+
+
     },
     generateMany: async (inputs: CreateEmailDto[]) => {
-        const emails = await Promise.all(inputs.map(async (input) => {
-            return await EmailProspectsServicesImpl.generate(input)
-        }))
-        return emails
+
+        const succeded = []
+        const failed = []
+
+        try {
+            for (const input of inputs) {
+                try {
+                    const email = await EmailProspectsServicesImpl.generate(input)
+                    succeded.push(email)
+                } catch (error) {
+                    failed.push(error)
+
+                }
+            }
+            return { success: true, send: succeded.length, failed: failed.length }
+        } catch (error) {
+            return { success: false, send: 0, failed: inputs.length }
+        }
+
+
     },
 
     send: async (id: string) => {
