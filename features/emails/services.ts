@@ -22,6 +22,8 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     generate: async (inputs: CreateEmailDto) => {
+        const currentUser = await UserServices.getCurrentUser()
+
         const validated = emailValidator.validate(inputs)
         if (!validated.success) {
             throw validated.error
@@ -33,6 +35,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         //Create new version with status draft
         const email = await EmailWriteRepositoriesImpl.create({
             ...inputs,
+            validatedBy: currentUser.id,
             status,
         })
         const version = await EmailVersionWriteRepositoriesImpl.create({
