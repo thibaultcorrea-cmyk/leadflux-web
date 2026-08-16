@@ -9,7 +9,7 @@ export type EmailVersion = {
     id: string;
     subject: string;
     /** Corps de l'email, un élément par paragraphe. */
-    body: string[];
+    body: string;
     /** Date de génération, ISO. */
     generatedAt: string;
     /** Version du PDF de connaissance client ayant servi à la rédaction. */

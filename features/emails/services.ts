@@ -37,7 +37,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         })
         const version = await EmailVersionWriteRepositoriesImpl.create({
             emailId: email.id,
-            body: [agentResponse.body],
+            body: agentResponse.body,
             subject: agentResponse.subject,
             generatedAt: new Date(),
             knowledgeVersion: agentResponse.knowledgeVersion,

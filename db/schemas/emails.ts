@@ -100,7 +100,7 @@ export const emailVersions = pgTable(
 
     subject: text("subject").notNull(),
     /** Un element par paragraphe, fidele au rendu de l'apercu. */
-    body: jsonb("body").$type<string[]>().notNull(),
+    body: jsonb("body").$type<string>().notNull(),
 
     /**
      * Libelle de version du PDF de connaissance client ("12/07/2026"), texte
