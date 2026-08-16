@@ -81,7 +81,7 @@ export function useEmailsTableActions() {
       label: "Valider",
       icon: Send,
       variant: "primary",
-      isHidden: (email) => email.status !== "brouillon",
+      isHidden: (email) => email.status !== "draft",
       onSelect: (email) =>
         confirm({
           title: "Valider et envoyer",
@@ -94,7 +94,7 @@ export function useEmailsTableActions() {
       label: "Répondre",
       icon: Reply,
       variant: "primary",
-      isHidden: (email) => email.status !== "repondu",
+      isHidden: (email) => email.status !== "replied",
       onSelect: (email) =>
         confirm({
           title: "Répondre",
@@ -107,7 +107,7 @@ export function useEmailsTableActions() {
       label: "Relancer",
       icon: Repeat2,
       variant: "primary",
-      isHidden: (email) => email.status !== "envoye",
+      isHidden: (email) => email.status !== "sent",
       onSelect: (email) =>
         confirm({
           title: "Relancer",

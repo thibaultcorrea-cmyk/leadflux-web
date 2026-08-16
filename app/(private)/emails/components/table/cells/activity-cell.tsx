@@ -14,7 +14,19 @@ export function ActivityCell({ isoDate }: { isoDate: string }) {
       })}
       className="text-[13px] text-ink-700"
     >
-      {formatRelativeTime(isoDate)}
+      <RenderTimeAgo isoDate={isoDate} />
+
     </time>
   );
+}
+
+
+const RenderTimeAgo = ({ isoDate }: { isoDate: Date | string }) => {
+  const relativeTime = formatRelativeTime(isoDate)
+
+  if (relativeTime.includes('instant')) {
+    return `à l\'instant`
+  }
+
+  return `Il y a ${relativeTime}`
 }
