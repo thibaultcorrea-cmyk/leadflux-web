@@ -11,6 +11,7 @@ export const fetchEmailProspectsApi = async (): Promise<any> => {
 
 
 export const updateEmailApi = async (data: UpdateEmailMutationParams) => {
+    const { id, ...rest } = data
     //return request(GRAPHQL_BASE_URL, UPDATE_EMAIL_MUTATION, data)
     return null;
 }
