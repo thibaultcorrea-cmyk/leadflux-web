@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { Email } from "../../types/email";
 import EmailStaticView from "./email-static-view";
+import { EmailInputView } from "./email-input-view";
 
 /** Initiales du prospect, pour l'avatar de l'entête. */
 function getInitials(name: string) {
@@ -87,7 +88,7 @@ export function EmailPreviewModal({
         </p>
 
         <div className="border-t border-border" />
-        <EmailStaticView email={email} version={version} />
+        {isEditing ? <EmailInputView email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
 
         {/* <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
           <FileText className="mt-0.5 size-4 shrink-0 text-ink-500" aria-hidden />
