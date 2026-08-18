@@ -31,7 +31,7 @@ export function useEmailsTableActions() {
 
   const { open } = useModalController();
 
-  const { openPreview } = useEmailPreviewAction();
+  const { openPreview, openEditView } = useEmailPreviewAction();
 
   const confirm = (props: {
     title: string;
@@ -94,12 +94,7 @@ export function useEmailsTableActions() {
       label: "Modifier l'email",
       icon: Pencil,
       variant: "ghost",
-      onSelect: (email) =>
-        confirm({
-          title: "Modifier l'email",
-          description: `L'éditeur de l'email adressé à ${email.contactName} arrive dans un prochain lot.`,
-          confirmLabel: "Compris",
-        }),
+      onSelect: openEditView,
     },
     {
       id: "supprimer",

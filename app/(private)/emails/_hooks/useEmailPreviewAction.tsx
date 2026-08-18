@@ -4,9 +4,11 @@ import { useModalController } from "@/hooks/useModalController";
 import { EmailPreviewModal } from "../components/modal/email-preview-modal";
 import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import { Email } from "../types/email";
+import EditEmailForm from "../components/forms/edit-email-form";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
-const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
+const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[40vw]";
+const EDIT_MODAL_CLASSNAME = "sm:max-w-[42vw]";
 
 export const useEmailPreviewAction = () => {
 
@@ -51,6 +53,12 @@ export const useEmailPreviewAction = () => {
             ),
         });
 
-    return { openPreview };
+
+    const openEditView = (email: Email) => open({
+        contentClassName: EDIT_MODAL_CLASSNAME,
+        components: <EditEmailForm email={email} version={email.versions[0]} />
+    })
+
+    return { openPreview, openEditView };
 }
 
