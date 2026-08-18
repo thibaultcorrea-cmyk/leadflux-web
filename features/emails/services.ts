@@ -113,20 +113,23 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     regenerateMany: async (ids: string[]) => {
         const succeded = []
         const failed = []
+        const data: { id: string, subject: string, body: string }[] = []
         try {
             for (const id of ids) {
                 try {
-                    const email = await EmailProspectsServicesImpl.regenerate(id)
-                    succeded.push(email)
+                    const version = await EmailProspectsServicesImpl.regenerate(id)
+                    data.push({ id, subject: version.subject, body: version.body })
+                    succeded.push(id)
+
                 } catch (error) {
                     console.log(error);
                     failed.push(error)
                 }
             }
-            return { success: true, send: succeded.length, failed: failed.length }
+            return { success: true, send: succeded.length, failed: failed.length, data }
         } catch (error) {
             console.log(error);
-            return { success: false, send: 0, failed: ids.length }
+            return { success: false, send: 0, failed: ids.length, data: [] }
         }
     },
 
