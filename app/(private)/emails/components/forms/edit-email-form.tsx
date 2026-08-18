@@ -10,6 +10,7 @@ import { useEmailForm } from "../../_hooks/useEmailForm";
 import { Textarea } from "@/components/ui/textarea";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
 import { useTransition } from "react";
+import { Loader2 } from "lucide-react";
 
 
 interface EditEmailFormProps {
@@ -21,18 +22,14 @@ export const EditEmailForm = ({ email, version }: EditEmailFormProps) => {
 
     const defaultValues = emailToEmailFormFaktorySchema({ email, version });
 
-    const { form, submitFn } = useEmailForm({ email, version, defaultValues })
-    const confirmLabel = "Enregistrer"
+    const { form, submitFn, isPending } = useEmailForm({ email, version, defaultValues })
+    const confirmLabel = isPending ? "Enregistrement en cours..." : "Enregistrer"
 
     const emailEmailId = email.id
     const emailVersionId = version.id
 
     const title = "Modification de l'email"
     const description = <>Modification de l'email adressé à <strong>{email.contactName}</strong></>
-
-
-
-
 
     return (
         <form onSubmit={form.handleSubmit(submitFn)} className="flex flex-col gap-3 w-full">
@@ -63,7 +60,10 @@ export const EditEmailForm = ({ email, version }: EditEmailFormProps) => {
                 </FieldGroup>
             </div>
             <DialogFooter>
-                <Button type="submit" size="lg" className={"w-full"}>{confirmLabel}</Button>
+                <Button disabled={isPending} type="submit" size="lg" className={"w-full"}>
+                    {isPending && <Loader2 className="animate-spin" />}
+                    {confirmLabel}
+                </Button>
             </DialogFooter>
         </form>
     )

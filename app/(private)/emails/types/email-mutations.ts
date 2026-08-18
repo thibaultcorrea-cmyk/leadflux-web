@@ -1,12 +1,14 @@
 import { Email, EmailStatus } from "./email"
 
 export type UpdateEmailMutationParams = {
-    id: string
-    data: {
-        status?: EmailStatus
-        subject?: string
-        body?: string
-    }
+    emailId: string
+    versionId: string
+    status?: EmailStatus
+    subject?: string
+    body?: string
+    recipient?: string
+
+
 }
 
 

@@ -12,7 +12,7 @@ export const useEmailMutation = () => {
 
     const queryClient = useQueryClient()
 
-    const update = async () => useMutation({
+    const updateMutation = useMutation({
         mutationFn: async (data: UpdateEmailMutationParams) => updateEmailApi(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
@@ -20,7 +20,7 @@ export const useEmailMutation = () => {
         },
     })
 
-    const remove = async () => useMutation({
+    const removeMutation = useMutation({
         mutationFn: async (data: RemoveEmailMutationParams) => removeEmailApi(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
@@ -28,7 +28,7 @@ export const useEmailMutation = () => {
         },
     })
 
-    const regenerate = async () => useMutation({
+    const regenerateMutation = useMutation({
         mutationFn: async (data: RegenerateEmailMutationParams) => regenerateEmailApi(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
@@ -37,7 +37,7 @@ export const useEmailMutation = () => {
     })
 
 
-    return { update, remove, regenerate }
+    return { update: updateMutation.mutateAsync, remove: removeMutation.mutateAsync, regenerate: regenerateMutation.mutateAsync }
 
 
 

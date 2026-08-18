@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Email, EmailVersion } from "../types/email";
 import { useTransition } from "react";
 import { useModalController } from "@/hooks/useModalController";
+import { useEmailMutation } from "./useEmailMutation";
 
 
 interface UseEmailFormProps {
@@ -16,6 +17,7 @@ interface UseEmailFormProps {
 export const useEmailForm = ({ email, version, defaultValues }: UseEmailFormProps) => {
     const [isPending, startTransition] = useTransition();
     const { close } = useModalController()
+    const { update } = useEmailMutation()
 
     const form = useForm<EmailFormValues>({
         resolver: zodResolver(emailFormSchema),
@@ -30,7 +32,12 @@ export const useEmailForm = ({ email, version, defaultValues }: UseEmailFormProp
             try {
                 const emailId = email.id
                 const versionId = version.id
-                //call api function here
+
+                await update({
+                    emailId,
+                    versionId,
+                    ...values
+                })
 
                 close()
             } catch (error) {
