@@ -32,7 +32,6 @@ export const useEmailMutation = () => {
         mutationFn: async (data: RegenerateEmailMutationParams) => regenerateEmailApi(data),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
-
         },
     })
 
