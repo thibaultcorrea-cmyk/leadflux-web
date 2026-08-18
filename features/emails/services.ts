@@ -1,6 +1,6 @@
-import { EmailSqlInfer, EmailStatusValue } from "@/db/schemas"
+import { EmailSqlInfer, EmailStatusValue, EmailVersionSqlInfer } from "@/db/schemas"
 import { EmailProspectsServices } from "./entities/services"
-import { CreateEmailDto, UpdateEmailStatusDto } from "./dto/schema"
+import { CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
 import { EmailReadRepositoriesImpl } from "./repositories/read"
@@ -96,6 +96,24 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
     update: async (email) => {
         throw new Error("Method not implemented.")
+    },
+
+    updateEmailContent: async (input: Partial<UpdateEmailContentDto>) => {
+        const validated = emailValidator.validateUpdateEmailContent(input)
+        if (!validated.success) {
+            throw validated.error
+        }
+
+        const { data } = validated
+        const patch: Partial<EmailVersionSqlInfer> = {
+            id: data.versionId,
+            body: data.body,
+            subject: data.subject,
+        }
+
+        await EmailVersionWriteRepositoriesImpl.update(patch)
+        const email = await EmailWriteRepositoriesImpl.update({ id: data.emailId, prospectEmail: data.recipient })
+        return email;
     },
 
     /**

@@ -224,10 +224,21 @@ type EmailProspectCreated {
     failed: Int
 }
 
+
+input EmailUpdateContentInput {
+     emailId: ID!
+    subject: String!
+    body: String!
+    recipient: String!
+    versionId: ID!
+}
+
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     clearSearchResults: SearchResultsCleared
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
+    updateEmailContent(input: EmailUpdateContentInput): String
+    
    
 }
 

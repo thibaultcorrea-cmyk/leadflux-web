@@ -1,5 +1,5 @@
 import request from "graphql-request"
-import { GET_EMAIL_PROSPECTS_QUERY } from "../_hooks/queries";
+import { GET_EMAIL_PROSPECTS_QUERY, UPDATE_EMAIL_CONTENT_MUTATION } from "../_hooks/queries";
 import { GRAPHQL_BASE_URL } from "@/core/params";
 import { RegenerateEmailMutationParams, RemoveEmailMutationParams, UpdateEmailMutationParams } from "../types/email-mutations";
 
@@ -10,10 +10,9 @@ export const fetchEmailProspectsApi = async (): Promise<any> => {
 
 
 
-export const updateEmailApi = async (data: UpdateEmailMutationParams) => {
-    const { emailId, versionId, ...rest } = data
-    //return request(GRAPHQL_BASE_URL, UPDATE_EMAIL_MUTATION, data)
-    return null;
+export const updateEmailApi = async (input: UpdateEmailMutationParams) => {
+
+    return request(GRAPHQL_BASE_URL, UPDATE_EMAIL_CONTENT_MUTATION, { input })
 }
 export const removeEmailApi = async (data: RemoveEmailMutationParams) => {
     //return request(GRAPHQL_BASE_URL, REMOVE_EMAIL_MUTATION, data)

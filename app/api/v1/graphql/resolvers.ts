@@ -20,6 +20,10 @@ const resolvers = {
             return { success: result, message }
         },
         generateEmailContent: (_: any, args: any) => EmailProspectsServicesImpl.generateMany(args.inputs.prospects),
+        updateEmailContent: async (_: any, args: any) => {
+            await EmailProspectsServicesImpl.updateEmailContent(args.input)
+            return "Email content updated successfully"
+        },
         /*  regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.collections(args.input),
           deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
           deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.input),
