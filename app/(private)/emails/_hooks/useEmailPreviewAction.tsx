@@ -7,7 +7,7 @@ import { Email } from "../types/email";
 import EditEmailForm from "../components/forms/edit-email-form";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
-const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[40vw]";
+const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
 const EDIT_MODAL_CLASSNAME = "sm:max-w-[42vw]";
 
 export const useEmailPreviewAction = () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { FileText, Pencil, RefreshCw, Redo2, Send, Undo2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,8 @@ import {
 import type { Email } from "../../types/email";
 import EmailStaticView from "./email-static-view";
 import { EmailInputView } from "./email-input-view";
+import { useEmailForm } from "../../_hooks/useEmailForm";
+import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
 
 /** Initiales du prospect, pour l'avatar de l'entête. */
 function getInitials(name: string) {
@@ -55,6 +57,13 @@ export function EmailPreviewModal({
   const canUndo = versionIndex > 0;
   const canRedo = versionIndex < lastIndex;
 
+  const defaultValues = emailToEmailFormFaktorySchema({ email, version: version })
+  const { form } = useEmailForm({ email, version, defaultValues })
+
+
+
+
+
   return (
     <div className="flex max-h-[85vh] flex-col">
       <div className="flex min-h-0 flex-col gap-4 overflow-y-auto p-2">
@@ -88,7 +97,7 @@ export function EmailPreviewModal({
         </p>
 
         <div className="border-t border-border" />
-        {isEditing ? <EmailInputView email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
+        {isEditing ? <EmailInputView form={form} email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
 
         {/* <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
           <FileText className="mt-0.5 size-4 shrink-0 text-ink-500" aria-hidden />
@@ -144,7 +153,7 @@ export function EmailPreviewModal({
             onClick={() => setIsEditing(!isEditing)}
           >
             <Pencil className="size-4" aria-hidden />
-            {isEditing ? "Confirmer" : "Modifier"}
+            {isEditing ? "Annuler" : "Modifier"}
           </Button>
           <Button
             type="button"
