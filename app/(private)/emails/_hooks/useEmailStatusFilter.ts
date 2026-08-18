@@ -13,9 +13,9 @@ import {
 
 const FILTER_LABELS: Record<EmailStatusFilter, string> = {
   tous: "Tous",
-  brouillon: "Brouillons à valider",
-  envoye: "Validés et envoyés",
-  repondu: "A répondu",
+  draft: "Brouillons à valider",
+  sent: "Validés et envoyés",
+  replied: "A répondu",
 };
 
 /**
@@ -35,7 +35,7 @@ export function useEmailStatusFilter(emails: Email[]) {
   );
 
   const counts = useMemo(() => {
-    const byStatus = { brouillon: 0, envoye: 0, repondu: 0 };
+    const byStatus = { draft: 0, sent: 0, replied: 0 };
     for (const email of emails) byStatus[email.status] += 1;
     return { tous: emails.length, ...byStatus };
   }, [emails]);

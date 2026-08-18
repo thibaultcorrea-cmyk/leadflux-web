@@ -7,6 +7,7 @@ import { technologies, companyTechnologies } from "./technologies";
 import { persons } from "./persons";
 import { prospects } from "./prospects";
 import { searches, searchResults } from "./searches";
+import { emails, emailVersions } from "./emails";
 import { user } from "./authSchema";
 
 /**
@@ -106,5 +107,20 @@ export const searchResultRelations = relations(searchResults, ({ one }) => ({
   prospect: one(prospects, {
     fields: [searchResults.prospectId],
     references: [prospects.id],
+  }),
+}));
+
+export const emailRelations = relations(emails, ({ one, many }) => ({
+  validator: one(user, {
+    fields: [emails.validatedBy],
+    references: [user.id],
+  }),
+  versions: many(emailVersions),
+}));
+
+export const emailVersionRelations = relations(emailVersions, ({ one }) => ({
+  email: one(emails, {
+    fields: [emailVersions.emailId],
+    references: [emails.id],
   }),
 }));

@@ -5,9 +5,9 @@ export type { EmailStatus };
 /** Valeurs possibles du filtre de statut, `tous` compris. */
 export const EMAIL_STATUS_FILTERS = [
   "tous",
-  "brouillon",
-  "envoye",
-  "repondu",
+  "draft",
+  "sent",
+  "replied",
 ] as const;
 
 export type EmailStatusFilter = (typeof EMAIL_STATUS_FILTERS)[number];

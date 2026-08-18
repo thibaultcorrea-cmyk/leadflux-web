@@ -51,6 +51,10 @@ export const prospects = pgTable(
     rawPayload: jsonb("raw_payload").$type<ProspectSourcePayload>(),
     /** Derniere fois que la source a re-remonte ce lead. */
     lastSourcedAt: timestamp("last_sourced_at").defaultNow().notNull(),
+    /** Consentement de prospection recueilli pour ce lead (obligation RGPD). */
+    prospectingConsent: boolean("prospecting_consent")
+      .default(true)
+      .notNull(),
 
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")

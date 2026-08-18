@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { Email } from "../../types/email";
+import EmailStaticView from "./email-static-view";
+import { EmailInputView } from "./email-input-view";
 
 /** Initiales du prospect, pour l'avatar de l'entête. */
 function getInitials(name: string) {
@@ -47,6 +49,7 @@ export function EmailPreviewModal({
 }: EmailPreviewModalProps) {
   const lastIndex = email.versions.length - 1;
   const [versionIndex, setVersionIndex] = useState(lastIndex);
+  const [isEditing, setIsEditing] = useState(false);
   const version = email.versions[versionIndex];
 
   const canUndo = versionIndex > 0;
@@ -85,40 +88,13 @@ export function EmailPreviewModal({
         </p>
 
         <div className="border-t border-border" />
+        {isEditing ? <EmailInputView email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
 
-        <dl className="flex flex-col gap-2">
-          <div className="flex gap-3">
-            <dt className="w-12 shrink-0 text-xs font-semibold tracking-[0.03em] text-ink-500">
-              À
-            </dt>
-            <dd className="text-[13px] text-ink-700">{email.recipient}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="w-12 shrink-0 pt-0.5 text-xs font-semibold tracking-[0.03em] text-ink-500">
-              OBJET
-            </dt>
-            <dd className="text-base font-semibold text-ink-900">
-              {version.subject}
-            </dd>
-          </div>
-        </dl>
-
-        <div className="flex flex-col gap-3 border-t border-border pt-4">
-          {version.body.map((paragraph, index) => (
-            <p
-              key={index}
-              className="text-sm leading-relaxed text-ink-700"
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-        <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
+        {/* <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
           <FileText className="mt-0.5 size-4 shrink-0 text-ink-500" aria-hidden />
           Rédigé à partir de votre PDF de connaissance client, version du{" "}
           {version.knowledgeVersion}.
-        </p>
+        </p>*/}
       </div>
 
       <div className="-mx-4 -mb-4 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-b-xl border-t border-border bg-background-100 px-6 py-4">
@@ -165,10 +141,10 @@ export function EmailPreviewModal({
             variant="outline"
             size="lg"
             className="h-11 gap-2 px-4 text-sm"
-            onClick={() => onEdit(email)}
+            onClick={() => setIsEditing(!isEditing)}
           >
             <Pencil className="size-4" aria-hidden />
-            Modifier
+            {isEditing ? "Confirmer" : "Modifier"}
           </Button>
           <Button
             type="button"

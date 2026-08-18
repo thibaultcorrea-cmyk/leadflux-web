@@ -64,7 +64,7 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
         return searchRows.map((search) => ({
             id: search.id,
             launchedAt: search.launchedAt.toISOString(),
-            resultCount: search.resultCount,
+            resultCount: resultRows.length,
             results: resultRows
                 .filter((result) => result.searchId === search.id)
                 .map((result) => ({ prospect: leadProspectFromRow(result) })),

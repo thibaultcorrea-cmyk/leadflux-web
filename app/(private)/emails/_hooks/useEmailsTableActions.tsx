@@ -10,6 +10,7 @@ import type {
 import { useModalController } from "@/hooks/useModalController";
 import { EmailPreviewModal } from "../components/modal/email-preview-modal";
 import type { Email } from "../types/email";
+import { useEmailPreviewAction } from "./useEmailPreviewAction";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
@@ -27,7 +28,10 @@ const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
  * (CLAUDE.md §8).
  */
 export function useEmailsTableActions() {
+
   const { open } = useModalController();
+
+  const { openPreview } = useEmailPreviewAction();
 
   const confirm = (props: {
     title: string;
@@ -36,36 +40,6 @@ export function useEmailsTableActions() {
     tone?: "default" | "destructive";
   }) => open({ components: <ConfirmModalContent {...props} /> });
 
-  const openPreview = (email: Email) =>
-    open({
-      contentClassName: PREVIEW_MODAL_CLASSNAME,
-      components: (
-        <EmailPreviewModal
-          email={email}
-          onEdit={(current) =>
-            confirm({
-              title: "Modifier le brouillon",
-              description: `L'éditeur de l'email adressé à ${current.contactName} arrive dans un prochain lot.`,
-              confirmLabel: "Compris",
-            })
-          }
-          onRegenerate={(current) =>
-            confirm({
-              title: "Régénérer le brouillon",
-              description: `Une nouvelle version sera rédigée pour ${current.contactName}. Les versions précédentes restent accessibles depuis l'aperçu.`,
-              confirmLabel: "Régénérer",
-            })
-          }
-          onValidate={(current) =>
-            confirm({
-              title: "Valider et envoyer",
-              description: `L'email sera envoyé à ${current.recipient}. C'est la seule étape qui déclenche un envoi.`,
-              confirmLabel: "Valider et envoyer",
-            })
-          }
-        />
-      ),
-    });
 
   const rowActions: DataTableRowAction<Email>[] = [
     {
@@ -81,7 +55,7 @@ export function useEmailsTableActions() {
       label: "Valider",
       icon: Send,
       variant: "primary",
-      isHidden: (email) => email.status !== "brouillon",
+      isHidden: (email) => email.status !== "draft",
       onSelect: (email) =>
         confirm({
           title: "Valider et envoyer",
@@ -94,7 +68,7 @@ export function useEmailsTableActions() {
       label: "Répondre",
       icon: Reply,
       variant: "primary",
-      isHidden: (email) => email.status !== "repondu",
+      isHidden: (email) => email.status !== "replied",
       onSelect: (email) =>
         confirm({
           title: "Répondre",
@@ -107,7 +81,7 @@ export function useEmailsTableActions() {
       label: "Relancer",
       icon: Repeat2,
       variant: "primary",
-      isHidden: (email) => email.status !== "envoye",
+      isHidden: (email) => email.status !== "sent",
       onSelect: (email) =>
         confirm({
           title: "Relancer",

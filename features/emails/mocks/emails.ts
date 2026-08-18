@@ -1,4 +1,8 @@
-import type { Email } from "../types/email";
+import { Email } from "../entities/type";
+
+
+
+
 
 const KNOWLEDGE_V1 = "12/07/2026";
 
@@ -7,7 +11,7 @@ const KNOWLEDGE_V1 = "12/07/2026";
  * Marion Aubert porte deux versions : c'est le cas qui rend l'annuler /
  * rétablir de l'aperçu observable.
  */
-export const emails: Email[] = [
+export const emailsMocks: Email[] = [
   {
     id: "e-01",
     contactName: "Marion Aubert",
