@@ -218,6 +218,10 @@ input CreateEmailContentInputs {
     prospects: [ProspectInput!]!
 }
 
+input RegenerateEmailContentInputs {
+    ids: [ID!]!
+}
+
 type EmailProspectCreated {
     success: Boolean!
     send: Int
@@ -237,6 +241,7 @@ type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     clearSearchResults: SearchResultsCleared
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
+    regenerateEmailContent(inputs: RegenerateEmailContentInputs): EmailProspectCreated
     updateEmailContent(input: EmailUpdateContentInput): String
     
    

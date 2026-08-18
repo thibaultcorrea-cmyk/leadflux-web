@@ -24,10 +24,12 @@ const resolvers = {
             await EmailProspectsServicesImpl.updateEmailContent(args.input)
             return "Email content updated successfully"
         },
-        /*  regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.collections(args.input),
-          deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
-          deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.input),
-          clearEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.clear(),*/
+
+
+        regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.regenerateMany(args.inputs.ids),
+        /*  deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
+         deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.input),
+         clearEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.clear(),*/
     },
 
 };

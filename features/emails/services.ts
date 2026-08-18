@@ -85,10 +85,49 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     regenerate: async (id: string) => {
-        throw new Error("Method not implemented.")
+        const email = await EmailReadRepositoriesImpl.get(id)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+
+        const input = {
+            prospectName: email.prospectName,
+            prospectCompany: email.prospectCompany,
+            prospectJob: email.prospectJob,
+            prospectLocation: email.prospectLocation,
+            prospectingConsent: email.prospectingConsent,
+
+        }
+
+        const agentResponse = await AgentEmailService.regenerate(input)
+        const newVersion = await EmailVersionWriteRepositoriesImpl.create({
+            emailId: email.id,
+            body: agentResponse.body,
+            subject: agentResponse.subject,
+            generatedAt: new Date(),
+            knowledgeVersion: agentResponse.knowledgeVersion,
+        })
+        const newVersionCreated = await EmailVersionWriteRepositoriesImpl.create(newVersion)
+        return newVersionCreated
     },
     regenerateMany: async (ids: string[]) => {
-        throw new Error("Method not implemented.")
+        const succeded = []
+        const failed = []
+        try {
+            for (const id of ids) {
+                try {
+                    const email = await EmailProspectsServicesImpl.regenerate(id)
+                    succeded.push(email)
+                } catch (error) {
+                    console.log(error);
+                    failed.push(error)
+                }
+            }
+            return { success: true, send: succeded.length, failed: failed.length }
+        } catch (error) {
+            console.log(error);
+            return { success: false, send: 0, failed: ids.length }
+        }
     },
 
     collections: async (query: any) => {
