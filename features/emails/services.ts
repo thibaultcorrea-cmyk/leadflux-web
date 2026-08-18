@@ -107,8 +107,8 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             generatedAt: new Date(),
             knowledgeVersion: agentResponse.knowledgeVersion,
         })
-        const newVersionCreated = await EmailVersionWriteRepositoriesImpl.create(newVersion)
-        return newVersionCreated
+        // const newVersionCreated = await EmailVersionWriteRepositoriesImpl.create(newVersion)
+        return newVersion
     },
     regenerateMany: async (ids: string[]) => {
         const succeded = []
