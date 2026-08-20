@@ -107,7 +107,6 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             generatedAt: new Date(),
             knowledgeVersion: agentResponse.knowledgeVersion,
         })
-        // const newVersionCreated = await EmailVersionWriteRepositoriesImpl.create(newVersion)
         return newVersion
     },
     regenerateMany: async (ids: string[]) => {
@@ -118,7 +117,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             for (const id of ids) {
                 try {
                     const version = await EmailProspectsServicesImpl.regenerate(id)
-                    data.push({ id, subject: version.subject, body: version.body })
+                    data.push({ id: version.id, subject: version.subject, body: version.body })
                     succeded.push(id)
 
                 } catch (error) {

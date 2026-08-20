@@ -2,8 +2,7 @@
 export const EmailAgentMock = [
     {
         subject: "Votre approche du conseil en transformation",
-        body: `
-                Bonjour Marion,
+        body: `Bonjour Marion,
 
                 J'ai vu qu'Aubert Stratégie accompagne des dirigeants de PME sur la transformation depuis plusieurs années, avec une équipe de cinq personnes.
 
@@ -13,8 +12,7 @@ export const EmailAgentMock = [
 
                 Est-ce que 30 minutes la semaine prochaine vous conviendraient pour en parler ?
 
-                Thibault Correa, OxIAgen
-            `,
+                Thibault Correa, OxIAgen`,
         knowledgeVersion: "2026-08-16T01:18:04.616Z",
     },
 ]

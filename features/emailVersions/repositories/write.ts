@@ -8,16 +8,13 @@ import { IEmailVersionWriteRepository } from "../entities/repository"
 export const EmailVersionWriteRepositoriesImpl: IEmailVersionWriteRepository = {
     create: async (data: EmailVersionSqlInsert) => {
         const [result] = await db.insert(emailVersions).values(data).returning()
-
         return result
     },
 
     update: async (data: Partial<EmailVersionSqlInfer>): Promise<EmailVersionSqlInfer> => {
         const [result] = await db.update(emailVersions).set({
             ...data,
-
         }).where(eq(emailVersions.id, data.id!)).returning()
-
         return result
     },
 
