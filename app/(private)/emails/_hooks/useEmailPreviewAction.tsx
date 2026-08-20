@@ -73,7 +73,6 @@ export const useEmailPreviewAction = () => {
                             confirmLabel: "Valider et envoyer",
                             onConfirm: async () => {
                                 const result = await validateAndSend({ id: current.id })
-                                console.log(result)
                             },
                             onCancel: async () => openPreview(current),
 
