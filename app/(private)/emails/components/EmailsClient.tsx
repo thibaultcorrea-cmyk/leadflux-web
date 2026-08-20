@@ -11,9 +11,6 @@ import { EmailsTablePanel } from "./table/emails-table-panel"
 export default function EmailsClient() {
     const { emails, isLoading, error } = useFetchEmails()
 
-    console.log(emails);
-
-
     return (
         <div>
             <EmailsHeader total={emails.length} />

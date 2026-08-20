@@ -19,3 +19,13 @@ export type RegenerateEmailMutationParams = { ids: string[] }
 export type RegenerateEmailApiResponse = {
     regenerateEmailContent: EmailVersion
 }
+
+
+
+export type ApiManyIdsResponse = {
+    message?: string
+    success: number
+    errors?: number
+}
+
+export type SendEmailApiResponse = ApiManyIdsResponse 

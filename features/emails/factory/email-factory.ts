@@ -1,5 +1,6 @@
 import { EmailSqlInfer, EmailVersionSqlInfer } from "@/db/schemas";
 import { Email, EmailVersion } from "../entities/type";
+import { AgentEmailSendInput } from "@/features/agent/email/entities/agentEmail";
 
 
 /**
@@ -28,3 +29,12 @@ export const emailFromRow = (
         knowledgeVersion: version.knowledgeVersion ?? "",
     })),
 })
+
+
+export const emailToAgentSendInput = (email: EmailSqlInfer, version: EmailVersionSqlInfer): AgentEmailSendInput => {
+    return {
+        subject: version.subject,
+        body: version.body,
+        recipient: email.prospectEmail,
+    }
+}
