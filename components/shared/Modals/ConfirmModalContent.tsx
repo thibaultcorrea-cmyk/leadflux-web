@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useModalController } from "@/hooks/useModalController";
+import { Loader2 } from "lucide-react";
 
 type ConfirmModalContentProps = {
   title: string;
@@ -15,6 +16,7 @@ type ConfirmModalContentProps = {
   confirmLabel: string;
   cancelLabel?: string;
   tone?: "default" | "destructive";
+  isLoading?: boolean;
   onConfirm?: () => void;
 };
 
@@ -30,9 +32,12 @@ export function ConfirmModalContent({
   confirmLabel,
   cancelLabel = "Annuler",
   tone = "default",
+  isLoading = false,
   onConfirm,
 }: ConfirmModalContentProps) {
   const { close } = useModalController();
+
+  const confirmLabelText = isLoading ? "Traitement en cours ..." : confirmLabel;
 
   return (
     <>
@@ -57,8 +62,10 @@ export function ConfirmModalContent({
             onConfirm?.();
             close();
           }}
+          disabled={isLoading}
         >
-          {confirmLabel}
+          {isLoading && <Loader2 className="animate-spin" />}
+          {confirmLabelText}
         </Button>
       </DialogFooter>
     </>

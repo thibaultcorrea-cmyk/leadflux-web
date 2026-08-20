@@ -59,3 +59,15 @@ export const updateEmailStatusSchema = z.object({
 )
 
 export type UpdateEmailStatusDto = z.infer<typeof updateEmailStatusSchema>
+
+
+
+export const updateEmailContentSchema = z.object({
+    emailId: z.string().min(1, "email id est requis"),
+    subject: z.string().min(1, "sujet est requis"),
+    body: z.string().min(1, "corps est requis"),
+    recipient: z.string().email("email est invalide"),
+    versionId: z.string().min(1, "version id est requis"),
+})
+
+export type UpdateEmailContentDto = z.infer<typeof updateEmailContentSchema>

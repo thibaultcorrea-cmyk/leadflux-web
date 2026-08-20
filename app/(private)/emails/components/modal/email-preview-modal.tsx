@@ -1,7 +1,7 @@
 "use client";
 
-import { FileText, Pencil, RefreshCw, Redo2, Send, Undo2 } from "lucide-react";
-import { useState } from "react";
+import { FileText, Pencil, RefreshCw, Redo2, Send, Undo2, Loader2 } from "lucide-react";
+import { useEffect, useEffectEvent, useState, useTransition } from "react";
 
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Email } from "../../types/email";
+import type { Email, EmailVersion } from "../../types/email";
 import EmailStaticView from "./email-static-view";
 import { EmailInputView } from "./email-input-view";
+import { useEmailForm } from "../../_hooks/useEmailForm";
+import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
+import { useEmailMutation } from "../../_hooks/useEmailMutation";
 
 /** Initiales du prospect, pour l'avatar de l'entête. */
 function getInitials(name: string) {
@@ -43,17 +46,60 @@ type EmailPreviewModalProps = {
  */
 export function EmailPreviewModal({
   email,
-  onEdit,
-  onRegenerate,
   onValidate,
 }: EmailPreviewModalProps) {
   const lastIndex = email.versions.length - 1;
   const [versionIndex, setVersionIndex] = useState(lastIndex);
   const [isEditing, setIsEditing] = useState(false);
-  const version = email.versions[versionIndex];
+  const [versions, setVersions] = useState(email.versions)
+  const [isPending, startTransition] = useTransition()
+
+  const version = versions[versionIndex];
 
   const canUndo = versionIndex > 0;
-  const canRedo = versionIndex < lastIndex;
+  const canRedo = versionIndex < versions.length - 1;
+
+  const defaultValues = emailToEmailFormFaktorySchema({ email, version: version })
+  const { form } = useEmailForm({ email, version, defaultValues })
+  const { regenerate } = useEmailMutation()
+
+
+  const undo = () => {
+    if (canUndo) {
+      setVersionIndex((index) => index - 1);
+    }
+  };
+  const redo = () => {
+    if (canRedo) {
+      setVersionIndex((index) => index + 1);
+    }
+  };
+
+  const onRegenerateHandler = () => {
+    startTransition(async () => {
+      try {
+        const { regenerateEmailContent } = await regenerate({ id: email.id })
+
+        const newVersion = {
+          id: regenerateEmailContent.id,
+          subject: regenerateEmailContent.subject,
+          body: regenerateEmailContent.body,
+          knowledgeVersion: regenerateEmailContent.knowledgeVersion,
+          generatedAt: regenerateEmailContent.generatedAt,
+        } satisfies EmailVersion
+
+        setVersions((current) => {
+          const nextVersions = [...current, newVersion];
+          setVersionIndex(nextVersions.length - 1);
+          return nextVersions;
+        });
+      } catch (error) {
+        console.error(error)
+      }
+    })
+  };
+
+
 
   return (
     <div className="flex max-h-[85vh] flex-col">
@@ -80,21 +126,23 @@ export function EmailPreviewModal({
         </header>
 
         <p className="text-xs text-ink-500">
-          {email.versions.length > 1
-            ? `Version ${versionIndex + 1} sur ${email.versions.length}`
+          {versions.length > 1
+            ? `Version ${versionIndex + 1} sur ${versions.length}`
             : "Version initiale"}{" "}
           · Rédaction puis passe d&apos;humanisation · Jamais envoyé
           automatiquement
         </p>
 
         <div className="border-t border-border" />
-        {isEditing ? <EmailInputView email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
+        {isEditing ? <EmailInputView form={form} email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
 
-        {/* <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
-          <FileText className="mt-0.5 size-4 shrink-0 text-ink-500" aria-hidden />
-          Rédigé à partir de votre PDF de connaissance client, version du{" "}
-          {version.knowledgeVersion}.
-        </p>*/}
+        {/* 
+          <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
+            <FileText className="mt-0.5 size-4 shrink-0 text-ink-500" aria-hidden />
+            Rédigé à partir de votre PDF de connaissance client, version du{" "}
+            {version.knowledgeVersion}.
+          </p>
+        */}
       </div>
 
       <div className="-mx-4 -mb-4 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-b-xl border-t border-border bg-background-100 px-6 py-4">
@@ -108,7 +156,7 @@ export function EmailPreviewModal({
                   size="icon-lg"
                   disabled={!canUndo}
                   aria-label="Revenir à la génération précédente"
-                  onClick={() => setVersionIndex((index) => index - 1)}
+                  onClick={undo}
                 />
               }
             >
@@ -125,7 +173,7 @@ export function EmailPreviewModal({
                   size="icon-lg"
                   disabled={!canRedo}
                   aria-label="Revenir à la génération suivante"
-                  onClick={() => setVersionIndex((index) => index + 1)}
+                  onClick={redo}
                 />
               }
             >
@@ -136,7 +184,7 @@ export function EmailPreviewModal({
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          <Button
+          {/*  <Button
             type="button"
             variant="outline"
             size="lg"
@@ -144,23 +192,27 @@ export function EmailPreviewModal({
             onClick={() => setIsEditing(!isEditing)}
           >
             <Pencil className="size-4" aria-hidden />
-            {isEditing ? "Confirmer" : "Modifier"}
+            {isEditing ? "Annuler" : "Modifier"}
           </Button>
+          */}
+
           <Button
             type="button"
             variant="outline"
             size="lg"
             className="h-11 gap-2 px-4 text-sm"
-            onClick={() => onRegenerate(email)}
+            onClick={onRegenerateHandler}
+            disabled={isPending}
           >
-            <RefreshCw className="size-4" aria-hidden />
-            Régénérer
+            {isPending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <RefreshCw className="size-4" aria-hidden />}
+            {isPending ? "Régénération en cours..." : "Régénérer"}
           </Button>
           <Button
             type="button"
             size="lg"
             className="h-11 gap-2 px-5 text-[15px] font-semibold"
             onClick={() => onValidate(email)}
+            disabled={isPending}
           >
             <Send className="size-4" aria-hidden />
             Valider et envoyer

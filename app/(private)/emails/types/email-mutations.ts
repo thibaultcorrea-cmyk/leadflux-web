@@ -1,12 +1,14 @@
-import { Email, EmailStatus } from "./email"
+import { Email, EmailStatus, EmailVersion } from "./email"
 
 export type UpdateEmailMutationParams = {
-    id: string
-    data: {
-        status?: EmailStatus
-        subject?: string
-        body?: string
-    }
+    emailId: string
+    versionId: string
+    status?: EmailStatus
+    subject?: string
+    body?: string
+    recipient?: string
+
+
 }
 
 
@@ -14,4 +16,6 @@ export type RemoveEmailMutationParams = { ids: string[] }
 export type RemoveEmailApiResponse = Email
 
 export type RegenerateEmailMutationParams = { ids: string[] }
-export type RegenerateEmailApiResponse = Email
+export type RegenerateEmailApiResponse = {
+    regenerateEmailContent: EmailVersion
+}

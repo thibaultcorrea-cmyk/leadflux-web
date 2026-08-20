@@ -1,6 +1,6 @@
-import { EmailSqlInfer, EmailStatusValue } from "@/db/schemas"
+import { EmailSqlInfer, EmailStatusValue, EmailVersionSqlInfer } from "@/db/schemas"
 import { EmailProspectsServices } from "./entities/services"
-import { CreateEmailDto, UpdateEmailStatusDto } from "./dto/schema"
+import { CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
 import { EmailReadRepositoriesImpl } from "./repositories/read"
@@ -85,10 +85,51 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     regenerate: async (id: string) => {
-        throw new Error("Method not implemented.")
+        const email = await EmailReadRepositoriesImpl.get(id)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+
+        const input = {
+            prospectName: email.prospectName,
+            prospectCompany: email.prospectCompany,
+            prospectJob: email.prospectJob,
+            prospectLocation: email.prospectLocation,
+            prospectingConsent: email.prospectingConsent,
+
+        }
+
+        const agentResponse = await AgentEmailService.regenerate(input)
+        const newVersion = await EmailVersionWriteRepositoriesImpl.create({
+            emailId: email.id,
+            body: agentResponse.body,
+            subject: agentResponse.subject,
+            generatedAt: new Date(),
+            knowledgeVersion: agentResponse.knowledgeVersion,
+        })
+        return newVersion
     },
     regenerateMany: async (ids: string[]) => {
-        throw new Error("Method not implemented.")
+        const succeded = []
+        const failed = []
+        const data: { id: string, subject: string, body: string }[] = []
+        try {
+            for (const id of ids) {
+                try {
+                    const version = await EmailProspectsServicesImpl.regenerate(id)
+                    data.push(version)
+                    succeded.push(id)
+
+                } catch (error) {
+                    console.log(error);
+                    failed.push(error)
+                }
+            }
+            return { success: true, send: succeded.length, failed: failed.length, data }
+        } catch (error) {
+            console.log(error);
+            return { success: false, send: 0, failed: ids.length, data: [] }
+        }
     },
 
     collections: async (query: any) => {
@@ -96,6 +137,24 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
     update: async (email) => {
         throw new Error("Method not implemented.")
+    },
+
+    updateEmailContent: async (input: Partial<UpdateEmailContentDto>) => {
+        const validated = emailValidator.validateUpdateEmailContent(input)
+        if (!validated.success) {
+            throw validated.error
+        }
+
+        const { data } = validated
+        const patch: Partial<EmailVersionSqlInfer> = {
+            id: data.versionId,
+            body: data.body,
+            subject: data.subject,
+        }
+
+        await EmailVersionWriteRepositoriesImpl.update(patch)
+        const email = await EmailWriteRepositoriesImpl.update({ id: data.emailId, prospectEmail: data.recipient })
+        return email;
     },
 
     /**

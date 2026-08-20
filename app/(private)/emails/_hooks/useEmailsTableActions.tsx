@@ -11,6 +11,8 @@ import { useModalController } from "@/hooks/useModalController";
 import { EmailPreviewModal } from "../components/modal/email-preview-modal";
 import type { Email } from "../types/email";
 import { useEmailPreviewAction } from "./useEmailPreviewAction";
+import { useEmailMutation } from "./useEmailMutation";
+import { useTransition } from "react";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
@@ -31,13 +33,17 @@ export function useEmailsTableActions() {
 
   const { open } = useModalController();
 
-  const { openPreview } = useEmailPreviewAction();
+  const { openPreview, openEditView } = useEmailPreviewAction();
+  const { remove } = useEmailMutation()
+  const [isPending, startTransition] = useTransition()
 
   const confirm = (props: {
     title: string;
     description: React.ReactNode;
     confirmLabel: string;
     tone?: "default" | "destructive";
+    isLoading?: boolean;
+    onConfirm?: () => void;
   }) => open({ components: <ConfirmModalContent {...props} /> });
 
 
@@ -94,12 +100,7 @@ export function useEmailsTableActions() {
       label: "Modifier l'email",
       icon: Pencil,
       variant: "ghost",
-      onSelect: (email) =>
-        confirm({
-          title: "Modifier l'email",
-          description: `L'éditeur de l'email adressé à ${email.contactName} arrive dans un prochain lot.`,
-          confirmLabel: "Compris",
-        }),
+      onSelect: openEditView,
     },
     {
       id: "supprimer",
@@ -112,6 +113,15 @@ export function useEmailsTableActions() {
           description: `Le suivi de l'email adressé à ${email.contactName} sera supprimé. Cette action est définitive.`,
           confirmLabel: "Supprimer",
           tone: "destructive",
+          isLoading: isPending,
+          onConfirm: async () => {
+            try {
+              await remove({ ids: [email.id] })
+            } catch (error) {
+
+            }
+          }
+
         }),
     },
   ];
@@ -133,5 +143,5 @@ export function useEmailsTableActions() {
     },
   ];
 
-  return { rowActions, bulkActions, openPreview };
+  return { isPending, rowActions, bulkActions, openPreview };
 }
