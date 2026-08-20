@@ -22,5 +22,5 @@ export const removeEmailApi = async (data: RemoveEmailMutationParams) => {
 
 
 export const regenerateEmailApi = async (id: string) => {
-    return request(GRAPHQL_BASE_URL, REGENERATE_EMAIL_MUTATION, { id })
+    return request<RegenerateEmailApiResponse>(GRAPHQL_BASE_URL, REGENERATE_EMAIL_MUTATION, { id })
 }

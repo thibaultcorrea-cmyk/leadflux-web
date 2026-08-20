@@ -1,6 +1,4 @@
-import { GraphQLResponse } from "graphql-request"
-import { Email, EmailStatus } from "./email"
-import { EmailVersionSqlInfer } from "@/db/schemas"
+import { Email, EmailStatus, EmailVersion } from "./email"
 
 export type UpdateEmailMutationParams = {
     emailId: string
@@ -18,6 +16,6 @@ export type RemoveEmailMutationParams = { ids: string[] }
 export type RemoveEmailApiResponse = Email
 
 export type RegenerateEmailMutationParams = { ids: string[] }
-export type RegenerateEmailApiResponse = GraphQLResponse<{
-    regenerateEmailContent: Omit<EmailVersionSqlInfer, "updatedAt" | "createdAt">
-}>
+export type RegenerateEmailApiResponse = {
+    regenerateEmailContent: EmailVersion
+}

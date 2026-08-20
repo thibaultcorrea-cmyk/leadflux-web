@@ -81,26 +81,22 @@ export function EmailPreviewModal({
         const { regenerateEmailContent } = await regenerate({ id: email.id })
 
         const newVersion = {
-          id: regenerateEmailContent.id as string,
-          subject: regenerateEmailContent.subject as string,
-          body: regenerateEmailContent.body as string,
-          knowledgeVersion: regenerateEmailContent.knowledgeVersion as string,
-          generatedAt: regenerateEmailContent.generatedAt.toISOString() as string,
+          id: regenerateEmailContent.id,
+          subject: regenerateEmailContent.subject,
+          body: regenerateEmailContent.body,
+          knowledgeVersion: regenerateEmailContent.knowledgeVersion,
+          generatedAt: regenerateEmailContent.generatedAt,
         } satisfies EmailVersion
 
-        const nextVersions = [...versions, newVersion]
-        console.log(nextVersions);
-
-        setVersions(nextVersions);
-        setVersionIndex(nextVersions.length);
-
+        setVersions((current) => {
+          const nextVersions = [...current, newVersion];
+          setVersionIndex(nextVersions.length - 1);
+          return nextVersions;
+        });
       } catch (error) {
-
+        console.error(error)
       }
-
     })
-
-
   };
 
 
@@ -130,8 +126,8 @@ export function EmailPreviewModal({
         </header>
 
         <p className="text-xs text-ink-500">
-          {email.versions.length > 1
-            ? `Version ${versionIndex + 1} sur ${email.versions.length}`
+          {versions.length > 1
+            ? `Version ${versionIndex + 1} sur ${versions.length}`
             : "Version initiale"}{" "}
           · Rédaction puis passe d&apos;humanisation · Jamais envoyé
           automatiquement
