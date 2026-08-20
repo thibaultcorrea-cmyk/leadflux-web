@@ -117,7 +117,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             for (const id of ids) {
                 try {
                     const version = await EmailProspectsServicesImpl.regenerate(id)
-                    data.push({ id: version.id, subject: version.subject, body: version.body })
+                    data.push(version)
                     succeded.push(id)
 
                 } catch (error) {

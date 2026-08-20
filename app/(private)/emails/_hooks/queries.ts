@@ -56,3 +56,16 @@ mutation UpdateEmailContent($input: EmailUpdateContentInput) {
 `
 
 
+export const REGENERATE_EMAIL_MUTATION = gql`
+mutation RegenerateEmailContent($id: ID!) {
+  regenerateEmailContent(id: $id) {
+    id
+    knowledgeVersion
+    subject
+    body
+    generatedAt
+  }
+}
+`
+
+

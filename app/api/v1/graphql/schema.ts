@@ -233,6 +233,9 @@ type GeneratedEmailContent {
     id: String!
     subject: String!
     body: String!
+    knowledgeVersion: String!
+    generatedAt: String!
+    
 
 }
 
@@ -257,7 +260,7 @@ type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     clearSearchResults: SearchResultsCleared
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
-    regenerateEmailContent(inputs: RegenerateEmailContentInputs): RegenerateEmailContentOutput
+    regenerateEmailContent(id: ID!): GeneratedEmailContent
     updateEmailContent(input: EmailUpdateContentInput): String
     
    

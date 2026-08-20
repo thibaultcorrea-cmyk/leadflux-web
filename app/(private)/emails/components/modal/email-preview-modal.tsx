@@ -78,9 +78,21 @@ export function EmailPreviewModal({
   const onRegenerateHandler = () => {
     startTransition(async () => {
       try {
-        const newVersion = await regenerate({ ids: [email.id] })
-        setVersions([...versions, newVersion]);
-        setVersionIndex(versions.length);
+        const { regenerateEmailContent } = await regenerate({ id: email.id })
+
+        const newVersion = {
+          id: regenerateEmailContent.id as string,
+          subject: regenerateEmailContent.subject as string,
+          body: regenerateEmailContent.body as string,
+          knowledgeVersion: regenerateEmailContent.knowledgeVersion as string,
+          generatedAt: regenerateEmailContent.generatedAt.toISOString() as string,
+        } satisfies EmailVersion
+
+        const nextVersions = [...versions, newVersion]
+        console.log(nextVersions);
+
+        setVersions(nextVersions);
+        setVersionIndex(nextVersions.length);
 
       } catch (error) {
 

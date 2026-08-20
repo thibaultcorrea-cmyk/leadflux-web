@@ -1,6 +1,6 @@
-import { EmailSqlInfer } from "@/db/schemas"
+import { EmailSqlInfer, EmailVersionSqlInfer } from "@/db/schemas"
 import { CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "../dto/schema"
-import { Email, GenerateManyResult } from "./type"
+import { Email, EmailVersion, GenerateManyResult } from "./type"
 
 
 export type EmailProspectsServices = {
@@ -9,7 +9,7 @@ export type EmailProspectsServices = {
     generateMany: (email: CreateEmailDto[]) => Promise<GenerateManyResult>
     send: (id: string) => Promise<void>
     sendMany: (ids: string[]) => Promise<void>
-    regenerate: (id: string) => Promise<any>
+    regenerate: (id: string) => Promise<EmailVersionSqlInfer>
     regenerateMany: (ids: string[]) => Promise<GenerateManyResult>
     collections: (query: any) => Promise<any[]>
     update: (email: Partial<EmailSqlInfer>) => Promise<EmailSqlInfer>
