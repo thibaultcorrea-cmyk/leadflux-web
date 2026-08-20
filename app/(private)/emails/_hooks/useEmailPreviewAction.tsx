@@ -5,21 +5,44 @@ import { EmailPreviewModal } from "../components/modal/email-preview-modal";
 import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import { Email } from "../types/email";
 import EditEmailForm from "../components/forms/edit-email-form";
+import { SendEmailConfirmModalContent } from "../components/modal/send-email-confirm";
+import { useEmailMutation } from "./useEmailMutation";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
 const EDIT_MODAL_CLASSNAME = "sm:max-w-[42vw]";
 
+
 export const useEmailPreviewAction = () => {
 
     const { open } = useModalController();
+    const { validateAndSend } = useEmailMutation()
 
     const confirm = (props: {
         title: string;
         description: React.ReactNode;
         confirmLabel: string;
         tone?: "default" | "destructive";
-    }) => open({ components: <ConfirmModalContent {...props} /> });
+        onConfirm?: () => Promise<void>;
+        onCancel?: () => Promise<void>;
+    }) => open({ components: <ConfirmModalContent {...props} closeOnCancel={false} /> });
+
+    const SendEmailConfirmModal = (props: {
+        title: string;
+        description: React.ReactNode;
+        confirmLabel: string;
+        tone?: "default" | "destructive";
+        onConfirm?: () => Promise<void>;
+        email: Email;
+        onCancel?: () => Promise<void>;
+
+    }) => {
+        return (
+            open({
+                components: <SendEmailConfirmModalContent {...props} cancelLabel="Revenir en arrière" closeOnCancel={false} />
+            })
+        )
+    }
 
     const openPreview = (email: Email) =>
         open({
@@ -43,10 +66,18 @@ export const useEmailPreviewAction = () => {
                         })
                     }
                     onValidate={(current) =>
-                        confirm({
+                        SendEmailConfirmModal({
+                            email: current,
                             title: "Valider et envoyer",
                             description: `L'email sera envoyé à ${current.recipient}. C'est la seule étape qui déclenche un envoi.`,
                             confirmLabel: "Valider et envoyer",
+                            onConfirm: async () => {
+                                const result = await validateAndSend({ id: current.id })
+                                console.log(result)
+                            },
+                            onCancel: async () => openPreview(current),
+
+
                         })
                     }
                 />

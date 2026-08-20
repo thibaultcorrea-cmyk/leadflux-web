@@ -25,6 +25,6 @@ export const regenerateEmailApi = async (id: string) => {
     return request<RegenerateEmailApiResponse>(GRAPHQL_BASE_URL, REGENERATE_EMAIL_MUTATION, { id })
 }
 
-export const validateSendEmailApi = async (ids: string[]) => {
-    return request(GRAPHQL_BASE_URL, SEND_EMAIL_MUTATION, { ids })
+export const validateSendEmailApi = async (id: string) => {
+    return request(GRAPHQL_BASE_URL, SEND_EMAIL_MUTATION, { id })
 }

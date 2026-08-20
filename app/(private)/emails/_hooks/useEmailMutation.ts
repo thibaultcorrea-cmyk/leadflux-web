@@ -36,7 +36,7 @@ export const useEmailMutation = () => {
     })
 
     const validateSendEmailMutation = useMutation({
-        mutationFn: async ({ ids }: { ids: string[] }) => validateSendEmailApi(ids),
+        mutationFn: async ({ id }: { id: string }) => validateSendEmailApi(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
         },

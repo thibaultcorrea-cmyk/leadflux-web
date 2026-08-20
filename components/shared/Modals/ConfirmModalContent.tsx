@@ -17,7 +17,10 @@ type ConfirmModalContentProps = {
   cancelLabel?: string;
   tone?: "default" | "destructive";
   isLoading?: boolean;
-  onConfirm?: () => void;
+  closeOnConfirm?: boolean;
+  closeOnCancel?: boolean;
+  onConfirm?: () => Promise<void>;
+  onCancel?: () => Promise<void>;
 };
 
 /**
@@ -33,11 +36,23 @@ export function ConfirmModalContent({
   cancelLabel = "Annuler",
   tone = "default",
   isLoading = false,
+  closeOnConfirm = true,
+  closeOnCancel = true,
   onConfirm,
+  onCancel
 }: ConfirmModalContentProps) {
   const { close } = useModalController();
 
   const confirmLabelText = isLoading ? "Traitement en cours ..." : confirmLabel;
+  const handleCancel = async () => {
+    await onCancel?.();
+    if (closeOnCancel) close();
+  }
+
+  const handleConfirm = async () => {
+    await onConfirm?.();
+    if (closeOnConfirm) close();
+  }
 
   return (
     <>
@@ -51,17 +66,14 @@ export function ConfirmModalContent({
       </DialogHeader>
 
       <DialogFooter>
-        <Button type="button" variant="outline" size="lg" onClick={close}>
+        <Button type="button" variant="outline" size="lg" onClick={handleCancel}>
           {cancelLabel}
         </Button>
         <Button
           type="button"
           size="lg"
           variant={tone === "destructive" ? "destructive" : "default"}
-          onClick={() => {
-            onConfirm?.();
-            close();
-          }}
+          onClick={handleConfirm}
           disabled={isLoading}
         >
           {isLoading && <Loader2 className="animate-spin" />}
