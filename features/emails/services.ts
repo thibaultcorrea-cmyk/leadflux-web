@@ -7,7 +7,8 @@ import { EmailReadRepositoriesImpl } from "./repositories/read"
 import { UserServices } from "../users/services"
 import { EmailVersionWriteRepositoriesImpl } from "../emailVersions/repositories/write"
 import { AgentEmailService } from "../agent/email/service"
-import { emailFromRow } from "./factory/email-factory"
+import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
+import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
 
 
 
@@ -77,7 +78,34 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     send: async (id: string) => {
-        throw new Error("Method not implemented.")
+        //Update email status to "sent" and save threadId
+        const email = await EmailReadRepositoriesImpl.get(id)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+
+        //get latest version
+        const latestVersion = await EmailVersionReadRepositoriesImpl.getLatestVersion(email.id)
+        if (!latestVersion) {
+            throw new Error("Email version not found")
+        }
+
+        //send email by Agent service
+        const response = await AgentEmailService.sendEmail(emailToAgentSendInput(email, latestVersion))
+
+        await EmailWriteRepositoriesImpl.update({
+            id: email.id,
+            status: "sent",
+            sentAt: new Date(),
+            threadId: response.threadId,
+        })
+
+        return {
+            success: true,
+            result: "email sent successfully",
+            threadId: response.threadId,
+
+        }
     },
 
     sendMany: async (ids: string[]) => {

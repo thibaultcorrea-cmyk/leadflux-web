@@ -7,6 +7,7 @@ export interface IEmailVersionReadRepository {
     get: (id: string) => Promise<EmailVersionSqlInfer>
     find: (query: any) => Promise<EmailVersionSqlInfer[]>
     count?: (query: any) => Promise<number>
+    getLatestVersion: (emailId: string) => Promise<EmailVersionSqlInfer>
 
 }
 

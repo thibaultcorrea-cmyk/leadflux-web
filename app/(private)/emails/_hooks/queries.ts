@@ -69,3 +69,13 @@ mutation RegenerateEmailContent($id: ID!) {
 `
 
 
+export const SEND_EMAIL_MUTATION = gql`
+mutation ValidateAndSendEmails($ids: [ID!]!) {
+  validateAndSendEmails(ids: $ids) {
+    message
+    success
+    errors
+  }
+}
+`
+
