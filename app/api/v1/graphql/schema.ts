@@ -256,12 +256,19 @@ input EmailUpdateContentInput {
     versionId: ID!
 }
 
+type ValidateSendEmailOutput {
+    success: Boolean
+    threadId: String!
+    result: String
+}
+
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     clearSearchResults: SearchResultsCleared
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
     regenerateEmailContent(id: ID!): GeneratedEmailContent
     updateEmailContent(input: EmailUpdateContentInput): String
+    validateAndSendEmail(id: ID!): ValidateSendEmailOutput
     
    
 }

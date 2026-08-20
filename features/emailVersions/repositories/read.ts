@@ -1,6 +1,6 @@
 import { db } from "@/db"
 import { emailVersions } from "@/db/schemas"
-import { asc, eq } from "drizzle-orm"
+import { asc, desc, eq } from "drizzle-orm"
 import { IEmailVersionReadRepository } from "../entities/repository"
 
 export const EmailVersionReadRepositoriesImpl: IEmailVersionReadRepository = {
@@ -21,5 +21,14 @@ export const EmailVersionReadRepositoriesImpl: IEmailVersionReadRepository = {
     count: async (query: any) => {
         throw new Error("Method not implemented.")
     },
+    getLatestVersion: async (emailId: string) => {
+        const [result] = await db.select().from(emailVersions).where(eq(emailVersions.emailId, emailId)).orderBy(desc(emailVersions.createdAt)).limit(1)
+
+        if (!result) {
+            throw new Error("Email version not found")
+        }
+        return result
+    },
+
 
 }
