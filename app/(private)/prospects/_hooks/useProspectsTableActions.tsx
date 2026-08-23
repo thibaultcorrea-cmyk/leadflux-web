@@ -11,6 +11,7 @@ import type {
 import { useModalController } from "@/hooks/useModalController";
 import type { Prospect } from "../types/prospect";
 import { EditProspectModal } from "../components/modals/EditProspectView";
+import { hiddenRowActions } from "../services/row-actions";
 
 /**
  * Actions de la table de résultats : une seule source pour la colonne Actions
@@ -27,6 +28,20 @@ import { EditProspectModal } from "../components/modals/EditProspectView";
 export function useProspectsTableActions() {
   const { open } = useModalController();
 
+  const sendProspectEmail = async (prospect: Prospect) => {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(undefined);
+      }, 3000);
+    })
+    await promise;
+
+  }
+
+
+
+
+
   return useMemo(() => {
     const rowActions: DataTableRowAction<Prospect>[] = [
       {
@@ -34,13 +49,14 @@ export function useProspectsTableActions() {
         label: "Prospecter",
         icon: Send,
         variant: "primary",
-        onSelect: (prospect) =>
+        onSelect: (prospect: Prospect) =>
           open({
             components: (
               <ConfirmModalContent
                 title="Prospecter ce contact"
                 description={`Un brouillon d'email sera rédigé pour ${prospect.contactName} (${prospect.company}). Rien n'est envoyé : le brouillon reste à valider.`}
                 confirmLabel="Rédiger le brouillon"
+                onConfirm={() => sendProspectEmail(prospect)}
               />
             ),
           }),
@@ -66,7 +82,7 @@ export function useProspectsTableActions() {
         label: "Modifier la fiche",
         icon: Pencil,
         variant: "ghost",
-        onSelect: (prospect) =>
+        onSelect: (prospect: Prospect) =>
           open({
             components: (
               <EditProspectModal
@@ -81,7 +97,7 @@ export function useProspectsTableActions() {
         label: "Retirer des résultats",
         icon: Trash2,
         variant: "destructive",
-        onSelect: (prospect) =>
+        onSelect: (prospect: Prospect) =>
           open({
             components: (
               <ConfirmModalContent
@@ -117,6 +133,9 @@ export function useProspectsTableActions() {
       },
     ];
 
-    return { rowActions, bulkActions };
+
+    const filteredRowActions = rowActions.filter((action) => !hiddenRowActions.includes(action.id));
+
+    return { rowActions: filteredRowActions, bulkActions };
   }, [open]);
 }

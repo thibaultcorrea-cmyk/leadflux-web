@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { useModalController } from "@/hooks/useModalController";
 import { Loader2 } from "lucide-react";
+import { useTransition } from "react";
 
 type ConfirmModalContentProps = {
   title: string;
@@ -42,6 +43,7 @@ export function ConfirmModalContent({
   onCancel
 }: ConfirmModalContentProps) {
   const { close } = useModalController();
+  const [isPending, startTransition] = useTransition();
 
   const confirmLabelText = isLoading ? "Traitement en cours ..." : confirmLabel;
   const handleCancel = async () => {
@@ -50,8 +52,15 @@ export function ConfirmModalContent({
   }
 
   const handleConfirm = async () => {
-    await onConfirm?.();
-    if (closeOnConfirm) close();
+    startTransition(async () => {
+      try {
+        await onConfirm?.();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        if (closeOnConfirm) close();
+      }
+    });
   }
 
   return (
@@ -74,9 +83,9 @@ export function ConfirmModalContent({
           size="lg"
           variant={tone === "destructive" ? "destructive" : "default"}
           onClick={handleConfirm}
-          disabled={isLoading}
+          disabled={isLoading || isPending}
         >
-          {isLoading && <Loader2 className="animate-spin" />}
+          {isLoading || isPending && <Loader2 className="animate-spin" />}
           {confirmLabelText}
         </Button>
       </DialogFooter>
