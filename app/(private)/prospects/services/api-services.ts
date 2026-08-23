@@ -36,6 +36,7 @@ export const sendProspectEmail = async (prospects: Prospect[]) => {
             prospectName: prospect.contactName,
             prospectCompany: prospect.company,
             prospectJob: prospect.contactRole,
+            prospectLocation: prospect.city,
             prospectingConsent: true
         }))
     }
