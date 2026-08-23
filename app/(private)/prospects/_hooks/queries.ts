@@ -52,3 +52,15 @@ mutation CreateSearchResults($inputs: CreateSearchInputs!) {
   }
 }
 `
+
+export const SEND_PROSPECT_EMAIL_MUTATION = gql`
+mutation CreateDraftEmail($inputs: CreateDraftEmailInputs!) {
+  createDraftEmail(inputs: $inputs) {
+    draftEmail {
+      id
+      content
+      status
+    }
+  }
+}
+`

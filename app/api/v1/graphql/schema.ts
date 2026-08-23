@@ -214,8 +214,18 @@ input ProspectInput {
     prospectingConsent: Boolean!
 }
 
+input ProspectEmailInput{
+    prospectId: ID!
+    prospectName: String
+    prospectCompany: String
+    prospectJob: String!
+    prospectLocation: String!
+    prospectingConsent: Boolean!
+    
+}
+
 input CreateEmailContentInputs {
-    prospects: [ProspectInput!]!
+    prospects: [ProspectEmailInput!]!
 }
 
 input RegenerateEmailContentInputs {

@@ -1,4 +1,5 @@
 import { ProspectSqlInfer, ProspectSqlInsert } from "@/db/schemas"
+import { TProspectWithRelations } from "./type"
 
 
 
@@ -6,6 +7,7 @@ import { ProspectSqlInfer, ProspectSqlInsert } from "@/db/schemas"
 
 export interface IProspectReadRepository {
     get: (id: string) => Promise<ProspectSqlInfer>
+    getWithRelations: (id: string) => Promise<TProspectWithRelations>
     find: (query: any) => Promise<ProspectSqlInfer[]>
     count?: (query: any) => Promise<number>
 

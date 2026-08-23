@@ -71,3 +71,16 @@ export const updateEmailContentSchema = z.object({
 })
 
 export type UpdateEmailContentDto = z.infer<typeof updateEmailContentSchema>
+
+
+export const createEmailByProspectIdSchema = z.object({
+    prospectId: z.string().min(1, "prospect id est requis"),
+    prospectingConsent: z.boolean().optional().default(true),
+    prospectJob: z.string().min(1, "job est requis"),
+    prospectCompany: z.string().optional(),
+    prospectName: z.string().optional(),
+    prospectLocation: z.string().min(1, "location est requis"),
+
+})
+
+export type CreateEmailByProspectIdDto = z.infer<typeof createEmailByProspectIdSchema>

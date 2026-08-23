@@ -1,6 +1,6 @@
 import { EmailSqlInfer, EmailStatusValue, EmailVersionSqlInfer } from "@/db/schemas"
 import { EmailProspectsServices } from "./entities/services"
-import { CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "./dto/schema"
+import { CreateEmailByProspectIdDto, CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
 import { EmailWriteRepositoriesImpl } from "./repositories/write"
 import { EmailReadRepositoriesImpl } from "./repositories/read"
@@ -9,6 +9,7 @@ import { EmailVersionWriteRepositoriesImpl } from "../emailVersions/repositories
 import { AgentEmailService } from "../agent/email/service"
 import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
 import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
+import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
 
 
 
@@ -22,20 +23,35 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
 
     },
 
-    generate: async (inputs: CreateEmailDto) => {
+    generate: async (inputs: CreateEmailByProspectIdDto) => {
         const currentUser = await UserServices.getCurrentUser()
 
-        const validated = emailValidator.validate(inputs)
+        const prospect = await ProspectReadRepositoriesImpl.getWithRelations(inputs.prospectId)
+
+        if (!prospect) {
+            throw new Error("Prospect not found")
+        }
+
+        const createEmailInput = {
+            prospectName: inputs.prospectName ?? prospect.person.fullName,
+            prospectEmail: prospect.person.email,
+            prospectCompany: inputs.prospectCompany ?? prospect.company.name,
+            prospectJob: inputs.prospectJob ?? prospect.person.jobTitle ?? "",
+            prospectLocation: inputs.prospectLocation ?? prospect.address.city ?? prospect.address?.country ?? "",
+            prospectingConsent: inputs.prospectingConsent ?? true,
+        } satisfies CreateEmailDto
+
+        const validated = emailValidator.validate(createEmailInput)
         if (!validated.success) {
             throw validated.error
         }
         const status: EmailStatusValue = "draft"
         // Call Agent Service to generate email content from knowlege base
-        const agentResponse = await AgentEmailService.generate(inputs)
+        const agentResponse = await AgentEmailService.generate(validated.data)
 
         //Create new version with status draft
         const email = await EmailWriteRepositoriesImpl.create({
-            ...inputs,
+            ...validated.data,
             validatedBy: currentUser.id,
             status,
         })
@@ -52,7 +68,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
 
 
     },
-    generateMany: async (inputs: CreateEmailDto[]) => {
+    generateMany: async (inputs: CreateEmailByProspectIdDto[]) => {
 
         const succeded = []
         const failed = []
