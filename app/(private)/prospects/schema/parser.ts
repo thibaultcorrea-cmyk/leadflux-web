@@ -2,13 +2,11 @@ import { ProspectApiItem } from "@/app/api/v1/leads/mocks/prospects-response"
 import { prospectSchema } from "./prospect-schema"
 
 
-export const parseSearchResults = (prospects: ProspectApiItem[]) => {
+export const parseSearchResults = (prospects: { prospect: ProspectApiItem }[]) => {
 
 
 
     return prospects.map(({ prospect }) => {
-
-
 
         const address = prospect.company.address || { city: "Inconnue", country: "Inconnue" }
         const industry = prospect.company.industry.name || "Inconnue"
@@ -19,7 +17,7 @@ export const parseSearchResults = (prospects: ProspectApiItem[]) => {
 
 
         return prospectSchema.parse({
-            id: `${prospect.person.id}-${prospect.company.name}`,
+            id: prospect.id,
             company: prospect.company.name,
             contactName: prospect.person.fullName,
             contactRole: prospect.person.jobTitle,

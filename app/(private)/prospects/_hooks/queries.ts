@@ -13,6 +13,7 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
     resultCount
     results {
       prospect {
+        id
         person {
           fullName
           email
@@ -54,13 +55,11 @@ mutation CreateSearchResults($inputs: CreateSearchInputs!) {
 `
 
 export const SEND_PROSPECT_EMAIL_MUTATION = gql`
-mutation CreateDraftEmail($inputs: CreateDraftEmailInputs!) {
-  createDraftEmail(inputs: $inputs) {
-    draftEmail {
-      id
-      content
-      status
-    }
+mutation GenerateEmailContent($inputs: CreateEmailContentInputs) {
+  generateEmailContent(inputs: $inputs) {
+    send
+    success
+    failed
   }
 }
 `

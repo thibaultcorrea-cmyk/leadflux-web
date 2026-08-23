@@ -29,10 +29,15 @@ export const createSearchProspects = async (inputs: LeadFinderFormSchemaType) =>
 }
 
 
-export const sendProspectEmail = async (prospect: Prospect) => {
+export const sendProspectEmail = async (prospects: Prospect[]) => {
     const inputs = {
-        "prospectId": prospect.id,
-        "prospectingConsent": true
+        prospects: prospects.map((prospect: Prospect) => ({
+            prospectId: prospect.id,
+            prospectName: prospect.contactName,
+            prospectCompany: prospect.company,
+            prospectJob: prospect.contactRole,
+            prospectingConsent: true
+        }))
     }
     return request(GRAPHQL_BASE_URL, SEND_PROSPECT_EMAIL_MUTATION, { inputs });
 }   

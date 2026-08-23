@@ -9,10 +9,11 @@ import { asc, desc, eq, inArray } from "drizzle-orm";
  * encore dans le payload source (cf. features/search/services.ts), vides/0 en
  * attendant qu'une vraie source les fournisse.
  */
-const leadProspectFromRow = (row: { rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date }) => {
+const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date }) => {
     const payload = row.rawPayload
 
     return {
+        id: row.id,
         person: {
             fullName: payload?.person.name ?? "",
             email: payload?.person.email ?? "",
@@ -52,6 +53,7 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
         }
 
         const resultRows = await db.select({
+            id: prospects.id,
             searchId: searchResults.searchId,
             position: searchResults.position,
             rawPayload: prospects.rawPayload,

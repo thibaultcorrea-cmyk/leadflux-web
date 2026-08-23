@@ -11,6 +11,7 @@ export const useFetchSearchProspectResults = () => {
         queryFn: () => fetchProspects(),
     })
 
+
     const prospects = useMemo(() => {
         if (!data) return []
         const results = data.searches[0]
@@ -32,4 +33,4 @@ export const useFetchSearchProspectResults = () => {
     }
 
 
-}
+}   

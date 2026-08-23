@@ -121,6 +121,7 @@ type ProspectCompany {
 }
 
 type LeadProspect {
+    id: ID!
     person: ProspectPerson!
     company: ProspectCompany!
     lastSourcedAt: String!
@@ -219,7 +220,7 @@ input ProspectEmailInput{
     prospectName: String
     prospectCompany: String
     prospectJob: String!
-    prospectLocation: String!
+    prospectLocation: String
     prospectingConsent: Boolean!
     
 }

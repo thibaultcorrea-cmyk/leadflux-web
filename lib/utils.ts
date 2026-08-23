@@ -7,3 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export const isDevMode: boolean = process.env.NODE_ENV?.toLowerCase() === "development";
+
+
+export const waitDelay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

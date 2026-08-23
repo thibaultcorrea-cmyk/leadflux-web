@@ -12,7 +12,7 @@ export function useProspectMutation() {
     const queryClient = useQueryClient();
 
     const sendProspectEmailMutation = useMutation({
-        mutationFn: (prospect: Prospect) => sendProspectEmail(prospect),
+        mutationFn: (prospects: Prospect[]) => sendProspectEmail(prospects),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] });
         },

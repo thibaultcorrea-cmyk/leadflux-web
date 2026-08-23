@@ -12,6 +12,8 @@ import { useModalController } from "@/hooks/useModalController";
 import type { Prospect } from "../types/prospect";
 import { EditProspectModal } from "../components/modals/EditProspectView";
 import { hiddenRowActions } from "../services/row-actions";
+import { useProspectMutation } from "./useProspectMutation";
+import { waitDelay } from "@/lib/utils";
 
 /**
  * Actions de la table de résultats : une seule source pour la colonne Actions
@@ -27,15 +29,11 @@ import { hiddenRowActions } from "../services/row-actions";
  */
 export function useProspectsTableActions() {
   const { open } = useModalController();
+  const { sendProspectEmail } = useProspectMutation();
 
-  const sendProspectEmail = async (prospect: Prospect) => {
-    const promise = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(undefined);
-      }, 3000);
-    })
-    await promise;
-
+  const sendProspect = async (prospect: Prospect) => {
+    await waitDelay(1500);
+    await sendProspectEmail([prospect]);
   }
 
 
@@ -56,7 +54,7 @@ export function useProspectsTableActions() {
                 title="Prospecter ce contact"
                 description={`Un brouillon d'email sera rédigé pour ${prospect.contactName} (${prospect.company}). Rien n'est envoyé : le brouillon reste à valider.`}
                 confirmLabel="Rédiger le brouillon"
-                onConfirm={() => sendProspectEmail(prospect)}
+                onConfirm={() => sendProspect(prospect)}
               />
             ),
           }),
