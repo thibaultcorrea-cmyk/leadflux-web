@@ -41,4 +41,11 @@ export type GenerateManyResult = {
     success: boolean;
     send: number;
     failed: number;
+    message?: string;
+}
+
+export type ManyOperationResult = {
+    success: number;
+    failed: number;
+    message?: string;
 }

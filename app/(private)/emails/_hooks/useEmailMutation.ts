@@ -21,7 +21,7 @@ export const useEmailMutation = () => {
     })
 
     const removeMutation = useMutation({
-        mutationFn: async (data: RemoveEmailMutationParams) => removeEmailApi(data),
+        mutationFn: async ({ ids }: RemoveEmailMutationParams) => removeEmailApi(ids),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
 
@@ -41,6 +41,8 @@ export const useEmailMutation = () => {
             queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
         },
     })
+
+
 
 
     return { update: updateMutation.mutateAsync, remove: removeMutation.mutateAsync, regenerate: regenerateMutation.mutateAsync, validateAndSend: validateSendEmailMutation.mutateAsync }

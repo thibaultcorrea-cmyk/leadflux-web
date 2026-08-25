@@ -78,3 +78,12 @@ mutation ValidateAndSendEmail($id: ID!) {
 }
 `
 
+export const REMOVE_EMAIL_MUTATION = gql`
+mutation DeleteManyEmailProspects($ids: [ID!]!) {
+  deleteManyEmailProspects(ids: $ids) {
+    success
+    failed
+    message
+  }
+}
+`

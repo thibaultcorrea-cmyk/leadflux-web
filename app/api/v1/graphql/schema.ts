@@ -206,6 +206,13 @@ type SearchResultsCleared {
     message: String!
 }
 
+
+type ManyOperationResult {
+    success: Int
+    failed: Int
+    message: String
+}
+
 input ProspectInput {
     prospectName: String
     prospectEmail: String!
@@ -286,7 +293,7 @@ type Mutation {
     regenerateEmailContent(id: ID!): GeneratedEmailContent
     updateEmailContent(input: EmailUpdateContentInput): String
     validateAndSendEmail(id: ID!): ValidateSendEmailOutput
-    deleteManyEmailProspects(ids: [ID!]!): SearchResultsCleared
+    deleteManyEmailProspects(ids: [ID!]!): ManyOperationResult
     
    
 }

@@ -240,7 +240,23 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         await EmailWriteRepositoriesImpl.delete(id)
     },
     deleteMany: async (ids: string[]) => {
-        await EmailWriteRepositoriesImpl.deleteMany(ids)
+        const succeded = []
+        const failed = []
+        try {
+            for (const id of ids) {
+                try {
+                    await EmailWriteRepositoriesImpl.delete(id)
+                    succeded.push(id)
+                } catch (error) {
+                    console.log(error);
+                    failed.push(error)
+                }
+            }
+            return { success: succeded.length, failed: failed.length, message: "Emails deleted successfully" }
+        } catch (error) {
+            console.log(error);
+            throw new Error("An error occured while deleting emails")
+        }
     },
     clear: async () => {
         await EmailWriteRepositoriesImpl.truncate()
