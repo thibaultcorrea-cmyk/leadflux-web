@@ -41,7 +41,6 @@ export function useEmailsTableActions() {
 
   const removeEmails = async (ids: string[]) => {
     try {
-      await waitDelay(1000)
       await remove({ ids })
     } catch (error) {
       throw new Error("Failed to remove emails")
