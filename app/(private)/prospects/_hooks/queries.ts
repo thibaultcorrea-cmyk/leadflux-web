@@ -66,13 +66,13 @@ mutation GenerateEmailContent($inputs: CreateEmailContentInputs) {
 
 
 export const DELETE_PROSPECTS_MUTATION = gql`
-    mutation DeleteProspects($prospectIds: [String!]!) {
-        deleteProspects(prospectIds: $prospectIds) {
-            id
-            createdAt
-            updatedAt
-        }
-    }
+   mutation DeleteProspectSearchResults($ids: [ID!]!) {
+  deleteProspectSearchResults(ids: $ids) {
+    success
+    failed
+    message
+  }
+}
 `
 
 

@@ -37,7 +37,7 @@ export const ProspectWriteRepositoriesImpl: IProspectWriteRepository = {
     delete: async (id: string) => {
         await db.delete(prospects).where(eq(prospects.id, id))
     },
-    deleteMultiple: async (ids: string[]) => {
+    deleteMany: async (ids: string[]) => {
         await db.delete(prospects).where(inArray(prospects.id, ids))
     },
 

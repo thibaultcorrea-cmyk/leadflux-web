@@ -45,8 +45,8 @@ export const sendProspectEmail = async (prospects: Prospect[]) => {
 
 
 
-export const deleteProspects = async (prospectIds: string[]) => {
-    return request(GRAPHQL_BASE_URL, DELETE_PROSPECTS_MUTATION, { prospectIds });
+export const deleteProspects = async (ids: string[]) => {
+    return request(GRAPHQL_BASE_URL, DELETE_PROSPECTS_MUTATION, { ids });
 }
 
 export const truncateProspects = async () => {

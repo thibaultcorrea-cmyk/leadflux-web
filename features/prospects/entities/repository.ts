@@ -17,7 +17,7 @@ export interface IProspectWriteRepository {
     create: (prospect: ProspectSqlInsert) => Promise<ProspectSqlInfer>
     update: (prospect: Partial<ProspectSqlInfer>) => Promise<ProspectSqlInfer>
     delete: (id: string) => Promise<void>
-    deleteMultiple: (id: string[]) => Promise<void>
+    deleteMany: (ids: string[]) => Promise<void>
     truncate: () => Promise<void>
 
 }

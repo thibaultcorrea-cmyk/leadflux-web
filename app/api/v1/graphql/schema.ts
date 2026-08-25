@@ -288,6 +288,7 @@ type ValidateSendEmailOutput {
 
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
+    deleteProspectSearchResults(ids: [ID!]!): ManyOperationResult
     clearSearchResults: SearchResultsCleared
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
     regenerateEmailContent(id: ID!): GeneratedEmailContent

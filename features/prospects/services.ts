@@ -21,8 +21,24 @@ export const ProspectServicesImpl: ProspectServices = {
     delete: async (id) => {
         await ProspectWriteRepositoriesImpl.delete(id)
     },
-    deleteMultiple: async (ids) => {
-        await ProspectWriteRepositoriesImpl.deleteMultiple(ids)
+    deleteMany: async (ids) => {
+        const succeded = []
+        const failed = []
+        try {
+            for (const id of ids) {
+                try {
+                    await ProspectWriteRepositoriesImpl.delete(id)
+                    succeded.push(id)
+                } catch (error) {
+                    failed.push(id)
+                }
+            }
+            return { success: succeded.length, failed: failed.length, message: "prospects deleted successfully" }
+        } catch (error) {
+            console.log(error);
+            throw new Error("An error occured while deleting prospects")
+        }
+
     },
     clear: async () => {
         await ProspectWriteRepositoriesImpl.truncate()
