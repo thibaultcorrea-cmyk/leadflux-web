@@ -40,15 +40,13 @@ export function useEmailsTableActions() {
 
 
   const removeEmails = async (ids: string[]) => {
-    startTransition(async () => {
-      try {
-        await remove({ ids })
-      } catch (error) {
-        console.error(error)
-      }
-    })
+    try {
+      await waitDelay(1000)
+      await remove({ ids })
+    } catch (error) {
+      throw new Error("Failed to remove emails")
+    }
   }
-
 
   const confirm = (props: {
     title: string;
