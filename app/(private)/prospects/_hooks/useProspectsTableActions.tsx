@@ -29,13 +29,17 @@ import { waitDelay } from "@/lib/utils";
  */
 export function useProspectsTableActions() {
   const { open } = useModalController();
-  const { sendProspectEmail } = useProspectMutation();
+  const { sendProspectEmail, deleteProspects } = useProspectMutation();
 
   const sendProspect = async (prospect: Prospect) => {
     await waitDelay(1500);
     await sendProspectEmail([prospect]);
   }
 
+  const deleteProspect = async (prospect: Prospect) => {
+    await waitDelay(1500);
+    await deleteProspects([prospect.id]);
+  }
 
 
 
@@ -103,6 +107,7 @@ export function useProspectsTableActions() {
                 description={`${prospect.company} sera retirée des résultats de ce sourcing. Cette action est définitive pour cette recherche.`}
                 confirmLabel="Retirer"
                 tone="destructive"
+                onConfirm={() => deleteProspect(prospect)}
               />
             ),
           }),

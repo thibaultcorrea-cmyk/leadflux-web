@@ -240,6 +240,12 @@ type EmailProspectCreated {
 
 }
 
+type ActionManyResult{
+    message: String!
+    success: Int
+    failed: Int
+}
+
 type GeneratedEmailContent {
     id: String!
     subject: String!
@@ -280,6 +286,7 @@ type Mutation {
     regenerateEmailContent(id: ID!): GeneratedEmailContent
     updateEmailContent(input: EmailUpdateContentInput): String
     validateAndSendEmail(id: ID!): ValidateSendEmailOutput
+    deleteManyEmailProspects(ids: [ID!]!): SearchResultsCleared
     
    
 }
