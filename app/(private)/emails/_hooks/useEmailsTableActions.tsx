@@ -8,12 +8,9 @@ import type {
   DataTableRowAction,
 } from "@/components/shared/tables/types";
 import { useModalController } from "@/hooks/useModalController";
-import { EmailPreviewModal } from "../components/modal/email-preview-modal";
 import type { Email } from "../types/email";
 import { useEmailPreviewAction } from "./useEmailPreviewAction";
 import { useEmailMutation } from "./useEmailMutation";
-import { useTransition } from "react";
-import { waitDelay } from "@/lib/utils";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
@@ -36,7 +33,6 @@ export function useEmailsTableActions() {
 
   const { openPreview, openEditView } = useEmailPreviewAction();
   const { remove } = useEmailMutation()
-  const [isPending, startTransition] = useTransition()
 
 
   const removeEmails = async (ids: string[]) => {
@@ -164,5 +160,5 @@ export function useEmailsTableActions() {
     },
   ];
 
-  return { isPending, rowActions, bulkActions, openPreview };
+  return { rowActions, bulkActions, openPreview };
 }
