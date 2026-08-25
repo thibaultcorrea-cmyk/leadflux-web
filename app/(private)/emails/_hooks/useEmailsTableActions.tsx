@@ -13,6 +13,7 @@ import type { Email } from "../types/email";
 import { useEmailPreviewAction } from "./useEmailPreviewAction";
 import { useEmailMutation } from "./useEmailMutation";
 import { useTransition } from "react";
+import { waitDelay } from "@/lib/utils";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
@@ -37,13 +38,25 @@ export function useEmailsTableActions() {
   const { remove } = useEmailMutation()
   const [isPending, startTransition] = useTransition()
 
+
+  const removeEmails = async (ids: string[]) => {
+    startTransition(async () => {
+      try {
+        await remove({ ids })
+      } catch (error) {
+        console.error(error)
+      }
+    })
+  }
+
+
   const confirm = (props: {
     title: string;
     description: React.ReactNode;
     confirmLabel: string;
     tone?: "default" | "destructive";
     isLoading?: boolean;
-    onConfirm?: () => void;
+    onConfirm?: () => Promise<void>;
   }) => open({ components: <ConfirmModalContent {...props} /> });
 
 
@@ -113,13 +126,8 @@ export function useEmailsTableActions() {
           description: `Le suivi de l'email adressé à ${email.contactName} sera supprimé. Cette action est définitive.`,
           confirmLabel: "Supprimer",
           tone: "destructive",
-          isLoading: isPending,
           onConfirm: async () => {
-            try {
-              await remove({ ids: [email.id] })
-            } catch (error) {
-
-            }
+            await removeEmails([email.id])
           }
 
         }),
@@ -139,6 +147,22 @@ export function useEmailsTableActions() {
           title: "Valider et envoyer la sélection",
           description: `${selected.length} email${selected.length > 1 ? "s vous seront présentés" : " vous sera présenté"} un par un pour relecture avant envoi. Aucun envoi groupé sans relecture.`,
           confirmLabel: "Relire les brouillons",
+        }),
+    },
+    {
+      id: "supprimer-selection",
+      label: "Supprimer la sélection",
+      icon: Trash2,
+      variant: "destructive",
+      onSelect: (selected) =>
+        confirm({
+          title: "Supprimer la sélection",
+          description: `${selected.length} email${selected.length > 1 ? "s seront supprimés" : " sera supprimé"} .`,
+          confirmLabel: "Supprimer",
+          tone: "destructive",
+          onConfirm: async () => {
+            await removeEmails(selected.map((email) => email.id))
+          }
         }),
     },
   ];
