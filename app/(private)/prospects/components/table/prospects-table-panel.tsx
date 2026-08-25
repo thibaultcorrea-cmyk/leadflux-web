@@ -12,6 +12,7 @@ import { useProspectsTableActions } from "../../_hooks/useProspectsTableActions"
 import type { Prospect } from "../../types/prospect";
 import { getProspectsColumns } from "./prospects-columns";
 import { useFetchSearchProspectResults } from "../../_hooks/useFetchSearchProspectResults";
+import { TruncateProspectButton } from "./truncate-prospect-button";
 
 const PAGE_SIZE = 8;
 
@@ -66,6 +67,8 @@ export function ProspectsTablePanel() {
         <div className="flex items-center gap-2">
           <DataTableSortMenu table={table} defaultLabel="pertinence" />
           <DataTableViewOptions table={table} />
+          <TruncateProspectButton />
+
         </div>
       </div>
 
