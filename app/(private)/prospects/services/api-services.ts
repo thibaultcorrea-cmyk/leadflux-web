@@ -1,7 +1,7 @@
 import { LeadFinderFormSchemaType } from "../types/forms"
 import prospectsResponse from "@/app/api/v1/leads/mocks/prospects-response"
 import { API_BASE_URL, GRAPHQL_BASE_URL } from "@/core/params"
-import { CREATE_SEARCH_PROSPECTS_MUTATION, DELETE_PROSPECTS_MUTATION, GET_SEARCH_PROSPECTS_QUERY, SEND_PROSPECT_EMAIL_MUTATION } from "../_hooks/queries"
+import { CREATE_SEARCH_PROSPECTS_MUTATION, DELETE_PROSPECTS_MUTATION, GET_SEARCH_PROSPECTS_QUERY, SEND_PROSPECT_EMAIL_MUTATION, TRUNCATE_PROSPECTS_MUTATION } from "../_hooks/queries"
 import request from "graphql-request"
 import { Prospect } from "../types/prospect"
 
@@ -47,4 +47,8 @@ export const sendProspectEmail = async (prospects: Prospect[]) => {
 
 export const deleteProspects = async (prospectIds: string[]) => {
     return request(GRAPHQL_BASE_URL, DELETE_PROSPECTS_MUTATION, { prospectIds });
-}   
+}
+
+export const truncateProspects = async () => {
+    return request(GRAPHQL_BASE_URL, TRUNCATE_PROSPECTS_MUTATION);
+}

@@ -1,30 +1,22 @@
 "use client"
 
-import SelectController from "@/components/shared/forms/SelectController"
 import { useSearchProspectForm } from "../../_hooks/useSearchProspectForm"
-import { FieldGroup } from "@/components/ui/field"
 import {
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { SearchFormInputs } from "./SearchFormInputs";
 import { useModalController } from "@/hooks/useModalController";
-import { CardContent } from "@/components/ui/card";
 import { LeadFinderFormSchemaType } from "../../types/forms";
-import { useMutationSearchProspects } from "../../_hooks/useMutationProspect";
+import { useProspectMutation } from "../../_hooks/useProspectMutation";
 
 
 
 export const SearchProspectForm = () => {
-
     const { form } = useSearchProspectForm()
-
     const modalController = useModalController()
-    const { createSearchProspect } = useMutationSearchProspects()
+    const { createSearchProspect } = useProspectMutation()
 
     const close = () => {
         modalController.close()
@@ -36,10 +28,6 @@ export const SearchProspectForm = () => {
         await createSearchProspect(data)
         close()
     }
-
-    console.log(form.formState.errors);
-
-
 
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-[38rem]" >

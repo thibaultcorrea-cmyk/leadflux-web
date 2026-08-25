@@ -29,6 +29,7 @@ const resolvers = {
         regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.regenerate(args.id),
         validateAndSendEmail: async (_: any, args: any) => EmailProspectsServicesImpl.send(args.id),
         deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.ids),
+        clearProspectsAndResults: async (_: any, args: any) => SearchProspectsServicesImpl.clear(),
         /* deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
        / clearEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.clear(),*/
     },

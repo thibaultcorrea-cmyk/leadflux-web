@@ -74,3 +74,11 @@ export const DELETE_PROSPECTS_MUTATION = gql`
         }
     }
 `
+
+
+
+export const TRUNCATE_PROSPECTS_MUTATION = gql`
+mutation ClearProspectsAndResults {
+  clearProspectsAndResults
+}
+`

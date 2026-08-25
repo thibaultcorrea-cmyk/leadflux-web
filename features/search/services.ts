@@ -73,7 +73,7 @@ export const SearchProspectsServicesImpl: any = {
         return search
     },
 
-    cleanAll: async () => {
+    clear: async () => {
         try {
             await clearProspectsAndResults()
             return true

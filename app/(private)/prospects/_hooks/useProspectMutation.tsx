@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createSearchProspects, deleteProspects, sendProspectEmail } from "../services/api-services";
+import { createSearchProspects, deleteProspects, sendProspectEmail, truncateProspects } from "../services/api-services";
 import { Prospect } from "../types/prospect";
 import { QueryKey } from "./queries";
 import { LeadFinderFormSchemaType } from "../types/forms";
@@ -33,11 +33,18 @@ export function useProspectMutation() {
         },
     });
 
+    const truncateProspectsMutation = useMutation({
+        mutationFn: () => truncateProspects(),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] });
+        },
+    });
 
     return {
         createSearchProspect: createSearchProspectsMutation.mutateAsync,
         sendProspectEmail: sendProspectEmailMutation.mutateAsync,
         deleteProspects: deleteProspectMutation.mutateAsync,
+        truncate: truncateProspectsMutation.mutateAsync,
     };
 
 }

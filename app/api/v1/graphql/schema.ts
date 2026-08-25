@@ -294,6 +294,7 @@ type Mutation {
     updateEmailContent(input: EmailUpdateContentInput): String
     validateAndSendEmail(id: ID!): ValidateSendEmailOutput
     deleteManyEmailProspects(ids: [ID!]!): ManyOperationResult
+    clearProspectsAndResults:Boolean
     
    
 }

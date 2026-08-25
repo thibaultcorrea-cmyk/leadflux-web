@@ -5,15 +5,19 @@ import { Button } from "@/components/ui/button"
 import { waitDelay } from "@/lib/utils"
 import { Loader2, Trash } from "lucide-react"
 import { useTransition } from "react"
+import { useProspectMutation } from "../../_hooks/useProspectMutation"
 
 export function TruncateProspectButton() {
 
     const [isPending, startTransition] = useTransition()
 
+    const { truncate } = useProspectMutation()
+
     const truncateProspect = () => {
         startTransition(async () => {
             try {
-                await waitDelay(1000)
+                await waitDelay(2000)
+                await truncate()
             } catch (error) {
                 console.log(error)
             }
