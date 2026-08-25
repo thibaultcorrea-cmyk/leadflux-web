@@ -1,0 +1,82 @@
+- generic [ref=f3e1]:
+  - generic [active]:
+    - generic [ref=f3e302]:
+      - generic [ref=f3e303]:
+        - navigation [ref=f3e305]:
+          - button [disabled] [ref=f3e306]:
+            - img "previous" [ref=f3e307]
+          - generic [ref=f3e309]:
+            - generic [ref=f3e310]: 1/
+            - text: "1"
+          - button [disabled] [ref=f3e311]:
+            - img "next" [ref=f3e312]
+        - link "Next.js 16.2.10 (stale) Turbopack" [ref=f3e315] [cursor=pointer]:
+          - /url: https://nextjs.org/docs/messages/version-staleness
+          - generic "There is a newer version (16.3.2) available, upgrade recommended!" [ref=f3e318]: Next.js 16.2.10 (stale)
+          - generic [ref=f3e319]: Turbopack
+      - dialog "Runtime Error" [ref=f3e321]:
+        - generic [ref=f3e324]:
+          - generic [ref=f3e325]:
+            - generic [ref=f3e326]:
+              - generic [ref=f3e327]: Runtime Error
+              - generic [ref=f3e329]:
+                - button "Copy Error Info" [ref=f3e330] [cursor=pointer]
+                - button "No related documentation found" [disabled] [ref=f3e333]
+                - button "Attach Node.js inspector" [ref=f3e336] [cursor=pointer]
+            - generic [ref=f3e345]: "Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>."
+          - generic [ref=f3e347]:
+            - generic [ref=f3e348]:
+              - paragraph [ref=f3e350]:
+                - generic [ref=f3e355]: components/ui/dropdown-menu.tsx (64:5) @ DropdownMenuLabel
+                - button "Open in editor" [ref=f3e356] [cursor=pointer]
+              - generic [ref=f3e361]:
+                - generic [ref=f3e362]: "62 | }) {"
+                - generic [ref=f3e363]: 63 | return (
+                - generic [ref=f3e364]: "> 64 | <MenuPrimitive.GroupLabel"
+                - generic [ref=f3e365]: "| ^"
+                - generic [ref=f3e366]: 65 | data-slot="dropdown-menu-label"
+                - generic [ref=f3e367]: "66 | data-inset={inset}"
+                - generic [ref=f3e368]: "67 | className={cn("
+            - generic [ref=f3e369]:
+              - generic [ref=f3e370]:
+                - paragraph [ref=f3e371]:
+                  - text: Call Stack
+                  - generic [ref=f3e372]: "19"
+                - button "Show 15 ignore-listed frame(s)" [ref=f3e373] [cursor=pointer]
+              - generic [ref=f3e376]:
+                - generic [ref=f3e377]:
+                  - text: DropdownMenuLabel
+                  - button "Open DropdownMenuLabel in editor" [ref=f3e378] [cursor=pointer]
+                - text: components/ui/dropdown-menu.tsx (64:5)
+              - generic [ref=f3e381]:
+                - generic [ref=f3e382]:
+                  - text: DataTableViewOptions
+                  - button "Open DataTableViewOptions in editor" [ref=f3e383] [cursor=pointer]
+                - text: components/shared/tables/data-table-view-options.tsx (53:9)
+              - generic [ref=f3e386]:
+                - generic [ref=f3e387]:
+                  - text: ProspectsTablePanel
+                  - button "Open ProspectsTablePanel in editor" [ref=f3e388] [cursor=pointer]
+                - text: app/(private)/prospects/components/table/prospects-table-panel.tsx (69:11)
+              - generic [ref=f3e391]:
+                - generic [ref=f3e392]:
+                  - text: ProspectsPage
+                  - button "Open ProspectsPage in editor" [ref=f3e393] [cursor=pointer]
+                - text: app/(private)/prospects/page.tsx (20:7)
+        - generic [ref=f3e396]: "1"
+        - generic [ref=f3e397]: "2"
+    - generic [ref=f3e126] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=f3e127]
+      - generic [ref=f3e398]:
+        - button "Open issues overlay" [ref=f3e399]:
+          - generic [ref=f3e400]:
+            - generic [ref=f3e401]: "0"
+            - generic [ref=f3e402]: "1"
+          - generic [ref=f3e403]: Issue
+        - button "Collapse issues badge" [ref=f3e404]
+  - generic [ref=f3e408]:
+    - heading "This page couldn’t load" [level=1] [ref=f3e411]
+    - paragraph [ref=f3e412]: Reload to try again, or go back.
+    - generic [ref=f3e413]:
+      - button "Reload" [ref=f3e415] [cursor=pointer]
+      - button "Back" [ref=f3e416] [cursor=pointer]

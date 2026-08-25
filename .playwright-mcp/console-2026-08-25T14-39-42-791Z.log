@@ -1,0 +1,25 @@
+[     179ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[     191ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   15176ms] Error: Base UI: MenuGroupContext is missing. Menu group parts must be used within <Menu.Group> or <Menu.RadioGroup>.
+    at useMenuGroupRootContext (http://localhost:3000/_next/static/chunks/01x3_%40base-ui_react_menu_18d5htp._.js:602:15)
+    at MenuGroupLabel (http://localhost:3000/_next/static/chunks/01x3_%40base-ui_react_menu_18d5htp._.js:669:409)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:4620:24)
+    at updateForwardRef (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:5908:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:6766:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:10200:106)
+    at http://localhost:3000/_next/static/chunks/156z_next_dist_compiled_react-dom_0t6pk9c._.js:10274:158
+[   40608ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   40625ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   40634ms] [LOG] [Fast Refresh] done in 116ms @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   40866ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   40879ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   46668ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
+[   46700ms] [LOG] [Fast Refresh] done in 73ms @ http://localhost:3000/_next/static/chunks/156z_next_dist_1_t5e45._.js:2477
