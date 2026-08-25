@@ -36,9 +36,9 @@ export function useProspectsTableActions() {
     await sendProspectEmail([prospect]);
   }
 
-  const deleteProspect = async (prospect: Prospect) => {
+  const removeProspectFromSearch = async (ids: string[]) => {
     await waitDelay(1500);
-    await deleteProspects([prospect.id]);
+    await deleteProspects(ids);
   }
 
 
@@ -107,7 +107,7 @@ export function useProspectsTableActions() {
                 description={`${prospect.company} sera retirée des résultats de ce sourcing. Cette action est définitive pour cette recherche.`}
                 confirmLabel="Retirer"
                 tone="destructive"
-                onConfirm={() => deleteProspect(prospect)}
+                onConfirm={() => removeProspectFromSearch([prospect.id])}
               />
             ),
           }),
@@ -134,6 +134,24 @@ export function useProspectsTableActions() {
             ),
           }),
       },
+      {
+        id: "delete-selection",
+        label: "Supprimer la sélection",
+        icon: Trash2,
+        variant: "destructive",
+        onSelect: (selected) =>
+          open({
+            components: (
+              <ConfirmModalContent
+                title="Supprimer la sélection"
+                description={`${selected.length} brouillon${selected.length > 1 ? "s seront supprimés" : " sera supprimé"}, puis présenté${selected.length > 1 ? "s" : ""} un par un pour validation. Aucun email n'est envoyé automatiquement.`}
+                confirmLabel="Supprimer"
+                tone="destructive"
+                onConfirm={() => removeProspectFromSearch(selected.map((prospect) => prospect.id))}
+              />
+            ),
+          }),
+      }
     ];
 
 
