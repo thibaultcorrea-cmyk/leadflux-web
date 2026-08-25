@@ -15,7 +15,7 @@ const resolvers = {
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
         clearSearchResults: async (): Promise<{ success: boolean, message: string }> => {
-            const result = await SearchProspectsServicesImpl.cleanAll()
+            const result = await SearchProspectsServicesImpl.clear()
             const message = result ? "Search results cleared successfully" : "Failed to clear search results"
             return { success: result, message }
         },
@@ -29,7 +29,6 @@ const resolvers = {
         regenerateEmailContent: async (_: any, args: any) => EmailProspectsServicesImpl.regenerate(args.id),
         validateAndSendEmail: async (_: any, args: any) => EmailProspectsServicesImpl.send(args.id),
         deleteManyEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.deleteMany(args.ids),
-        clearProspectsAndResults: async (_: any, args: any) => SearchProspectsServicesImpl.clear(),
         /* deleteEmailProspect: async (_: any, args: any) => EmailProspectsServicesImpl.delete(args.input),
        / clearEmailProspects: async (_: any, args: any) => EmailProspectsServicesImpl.clear(),*/
     },
