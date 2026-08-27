@@ -1,8 +1,9 @@
+"use client"
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { funnelSteps } from "../mocks/funnel";
 import type { FunnelStep } from "../types/tableau";
+import { useFunnelKpi } from "../_hooks/useFunnelKpi";
 
 const TONE_CLASSES: Record<FunnelStep["tone"], string> = {
   neutral: "[&_[data-slot=progress-indicator]]:bg-primary-400",
@@ -11,9 +12,8 @@ const TONE_CLASSES: Record<FunnelStep["tone"], string> = {
 };
 
 export function FunnelPanel() {
-  // Le premier palier sert de référence : chaque étape se lit en proportion
-  // des prospects sourcés, pas de l'étape précédente.
-  const reference = Math.max(...funnelSteps.map((step) => step.value), 1);
+
+  const { reference, funnelSteps, isLoading, error } = useFunnelKpi()
 
   return (
     <Card className="gap-4 ring-border [--card-spacing:--spacing(5)]">

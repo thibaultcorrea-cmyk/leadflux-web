@@ -14,7 +14,7 @@ export const GET_KPIS_QUERY = gql`
       id
       label
       value
-      hint
+      
     }
   }
 `

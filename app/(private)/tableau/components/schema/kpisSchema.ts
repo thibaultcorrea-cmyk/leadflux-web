@@ -2,12 +2,13 @@ import { LucideIcon } from "lucide-react";
 import z from "zod";
 
 
+const kpiIdSchemaEnum = z.enum(["drafted", "sent", "replied", "totalProspects", "repliedRate"])
 
 export const kpiSchema = z.object({
-    id: z.string(),
+    id: kpiIdSchemaEnum,
     label: z.string(),
     value: z.coerce.number(),
-    hint: z.string(),
+    hint: z.string().optional(),
     icon: z.custom<LucideIcon>(),
 });
 

@@ -12,7 +12,7 @@ export type Kpi = z.infer<typeof kpiSchema>;
 export type KpiApiReturn = Omit<Kpi, "icon">;
 
 export type RecentActivityRow = {
-  id: string;
+  id: KpiEmailKey;
   prospect: string;
   company: string;
   status: EmailStatus;
@@ -29,6 +29,9 @@ export type FunnelStep = {
 };
 
 export type SavedSearchReturn = SavedSearchItem
+
+
+export type KpiEmailKey = "drafted" | "sent" | "replied" | "totalProspects" | "repliedRate"
 
 
 

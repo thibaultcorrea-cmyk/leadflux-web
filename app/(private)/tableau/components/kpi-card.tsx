@@ -24,7 +24,6 @@ export function KpiCard({ kpi }: { kpi: Kpi }) {
         <p className="font-display text-[44px] leading-none tracking-[0.02em] text-primary-700 tabular-nums">
           {kpi.value}
         </p>
-        <p className="text-xs text-ink-500">{kpi.hint}</p>
       </CardContent>
     </Card>
   );

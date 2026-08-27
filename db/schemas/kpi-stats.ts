@@ -1,7 +1,7 @@
 import { pgView } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { emails } from "./emails";
-import { prospects } from "./prospects";
+import { searchResults } from "./searches";
 
 /**
  * KPIs du Tableau : une ligne unique de compteurs agreges sur toute la table
@@ -23,7 +23,7 @@ import { prospects } from "./prospects";
 export const kpiEmailStats = pgView("kpi_email_stats").as((qb) =>
     qb
         .select({
-            totalProspects: sql<number>`(select count(*) from ${prospects})::int`.as("total_prospects"),
+            totalProspects: sql<number>`(select count(*) from ${searchResults})::int`.as("total_prospects"),
             totalSent: sql<number>`count(*)::int`.as("total_sent"),
             drafted: sql<number>`count(*) filter (where ${emails.status} = 'draft')::int`.as("drafted"),
             sent: sql<number>`count(*) filter (where ${emails.status} = 'sent')::int`.as("sent"),

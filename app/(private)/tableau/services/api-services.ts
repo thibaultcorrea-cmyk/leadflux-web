@@ -16,6 +16,13 @@ export const retrieveRecentlyActivity = async (): Promise<GraphqlApiReturn<"rece
     return request(GRAPHQL_BASE_URL, GET_RECENTLY_ACTIVITY_QUERY);
 }
 
+export const retrieveFunnelStep = async (): Promise<GraphqlApiReturn<"kpis", KpiApiReturn[]>> => {
+    return request(GRAPHQL_BASE_URL, GET_KPIS_QUERY);
+}
+
+
+
+
 export const retrieveEmailSendChart = async (): Promise<[]> => {
     return []
 }

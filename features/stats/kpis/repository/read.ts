@@ -5,13 +5,15 @@ import { funnelSteps } from "../../mocks/funnel";
 import { db } from "@/db";
 import { emails, searches } from "@/db/schemas";
 import { desc, eq, sql } from "drizzle-orm";
-import { CriterItem, LastSearchResultItem, RecentlyActivityItem } from "../../entities/type";
+import { CriterItem, KpiItem, LastSearchResultItem, RecentlyActivityItem } from "../../entities/type";
+import { kpiEmailStats, KpiEmailStatsSqlInfer } from "@/db/schemas/kpi-stats";
 
 
 export const StatsReadRepository: IStatsReadRepository = {
     getKpis: async (filters?: DateFilter) => {
 
-        return kpis;
+        const [kpisData] = await db.select().from(kpiEmailStats)
+        return kpiEmailViewToItemFactory(kpisData);
     },
     getRecentlyActivity: async (filters?: DateFilter) => {
 
@@ -69,4 +71,55 @@ export const recentActivityFactory = (item: any): RecentlyActivityItem => {
 export const criteriaNameFactory = (criteria: CriterItem): string => {
     const range = `${criteria.headcountMin}-${criteria.headcountMax} sal.`
     return `${criteria.jobTitle} - ${range} - ${criteria.location}`
+}
+
+
+export const kpiEmailViewToItemFactory = (kpiEmailView: KpiEmailStatsSqlInfer): KpiItem[] => {
+    const result: KpiItem[] = []
+
+    for (const [key, value] of Object.entries(kpiEmailView)) {
+        if (key === "totalProspects") {
+            result.push({
+                id: key,
+                label: "Prospects sourcés",
+                type: "number",
+                value: Number(value) ?? 0,
+            })
+        }
+        else if (key === "drafted") {
+            result.push({
+                id: key,
+                label: "Brouillons à valider",
+                type: "number",
+                value: Number(value) ?? 0,
+            })
+        }
+        else if (key === "sent") {
+            result.push({
+                id: key,
+                label: "Emails envoyés",
+                type: "number",
+                value: Number(value) ?? 0,
+            })
+        }
+        else if (key === "replied") {
+            result.push({
+                id: key,
+                label: "Réponses reçues",
+                type: "number",
+                value: Number(value) ?? 0,
+            })
+        }
+        else if (key === "repliedRate") {
+            result.push({
+                id: key,
+                label: "Taux de réponse",
+                type: "number",
+                value: Number(value) ?? 0,
+            })
+        }
+
+    }
+
+    return result
 }

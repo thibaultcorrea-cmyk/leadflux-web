@@ -54,7 +54,6 @@ export const parseForCriteriaBar = (criteria: typeof UNKNOWN_CRITERIA) => {
         }
 
     }
-    console.log(result);
 
     return result as { id: string, label: string }[]
 

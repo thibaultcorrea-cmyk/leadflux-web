@@ -15,6 +15,6 @@ export const parser = {
             };
         });
         return z.array(kpiSchema).safeParse(iconsMap).data ?? [];
-    }
+    },
 
 }
