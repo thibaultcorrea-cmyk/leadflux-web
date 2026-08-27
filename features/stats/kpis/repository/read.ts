@@ -1,11 +1,9 @@
 import { DateFilter } from "@/types/shared";
 import { IStatsReadRepository } from "../../entities/repository";
 import { kpis } from "../../mocks/kpis";
-import { recentActivity } from "../../mocks/recent-activity";
 import { funnelSteps } from "../../mocks/funnel";
-import { savedSearches } from "../../mocks/saved-searches";
 import { db } from "@/db";
-import { companies, emails, persons, prospects, searches } from "@/db/schemas";
+import { emails, searches } from "@/db/schemas";
 import { desc, eq, sql } from "drizzle-orm";
 import { CriterItem, LastSearchResultItem, RecentlyActivityItem } from "../../entities/type";
 
