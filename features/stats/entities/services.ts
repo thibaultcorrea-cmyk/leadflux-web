@@ -6,3 +6,4 @@ export interface IStatsServices {
     getLastSearchResults(filters?: DateFilter): Promise<any[]>;
     getEmailSendChart(filters?: DateFilter): Promise<any[]>;
 }
+

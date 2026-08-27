@@ -35,3 +35,24 @@ export type FunnelStepItem = {
     label: string;
     value: number;
 }
+
+
+export type CriterItem = {
+    revenue: string,
+    industry: string,
+    jobTitle: string,
+    location: string,
+    headcountMax: number,
+    headcountMin: number,
+    employeeRange: string
+}
+
+
+export type LastSearchResultItem = {
+    id: string,
+    launchedAt: Date,
+    criteria: CriterItem,
+    count: number
+
+}
+
