@@ -12,7 +12,7 @@ export type Kpi = z.infer<typeof kpiSchema>;
 export type KpiApiReturn = Omit<Kpi, "icon">;
 
 export type RecentActivityRow = {
-  id: KpiEmailKey;
+  id: string;
   prospect: string;
   company: string;
   status: EmailStatus;
