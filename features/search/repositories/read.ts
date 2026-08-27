@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { ISearchReadRepository } from "../entities/repository";
 import { prospects, ProspectSourcePayload, searches, searchResults } from "@/db/schemas";
-import { asc, desc, eq, inArray } from "drizzle-orm";
+import { asc, desc, eq, inArray, sql } from "drizzle-orm";
 
 /**
  * Reconstruit la forme GraphQL LeadProspect a partir du raw_payload stocke sur
@@ -69,10 +69,16 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
             .where(inArray(searchResults.searchId, searchRows.map((search) => search.id)))
             .orderBy(asc(searchResults.position))
 
+        const [{ count }] = await db.select({
+            count: sql<number>`CAST(count(*) as integer)`,
+        }).from(searchResults).where(inArray(searchResults.searchId, searchRows.map((search) => search.id)))
+
+
+
         return searchRows.map((search) => ({
             id: search.id,
             launchedAt: search.launchedAt.toISOString(),
-            resultCount: resultRows.length,
+            resultCount: count,
             criteria: search.criteria,
             results: resultRows
                 .filter((result) => result.searchId === search.id)
