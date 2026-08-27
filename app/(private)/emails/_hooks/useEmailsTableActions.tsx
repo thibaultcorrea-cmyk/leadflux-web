@@ -140,7 +140,7 @@ export function useEmailsTableActions() {
         // parcours de validation séquentiel reste à construire.
         confirm({
           title: "Valider et envoyer la sélection",
-          description: `${selected.length} email${selected.length > 1 ? "s vous seront présentés" : " vous sera présenté"} un par un pour relecture avant envoi. Aucun envoi groupé sans relecture.`,
+          description: `${selected.length} email${selected.length > 1 ? "s vous seront présentés" : " vous sera présenté"} pour relecture avant envoi. Les messages ayant le status validé et envoyé ne seront pas traités.`,
           confirmLabel: "Relire les brouillons",
           closeOnConfirm: false,
           onConfirm: async () => {
