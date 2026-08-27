@@ -4,7 +4,7 @@ import type { Prospect, SearchCriterion } from "../types/prospect";
  * Jeu de données de démonstration, en attendant le branchement du sourcing.
  * Reprend les entreprises de la maquette « Recherche — Résultats ».
  */
-export const prospects: Prospect[] = [
+export const prospects: any[] = [
   {
     id: "p-01",
     company: "Aubert Stratégie",

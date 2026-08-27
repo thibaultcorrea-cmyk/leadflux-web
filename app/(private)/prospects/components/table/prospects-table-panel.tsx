@@ -44,7 +44,7 @@ export function ProspectsTablePanel() {
   return (
 
     <>
-      <CriteriaBar criteria={searchCriteria} />
+      {prospects.length > 0 ? <CriteriaBar criteria={searchCriteria} /> : null}
       <ProspectsTableContent prospects={prospects} />
 
     </>
