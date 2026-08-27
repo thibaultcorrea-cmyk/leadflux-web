@@ -12,13 +12,13 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
     launchedAt
     resultCount
     criteria {
-      revenue
-      jobTitle
       industry
+      jobTitle
       headcountMin
       headcountMax
       employeeRange
       location
+      revenue
     }
     results {
       prospect {
