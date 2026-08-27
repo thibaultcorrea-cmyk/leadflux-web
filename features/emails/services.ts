@@ -157,23 +157,20 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         const succeded = []
         const failed = []
         const data: { id: string, subject: string, body: string }[] = []
-        try {
-            for (const id of ids) {
-                try {
-                    const version = await EmailProspectsServicesImpl.regenerate(id)
-                    data.push(version)
-                    succeded.push(id)
 
-                } catch (error) {
-                    console.log(error);
-                    failed.push(error)
-                }
+        for (const id of ids) {
+            try {
+                const version = await EmailProspectsServicesImpl.regenerate(id)
+                data.push(version)
+                succeded.push(id)
+
+            } catch (error) {
+                console.log(error);
+                failed.push(error)
             }
-            return { success: true, send: succeded.length, failed: failed.length, data }
-        } catch (error) {
-            console.log(error);
-            return { success: false, send: 0, failed: ids.length, data: [] }
         }
+        return { success: true, send: succeded.length, failed: failed.length, data }
+
     },
 
     collections: async (query: any) => {

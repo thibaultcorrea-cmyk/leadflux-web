@@ -42,10 +42,13 @@ export type GenerateManyResult = {
     send: number;
     failed: number;
     message?: string;
+    error?: any;
 }
 
 export type ManyOperationResult = {
     success: number;
     failed: number;
     message?: string;
+    error?: any;
+
 }
