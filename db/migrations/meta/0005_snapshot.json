@@ -1,5 +1,5 @@
 {
-  "id": "573e843f-f481-433b-97fb-569f63a51f20",
+  "id": "d7b69729-29bc-4b43-9e99-545ea757a545",
   "prevId": "64923388-ce3e-4bdf-aba1-f8a0d91fe39f",
   "version": "7",
   "dialect": "postgresql",
@@ -1607,10 +1607,10 @@
   "roles": {},
   "policies": {},
   "views": {
-    "public.kpi_stats": {
+    "public.kpi_email_stats": {
       "columns": {},
-      "definition": "select (select count(*) from \"prospects\")::int as \"total_prospects\", count(*)::int as \"total_emails\", count(*) filter (where \"status\" = 'draft')::int as \"drafted_emails\", count(*) filter (where \"status\" = 'sent')::int as \"sent_emails\", count(*) filter (where \"status\" = 'replied')::int as \"replied_emails\", round(\n                count(*) filter (where \"status\" = 'replied')::numeric\n                / nullif(count(*) filter (where \"status\" in ('sent', 'replied')), 0) * 100,\n                1\n            )::float as \"replied_rate\" from \"emails\"",
-      "name": "kpi_stats",
+      "definition": "select (select count(*) from \"prospects\")::int as \"total_prospects\", count(*)::int as \"total_sent\", count(*) filter (where \"status\" = 'draft')::int as \"drafted\", count(*) filter (where \"status\" = 'sent')::int as \"sent\", count(*) filter (where \"status\" = 'replied')::int as \"replied\", round(\n                count(*) filter (where \"status\" = 'replied')::numeric\n                / nullif(count(*) filter (where \"status\" in ('sent', 'replied')), 0) * 100,\n                1\n            )::float as \"replied_rate\" from \"emails\"",
+      "name": "kpi_email_stats",
       "schema": "public",
       "isExisting": false,
       "materialized": false

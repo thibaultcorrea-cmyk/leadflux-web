@@ -20,14 +20,14 @@ import { prospects } from "./prospects";
  * Casts ::int / ::float explicites : count()/round() renvoient des
  * bigint/numeric que le driver pg renvoie en string, pas en number.
  */
-export const kpiStats = pgView("kpi_stats").as((qb) =>
+export const kpiEmailStats = pgView("kpi_email_stats").as((qb) =>
     qb
         .select({
             totalProspects: sql<number>`(select count(*) from ${prospects})::int`.as("total_prospects"),
-            totalSentEmails: sql<number>`count(*)::int`.as("total_emails"),
-            draftedEmails: sql<number>`count(*) filter (where ${emails.status} = 'draft')::int`.as("drafted_emails"),
-            sentEmails: sql<number>`count(*) filter (where ${emails.status} = 'sent')::int`.as("sent_emails"),
-            repliedEmails: sql<number>`count(*) filter (where ${emails.status} = 'replied')::int`.as("replied_emails"),
+            totalSent: sql<number>`count(*)::int`.as("total_sent"),
+            drafted: sql<number>`count(*) filter (where ${emails.status} = 'draft')::int`.as("drafted"),
+            sent: sql<number>`count(*) filter (where ${emails.status} = 'sent')::int`.as("sent"),
+            replied: sql<number>`count(*) filter (where ${emails.status} = 'replied')::int`.as("replied"),
             /** Reponses / emails effectivement sortis (sent + replied), pas / total incluant les brouillons. */
             repliedRate: sql<number>`round(
                 count(*) filter (where ${emails.status} = 'replied')::numeric
@@ -38,4 +38,4 @@ export const kpiStats = pgView("kpi_stats").as((qb) =>
         .from(emails)
 );
 
-export type KpiStatsSqlInfer = typeof kpiStats.$inferSelect;
+export type KpiEmailStatsSqlInfer = typeof kpiEmailStats.$inferSelect;
