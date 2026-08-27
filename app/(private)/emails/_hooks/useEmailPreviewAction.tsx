@@ -7,6 +7,7 @@ import { Email } from "../types/email";
 import EditEmailForm from "../components/forms/edit-email-form";
 import { SendEmailConfirmModalContent } from "../components/modal/send-email-confirm";
 import { useEmailMutation } from "./useEmailMutation";
+import { getLastVersion } from "../services/utils";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
@@ -39,12 +40,13 @@ export const useEmailPreviewAction = () => {
     }) => {
         return (
             open({
-                components: <SendEmailConfirmModalContent {...props} cancelLabel="Revenir en arrière" closeOnCancel={false} />
+                components: <SendEmailConfirmModalContent {...props} cancelLabel="Annuler" />
             })
         )
     }
 
     const openPreview = (email: Email) =>
+
         open({
             contentClassName: PREVIEW_MODAL_CLASSNAME,
             components: (
@@ -74,7 +76,7 @@ export const useEmailPreviewAction = () => {
                             onConfirm: async () => {
                                 const result = await validateAndSend({ id: current.id })
                             },
-                            onCancel: async () => openPreview(current),
+
 
 
                         })
@@ -86,9 +88,11 @@ export const useEmailPreviewAction = () => {
 
     const openEditView = (email: Email) => open({
         contentClassName: EDIT_MODAL_CLASSNAME,
-        components: <EditEmailForm email={email} version={email.versions[0]} />
+        components: <EditEmailForm email={email} version={getLastVersion(email.versions)} />
     })
 
     return { openPreview, openEditView };
 }
+
+
 

@@ -16,7 +16,7 @@ export const EmailVersionReadRepositoriesImpl: IEmailVersionReadRepository = {
     find: async (query: { emailId: string }) => {
         return db.select().from(emailVersions)
             .where(eq(emailVersions.emailId, query.emailId))
-            .orderBy(asc(emailVersions.generatedAt))
+            .orderBy(desc(emailVersions.createdAt)) //TODO add limit
     },
     count: async (query: any) => {
         throw new Error("Method not implemented.")
