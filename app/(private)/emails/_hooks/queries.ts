@@ -78,6 +78,17 @@ mutation ValidateAndSendEmail($id: ID!) {
 }
 `
 
+
+export const SEND_EMAIL_MANY_MUTATION = gql`
+mutation ValidateAndSendEmailsMany($ids: [ID!]!) {
+  validateAndSendEmailsMany(ids: $ids) {
+    message
+    success
+    failed
+  }
+}
+`
+
 export const REMOVE_EMAIL_MUTATION = gql`
 mutation DeleteManyEmailProspects($ids: [ID!]!) {
   deleteManyEmailProspects(ids: $ids) {

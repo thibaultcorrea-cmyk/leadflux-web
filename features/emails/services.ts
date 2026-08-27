@@ -10,6 +10,7 @@ import { AgentEmailService } from "../agent/email/service"
 import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
 import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
 import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
+import { ManyOperationResult } from "./entities/type"
 
 
 
@@ -125,7 +126,25 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     sendMany: async (ids: string[]) => {
-        throw new Error("Method not implemented.")
+
+        const succeded = []
+        const failed = []
+
+        for (const id of ids) {
+            try {
+                const result = await EmailProspectsServicesImpl.send(id)
+                if (result) {
+                    succeded.push(id)
+                } else {
+                    failed.push(id)
+                }
+            } catch (error) {
+                failed.push(error)
+
+            }
+        }
+        return { success: succeded.length, failed: failed.length, message: "Emails sent successfully" } satisfies ManyOperationResult
+
     },
 
     regenerate: async (id: string) => {

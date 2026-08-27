@@ -31,7 +31,7 @@ export function useEmailsTableActions() {
 
   const { open } = useModalController();
 
-  const { openPreview, openEditView } = useEmailPreviewAction();
+  const { openPreview, openEditView, openReviewingValidateView } = useEmailPreviewAction();
   const { remove } = useEmailMutation()
 
 
@@ -49,7 +49,9 @@ export function useEmailsTableActions() {
     confirmLabel: string;
     tone?: "default" | "destructive";
     isLoading?: boolean;
+    closeOnConfirm?: boolean;
     onConfirm?: () => Promise<void>;
+    onCancel?: () => Promise<void>;
   }) => open({ components: <ConfirmModalContent {...props} /> });
 
 
@@ -140,6 +142,10 @@ export function useEmailsTableActions() {
           title: "Valider et envoyer la sélection",
           description: `${selected.length} email${selected.length > 1 ? "s vous seront présentés" : " vous sera présenté"} un par un pour relecture avant envoi. Aucun envoi groupé sans relecture.`,
           confirmLabel: "Relire les brouillons",
+          closeOnConfirm: false,
+          onConfirm: async () => {
+            openReviewingValidateView(selected)
+          }
         }),
     },
     {

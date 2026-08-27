@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { RemoveEmailMutationParams, UpdateEmailMutationParams } from "../types/email-mutations"
-import { regenerateEmailApi, removeEmailApi, validateSendEmailApi, updateEmailApi } from "../services/api-service"
+import { regenerateEmailApi, removeEmailApi, validateSendEmailApi, updateEmailApi, validateSendEmailsManyApi } from "../services/api-service"
 import { QueryKey } from "./queries"
 
 
@@ -42,10 +42,16 @@ export const useEmailMutation = () => {
         },
     })
 
+    const validateSendEmailsManyMutation = useMutation({
+        mutationFn: async ({ ids }: { ids: string[] }) => validateSendEmailsManyApi(ids),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
+        },
+    })
 
 
 
-    return { update: updateMutation.mutateAsync, remove: removeMutation.mutateAsync, regenerate: regenerateMutation.mutateAsync, validateAndSend: validateSendEmailMutation.mutateAsync }
+    return { update: updateMutation.mutateAsync, remove: removeMutation.mutateAsync, regenerate: regenerateMutation.mutateAsync, validateAndSend: validateSendEmailMutation.mutateAsync, validateSendEmailsMany: validateSendEmailsManyMutation.mutateAsync }
 
 
 

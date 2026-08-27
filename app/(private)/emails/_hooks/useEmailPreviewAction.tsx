@@ -8,6 +8,7 @@ import EditEmailForm from "../components/forms/edit-email-form";
 import { SendEmailConfirmModalContent } from "../components/modal/send-email-confirm";
 import { useEmailMutation } from "./useEmailMutation";
 import { getLastVersion } from "../services/utils";
+import { EmailReviewingValidateModalContent } from "../components/modal/email-reviewing-validate";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
@@ -91,7 +92,12 @@ export const useEmailPreviewAction = () => {
         components: <EditEmailForm email={email} version={getLastVersion(email.versions)} />
     })
 
-    return { openPreview, openEditView };
+    const openReviewingValidateView = (selectedEmails: Email[]) => open({
+        contentClassName: EDIT_MODAL_CLASSNAME,
+        components: <EmailReviewingValidateModalContent selectedEmails={selectedEmails} />
+    })
+
+    return { openPreview, openEditView, openReviewingValidateView };
 }
 
 

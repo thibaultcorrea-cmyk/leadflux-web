@@ -18,3 +18,13 @@ export const showUserInitials = (name: string) => {
 
 }
 
+
+/** Initiales du prospect, pour l'avatar de l'entête. */
+function getInitials(name: string) {
+    return name
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() ?? "")
+        .join("");
+}
