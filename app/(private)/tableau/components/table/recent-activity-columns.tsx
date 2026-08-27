@@ -4,6 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import type { RecentActivityRow } from "../../types/tableau";
+import { RecentActivityTimestampCell } from "../recent-activity-timestamp-cell";
 
 export const recentActivityColumns: ColumnDef<RecentActivityRow>[] = [
   {
@@ -30,13 +31,11 @@ export const recentActivityColumns: ColumnDef<RecentActivityRow>[] = [
     cell: ({ row }) => <EmailStatusBadge status={row.original.status} />,
   },
   {
-    accessorKey: "activityLabel",
+    accessorKey: "timestamp",
     header: "Date",
     size: 90,
-    cell: ({ row }) => (
-      <span className="text-[13px] text-ink-500">
-        {row.original.activityLabel}
-      </span>
-    ),
+    cell: ({ row }) => <RecentActivityTimestampCell item={row.original} />
+
+    ,
   },
 ];

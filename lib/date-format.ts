@@ -37,3 +37,9 @@ export const dateNowIsoString = () => {
     const dt = new Date()
     return dt.toISOString()
 }
+
+
+export const formatRelativeTimeFromTimestamp = (timestamp: string) => {
+    const date = new Date(Number(timestamp))
+    return formatRelativeTime(date)
+}

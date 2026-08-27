@@ -17,6 +17,7 @@ export type RecentActivityRow = {
   company: string;
   status: EmailStatus;
   activityLabel: string;
+  timestamp: string;
 };
 
 export type FunnelStep = {
