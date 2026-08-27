@@ -11,6 +11,15 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
     id
     launchedAt
     resultCount
+    criteria {
+      revenue
+      jobTitle
+      industry
+      headcountMin
+      headcountMax
+      employeeRange
+      location
+    }
     results {
       prospect {
         id

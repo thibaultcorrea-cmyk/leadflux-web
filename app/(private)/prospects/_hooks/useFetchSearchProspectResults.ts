@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { QueryKey } from "./queries"
 import { useMemo } from "react"
 import { parseSearchResults } from "../schema/parser"
+import { UNKNOWN_CRITERIA } from "../services/row-actions"
 
 export const useFetchSearchProspectResults = () => {
     const { data, isLoading, error } = useQuery({
@@ -25,11 +26,22 @@ export const useFetchSearchProspectResults = () => {
         return data.searches.resultCount
     }, [data])
 
+    const criteria = useMemo(() => {
+        if (!data) return UNKNOWN_CRITERIA
+        const result = data.searches[0]
+        if (!result) return UNKNOWN_CRITERIA
+        return result.criteria
+
+    }, [data])
+
+
+
     return {
         prospects,
         isLoading,
         error,
-        resultCount
+        resultCount,
+        criteria
     }
 
 

@@ -11,7 +11,6 @@ import type { SearchCriterion } from "../types/prospect";
  * point d'entrée prévu, avec les deux boutons « Nouvelle recherche ».
  */
 export function CriteriaBar({ criteria }: { criteria: SearchCriterion[] }) {
-  const { openSearchModal } = useSearchModal();
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-background-100 px-4 py-3">
@@ -27,13 +26,6 @@ export function CriteriaBar({ criteria }: { criteria: SearchCriterion[] }) {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={openSearchModal}
-        className="rounded-sm text-[13px] font-semibold text-accent-700 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        Modifier les critères
-      </button>
     </div>
   );
 }

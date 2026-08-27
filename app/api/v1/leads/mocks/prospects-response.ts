@@ -35,6 +35,15 @@ export type ProspectApiItem = {
   company: ProspectCompany;
   person: ProspectPerson;
   lastSourcedAt: string;
+  criteria: {
+    industry: string;
+    jobTitle: string;
+    location: string;
+    headcountMin: number;
+    headcountMax: number;
+    revenue: string;
+    employeeRange: string;
+  };
 };
 
 export const prospectsResponse: ProspectApiItem[] = [
@@ -325,6 +334,15 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Sarah Barbier",
     },
     lastSourcedAt: "2026-07-23T10:00:00.000Z",
+    criteria: {
+      jobTitle: "Fondatrice",
+      industry: "Conseil RH",
+      location: "Montpellier",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    }
   },
 ];
 
