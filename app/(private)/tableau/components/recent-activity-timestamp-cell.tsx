@@ -11,7 +11,7 @@ export const RecentActivityTimestampCell = ({ item }: { item: RecentActivityRow 
 
     return (
         <span className="text-[13px] text-ink-500">
-            {formattedTimestamp}
+            il y a {formattedTimestamp}
         </span>
     )
 }
