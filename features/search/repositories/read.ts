@@ -11,6 +11,10 @@ import { asc, desc, eq, inArray } from "drizzle-orm";
  */
 const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date }) => {
     const payload = row.rawPayload
+    const headcountMin = parseInt(payload?.company?.size?.split('-')[0] ?? "0", 10) || 0
+    const headcountMax = parseInt(payload?.company?.size?.split('-')[1] ?? "0", 10) || 0
+
+
 
     return {
         id: row.id,
@@ -24,8 +28,8 @@ const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayloa
         company: {
             name: payload?.company.name ?? "",
             description: payload?.company.description ?? "",
-            headcountMin: 0,
-            headcountMax: 0,
+            headcountMin: headcountMin,
+            headcountMax: headcountMax,
             industry: { name: payload?.company.industry ?? "" },
             address: {
                 city: payload?.company.address?.city ?? "",

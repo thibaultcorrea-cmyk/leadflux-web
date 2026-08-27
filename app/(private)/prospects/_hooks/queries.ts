@@ -33,8 +33,8 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
         company {
           name
           description
-          headcountMax
           headcountMin
+          headcountMax
           address {
             city
             country

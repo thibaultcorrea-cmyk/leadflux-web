@@ -146,6 +146,8 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
         state: company.address.state,
     } satisfies CreateAddressDto
 
+    const headcountMin = Number(parseInt(company.size.split("-")[0], 10)) ?? 0
+    const headcountMax = Number(parseInt(company.size.split("-")[1], 10)) ?? 0
 
 
     const companyData = {
@@ -154,8 +156,8 @@ const leadsApiToProspectFactory = async (lead: LeadFinderApiResponse) => {
         description: company.description,
         industryRaw: company.industry,
         sizeRaw: company.size,
-        headcountMin: 0,
-        headcountMax: 0,
+        headcountMin: headcountMin,
+        headcountMax: headcountMax,
     } satisfies Omit<CreateCompanyDto, "addressId">
 
     const rawPayload = {
