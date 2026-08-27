@@ -32,6 +32,7 @@ const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayloa
                 country: payload?.company.address?.country ?? "",
             },
         },
+
         lastSourcedAt: row.lastSourcedAt.toISOString(),
     }
 }
@@ -45,8 +46,9 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
             id: searches.id,
             launchedAt: searches.launchedAt,
             resultCount: searches.resultCount,
+            criteria: searches.criteria,
         }).from(searches)
-            .orderBy(desc(searches.launchedAt))
+            .orderBy(desc(searches.launchedAt)).limit(1)
 
         if (searchRows.length === 0) {
             return []
@@ -67,6 +69,7 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
             id: search.id,
             launchedAt: search.launchedAt.toISOString(),
             resultCount: resultRows.length,
+            criteria: search.criteria,
             results: resultRows
                 .filter((result) => result.searchId === search.id)
                 .map((result) => ({ prospect: leadProspectFromRow(result) })),

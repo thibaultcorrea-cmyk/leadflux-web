@@ -131,10 +131,22 @@ type SearchResult {
     prospect: LeadProspect!
 }
 
+type Criteria {
+    industry: String
+    jobTitle: String
+    location: String
+    headcountMin: Int
+    headcountMax: Int
+    revenue: String
+    employeeRange: String
+    
+}
+
 type ProspectSearch {
     id: ID!
     launchedAt: String!
     resultCount: Int!
+    criteria: Criteria
     results: [SearchResult!]!
 }
 

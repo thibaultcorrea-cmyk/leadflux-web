@@ -21,6 +21,8 @@ import { SearchResultServicesImpl } from "@/features/searchResults/services"
 export const SearchProspectsServicesImpl: any = {
     searchProspects: async (criteriaInputs: CreateSearchProspectsDto) => {
 
+        await clearProspectsAndResults()
+
         const currentUser = await UserServices.getCurrentUser()
 
         const dateStr = dateNowIsoString()
@@ -30,7 +32,7 @@ export const SearchProspectsServicesImpl: any = {
         }
 
         const { data: criteriaData } = criteriaValidated
-        const name = `${criteriaData.jobTitle} - ${criteriaData.industry} - ${criteriaData.location} - ${dateStr}`
+        const name = `${criteriaData.industry}`
         const criteriaLabel = `${criteriaData.jobTitle} - ${criteriaData.industry} - ${dateStr}`
 
         const { headcountMax, headcountMin } = criteriaEmployeeRangeFactory(criteriaData)
@@ -212,5 +214,5 @@ export const clearProspectsAndResults = async () => {
     await AddressServicesImpl.clear()
     await CompanyServicesImpl.clear()
     await PersonServicesImpl.clear()
-    await SearchWriteRepositoriesImpl.truncate()
+    // await SearchWriteRepositoriesImpl.truncate()
 }
