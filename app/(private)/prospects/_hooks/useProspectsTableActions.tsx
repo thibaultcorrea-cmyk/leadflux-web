@@ -31,9 +31,9 @@ export function useProspectsTableActions() {
   const { open } = useModalController();
   const { sendProspectEmail, deleteProspects } = useProspectMutation();
 
-  const sendProspect = async (prospect: Prospect) => {
+  const sendProspect = async (prospects: Prospect[]) => {
     await waitDelay(1500);
-    await sendProspectEmail([prospect]);
+    await sendProspectEmail(prospects);
   }
 
   const removeProspectFromSearch = async (ids: string[]) => {
@@ -58,7 +58,7 @@ export function useProspectsTableActions() {
                 title="Prospecter ce contact"
                 description={`Un brouillon d'email sera rédigé pour ${prospect.contactName} (${prospect.company}). Rien n'est envoyé : le brouillon reste à valider.`}
                 confirmLabel="Rédiger le brouillon"
-                onConfirm={() => sendProspect(prospect)}
+                onConfirm={() => sendProspect([prospect])}
               />
             ),
           }),
@@ -130,6 +130,7 @@ export function useProspectsTableActions() {
                 title="Prospecter la sélection"
                 description={`${selected.length} brouillon${selected.length > 1 ? "s seront rédigés" : " sera rédigé"}, puis présenté${selected.length > 1 ? "s" : ""} un par un pour validation. Aucun email n'est envoyé automatiquement.`}
                 confirmLabel="Rédiger les brouillons"
+                onConfirm={() => sendProspect(selected)}
               />
             ),
           }),
