@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import type { FunnelStep } from "../types/tableau";
 import { useFunnelKpi } from "../_hooks/useFunnelKpi";
 
-const TONE_CLASSES: Record<FunnelStep["tone"], string> = {
+const TONE_CLASSES: Record<FunnelStep["tone"] | string, string> = {
   neutral: "[&_[data-slot=progress-indicator]]:bg-primary-400",
   accent: "[&_[data-slot=progress-indicator]]:bg-accent-500",
   success: "[&_[data-slot=progress-indicator]]:bg-success",

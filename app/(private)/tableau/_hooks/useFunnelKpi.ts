@@ -39,7 +39,7 @@ const kpiItemToFunnelFactory = (kpis: any[]): FunnelStep[] => {
             id: kpi.id,
             label: kpi.label,
             value: kpi.value,
-            tone: mapedTone(kpi.id)
+            tone: mapedTone(kpi.id) as FunnelStep["tone"]
         }
     }) satisfies FunnelStep[]
 
