@@ -5,8 +5,9 @@ import { AgentEmailGenerateApiInput, AgentEmailGenerateApiOutput } from "../enti
 
 const N8N_WEBHOOK_URL = ENV.N8N_WEBHOOK_URL;
 
+
 const API_ENDPOINT = {
-    generateEmailContent: `${N8N_WEBHOOK_URL}/webhook-test/leadflux-redaction`,
+    generateEmailContent: `${N8N_WEBHOOK_URL}/leadflux-redaction`,
 }
 
 
@@ -14,6 +15,8 @@ const API_ENDPOINT = {
 export const AgentEmailWriteRepository = {
     generate: async (payload: AgentEmailGenerateApiInput): Promise<AgentEmailGenerateApiOutput> => {
         try {
+
+
             const res = await fetch(API_ENDPOINT.generateEmailContent, {
                 method: "POST",
                 headers: {
@@ -23,6 +26,8 @@ export const AgentEmailWriteRepository = {
             })
             const data = await res.json()
             if (!res.ok) {
+                console.log(payload)
+                console.log(data)
                 throw new Error(data.message)
             }
             return data as AgentEmailGenerateApiOutput

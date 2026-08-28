@@ -34,6 +34,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         }
 
         const createEmailInput = {
+            prospectId: prospect.id,
             prospectName: inputs.prospectName ?? prospect.person.fullName,
             prospectEmail: prospect.person.email,
             prospectCompany: inputs.prospectCompany ?? prospect.company.name,
@@ -154,6 +155,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
         }
 
         const input = {
+
             prospectName: email.prospectName,
             prospectCompany: email.prospectCompany,
             prospectJob: email.prospectJob,

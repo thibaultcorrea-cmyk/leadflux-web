@@ -1,11 +1,13 @@
 import { ProspectServicesImpl } from "@/features/prospects/services"
 import { EmailAgentMock } from "../mocks/email-contents"
-import { AgentEmailGenerateApiInput, AgentEmailGenerateInputs, AgentEmailGenerateOutput, AgentEmailSendInput, AgentEmailSendResult } from "./entities/agentEmail"
+import { AgentEmailGenerateApiInput, AgentEmailGenerateOutput, AgentEmailSendInput, AgentEmailSendResult } from "./entities/agentEmail"
 import { AgentEmailWriteRepository } from "./repositories/write"
 import { TProspectWithRelations } from "@/features/prospects/entities/type"
+import { CreateEmailDto } from "@/features/emails/dto/schema"
 
 export const AgentEmailService = {
-    generate: async (inputs: AgentEmailGenerateInputs): Promise<AgentEmailGenerateOutput> => {
+    generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
+        console.log(inputs);
 
 
         const prospect = await ProspectServicesImpl.find(inputs.prospectId)

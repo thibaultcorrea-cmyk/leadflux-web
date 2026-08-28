@@ -30,6 +30,7 @@ export type Email = z.infer<typeof EmailSchema>
  * creation garde le "draft" par defaut de la colonne status.
  */
 export const createEmailSchema = z.object({
+    prospectId: z.string().min(1, "prospect id est requis"),
     prospectName: z.string().min(1, "Le nom du prospect est requis"),
     prospectJob: z.string().optional(),
     prospectCompany: z.string().optional(),
