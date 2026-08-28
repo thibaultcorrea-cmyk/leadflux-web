@@ -11,6 +11,13 @@ const envSchema = z.object({
     ADMIN_NAME: z.string().default("Admin"),
     ADMIN_IMAGE_URL: z.url().default(""),
     N8N_WEBHOOK_URL: z.url().default("http://localhost:5678"),
+    SMTP_USER: z.string().default("assadi.halifa@gmail.com"),
+    SMTP_PASS: z.string().default(""),
+    SMTP_HOST: z.string().default("localhost"),
+    SMTP_PORT: z.coerce.number().default(587),
+    SMTP_FROM: z.string().default("assadi.halifa@gmail.com"),
+    SMTP_FROM_ALIAS: z.string().default("LeadFlux"),
+
 });
 
 export const ENV = envSchema.parse(process.env);

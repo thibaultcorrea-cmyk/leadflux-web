@@ -35,6 +35,6 @@ export const emailToAgentSendInput = (email: EmailSqlInfer, version: EmailVersio
     return {
         subject: version.subject,
         body: version.body,
-        recipient: email.prospectEmail,
+        to: email.prospectEmail,
     }
 }

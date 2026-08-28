@@ -32,7 +32,7 @@ export function useEmailsTableActions() {
   const { open } = useModalController();
 
   const { openPreview, openEditView, openReviewingValidateView } = useEmailPreviewAction();
-  const { remove } = useEmailMutation()
+  const { remove, validateAndSend } = useEmailMutation()
 
 
   const removeEmails = async (ids: string[]) => {
@@ -75,6 +75,9 @@ export function useEmailsTableActions() {
           title: "Valider et envoyer",
           description: `L'email sera envoyé à ${email.recipient}. C'est la seule étape qui déclenche un envoi.`,
           confirmLabel: "Valider et envoyer",
+          onConfirm: async () => {
+            await validateAndSend({ id: email.id })
+          }
         }),
     },
     {

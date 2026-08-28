@@ -4,6 +4,8 @@ import { AgentEmailGenerateApiInput, AgentEmailGenerateOutput, AgentEmailSendInp
 import { AgentEmailWriteRepository } from "./repositories/write"
 import { TProspectWithRelations } from "@/features/prospects/entities/type"
 import { CreateEmailDto } from "@/features/emails/dto/schema"
+import { SMTPServiceImpl } from "@/features/smtp/services"
+import { SendEmailDto } from "@/features/smtp/dto/schema"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
@@ -26,7 +28,16 @@ export const AgentEmailService = {
         return Promise.resolve(EmailAgentMock[randomIndx])
     },
     sendEmail: async (input: AgentEmailSendInput): Promise<AgentEmailSendResult> => {
-        return Promise.resolve({ success: true, result: "email sent successfully", threadId: crypto.randomUUID(), error: null })
+        const payload = {
+            to: input.to,
+            subject: input.subject,
+            html: input.body,
+        } as SendEmailDto
+
+
+        const result = await SMTPServiceImpl.send(payload)
+
+        return { success: true, result: "email sent successfully", threadId: result.messageId, }
     }
 
 }
