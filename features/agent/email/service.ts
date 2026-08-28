@@ -7,8 +7,6 @@ import { CreateEmailDto } from "@/features/emails/dto/schema"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
-        console.log(inputs);
-
 
         const prospect = await ProspectServicesImpl.find(inputs.prospectId)
         const payload: AgentEmailGenerateApiInput = mapProspectFromRelationsToPayload(prospect)
