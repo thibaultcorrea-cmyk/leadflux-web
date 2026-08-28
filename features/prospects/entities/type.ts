@@ -4,6 +4,10 @@ export type TProspectWithRelations = {
     company: {
         id: string
         name: string
+        description: string
+        website: string
+        industry: string
+        size: string
     }
     person: {
         id: string

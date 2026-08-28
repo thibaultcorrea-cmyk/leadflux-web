@@ -20,8 +20,10 @@ export const ProspectReadRepositoriesImpl: IProspectReadRepository = {
             company: {
                 id: companies.id,
                 name: companies.name,
-
-
+                description: companies.description,
+                website: companies.website,
+                industry: companies.industryRaw,
+                size: companies.sizeRaw,
             },
             person: {
                 id: persons.id,
@@ -30,6 +32,7 @@ export const ProspectReadRepositoriesImpl: IProspectReadRepository = {
                 linkedinUrl: persons.linkedinUrl,
                 phone: persons.phone,
                 jobTitle: persons.jobTitle,
+
             },
             address: {
                 id: addresses.id,

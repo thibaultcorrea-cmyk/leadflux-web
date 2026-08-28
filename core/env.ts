@@ -10,7 +10,7 @@ const envSchema = z.object({
     ADMIN_PASSWORD: z.string().min(1).default("passw@rd2026"),
     ADMIN_NAME: z.string().default("Admin"),
     ADMIN_IMAGE_URL: z.url().default(""),
-
+    N8N_WEBHOOK_URL: z.url().default("http://localhost:5678"),
 });
 
 export const ENV = envSchema.parse(process.env);

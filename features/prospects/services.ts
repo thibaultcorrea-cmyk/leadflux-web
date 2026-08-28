@@ -4,6 +4,7 @@ import { prospectValidator } from "./dto/validator"
 import { CreateProspectDto } from "./dto/schema"
 import { ProspectWriteRepositoriesImpl } from "./repositories/write"
 import { SearchReadRepositoriesImpl } from "../search/repositories/read";
+import { ProspectReadRepositoriesImpl } from "./repositories/read";
 
 
 
@@ -44,5 +45,12 @@ export const ProspectServicesImpl: ProspectServices = {
         await ProspectWriteRepositoriesImpl.truncate()
     },
     search: (query) => Promise.resolve(leadFinder),
+    find: async (id: string) => {
+        const prospect = await ProspectReadRepositoriesImpl.getWithRelations(id)
+        if (!prospect) {
+            throw new Error("Prospect not found")
+        }
+        return prospect
+    },
 
 }
