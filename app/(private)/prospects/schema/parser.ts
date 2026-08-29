@@ -27,6 +27,7 @@ export const parseSearchResults = (prospects: { prospect: ProspectApiItem }[]) =
             headcountLabel: `${prospect.company.headcountMin}-${prospect.company.headcountMax}`,
             headcountMin: prospect.company.headcountMin,
             headcountMax: prospect.company.headcountMax,
+            prospectedAt: prospect.prospectedAt,
         })
     })
 }

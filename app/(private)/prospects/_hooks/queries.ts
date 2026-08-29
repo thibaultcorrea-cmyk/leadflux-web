@@ -44,6 +44,7 @@ export const GET_SEARCH_PROSPECTS_QUERY = gql`
           }
         }
         lastSourcedAt
+        prospectedAt
       }
     }
   }

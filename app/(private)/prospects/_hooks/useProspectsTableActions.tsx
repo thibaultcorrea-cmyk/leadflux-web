@@ -51,6 +51,7 @@ export function useProspectsTableActions() {
         label: "Prospecter",
         icon: Send,
         variant: "primary",
+        isDisabled: (prospect: Prospect) => prospect.prospectedAt ? true : false,
         onSelect: (prospect: Prospect) =>
           open({
             components: (

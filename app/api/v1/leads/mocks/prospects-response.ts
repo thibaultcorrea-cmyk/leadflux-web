@@ -35,6 +35,7 @@ export type ProspectApiItem = {
   company: ProspectCompany;
   person: ProspectPerson;
   lastSourcedAt: string;
+  prospectedAt: string | null;
   criteria: {
     industry: string;
     jobTitle: string;

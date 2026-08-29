@@ -11,4 +11,5 @@ export const prospectSchema = z.object({
     headcountLabel: z.string(),
     headcountMin: z.number(),
     headcountMax: z.number(),
+    prospectedAt: z.string().nullable(),
 });

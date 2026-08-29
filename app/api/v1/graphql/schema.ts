@@ -125,6 +125,7 @@ type LeadProspect {
     person: ProspectPerson!
     company: ProspectCompany!
     lastSourcedAt: String!
+    prospectedAt: String
 }
 
 type SearchResult {

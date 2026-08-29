@@ -15,6 +15,7 @@ export type Prospect = {
   /** Borne basse de la tranche : sert au tri, jamais à l'affichage. */
   headcountMin: number;
   headcountMax: number;
+  prospectedAt: string | null;
 
 };
 
