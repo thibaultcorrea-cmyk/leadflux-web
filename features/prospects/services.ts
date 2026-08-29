@@ -52,5 +52,8 @@ export const ProspectServicesImpl: ProspectServices = {
         }
         return prospect
     },
+    markAsProspected: async (id: string) => {
+        return ProspectWriteRepositoriesImpl.update({ id, prospectedAt: new Date() })
+    }
 
 }

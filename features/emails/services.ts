@@ -11,6 +11,7 @@ import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
 import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
 import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
 import { ManyOperationResult } from "./entities/type"
+import { ProspectServicesImpl } from "../prospects/services"
 
 
 
@@ -64,7 +65,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             generatedAt: new Date(),
             knowledgeVersion: agentResponse.knowledgeVersion,
         })
-
+        await ProspectServicesImpl.markAsProspected(inputs.prospectId)
         const emailRow = emailFromRow(email, [version])
         return emailRow
 

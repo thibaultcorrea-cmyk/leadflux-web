@@ -11,5 +11,6 @@ export type ProspectServices = {
     deleteMany: (ids: string[]) => Promise<ManyOperationResult>
     clear: () => Promise<void>
     search: (query: any) => Promise<any[]>
+    markAsProspected: (id: string) => Promise<ProspectSqlInfer>
 
 }
