@@ -9,7 +9,7 @@ import { asc, desc, eq, inArray, sql } from "drizzle-orm";
  * encore dans le payload source (cf. features/search/services.ts), vides/0 en
  * attendant qu'une vraie source les fournisse.
  */
-const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date }) => {
+const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayload | null; lastSourcedAt: Date; prospectedAt: Date | null }) => {
     const payload = row.rawPayload
     const headcountMin = parseInt(payload?.company?.size?.split('-')[0] ?? "0", 10) || 0
     const headcountMax = parseInt(payload?.company?.size?.split('-')[1] ?? "0", 10) || 0
@@ -38,6 +38,7 @@ const leadProspectFromRow = (row: { id: string; rawPayload: ProspectSourcePayloa
         },
 
         lastSourcedAt: row.lastSourcedAt.toISOString(),
+        prospectedAt: row.prospectedAt?.toISOString(),
     }
 }
 
@@ -64,6 +65,7 @@ export const SearchReadRepositoriesImpl: ISearchReadRepository = {
             position: searchResults.position,
             rawPayload: prospects.rawPayload,
             lastSourcedAt: prospects.lastSourcedAt,
+            prospectedAt: prospects.prospectedAt,
         }).from(searchResults)
             .innerJoin(prospects, eq(searchResults.prospectId, prospects.id))
             .where(inArray(searchResults.searchId, searchRows.map((search) => search.id)))
