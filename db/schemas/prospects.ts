@@ -53,8 +53,11 @@ export const prospects = pgTable(
     lastSourcedAt: timestamp("last_sourced_at").defaultNow().notNull(),
     /** Consentement de prospection recueilli pour ce lead (obligation RGPD). */
     prospectingConsent: boolean("prospecting_consent")
-      .default(true)
+      .default(false)
       .notNull(),
+
+    /** Timestamp de la derniere prospection (email generee). */
+    prospectedAt: timestamp("prospected_at"),
 
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
