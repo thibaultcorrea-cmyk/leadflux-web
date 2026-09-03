@@ -5,6 +5,7 @@ import "./globals.css";
 import { ModalProvider } from "@/components/shared/Modals/ModalProvider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import TanstackQueryClientProvider from "@/components/shared/Providers/TanstackQueryClient";
+import { Toaster } from "@/components/ui/toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default function RootLayout({
           <TanstackQueryClientProvider>
             <ModalProvider>
               {children}
+              <Toaster />
             </ModalProvider>
           </TanstackQueryClientProvider>
         </NuqsAdapter>
