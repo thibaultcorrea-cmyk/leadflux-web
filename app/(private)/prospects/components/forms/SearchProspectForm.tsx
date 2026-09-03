@@ -39,7 +39,7 @@ export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
             toast.success({ title: dialogMessages.searchProspects.success.title, description: dialogMessages.searchProspects.success.description })
 
         } catch (error) {
-            reportErrorClient(error as Error, "Erreur lors du lancement de la recherche")
+            reportErrorClient(error as Error, dialogMessages.searchProspects.error.description)
             toast.error({ title: dialogMessages.searchProspects.error.title, description: dialogMessages.searchProspects.error.description })
         }
     }
