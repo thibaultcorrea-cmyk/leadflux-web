@@ -18,6 +18,14 @@ const envSchema = z.object({
     SMTP_FROM: z.string().default("assadi.halifa@gmail.com"),
     SMTP_FROM_ALIAS: z.string().default("LeadFlux"),
 
+    // Boite de test GreenMail (docker-compose), pour verifier en local la
+    // detection de reponse par IMAP. Jamais utilise en production : la
+    // detection reelle passe par le workflow n8n (CLAUDE.md §8, point 1).
+    IMAP_TEST_HOST: z.string().default("localhost"),
+    IMAP_TEST_PORT: z.coerce.number().default(3143),
+    IMAP_TEST_USER: z.string().default("test@leadflux.local"),
+    IMAP_TEST_PASS: z.string().default("test"),
+
 });
 
 export const ENV = envSchema.parse(process.env);

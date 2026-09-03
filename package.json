@@ -60,6 +60,7 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "imapflow": "^1.7.8",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"

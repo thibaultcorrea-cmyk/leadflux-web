@@ -11,5 +11,29 @@ services:
     volumes:
       - leadflux-postgres-data:/var/lib/postgresql/data
 
+  # Faux serveur SMTP + IMAP pour tester en local la detection de reponse
+  # (statut "A repondu"), sans toucher a une vraie boite Gmail. Ephemere :
+  # aucune persistance, les messages disparaissent a l'arret du conteneur.
+  greenmail:
+    image: greenmail/standalone:latest
+    restart: unless-stopped
+    environment:
+      GREENMAIL_OPTS: >-
+        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=test@leadflux.local:test -Dgreenmail.verbose
+    ports:
+      - "3025:3025" # SMTP de test
+      - "3143:3143" # IMAP de test
+
+  roundcube:
+    image: roundcube/roundcubemail:latest
+    depends_on:
+      - greenmail
+    ports:
+      - 8334:80
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_HOST=greenmail
+      - ROUNDCUBEMAIL_DEFAULT_PORT=3143
+      - ROUNDCUBEMAIL_SMTP_SERVER=greenmail
+      - ROUNDCUBEMAIL_SMTP_PORT=3025
 volumes:
   leadflux-postgres-data:
