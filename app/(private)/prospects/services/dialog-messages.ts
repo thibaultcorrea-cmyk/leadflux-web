@@ -1,4 +1,6 @@
 
+export type ActionsCount = { send: number, failed: number }
+
 export const dialogMessages = {
     searchProspects: {
         success: {
@@ -11,25 +13,30 @@ export const dialogMessages = {
         },
     },
 
-    drafting: {
-        success: {
-            title: "Brouillon rédigé",
-            description: "Le brouillon a été rédigé avec succès.",
-        },
-        error: {
-            title: "Erreur",
-            description: "Une erreur est survenue lors de la rédaction du brouillon.",
-        },
+    drafting: ({ send, failed }: ActionsCount) => {
+        return {
+            success: {
+                title: "Brouillon rédigé",
+                description: `${send} brouillon${send !== 1 ? "s" : ""} rédigé${send !== 1 ? "s" : ""} avec succès, ${failed} échec${failed !== 1 ? "s" : ""} d'envoi`,
+
+            },
+            error: {
+                title: "Erreur",
+                description: "Une erreur est survenue lors de la rédaction du brouillon.",
+            },
+        }
     },
-    draftingMany: {
-        success: {
-            title: "Brouillons rédigés",
-            description: "Les brouillons ont été rédigés avec succès.",
-        },
-        error: {
-            title: "Erreur",
-            description: "Une erreur est survenue lors de la rédaction des brouillons.",
-        },
+    draftingMany: ({ send, failed }: ActionsCount) => {
+        return {
+            success: {
+                title: "Brouillons rédigés",
+                description: `${send} brouillon${send !== 1 ? "s" : ""} rédigé${send !== 1 ? "s" : ""} avec succès, ${failed} échec${failed !== 1 ? "s" : ""} d'envoi`,
+            },
+            error: {
+                title: "Erreur",
+                description: "Une erreur est survenue lors de la rédaction des brouillons.",
+            },
+        }
     },
     deletion: {
         success: {
