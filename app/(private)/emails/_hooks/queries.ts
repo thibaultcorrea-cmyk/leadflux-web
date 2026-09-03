@@ -99,8 +99,8 @@ mutation DeleteManyEmailProspects($ids: [ID!]!) {
 }
 `
 export const TRUNCATE_EMAIL_MUTATION = gql`
-mutation TruncateEmailProspects {
-  truncateEmailProspects {
+mutation ClearEmailProspects {
+  clearEmailProspects {
     success
     message
   }

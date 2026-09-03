@@ -214,7 +214,7 @@ type SearchResultsCreated {
     resultCount: Int!
 }
 
-type SearchResultsCleared {
+type TruncateResult {
     success: Boolean!
     message: String!
 }
@@ -302,7 +302,7 @@ type ValidateSendEmailOutput {
 type Mutation {
     createSearchResults(inputs: CreateSearchInputs): SearchResultsCreated
     deleteProspectSearchResults(ids: [ID!]!): ManyOperationResult
-    clearSearchResults: SearchResultsCleared
+    clearSearchResults: TruncateResult
     generateEmailContent(inputs: CreateEmailContentInputs): EmailProspectCreated
     regenerateEmailContent(id: ID!): GeneratedEmailContent
     updateEmailContent(input: EmailUpdateContentInput): String
@@ -310,6 +310,7 @@ type Mutation {
     validateAndSendEmailsMany(ids: [ID!]!): ManyOperationResult
     deleteManyEmailProspects(ids: [ID!]!): ManyOperationResult
     clearProspectsAndResults:Boolean
+    clearEmailProspects:TruncateResult
     
    
 }

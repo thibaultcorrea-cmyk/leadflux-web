@@ -23,7 +23,6 @@ export function EmailsHeader({ total }: { total: number }) {
 
       <div className="flex items-center gap-4">
         <ExportEmailsButton />
-
       </div>
     </header>
   );

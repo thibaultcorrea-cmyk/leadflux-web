@@ -20,6 +20,14 @@ const resolvers = {
             const message = result ? "Search results cleared successfully" : "Failed to clear search results"
             return { success: result, message }
         },
+        clearEmailProspects: async (): Promise<{ success: boolean, message: string }> => {
+            try {
+                await EmailProspectsServicesImpl.clear()
+                return { success: true, message: "Email prospects cleared successfully" }
+            } catch (error) {
+                return { success: false, message: "Failed to clear email prospects" }
+            }
+        },
         generateEmailContent: (_: any, args: any) => EmailProspectsServicesImpl.generateMany(args.inputs.prospects),
         updateEmailContent: async (_: any, args: any) => {
             await EmailProspectsServicesImpl.updateEmailContent(args.input)
