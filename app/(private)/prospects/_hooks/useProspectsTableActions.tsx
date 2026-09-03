@@ -14,6 +14,7 @@ import { EditProspectModal } from "../components/modals/EditProspectView";
 import { hiddenRowActions } from "../services/row-actions";
 import { useProspectMutation } from "./useProspectMutation";
 import { waitDelay } from "@/lib/utils";
+import { dialogMessages } from "../services/dialog-messages";
 
 /**
  * Actions de la table de résultats : une seule source pour la colonne Actions
@@ -39,6 +40,7 @@ export function useProspectsTableActions() {
   const removeProspectFromSearch = async (ids: string[]) => {
     await waitDelay(1500);
     await deleteProspects(ids);
+
   }
 
 
@@ -60,6 +62,7 @@ export function useProspectsTableActions() {
                 description={`Un brouillon d'email sera rédigé pour ${prospect.contactName} (${prospect.company}). Rien n'est envoyé : le brouillon reste à valider.`}
                 confirmLabel="Rédiger le brouillon"
                 onConfirm={() => sendProspect([prospect])}
+                messages={dialogMessages.drafting}
               />
             ),
           }),
@@ -109,6 +112,7 @@ export function useProspectsTableActions() {
                 confirmLabel="Retirer"
                 tone="destructive"
                 onConfirm={() => removeProspectFromSearch([prospect.id])}
+                messages={dialogMessages.deletion}
               />
             ),
           }),
@@ -132,6 +136,7 @@ export function useProspectsTableActions() {
                 description={`${selected.length} brouillon${selected.length > 1 ? "s seront rédigés" : " sera rédigé"}, puis présenté${selected.length > 1 ? "s" : ""} un par un pour validation. Aucun email n'est envoyé automatiquement.`}
                 confirmLabel="Rédiger les brouillons"
                 onConfirm={() => sendProspect(selected)}
+                messages={dialogMessages.draftingMany}
               />
             ),
           }),
@@ -150,6 +155,7 @@ export function useProspectsTableActions() {
                 confirmLabel="Supprimer"
                 tone="destructive"
                 onConfirm={() => removeProspectFromSearch(selected.map((prospect) => prospect.id))}
+                messages={dialogMessages.deletionMany}
               />
             ),
           }),

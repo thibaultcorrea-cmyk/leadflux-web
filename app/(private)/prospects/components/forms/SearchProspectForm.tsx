@@ -13,6 +13,7 @@ import { useProspectMutation } from "../../_hooks/useProspectMutation";
 import { useRouter } from "next/navigation";
 import { toast } from "@/lib/toaster";
 import { reportErrorClient } from "@/lib/report-error-client";
+import { dialogMessages } from "../../services/dialog-messages";
 
 
 
@@ -35,11 +36,11 @@ export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
             if (redirect) {
                 router.push("/prospects");
             }
-            toast.success({ title: "Recherche lancée avec succès" })
+            toast.success({ title: dialogMessages.searchProspects.success.title, description: dialogMessages.searchProspects.success.description })
 
         } catch (error) {
             reportErrorClient(error as Error, "Erreur lors du lancement de la recherche")
-            toast.error({ title: "Erreur lors du lancement de la recherche" })
+            toast.error({ title: dialogMessages.searchProspects.error.title, description: dialogMessages.searchProspects.error.description })
         }
     }
 

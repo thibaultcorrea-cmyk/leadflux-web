@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useModalController } from "@/hooks/useModalController";
+import { toast } from "@/lib/toaster";
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
 
@@ -22,7 +23,13 @@ type ConfirmModalContentProps = {
   closeOnCancel?: boolean;
   onConfirm?: () => Promise<void>;
   onCancel?: () => Promise<void>;
+  messages?: ConfirmActionMessages;
 };
+
+export type ConfirmActionMessages = {
+  success: { title: string, description: string };
+  error: { title: string, description: string };
+}
 
 /**
  * Contenu de modale de confirmation, à passer à `useModalController().open()`.
@@ -40,7 +47,8 @@ export function ConfirmModalContent({
   closeOnConfirm = true,
   closeOnCancel = true,
   onConfirm,
-  onCancel
+  onCancel,
+  messages,
 }: ConfirmModalContentProps) {
   const { close } = useModalController();
   const [isPending, startTransition] = useTransition();
@@ -55,8 +63,21 @@ export function ConfirmModalContent({
     startTransition(async () => {
       try {
         await onConfirm?.();
+        if (messages?.success) {
+          const { title, description } = messages.success;
+          toast.success({
+            title,
+            description,
+          });
+        }
       } catch (error) {
-        console.error(error);
+        if (messages?.error) {
+          const { title, description } = messages.error;
+          toast.error({
+            title,
+            description,
+          });
+        }
       } finally {
         if (closeOnConfirm) close();
       }
