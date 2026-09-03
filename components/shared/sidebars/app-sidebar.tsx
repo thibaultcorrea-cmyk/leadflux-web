@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { LucideIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, type LucideIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -18,6 +18,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import UserDropDown from "./UserDropDown";
+import { Button } from "@/components/ui/button";
 
 export type AppSidebarNavItem = {
   label: string;
@@ -56,7 +57,7 @@ export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="gap-0 p-0">
-        <div className="flex items-center justify-between gap-2 px-4 py-5 group-data-[collapsible=icon]:px-2">
+        <div className="flex items-center justify-between gap-2 px-4 py-5 group-data-[collapsible=icon]:px-2 relative">
           <Link
             href={brand.href}
             className="flex items-center gap-2.5 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
@@ -68,11 +69,14 @@ export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
               {brand.label}
             </span>
           </Link>
-          <SidebarTrigger className="size-7 shrink-0 rounded-md bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground group-data-[collapsible=icon]:hidden" />
+          <SidebarTrigger className="size-7 shrink-0 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground absolute right-0 translate-x-1/2 border border-accent group-data-[collapsible=icon]:hidden"
+          />
         </div>
       </SidebarHeader>
 
       <SidebarContent>
+        <SidebarTrigger className=" mx-auto size-9 rounded-md bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground  group-data-[collapsible=icon]:flex hidden"
+        />
         <SidebarGroup className="px-3 group-data-[collapsible=icon]:px-2">
           <SidebarGroupContent>
             <SidebarMenu className="gap-1">
