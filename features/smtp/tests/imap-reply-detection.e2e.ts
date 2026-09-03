@@ -29,7 +29,7 @@ async function hasReplyInInbox(subjectContains: string): Promise<boolean> {
         const lock = await client.getMailboxLock("INBOX");
         try {
             for await (const message of client.fetch({ all: true }, { envelope: true })) {
-                if (message.envelope.subject?.includes(subjectContains)) {
+                if (message.envelope?.subject?.includes(subjectContains)) {
                     return true;
                 }
             }
