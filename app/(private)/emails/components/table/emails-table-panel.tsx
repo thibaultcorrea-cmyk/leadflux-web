@@ -13,6 +13,7 @@ import { useEmailsTableActions } from "../../_hooks/useEmailsTableActions";
 import { useEmailStatusFilter } from "../../_hooks/useEmailStatusFilter";
 import type { Email } from "../../types/email";
 import { getEmailsColumns } from "./emails-columns";
+import { EmptyEmailButton } from "../empty-email-button";
 
 const PAGE_SIZE = 9;
 
@@ -64,6 +65,7 @@ export function EmailsTablePanel({ data }: { data: Email[] }) {
           <div className="ml-auto flex items-center gap-2">
             <DataTableSortMenu table={table} defaultLabel="activité récente" />
             <DataTableViewOptions table={table} />
+            <EmptyEmailButton />
           </div>
         </div>
 

@@ -21,7 +21,10 @@ export function EmailsHeader({ total }: { total: number }) {
         </div>
       </div>
 
-      <ExportEmailsButton />
+      <div className="flex items-center gap-4">
+        <ExportEmailsButton />
+
+      </div>
     </header>
   );
 }
