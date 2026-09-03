@@ -21,14 +21,21 @@ type ConfirmModalContentProps = {
   isLoading?: boolean;
   closeOnConfirm?: boolean;
   closeOnCancel?: boolean;
-  onConfirm?: () => Promise<void>;
+  onConfirm?: () => Promise<unknown>;
   onCancel?: () => Promise<void>;
   messages?: ConfirmActionMessages;
 };
 
+type ConfirmMessage = { title: string, description: string };
+
+/**
+ * `success` peut dependre du resultat de `onConfirm` (ex. nombre de
+ * brouillons rediges) : le resoudre en fonction evite de figer le message
+ * avant que l'action ait tourne (cf. dialogMessages.drafting).
+ */
 export type ConfirmActionMessages = {
-  success: { title: string, description: string };
-  error: { title: string, description: string };
+  success: ConfirmMessage | ((result: unknown) => ConfirmMessage);
+  error: ConfirmMessage;
 }
 
 /**
@@ -62,9 +69,12 @@ export function ConfirmModalContent({
   const handleConfirm = async () => {
     startTransition(async () => {
       try {
-        await onConfirm?.();
+        const result = await onConfirm?.();
         if (messages?.success) {
-          const { title, description } = messages.success;
+          const { title, description } =
+            typeof messages.success === "function"
+              ? messages.success(result)
+              : messages.success;
           toast.success({
             title,
             description,

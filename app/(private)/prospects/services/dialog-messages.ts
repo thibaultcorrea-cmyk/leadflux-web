@@ -13,30 +13,33 @@ export const dialogMessages = {
         },
     },
 
-    drafting: ({ send, failed }: ActionsCount) => {
-        return {
-            success: {
+    drafting: {
+        // `success` recoit le resultat de `onConfirm` (le retour de
+        // `sendProspect`) : evalue apres la rediaction, jamais fige avant.
+        success: (result: unknown) => {
+            const { send, failed } = result as ActionsCount;
+            return {
                 title: "Brouillon rédigé",
                 description: `${send} brouillon${send !== 1 ? "s" : ""} rédigé${send !== 1 ? "s" : ""} avec succès, ${failed} échec${failed !== 1 ? "s" : ""} d'envoi`,
-
-            },
-            error: {
-                title: "Erreur",
-                description: "Une erreur est survenue lors de la rédaction du brouillon.",
-            },
-        }
+            };
+        },
+        error: {
+            title: "Erreur",
+            description: "Une erreur est survenue lors de la rédaction du brouillon.",
+        },
     },
-    draftingMany: ({ send, failed }: ActionsCount) => {
-        return {
-            success: {
+    draftingMany: {
+        success: (result: unknown) => {
+            const { send, failed } = result as ActionsCount;
+            return {
                 title: "Brouillons rédigés",
                 description: `${send} brouillon${send !== 1 ? "s" : ""} rédigé${send !== 1 ? "s" : ""} avec succès, ${failed} échec${failed !== 1 ? "s" : ""} d'envoi`,
-            },
-            error: {
-                title: "Erreur",
-                description: "Une erreur est survenue lors de la rédaction des brouillons.",
-            },
-        }
+            };
+        },
+        error: {
+            title: "Erreur",
+            description: "Une erreur est survenue lors de la rédaction des brouillons.",
+        },
     },
     deletion: {
         success: {

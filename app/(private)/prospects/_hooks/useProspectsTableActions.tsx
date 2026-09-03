@@ -1,7 +1,7 @@
 "use client";
 
 import { Pencil, Plus, Send, Trash2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
@@ -33,12 +33,10 @@ export function useProspectsTableActions() {
   const { open } = useModalController();
   const { sendProspectEmail, deleteProspects } = useProspectMutation();
 
-  const [resultCount, setResultCount] = useState<{ send: number, failed: number }>({ send: 0, failed: 0 });
-
   const sendProspect = async (prospects: Prospect[]) => {
     await waitDelay(1500);
     const { generateEmailContent: { send, failed } } = await sendProspectEmail(prospects);
-    setResultCount({ send, failed });
+    return { send, failed };
   }
 
   const removeProspectFromSearch = async (ids: string[]) => {
@@ -66,7 +64,7 @@ export function useProspectsTableActions() {
                 description={`Un brouillon d'email sera rédigé pour ${prospect.contactName} (${prospect.company}). Rien n'est envoyé : le brouillon reste à valider.`}
                 confirmLabel="Rédiger le brouillon"
                 onConfirm={() => sendProspect([prospect])}
-                messages={dialogMessages.drafting(resultCount)}
+                messages={dialogMessages.drafting}
               />
             ),
           }),
@@ -140,7 +138,7 @@ export function useProspectsTableActions() {
                 description={`${selected.length} brouillon${selected.length > 1 ? "s seront rédigés" : " sera rédigé"}, puis présenté${selected.length > 1 ? "s" : ""} un par un pour validation. Aucun email n'est envoyé automatiquement.`}
                 confirmLabel="Rédiger les brouillons"
                 onConfirm={() => sendProspect(selected)}
-                messages={dialogMessages.draftingMany(resultCount)}
+                messages={dialogMessages.draftingMany}
               />
             ),
           }),
