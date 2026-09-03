@@ -13,6 +13,9 @@ import { showUserInitials } from "@/lib/user-session";
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import { useEmailMutation } from "../../_hooks/useEmailMutation";
+import { toast } from "@/lib/toaster";
+import { dialogMessages } from "../../services/dialog-messages";
+import { reportErrorClient } from "@/lib/report-error-client";
 
 type EmailReviewingValidateModalContentProps = {
     selectedEmails: Email[],
@@ -40,8 +43,22 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
     }
 
     const sendValidateEmails = async () => {
-        const ids = getIdsOfDraftedEmails(selectedEmails)
-        await validateSendEmailsMany({ ids })
+        try {
+            const ids = getIdsOfDraftedEmails(selectedEmails)
+            const { validateAndSendEmailsMany } = await validateSendEmailsMany({ ids })
+
+            const success = validateAndSendEmailsMany.success
+            const failed = validateAndSendEmailsMany.failed
+
+            const messages = {
+                title: "Email envoyé",
+                description: `${success} email${success !== 1 ? "s" : ""} envoyé${success !== 1 ? "s" : ""} avec succès, ${failed} échec${failed !== 1 ? "s" : ""} d'envoi`,
+            }
+            toast.info(messages)
+        } catch (error) {
+            reportErrorClient(error as Error, "Erreur lors de l'envoi d'emails")
+            toast.error(dialogMessages.sendMany.error)
+        }
 
     }
 

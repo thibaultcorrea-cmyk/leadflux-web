@@ -2,7 +2,7 @@
 
 import { Eye, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
 
-import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
+import { ConfirmActionMessages, ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
   DataTableBulkAction,
   DataTableRowAction,
@@ -11,6 +11,9 @@ import { useModalController } from "@/hooks/useModalController";
 import type { Email } from "../types/email";
 import { useEmailPreviewAction } from "./useEmailPreviewAction";
 import { useEmailMutation } from "./useEmailMutation";
+import { toast } from "@/lib/toaster";
+import { dialogMessages } from "../services/dialog-messages";
+import { waitDelay } from "@/lib/utils";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
@@ -34,13 +37,17 @@ export function useEmailsTableActions() {
   const { openPreview, openEditView, openReviewingValidateView } = useEmailPreviewAction();
   const { remove, validateAndSend } = useEmailMutation()
 
+  const sendEmail = async (id: string) => {
+    await waitDelay(1500)
+    await validateAndSend({ id })
+  }
+
 
   const removeEmails = async (ids: string[]) => {
-    try {
-      await remove({ ids })
-    } catch (error) {
-      throw new Error("Failed to remove emails")
-    }
+
+    await remove({ ids })
+    toast.success(dialogMessages.delete.success)
+
   }
 
   const confirm = (props: {
@@ -52,6 +59,8 @@ export function useEmailsTableActions() {
     closeOnConfirm?: boolean;
     onConfirm?: () => Promise<void>;
     onCancel?: () => Promise<void>;
+    messages?: ConfirmActionMessages;
+
   }) => open({ components: <ConfirmModalContent {...props} /> });
 
 
@@ -76,9 +85,12 @@ export function useEmailsTableActions() {
           description: `L'email sera envoyé à ${email.recipient}. C'est la seule étape qui déclenche un envoi.`,
           confirmLabel: "Valider et envoyer",
           onConfirm: async () => {
-            await validateAndSend({ id: email.id })
-          }
+            const result = await sendEmail(email.id)
+            return result as any
+          },
+          messages: dialogMessages.send,
         }),
+
     },
     {
       id: "repondre",
@@ -126,8 +138,8 @@ export function useEmailsTableActions() {
           tone: "destructive",
           onConfirm: async () => {
             await removeEmails([email.id])
-          }
-
+          },
+          messages: dialogMessages.delete,
         }),
     },
   ];
@@ -148,7 +160,7 @@ export function useEmailsTableActions() {
           closeOnConfirm: false,
           onConfirm: async () => {
             openReviewingValidateView(selected)
-          }
+          },
         }),
     },
     {
@@ -164,8 +176,10 @@ export function useEmailsTableActions() {
           tone: "destructive",
           onConfirm: async () => {
             await removeEmails(selected.map((email) => email.id))
-          }
+          },
+          messages: dialogMessages.deleteMany,
         }),
+
     },
   ];
 

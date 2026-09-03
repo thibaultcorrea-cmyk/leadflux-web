@@ -7,6 +7,9 @@ import { Email, EmailVersion } from "../types/email";
 import { useTransition } from "react";
 import { useModalController } from "@/hooks/useModalController";
 import { useEmailMutation } from "./useEmailMutation";
+import { toast } from "@/lib/toaster";
+import { dialogMessages } from "../services/dialog-messages";
+import { reportErrorClient } from "@/lib/report-error-client";
 
 
 interface UseEmailFormProps {
@@ -40,8 +43,10 @@ export const useEmailForm = ({ email, version, defaultValues }: UseEmailFormProp
                 })
 
                 close()
+                toast.success(dialogMessages.update.success)
             } catch (error) {
-                console.log(error)
+                reportErrorClient(error as Error, dialogMessages.update.error.title)
+                toast.error(dialogMessages.update.error)
             }
         })
 

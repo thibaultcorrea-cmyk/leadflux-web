@@ -4,6 +4,7 @@ export type ActionsManyCount = { success: number, failed: number }
 export const dialogMessages = {
     send: {
         success: (result: unknown) => {
+            console.log(result);
             const { success, failed } = result as ActionsManyCount;
             return {
                 title: "Email envoyé",
@@ -83,27 +84,36 @@ export const dialogMessages = {
 
     delete: {
         success: {
-            title: "Supprimé",
-            description: "Les fiches ont été supprimées avec succès.",
+            title: "Suppression",
+            description: "Email supprimé avec succès",
         },
         error: {
             title: "Erreur",
-            description: "Une erreur est survenue lors de la suppression des fiches.",
+            description: "Erreur lors de la suppression",
         },
 
 
     },
 
-    deleteMany: {},
-
-    truncate: {
+    deleteMany: {
         success: {
-            title: "Prospects vidés",
-            description: "Tous les prospects ont été supprimés avec succès",
+            title: "Suppression",
+            description: "Emails supprimés avec succès",
         },
         error: {
             title: "Erreur",
-            description: "Erreur lors du vidage des prospects",
+            description: "Erreur lors de la suppression",
+        },
+    },
+
+    truncate: {
+        success: {
+            title: "Emails vidés",
+            description: "Tous les emails ont été supprimés avec succès",
+        },
+        error: {
+            title: "Erreur",
+            description: "Erreur lors du vidage des emails",
         },
     }
 } as const

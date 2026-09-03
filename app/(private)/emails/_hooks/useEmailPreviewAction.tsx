@@ -2,13 +2,14 @@
 
 import { useModalController } from "@/hooks/useModalController";
 import { EmailPreviewModal } from "../components/modal/email-preview-modal";
-import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
+import { ConfirmActionMessages, ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import { Email } from "../types/email";
 import EditEmailForm from "../components/forms/edit-email-form";
 import { SendEmailConfirmModalContent } from "../components/modal/send-email-confirm";
 import { useEmailMutation } from "./useEmailMutation";
 import { getLastVersion } from "../services/utils";
 import { EmailReviewingValidateModalContent } from "../components/modal/email-reviewing-validate";
+import { dialogMessages } from "../services/dialog-messages";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
 const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
@@ -27,6 +28,7 @@ export const useEmailPreviewAction = () => {
         tone?: "default" | "destructive";
         onConfirm?: () => Promise<void>;
         onCancel?: () => Promise<void>;
+        messages?: ConfirmActionMessages
     }) => open({ components: <ConfirmModalContent {...props} closeOnCancel={false} /> });
 
     const SendEmailConfirmModal = (props: {
@@ -37,6 +39,7 @@ export const useEmailPreviewAction = () => {
         onConfirm?: () => Promise<void>;
         email: Email;
         onCancel?: () => Promise<void>;
+        messages?: ConfirmActionMessages
 
     }) => {
         return (
@@ -58,14 +61,18 @@ export const useEmailPreviewAction = () => {
                             title: "Modifier le brouillon",
                             description: `L'éditeur de l'email adressé à ${current.contactName} arrive dans un prochain lot.`,
                             confirmLabel: "Compris",
+                            messages: dialogMessages.update
 
                         })
+
                     }
                     onRegenerate={(current) =>
                         confirm({
                             title: "Régénérer le brouillon",
                             description: `Une nouvelle version sera rédigée pour ${current.contactName}. Les versions précédentes restent accessibles depuis l'aperçu.`,
                             confirmLabel: "Régénérer",
+                            messages: dialogMessages.reGenerate
+
                         })
                     }
                     onValidate={(current) =>
@@ -75,10 +82,12 @@ export const useEmailPreviewAction = () => {
                             description: `L'email sera envoyé à ${current.recipient}. C'est la seule étape qui déclenche un envoi.`,
                             confirmLabel: "Valider et envoyer",
                             onConfirm: async () => {
-                                const result = await validateAndSend({ id: current.id })
+                                const lo = await validateAndSend({ id: current.id })
+                                console.log(lo);
+
                             },
 
-
+                            messages: dialogMessages.send
 
                         })
                     }

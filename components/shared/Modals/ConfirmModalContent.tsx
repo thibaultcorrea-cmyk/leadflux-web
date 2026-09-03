@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useModalController } from "@/hooks/useModalController";
+import { reportErrorClient } from "@/lib/report-error-client";
 import { toast } from "@/lib/toaster";
 import { Loader2 } from "lucide-react";
 import { useTransition } from "react";
@@ -81,6 +82,7 @@ export function ConfirmModalContent({
           });
         }
       } catch (error) {
+        reportErrorClient(error as Error, "Error on confirm modal")
         if (messages?.error) {
           const { title, description } = messages.error;
           toast.error({

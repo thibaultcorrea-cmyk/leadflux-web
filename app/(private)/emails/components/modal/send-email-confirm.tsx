@@ -1,6 +1,7 @@
 "use client"
 
 
+import { ConfirmActionMessages } from "@/components/shared/Modals/ConfirmModalContent";
 import { Button } from "@/components/ui/button";
 import {
     DialogDescription,
@@ -9,6 +10,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { useModalController } from "@/hooks/useModalController";
+import { toast } from "@/lib/toaster";
 import { Loader2 } from "lucide-react";
 import { useRef, useTransition } from "react";
 
@@ -23,6 +25,7 @@ type ConfirmModalContentProps = {
     closeOnCancel?: boolean;
     onConfirm?: () => Promise<void>;
     onCancel?: () => Promise<void>;
+    messages?: ConfirmActionMessages
 };
 
 /**
@@ -41,7 +44,8 @@ export function SendEmailConfirmModalContent({
     closeOnConfirm = true,
     closeOnCancel = true,
     onConfirm,
-    onCancel
+    onCancel,
+    messages
 }: ConfirmModalContentProps) {
     const { close } = useModalController();
 
@@ -59,10 +63,29 @@ export function SendEmailConfirmModalContent({
         startTransition(async () => {
             try {
                 await promise
-                await onConfirm?.()
+                const result = await onConfirm?.();
                 if (closeOnConfirm) close();
+                if (messages?.success) {
+                    const { title, description } =
+                        typeof messages.success === "function"
+                            ? messages.success(result)
+                            : messages.success;
+                    toast.success({
+                        title,
+                        description,
+                    });
+                }
+
+
             } catch (error) {
-                console.log(error);
+                if (messages?.error) {
+                    const { title, description } = messages.error;
+                    toast.error({
+                        title,
+                        description,
+
+                    })
+                }
             }
 
         })
