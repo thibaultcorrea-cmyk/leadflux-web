@@ -6,6 +6,9 @@ import { waitDelay } from "@/lib/utils"
 import { Loader2, Trash } from "lucide-react"
 import { useTransition } from "react"
 import { useProspectMutation } from "../../_hooks/useProspectMutation"
+import { toast } from "@/lib/toaster"
+import { dialogMessages } from "../../services/dialog-messages"
+import { reportErrorClient } from "@/lib/report-error-client"
 
 export function TruncateProspectButton() {
 
@@ -18,8 +21,10 @@ export function TruncateProspectButton() {
             try {
                 await waitDelay(2000)
                 await truncate()
+                toast.success(dialogMessages.truncate.success)
             } catch (error) {
-                console.log(error)
+                reportErrorClient(error as Error, "Erreur lors du vidage des prospects")
+                toast.error(dialogMessages.truncate.error)
             }
         })
     }

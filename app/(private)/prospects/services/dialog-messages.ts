@@ -60,5 +60,18 @@ export const dialogMessages = {
             title: "Erreur",
             description: "Une erreur est survenue lors de la suppression des fiches.",
         },
+
+
     },
+
+    truncate: {
+        success: {
+            title: "Prospects vidés",
+            description: "Tous les prospects ont été supprimés avec succès",
+        },
+        error: {
+            title: "Erreur",
+            description: "Erreur lors du vidage des prospects",
+        },
+    }
 } as const
