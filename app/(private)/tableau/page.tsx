@@ -26,7 +26,7 @@ export default function TableauPage() {
           </div>
         </div>
 
-        <NewSearchButton />
+        <NewSearchButton redirect={true} />
       </header>
 
       <KpiHeaderSection />

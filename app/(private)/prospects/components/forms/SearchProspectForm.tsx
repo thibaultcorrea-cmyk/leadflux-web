@@ -10,13 +10,16 @@ import { SearchFormInputs } from "./SearchFormInputs";
 import { useModalController } from "@/hooks/useModalController";
 import { LeadFinderFormSchemaType } from "../../types/forms";
 import { useProspectMutation } from "../../_hooks/useProspectMutation";
+import { useRouter } from "next/navigation";
+import { toast } from "@/lib/toaster";
 
 
 
-export const SearchProspectForm = () => {
+export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
     const { form } = useSearchProspectForm()
     const modalController = useModalController()
     const { createSearchProspect } = useProspectMutation()
+    const router = useRouter()
 
     const close = () => {
         modalController.close()
@@ -25,8 +28,17 @@ export const SearchProspectForm = () => {
 
 
     const onSubmit = async (data: LeadFinderFormSchemaType) => {
-        await createSearchProspect(data)
-        close()
+        try {
+            await createSearchProspect(data)
+            close();
+            if (redirect) {
+                router.push("/prospects");
+            }
+            toast.success({ title: "Recherche lancée avec succès" })
+
+        } catch (error) {
+            toast.error({ title: "Erreur lors du lancement de la recherche" })
+        }
     }
 
     return (

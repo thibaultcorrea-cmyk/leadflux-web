@@ -13,11 +13,13 @@ import { cn } from "@/lib/utils";
 export function NewSearchButton({
   label = "Nouvelle recherche",
   className,
+  redirect
 }: {
   label?: string;
   className?: string;
+  redirect?: boolean
 }) {
-  const { openSearchModal } = useSearchModal();
+  const { openSearchModal } = useSearchModal({ redirect });
 
   return (
     <Button

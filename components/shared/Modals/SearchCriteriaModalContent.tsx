@@ -21,13 +21,15 @@ import { useModalController } from "@/hooks/useModalController";
  * d'ouverture depuis le Tableau, la page de résultats et la barre de critères.
  */
 export function SearchCriteriaModalContent() {
-  const { close } = useModalController();
+  const { payload } = useModalController();
+
+  const redirectValue = (payload as { redirect: boolean })?.redirect || false;
 
   return (
     <>
 
 
-      <SearchProspectForm />
+      <SearchProspectForm redirect={redirectValue} />
 
 
     </>
