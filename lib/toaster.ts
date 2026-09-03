@@ -16,6 +16,7 @@ class Toast implements IToast {
             title,
             description,
             type: "success",
+
         })
 
     }

@@ -17,6 +17,9 @@ import { EmailInputView } from "./email-input-view";
 import { useEmailForm } from "../../_hooks/useEmailForm";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
 import { useEmailMutation } from "../../_hooks/useEmailMutation";
+import { toast } from "@/lib/toaster";
+import { dialogMessages } from "../../services/dialog-messages";
+import { reportErrorClient } from "@/lib/report-error-client";
 
 /** Initiales du prospect, pour l'avatar de l'entête. */
 function getInitials(name: string) {
@@ -93,8 +96,16 @@ export function EmailPreviewModal({
           setVersionIndex(nextVersions.length - 1);
           return nextVersions;
         });
+        toast.success({
+          title: "Nouvelle version de l'email",
+          description: "Nouvelle version de l'email générée avec succès",
+        })
       } catch (error) {
-        console.error(error)
+        reportErrorClient(error as Error, "Impossible de générer la version de l'email. Veuillez réessayer ultérieurement")
+        toast.error({
+          title: "Erreur lors de la génération de la version",
+          description: "Impossible de générer la version de l'email. Veuillez réessayer ultérieurement",
+        })
       }
     })
   };

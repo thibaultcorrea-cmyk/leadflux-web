@@ -61,7 +61,6 @@ export const useEmailPreviewAction = () => {
                             title: "Modifier le brouillon",
                             description: `L'éditeur de l'email adressé à ${current.contactName} arrive dans un prochain lot.`,
                             confirmLabel: "Compris",
-                            messages: dialogMessages.update
 
                         })
 
@@ -71,7 +70,6 @@ export const useEmailPreviewAction = () => {
                             title: "Régénérer le brouillon",
                             description: `Une nouvelle version sera rédigée pour ${current.contactName}. Les versions précédentes restent accessibles depuis l'aperçu.`,
                             confirmLabel: "Régénérer",
-                            messages: dialogMessages.reGenerate
 
                         })
                     }
