@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
     environment:
       GREENMAIL_OPTS: >-
-        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=test@leadflux.local:test -Dgreenmail.verbose
+        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${SMTP_USER}:${SMTP_PASS} -Dgreenmail.verbose
     ports:
       - "3025:3025" # SMTP de test
       - "3143:3143" # IMAP de test
