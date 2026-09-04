@@ -75,7 +75,10 @@ export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarTrigger className=" mx-auto size-9 rounded-md bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground  group-data-[collapsible=icon]:flex hidden"
+        <SidebarTrigger className="transition-all duration-500 ease-in-out mx-auto size-9 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground  group-data-[collapsible=icon]:flex hidden group-data-[collapsible=icon]:animate-in fade-in-0 group-data-[collapsible=icon]:slide-in-from-left-100"
+          render={<Button>
+            <ChevronRight className="size-5 text-accent-500" />
+          </Button>}
         />
         <SidebarGroup className="px-3 group-data-[collapsible=icon]:px-2">
           <SidebarGroupContent>
