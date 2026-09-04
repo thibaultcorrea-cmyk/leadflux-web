@@ -69,15 +69,18 @@ export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
               {brand.label}
             </span>
           </Link>
-          <SidebarTrigger className="size-7 shrink-0 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground absolute right-0 translate-x-1/2 border border-accent group-data-[collapsible=icon]:hidden"
+          <SidebarTrigger className="size-7 shrink-0 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground absolute right-0 translate-x-1/2 border border-accent group-data-[collapsible=icon]:hidden cursor-pointer"
+            render={<Button>
+              <ChevronLeft className="size-5 hover:text-accent-500" />
+            </Button>}
           />
         </div>
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarTrigger className="transition-all duration-500 ease-in-out mx-auto size-9 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground  group-data-[collapsible=icon]:flex hidden group-data-[collapsible=icon]:animate-in fade-in-0 group-data-[collapsible=icon]:slide-in-from-left-100"
+        <SidebarTrigger className="transition-all duration-500 ease-in-out mx-auto size-9 rounded-full bg-sidebar-accent text-secondary-200 hover:bg-sidebar-accent hover:text-sidebar-foreground  group-data-[collapsible=icon]:flex hidden group-data-[collapsible=icon]:animate-in fade-in-0 group-data-[collapsible=icon]:slide-in-from-left-100 cursor-pointer"
           render={<Button>
-            <ChevronRight className="size-5 text-accent-500" />
+            <ChevronRight className="size-5 hover:text-accent-500" />
           </Button>}
         />
         <SidebarGroup className="px-3 group-data-[collapsible=icon]:px-2">
