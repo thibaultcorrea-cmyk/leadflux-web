@@ -14,12 +14,14 @@ services:
   # Faux serveur SMTP + IMAP pour tester en local la detection de reponse
   # (statut "A repondu"), sans toucher a une vraie boite Gmail. Ephemere :
   # aucune persistance, les messages disparaissent a l'arret du conteneur.
+  # Reserve a ce seul usage IMAP (features/smtp/tests/imap-reply-detection.e2e.ts) :
+  # l'envoi applicatif normal passe par maildev, pas par greenmail.
   greenmail:
     image: greenmail/standalone:latest
     restart: unless-stopped
     environment:
       GREENMAIL_OPTS: >-
-        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${SMTP_USER}:${SMTP_PASS} -Dgreenmail.verbose
+        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${IMAP_TEST_USER}:${IMAP_TEST_PASS} -Dgreenmail.verbose
     ports:
       - "3025:3025" # SMTP de test
       - "3143:3143" # IMAP de test
@@ -35,5 +37,15 @@ services:
       - ROUNDCUBEMAIL_DEFAULT_PORT=3143
       - ROUNDCUBEMAIL_SMTP_SERVER=greenmail
       - ROUNDCUBEMAIL_SMTP_PORT=3025
+
+  # Capture tout email sortant de l'app (mode brouillon/test local) dans une
+  # seule UI web, quel que soit le destinataire : pas de notion de boite par
+  # compte comme greenmail, donc pas besoin de redirection cote code.
+  maildev:
+    image: maildev/maildev:latest
+    restart: unless-stopped
+    ports:
+      - "1080:1080" # UI web
+      - "1025:1025" # SMTP
 volumes:
   leadflux-postgres-data:
