@@ -21,10 +21,11 @@ services:
     restart: unless-stopped
     environment:
       GREENMAIL_OPTS: >-
-        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${IMAP_TEST_USER}:${IMAP_TEST_PASS} -Dgreenmail.verbose
+        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${SMTP_USER}:${SMTP_PASS} -Dgreenmail.verbose
     ports:
       - "3025:3025" # SMTP de test
       - "3143:3143" # IMAP de test
+      - "8080:8080" # API REST GreenMail (creer/lister/supprimer des comptes)
 
   roundcube:
     image: roundcube/roundcubemail:latest
