@@ -1,12 +1,10 @@
 import { ProspectServicesImpl } from "@/features/prospects/services"
-import { EmailAgentMock } from "../mocks/email-contents"
 import { AgentEmailGenerateApiInput, AgentEmailGenerateOutput, AgentEmailSendInput, AgentEmailSendResult } from "./entities/agentEmail"
 import { AgentEmailWriteRepository } from "./repositories/write"
 import { TProspectWithRelations } from "@/features/prospects/entities/type"
 import { CreateEmailDto } from "@/features/emails/dto/schema"
 import { SMTPServiceImpl } from "@/features/smtp/services"
 import { SendEmailDto } from "@/features/smtp/dto/schema"
-import { EmailProspectsServicesImpl } from "@/features/emails/services"
 import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
 
 export const AgentEmailService = {

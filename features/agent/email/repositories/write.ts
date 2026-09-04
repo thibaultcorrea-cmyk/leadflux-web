@@ -16,16 +16,6 @@ const API_ENDPOINT = {
 export const AgentEmailWriteRepository = {
     generate: async (payload: AgentEmailGenerateApiInput): Promise<AgentEmailGenerateApiOutput> => {
         try {
-            const { subject, content } = EmailAgentMock[0]
-
-            return {
-                status: "draft",
-                entreprise: payload.company.name + "regenerated",
-                subject: subject + "regenerated",
-                content: content,
-            }
-
-
             const res = await fetch(API_ENDPOINT.generateEmailContent, {
                 method: "POST",
                 headers: {
