@@ -8,6 +8,7 @@ import {
   index,
 } from "drizzle-orm/pg-core";
 import { user } from "./authSchema";
+import { AgentEmailGenerateApiInput } from "@/features/agent/email/entities/agentEmail";
 
 /**
  * Les trois seuls statuts du produit : aucun envoi n'est automatique (CLAUDE.md §3).
@@ -16,6 +17,12 @@ import { user } from "./authSchema";
  */
 export const EMAIL_STATUSES = ["draft", "sent", "replied"] as const;
 export type EmailStatusValue = (typeof EMAIL_STATUSES)[number];
+
+/**
+ * Payload d'entree d'un email.
+ */
+export type EmailGenerationInput = AgentEmailGenerateApiInput
+
 
 /**
  * Table racine du domaine email : le suivi d'une prospection par email. Pas de
@@ -60,6 +67,13 @@ export const emails = pgTable(
      * reponse.
      */
     threadId: text("thread_id"),
+
+    /**
+     * Entree utilisé pour la generation de l'email. Il est stocké ici pour 
+     * permettre la regeneration de l'email. Si cette entree change, il faut 
+     * recrée une nouvelle version de l'email.  
+     */
+    generationInput: jsonb("generation_input").$type<EmailGenerationInput>(),
 
     /**
      * Derniere activite (nouvelle version generee, envoi, reponse) : mise a

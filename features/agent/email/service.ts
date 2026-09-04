@@ -6,6 +6,8 @@ import { TProspectWithRelations } from "@/features/prospects/entities/type"
 import { CreateEmailDto } from "@/features/emails/dto/schema"
 import { SMTPServiceImpl } from "@/features/smtp/services"
 import { SendEmailDto } from "@/features/smtp/dto/schema"
+import { EmailProspectsServicesImpl } from "@/features/emails/services"
+import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
@@ -18,14 +20,32 @@ export const AgentEmailService = {
         return {
             subject,
             body: content,
-            knowledgeVersion: "1.0.0"
+            knowledgeVersion: "1.0.0",
+            payload
         }
 
 
     },
-    regenerate: async (inputs: any): Promise<AgentEmailGenerateOutput> => {
-        const randomIndx = Math.floor(Math.random() * EmailAgentMock.length)
-        return Promise.resolve(EmailAgentMock[randomIndx])
+    regenerate: async (emailId: string): Promise<AgentEmailGenerateOutput> => {
+        const email = await EmailReadRepositoriesImpl.get(emailId)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+
+        const payload = email.generationInput
+        if (!payload) {
+            throw new Error("No payload found for this email")
+        }
+
+        const result = await AgentEmailWriteRepository.generate(payload)
+        const { subject, content } = result
+
+        return {
+            subject,
+            body: content,
+            knowledgeVersion: "1.0.0",
+            payload
+        }
     },
     sendEmail: async (input: AgentEmailSendInput): Promise<AgentEmailSendResult> => {
         const payload = {

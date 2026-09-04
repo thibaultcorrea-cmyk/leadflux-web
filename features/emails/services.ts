@@ -1,4 +1,4 @@
-import { EmailSqlInfer, EmailStatusValue, EmailVersionSqlInfer } from "@/db/schemas"
+import { EmailGenerationInput, EmailSqlInfer, EmailStatusValue, EmailVersionSqlInfer } from "@/db/schemas"
 import { EmailProspectsServices } from "./entities/services"
 import { CreateEmailByProspectIdDto, CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "./dto/schema"
 import { emailValidator } from "./dto/validator"
@@ -57,6 +57,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             ...validated.data,
             validatedBy: currentUser.id,
             status,
+            generationInput: agentResponse.payload,
         })
         const version = await EmailVersionWriteRepositoriesImpl.create({
             emailId: email.id,
@@ -155,17 +156,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             throw new Error("Email not found")
         }
 
-        const input = {
-
-            prospectName: email.prospectName,
-            prospectCompany: email.prospectCompany,
-            prospectJob: email.prospectJob,
-            prospectLocation: email.prospectLocation,
-            prospectingConsent: email.prospectingConsent,
-
-        }
-
-        const agentResponse = await AgentEmailService.regenerate(input)
+        const agentResponse = await AgentEmailService.regenerate(id)
         const newVersion = await EmailVersionWriteRepositoriesImpl.create({
             emailId: email.id,
             body: agentResponse.body,
@@ -173,6 +164,8 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             generatedAt: new Date(),
             knowledgeVersion: agentResponse.knowledgeVersion,
         })
+        //update generation input in email table
+        await EmailProspectsServicesImpl.updateGenerationInput(email.id, agentResponse.payload)
         return newVersion
     },
     regenerateMany: async (ids: string[]) => {
@@ -198,8 +191,22 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     collections: async (query: any) => {
         return EmailReadRepositoriesImpl.find(query)
     },
-    update: async (email) => {
-        throw new Error("Method not implemented.")
+    update: async (email: any) => {
+        const emailInDb = await EmailReadRepositoriesImpl.get(email.id)
+        if (!emailInDb) {
+            throw new Error("Email not found")
+        }
+        const result = await EmailWriteRepositoriesImpl.update(email)
+        return result
+    },
+
+    updateGenerationInput: async (emailId: string, input: EmailGenerationInput) => {
+        const email = await EmailReadRepositoriesImpl.get(emailId)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+        const result = await EmailWriteRepositoriesImpl.update({ id: email.id, generationInput: input })
+        return result
     },
 
     updateEmailContent: async (input: Partial<UpdateEmailContentDto>) => {

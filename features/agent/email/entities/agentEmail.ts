@@ -3,6 +3,7 @@ export type AgentEmailGenerateOutput = {
     subject: string;
     body: string;
     knowledgeVersion: string;
+    payload: AgentEmailGenerateApiInput;
 }
 
 export type AgentEmailSendInput = {

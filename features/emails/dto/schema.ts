@@ -37,6 +37,7 @@ export const createEmailSchema = z.object({
     prospectEmail: z.email("L'email du prospect est invalide"),
     prospectLocation: z.string().optional(),
     prospectingConsent: z.boolean().optional(),
+    generationInput: z.any().optional(),
 })
 
 export type CreateEmailDto = z.infer<typeof createEmailSchema>

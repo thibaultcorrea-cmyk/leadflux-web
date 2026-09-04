@@ -1,4 +1,4 @@
-import { EmailSqlInfer, EmailVersionSqlInfer } from "@/db/schemas"
+import { EmailGenerationInput, EmailSqlInfer, EmailVersionSqlInfer } from "@/db/schemas"
 import { CreateEmailByProspectIdDto, CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "../dto/schema"
 import { Email, EmailVersion, GenerateManyResult, ManyOperationResult } from "./type"
 import { AgentEmailSendResult } from "@/features/agent/email/entities/agentEmail"
@@ -16,6 +16,7 @@ export type EmailProspectsServices = {
     update: (email: Partial<EmailSqlInfer>) => Promise<EmailSqlInfer>
     updateEmailContent: (email: Partial<UpdateEmailContentDto>) => Promise<EmailSqlInfer>
     updateStatus: (input: UpdateEmailStatusDto) => Promise<EmailSqlInfer>
+    updateGenerationInput: (emailId: string, input: EmailGenerationInput) => Promise<EmailSqlInfer>
     delete: (id: string) => Promise<void>
     deleteMany: (ids: string[]) => Promise<ManyOperationResult>
     clear: () => Promise<void>
