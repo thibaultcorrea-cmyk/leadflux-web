@@ -4,7 +4,12 @@ export type ActionsManyCount = { success: number, failed: number }
 export const dialogMessages = {
     send: {
         success: (result: unknown) => {
-            console.log(result);
+            if (!result) {
+                return {
+                    title: "Email envoyé",
+                    description: "Email envoyé avec succès",
+                };
+            }
             const { success, failed } = result as ActionsManyCount;
             return {
                 title: "Email envoyé",

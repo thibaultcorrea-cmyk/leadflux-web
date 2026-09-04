@@ -17,6 +17,12 @@ export const dialogMessages = {
         // `success` recoit le resultat de `onConfirm` (le retour de
         // `sendProspect`) : evalue apres la rediaction, jamais fige avant.
         success: (result: unknown) => {
+            if (!result) {
+                return {
+                    title: "Brouillon redigé",
+                    description: "Brouillon  rédigé avec succès",
+                };
+            }
             const { send, failed } = result as ActionsCount;
             return {
                 title: "Brouillon rédigé",
