@@ -57,6 +57,7 @@ export function DataTableRowActions<TData>({
 }) {
   const visibleActions = actions.filter((action) => !action.isHidden?.(row));
 
+
   if (visibleActions.length === 0) {
     return null;
   }
@@ -98,7 +99,7 @@ export function DataTableRowActions<TData>({
                   className={cn(
                     "text-ink-700",
                     action.variant === "destructive" &&
-                      "text-destructive hover:bg-destructive/10 hover:text-destructive"
+                    "text-destructive hover:bg-destructive/10 hover:text-destructive"
                   )}
                 />
               }

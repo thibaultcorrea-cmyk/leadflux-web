@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
+import { Check, Eye, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
 
 import { ConfirmActionMessages, ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
@@ -93,31 +93,41 @@ export function useEmailsTableActions() {
 
     },
     {
-      id: "repondre",
-      label: "Répondre",
-      icon: Reply,
-      variant: "primary",
-      isHidden: (email) => email.status !== "replied",
-      onSelect: (email) =>
-        confirm({
-          title: "Répondre",
-          description: `Une réponse sera préparée pour ${email.contactName}, en brouillon comme le reste.`,
-          confirmLabel: "Préparer la réponse",
-        }),
-    },
-    {
-      id: "relancer",
-      label: "Relancer",
-      icon: Repeat2,
+      id: "envoyé",
+      label: "Envoyé",
+      icon: Check,
       variant: "primary",
       isHidden: (email) => email.status !== "sent",
       onSelect: (email) =>
-        confirm({
-          title: "Relancer",
-          description: `Une relance sera rédigée pour ${email.contactName}, à valider avant envoi.`,
-          confirmLabel: "Préparer la relance",
-        }),
+        null
     },
+    /* 
+     {
+        id: "repondre",
+        label: "Répondre",
+        icon: Reply,
+        variant: "primary",
+        isHidden: (email) => email.status !== "replied",
+        onSelect: (email) =>
+          confirm({
+            title: "Répondre",
+            description: `Une réponse sera préparée pour ${email.contactName}, en brouillon comme le reste.`,
+            confirmLabel: "Préparer la réponse",
+          }),
+      },
+      {
+        id: "relancer",
+        label: "Relancer",
+        icon: Repeat2,
+        variant: "primary",
+        isHidden: (email) => email.status !== "sent",
+        onSelect: (email) =>
+          confirm({
+            title: "Relancer",
+            description: `Une relance sera rédigée pour ${email.contactName}, à valider avant envoi.`,
+            confirmLabel: "Préparer la relance",
+          }),
+      },*/
     {
       id: "modifier",
       label: "Modifier l'email",
