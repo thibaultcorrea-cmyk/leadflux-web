@@ -16,6 +16,7 @@ import { useEmailMutation } from "../../_hooks/useEmailMutation";
 import { toast } from "@/lib/toaster";
 import { dialogMessages } from "../../services/dialog-messages";
 import { reportErrorClient } from "@/lib/report-error-client";
+import { EmailHTMLEditor } from "./email-html-editor";
 
 type EmailReviewingValidateModalContentProps = {
     selectedEmails: Email[],
@@ -129,11 +130,7 @@ const ContentEmailReviewingValidateModalContent = ({ email, version }: { email: 
                     </dd>
                 </div>
             </dl>
-            <div className="flex flex-col gap-3 border-t border-border pt-4 ">
-                <p className="text-sm leading-relaxed text-ink-700 whitespace-pre-line px-1.5 overflow-y-auto max-h-[42vh]">
-                    {version.body}
-                </p>
-            </div>
+            <EmailHTMLEditor content={version.body} />
         </>
     )
 }
