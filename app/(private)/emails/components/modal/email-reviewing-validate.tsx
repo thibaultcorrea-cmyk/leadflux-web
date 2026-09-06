@@ -130,7 +130,11 @@ const ContentEmailReviewingValidateModalContent = ({ email, version }: { email: 
                     </dd>
                 </div>
             </dl>
-            <EmailHTMLEditor key={version.id} content={version.body} />
+
+            <div
+                className="text-sm leading-relaxed text-ink-700 px-1.5 overflow-y-auto max-h-[42vh] [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-5 [&_ol]:pl-5 [&_strong]:font-semibold [&_em]:italic [&_u]:underline"
+                dangerouslySetInnerHTML={{ __html: version.body }}
+            />
         </>
     )
 }
