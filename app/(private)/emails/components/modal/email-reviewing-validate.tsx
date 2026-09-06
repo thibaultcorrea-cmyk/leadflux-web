@@ -130,7 +130,7 @@ const ContentEmailReviewingValidateModalContent = ({ email, version }: { email: 
                     </dd>
                 </div>
             </dl>
-            <EmailHTMLEditor content={version.body} />
+            <EmailHTMLEditor key={version.id} content={version.body} />
         </>
     )
 }
