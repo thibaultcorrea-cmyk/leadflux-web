@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/lib/toaster";
 import { reportErrorClient } from "@/lib/report-error-client";
 import { dialogMessages } from "../../services/dialog-messages";
+import { waitDelay } from "@/lib/utils";
 
 
 
@@ -31,6 +32,7 @@ export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
 
     const onSubmit = async (data: LeadFinderFormSchemaType) => {
         try {
+            await waitDelay(3000)
             await createSearchProspect(data)
             close();
             if (redirect) {
