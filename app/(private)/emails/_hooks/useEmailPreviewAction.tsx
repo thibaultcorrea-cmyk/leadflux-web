@@ -96,7 +96,15 @@ export const useEmailPreviewAction = () => {
 
     const openEditView = (email: Email) => open({
         contentClassName: EDIT_MODAL_CLASSNAME,
-        components: <EditEmailForm email={email} version={getLastVersion(email.versions)} />
+        // key unique par ouverture : la modale reste montée en permanence
+        // (ModalProvider ne fait que remplacer `components`), et l'id de
+        // version ne change pas lors d'une simple édition de contenu. Sans
+        // clé qui change à chaque ouverture, React met à jour la même
+        // instance d'EditEmailForm au lieu de la remonter, et useForm ne
+        // reprend ses defaultValues qu'au montage : rouvrir le même email
+        // après l'avoir modifié laissait le formulaire (et l'éditeur riche)
+        // sur ses valeurs de la toute première ouverture.
+        components: <EditEmailForm key={`${email.id}-${Date.now()}`} email={email} version={getLastVersion(email.versions)} />
     })
 
     const openReviewingValidateView = (selectedEmails: Email[]) => open({

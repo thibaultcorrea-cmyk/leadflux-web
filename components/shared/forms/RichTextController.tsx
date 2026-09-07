@@ -26,6 +26,8 @@ const RichTextController = ({
 
     const { control, formState: { errors } } = form
 
+
+
     return (
         <Controller
             name={name}

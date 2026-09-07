@@ -54,6 +54,7 @@ export const EditEmailForm = ({ email, version }: EditEmailFormProps) => {
                 </FieldGroup>
                 <FieldGroup>
                     <RichTextController
+                        key={emailVersionId}
                         form={form}
                         name={"body"}
                         label={"Contenu de l'email"}
