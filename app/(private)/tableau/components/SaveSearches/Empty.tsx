@@ -21,13 +21,10 @@ export default function EmptySaveSearches() {
             <EmptyHeader>
                 <EmptyTitle>Recherches sauvegardées</EmptyTitle>
                 <EmptyDescription>
-                    Ajoutez une recherche pour commencer
+                    Aucune recherche sauvegardée pour le moment.
                 </EmptyDescription>
             </EmptyHeader>
-            <EmptyContent className="flex-row justify-center gap-2">
-                <Button>Nouvelle recherche</Button>
-                <Button variant="outline">Prospects enregistrés</Button>
-            </EmptyContent>
+
 
         </Empty>
     );

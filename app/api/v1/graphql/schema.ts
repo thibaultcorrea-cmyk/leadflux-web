@@ -311,7 +311,8 @@ type Mutation {
     deleteManyEmailProspects(ids: [ID!]!): ManyOperationResult
     clearProspectsAndResults:Boolean
     clearEmailProspects:TruncateResult
-    
+    clearSavedSearches: TruncateResult
+
    
 }
 

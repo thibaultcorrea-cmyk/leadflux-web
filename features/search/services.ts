@@ -75,6 +75,10 @@ export const SearchProspectsServicesImpl: any = {
         return search
     },
 
+    clearSavedSearches: async () => {
+        await SearchWriteRepositoriesImpl.truncate()
+    },
+
     clear: async () => {
         try {
             await clearProspectsAndResults()
@@ -209,6 +213,9 @@ export const peristCleanProspect = async (data: Awaited<ReturnType<typeof leadsA
 
     return prospectSaved
 }
+
+
+
 
 export const clearProspectsAndResults = async () => {
     await SearchResultServicesImpl.clear()
