@@ -53,6 +53,11 @@ export const RichTextEditor = ({ value, onChange, onBlur, ariaLabel = "Zone de t
         }
     }, [editor, value])
 
+    // useEditorState ne rafraîchit son instantané qu'au prochain événement
+    // "transaction"/"update" de l'éditeur : juste après sa création, avant
+    // toute interaction (clic, sélection), il reste `null` indéfiniment. Ce
+    // n'est utile qu'aux boutons de la bulle de formatage (gras/italique/…),
+    // jamais une raison de ne pas afficher le contenu déjà chargé.
     const formatState = useEditorState({
         editor,
         selector: ({ editor }) =>
@@ -67,7 +72,7 @@ export const RichTextEditor = ({ value, onChange, onBlur, ariaLabel = "Zone de t
                 : null,
     })
 
-    if (!editor || !formatState) {
+    if (!editor) {
         return null
     }
 
@@ -80,32 +85,32 @@ export const RichTextEditor = ({ value, onChange, onBlur, ariaLabel = "Zone de t
                 <RichTextFormattingButton
                     label="Gras"
                     icon={Bold}
-                    pressed={formatState.isBold}
+                    pressed={formatState?.isBold ?? false}
                     onToggle={() => editor.chain().focus().toggleBold().run()}
                 />
                 <RichTextFormattingButton
                     label="Italique"
                     icon={Italic}
-                    pressed={formatState.isItalic}
+                    pressed={formatState?.isItalic ?? false}
                     onToggle={() => editor.chain().focus().toggleItalic().run()}
                 />
                 <RichTextFormattingButton
                     label="Souligné"
                     icon={UnderlineIcon}
-                    pressed={formatState.isUnderline}
+                    pressed={formatState?.isUnderline ?? false}
                     onToggle={() => editor.chain().focus().toggleUnderline().run()}
                 />
                 <Separator orientation="vertical" className="mx-0.5 h-5" />
                 <RichTextFormattingButton
                     label="Liste à puces"
                     icon={List}
-                    pressed={formatState.isBulletList}
+                    pressed={formatState?.isBulletList ?? false}
                     onToggle={() => editor.chain().focus().toggleBulletList().run()}
                 />
                 <RichTextFormattingButton
                     label="Liste numérotée"
                     icon={ListOrdered}
-                    pressed={formatState.isOrderedList}
+                    pressed={formatState?.isOrderedList ?? false}
                     onToggle={() => editor.chain().focus().toggleOrderedList().run()}
                 />
             </BubbleMenu>
