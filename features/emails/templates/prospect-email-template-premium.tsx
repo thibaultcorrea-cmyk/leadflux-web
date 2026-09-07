@@ -13,40 +13,28 @@ const FONT_DISPLAY = "Georgia, 'Times New Roman', serif";
 const FONT_UI = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 
 /**
- * Icône `Radar` de lucide-react, recopiée en SVG brut plutôt qu'importée.
- * Depuis `lucide-react@1.27`, les icônes sont tagguées `"use client"` : les
- * appeler depuis `render()` (build Node de `@react-email/render`, utilisé
- * par `sendEmail` côté serveur) plante avec « Attempted to call the default
- * export ... from the server, but it's on the client », `render()` ne
- * passant pas par le pipeline RSC de Next qui sait résoudre ces références.
- * Un `<svg>`/`<path>` brut n'a pas ce problème : ce sont des éléments
- * intrinsèques, ni client ni serveur. Tracé identique à l'original.
+ * Repère de marque en PNG (`public/images/company-logo-placeholder.png`),
+ * pas en SVG : un `<svg>` inline évitait le crash `lucide-react` (icônes
+ * tagguées `"use client"`, incompatibles avec `render()` côté serveur —
+ * voir l'historique de ce fichier) mais reste illisible dans Outlook
+ * desktop, qui ne supporte pas le SVG en email. Un PNG n'a ni l'un ni
+ * l'autre problème : aucune frontière client/serveur, et supporté partout.
+ *
+ * URL absolue et non un chemin relatif : un email ouvert chez le
+ * destinataire n'a pas d'origine sur laquelle résoudre `/images/...`,
+ * contrairement à l'aperçu client qui tourne sur le même domaine que l'app.
+ *
+ * `process.env.NEXT_PUBLIC_APP_URL` en accès direct, jamais `ENV` de
+ * `@/core/env` : ce module valide tout le schéma d'environnement au chargement,
+ * secrets serveur compris (`BETTER_AUTH_SECRET`...). Ce template est importé
+ * depuis le hook client de l'aperçu (`useEmailPreviewHtml.tsx`) autant que
+ * depuis l'envoi serveur — l'importer ferait entrer `core/env.ts` dans le
+ * bundle navigateur, où ces secrets valent `undefined` : la validation Zod
+ * plante au chargement du module. `NEXT_PUBLIC_APP_URL` est en revanche
+ * conçue pour être lue telle quelle des deux côtés (Next.js l'inline
+ * statiquement dans les deux bundles).
  */
-function RadarMark() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={18}
-      height={18}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#23181C"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" />
-      <path d="M4 6h.01" />
-      <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35" />
-      <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67" />
-      <path d="M12 18h.01" />
-      <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67" />
-      <circle cx={12} cy={12} r={2} />
-      <path d="m13.41 10.59 5.66-5.66" />
-    </svg>
-  );
-}
+const BRAND_MARK_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/images/company-logo-placeholder.png`;
 
 /** Coupe proprement une chaîne HTML en texte brut, pour le préheader. */
 function toPreviewText(html: string, maxLength: number): string {
@@ -80,9 +68,9 @@ function toPreviewText(html: string, maxLength: number): string {
  * - Préheader caché : le texte qui apparaît dans l'aperçu de la boîte de
  *   réception (Gmail/Outlook), avant l'ouverture du mail.
  * - Liseré `accent-500` en tête de carte, repère de marque discret.
- * - Repère de marque (icône `Radar`, cohérent avec la sidebar de l'app,
- *   recopiée en SVG brut — voir `RadarMark` ci-dessous) et
- *   un sur-titre court sous le nom, dans le bandeau `primary-700`.
+ * - Repère de marque (PNG `company-logo-placeholder`, voir `BRAND_MARK_URL`
+ *   ci-dessous) et un sur-titre court sous le nom, dans le bandeau
+ *   `primary-700`.
  * - Rythme d'espacement plus généreux (`shadow-md`/`radius-xl` de
  *   design.md §3, réservés aux cartes mises en avant) et accent de couleur
  *   sur les passages en gras du corps (signature).
@@ -161,25 +149,14 @@ export function ProspectEmailTemplatePremium({
                   <tbody>
                     <tr>
                       <td style={{ paddingRight: 12, verticalAlign: "middle" }}>
-                        <table
-                          role="presentation"
-                          cellPadding={0}
-                          cellSpacing={0}
-                          style={{
-                            width: 34,
-                            height: 34,
-                            backgroundColor: "#D89727",
-                            borderRadius: 9999,
-                          }}
-                        >
-                          <tbody>
-                            <tr>
-                              <td align="center" valign="middle">
-                                <RadarMark />
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- un client email doit recevoir une balise <img> classique avec une URL absolue, pas le composant next/image (optimisation et lazy-load côté serveur Next, sans objet ici). */}
+                        <img
+                          src={BRAND_MARK_URL}
+                          alt="Leadflux"
+                          width={40}
+                          height={40}
+                          style={{ display: "block", borderRadius: 9999 }}
+                        />
                       </td>
                       <td style={{ verticalAlign: "middle" }}>
                         <div
