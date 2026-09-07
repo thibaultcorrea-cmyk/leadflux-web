@@ -70,6 +70,6 @@ export function getEmailsColumns(
         <ActivityCell isoDate={row.original.lastActivityAt} />
       ),
     },
-    createRowActionsColumn<Email>({ actions: rowActions, size: 240 }),
+    createRowActionsColumn<Email>({ actions: rowActions, size: 280 }),
   ];
 }

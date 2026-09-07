@@ -1,12 +1,22 @@
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
+import { auth } from "@/lib/auth";
 import { LoginForm } from "./components/form/login-form";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session) redirect("/tableau");
+
   return (
     <main className="flex min-h-dvh items-center justify-center bg-background px-4 py-16">
       <Card className="w-full max-w-md">

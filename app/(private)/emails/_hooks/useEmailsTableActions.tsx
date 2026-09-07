@@ -1,6 +1,7 @@
 "use client";
 
-import { Check, Eye, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
+import { Check, Eye, MailOpen, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { ConfirmActionMessages, ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
@@ -32,6 +33,7 @@ const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
  */
 export function useEmailsTableActions() {
 
+  const router = useRouter();
   const { open } = useModalController();
 
   const { openPreview, openEditView, openReviewingValidateView } = useEmailPreviewAction();
@@ -72,6 +74,16 @@ export function useEmailsTableActions() {
       icon: Eye,
       variant: "ghost",
       onSelect: openPreview,
+    },
+    {
+      // Distinct de l'aperçu ci-dessus : lecture seule, rendu HTML fidèle à
+      // l'email final (template react-email), sur sa propre page plutôt
+      // qu'en modale — pas d'action de régénération/validation ici.
+      id: "apercu-email",
+      label: "Aperçu email",
+      icon: MailOpen,
+      variant: "ghost",
+      onSelect: (email) => router.push(`/emails/${email.id}/apercu-email`),
     },
     {
       id: "valider",
