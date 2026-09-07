@@ -36,7 +36,7 @@ const FONT_UI = "'Helvetica Neue', Helvetica, Arial, sans-serif";
  * conçue pour être lue telle quelle des deux côtés (Next.js l'inline
  * statiquement dans les deux bundles).
  */
-const BRAND_MARK_URL = ENV.NEXT_PUBLIC_APP_URL + "/images/company-logo-placeholder.png";
+const BRAND_MARK_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/images/company-logo-placeholder.png`;
 
 /**
  * Placeholder : aucune adresse de contact réelle n'est encore actée pour

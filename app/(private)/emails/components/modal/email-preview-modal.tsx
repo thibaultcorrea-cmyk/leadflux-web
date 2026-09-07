@@ -6,6 +6,8 @@ import { useState, useTransition } from "react";
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import { Button } from "@/components/ui/button";
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
@@ -13,6 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { Email, EmailVersion } from "../../types/email";
 import EmailStaticView from "./email-static-view";
+import EmailHtmlPreviewView from "./email-html-preview-view";
 import { EmailInputView } from "./email-input-view";
 import { useEmailForm } from "../../_hooks/useEmailForm";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
@@ -54,6 +57,7 @@ export function EmailPreviewModal({
   const lastIndex = email.versions.length - 1;
   const [versionIndex, setVersionIndex] = useState(lastIndex);
   const [isEditing, setIsEditing] = useState(false);
+  const [showHtmlPreview, setShowHtmlPreview] = useState(false);
   const [versions, setVersions] = useState(email.versions)
   const [recipient, setRecipient] = useState(email.recipient)
   const [isPending, startTransition] = useTransition()
@@ -124,6 +128,7 @@ export function EmailPreviewModal({
     // édition déjà confirmée réafficherait le tout premier contenu chargé.
     form.reset(emailToEmailFormFaktorySchema({ email: displayEmail, version }))
     setIsEditing(true)
+    setShowHtmlPreview(false)
   }
 
   const cancelEdit = () => {
@@ -181,16 +186,30 @@ export function EmailPreviewModal({
           <EmailStatusBadge status={email.status} className="mr-9 py-1.5" />
         </header>
 
-        <p className="text-xs text-ink-500">
-          {versions.length > 1
-            ? `Version ${versionIndex + 1} sur ${versions.length}`
-            : "Version initiale"}{" "}
-          · Rédaction puis passe d&apos;humanisation · Jamais envoyé
-          automatiquement
-        </p>
+        <div className="flex items-center justify-end gap-2.5">
+          <Label
+            htmlFor="email-html-preview-toggle"
+            className={isEditing ? "text-ink-500 opacity-50" : "text-ink-700"}
+          >
+            Aperçu email
+          </Label>
+          <Switch
+            id="email-html-preview-toggle"
+            checked={showHtmlPreview}
+            onCheckedChange={setShowHtmlPreview}
+            disabled={isEditing}
+            aria-label="Afficher le rendu HTML complet de l'email"
+          />
+        </div>
 
         <div className="border-t border-border" />
-        {isEditing ? <EmailInputView form={form} email={displayEmail} version={version} /> : <EmailStaticView email={displayEmail} version={version} />}
+        {isEditing ? (
+          <EmailInputView form={form} email={displayEmail} version={version} />
+        ) : showHtmlPreview ? (
+          <EmailHtmlPreviewView email={displayEmail} version={version} />
+        ) : (
+          <EmailStaticView email={displayEmail} version={version} />
+        )}
 
         {/* 
           <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
