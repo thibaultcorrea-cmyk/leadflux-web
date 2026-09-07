@@ -26,7 +26,14 @@ function toPreviewText(html: string, maxLength: number): string {
 /**
  * Variante « premium » du template d'email, proposée à côté de
  * `ProspectEmailTemplate` (celui-ci n'est pas modifié ni retiré — voir
- * `hooks/useEmailPreviewHtml.tsx` pour brancher l'une ou l'autre variante).
+ * `render-email-html.tsx` pour le point d'entrée de rendu utilisé par la
+ * page d'aperçu, aujourd'hui branché sur cette variante).
+ *
+ * Vit dans `features/emails/` (et non sous la page `apercu-email`) pour
+ * rester importable aussi bien depuis le client (aperçu, via le build
+ * navigateur de `@react-email/render`) que depuis un futur envoi côté
+ * serveur (build Node du même `render()`, même composant, même HTML) —
+ * `features/` ne doit jamais dépendre d'un composant rangé sous `app/`.
  *
  * Mêmes contraintes que l'original : couleurs en hex brut et styles en ligne
  * uniquement, un client email ne lit ni variables CSS ni classes Tailwind
@@ -52,6 +59,7 @@ export function ProspectEmailTemplatePremium({
 
   return (
     <html lang="fr">
+      {/* eslint-disable-next-line @next/next/no-head-element -- document HTML autonome pour un email, pas une page Next : la règle App Router ne s'applique pas ici. */}
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

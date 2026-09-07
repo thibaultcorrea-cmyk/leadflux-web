@@ -1,19 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { render } from "@react-email/render";
 
+import { renderProspectEmailHtml } from "@/features/emails/templates/render-email-html";
 import { useFetchEmails } from "../../../_hooks/useFetchEmail";
 import { getLastVersion } from "../../../services/utils";
 import type { Email } from "../../../types/email";
-import { ProspectEmailTemplatePremium } from "../components/email-template/prospect-email-template-premium";
 
 /**
  * Trouve l'email par id dans le cache TanStack Query de la liste (pas de
  * requête dédiée par id : `GET_EMAIL_PROSPECTS` sert déjà toute la donnée,
  * voir CLAUDE.md §7 sur TanStack Query comme seule source de state serveur),
- * puis rend sa dernière version en HTML complet via `@react-email/render`
- * pour affichage dans l'iframe de la page d'aperçu.
+ * puis rend sa dernière version en HTML complet via `renderProspectEmailHtml`
+ * (build navigateur de `@react-email/render`, résolu automatiquement ici
+ * puisque ce hook est côté client) pour affichage dans l'iframe de la page
+ * d'aperçu.
  */
 export function useEmailPreviewHtml(emailId: string) {
   const { emails, isLoading: isLoadingEmails, error } = useFetchEmails();
@@ -31,7 +32,7 @@ export function useEmailPreviewHtml(emailId: string) {
 
     let cancelled = false;
 
-    render(<ProspectEmailTemplatePremium body={version.body} />).then((result) => {
+    renderProspectEmailHtml(version.body).then((result) => {
       if (!cancelled) {
         setRendered({ versionId: version.id, html: result });
       }

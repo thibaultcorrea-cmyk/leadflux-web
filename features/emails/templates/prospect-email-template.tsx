@@ -13,15 +13,23 @@ const FONT_DISPLAY = "Georgia, 'Times New Roman', serif";
 const FONT_UI = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 
 /**
- * Template de l'email de prospection, rendu en HTML complet via
- * `@react-email/render` (voir `hooks/useEmailPreviewHtml.ts`). Les couleurs
- * sont en hex brut : un client email ne lit ni variables CSS ni classes
- * Tailwind, seul du style inline survit au nettoyage HTML des webmails
- * (dérogation volontaire à la règle « jamais de hex brut », CLAUDE.md §7).
+ * Template original de l'email de prospection (voir aussi la variante
+ * `ProspectEmailTemplatePremium` dans ce même dossier). Rendu en HTML complet
+ * via `@react-email/render` — voir `render-email-html.tsx` pour le point
+ * d'entrée de rendu partagé entre l'aperçu client et un futur envoi serveur.
+ *
+ * Vit dans `features/emails/` plutôt que sous une page `app/` pour rester
+ * importable des deux côtés sans que `features/` dépende de `app/`.
+ *
+ * Les couleurs sont en hex brut : un client email ne lit ni variables CSS ni
+ * classes Tailwind, seul du style inline survit au nettoyage HTML des
+ * webmails (dérogation volontaire à la règle « jamais de hex brut »,
+ * CLAUDE.md §7).
  */
 export function ProspectEmailTemplate({ body }: ProspectEmailTemplateProps) {
   return (
     <html lang="fr">
+      {/* eslint-disable-next-line @next/next/no-head-element -- document HTML autonome pour un email, pas une page Next : la règle App Router ne s'applique pas ici. */}
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
