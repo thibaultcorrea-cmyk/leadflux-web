@@ -6,7 +6,7 @@ import { render } from "@react-email/render";
 import { useFetchEmails } from "../../../_hooks/useFetchEmail";
 import { getLastVersion } from "../../../services/utils";
 import type { Email } from "../../../types/email";
-import { ProspectEmailTemplate } from "../components/email-template/prospect-email-template";
+import { ProspectEmailTemplatePremium } from "../components/email-template/prospect-email-template-premium";
 
 /**
  * Trouve l'email par id dans le cache TanStack Query de la liste (pas de
@@ -31,7 +31,7 @@ export function useEmailPreviewHtml(emailId: string) {
 
     let cancelled = false;
 
-    render(<ProspectEmailTemplate body={version.body} />).then((result) => {
+    render(<ProspectEmailTemplatePremium body={version.body} />).then((result) => {
       if (!cancelled) {
         setRendered({ versionId: version.id, html: result });
       }
