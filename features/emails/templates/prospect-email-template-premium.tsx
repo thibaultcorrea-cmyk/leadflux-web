@@ -1,3 +1,5 @@
+import { ENV } from "@/core/env";
+
 type ProspectEmailTemplatePremiumProps = {
   /** Corps de l'email au format HTML (paragraphes, listes, gras/italique/souligné). */
   body: string;
@@ -34,7 +36,18 @@ const FONT_UI = "'Helvetica Neue', Helvetica, Arial, sans-serif";
  * conçue pour être lue telle quelle des deux côtés (Next.js l'inline
  * statiquement dans les deux bundles).
  */
-const BRAND_MARK_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/images/company-logo-placeholder.png`;
+const BRAND_MARK_URL = ENV.NEXT_PUBLIC_APP_URL + "/images/company-logo-placeholder.png";
+
+/**
+ * Placeholder : aucune adresse de contact réelle n'est encore actée pour
+ * Leadflux (CLAUDE.md §8 — hébergement et domaine non tranchés). Un `mailto:`
+ * reste la désinscription la plus simple à honorer sans backend dédié : pas
+ * de lien à un jour vérifier/révoquer, pas de token à générer côté serveur.
+ * À remplacer par la vraie adresse de contact (et, si le volume l'exige un
+ * jour, par un vrai lien de désabonnement en un clic) une fois décidée.
+ */
+const UNSUBSCRIBE_MAILTO =
+  "mailto:contact@leadflux.local?subject=D%C3%A9sinscription%20des%20emails%20de%20prospection";
 
 /** Coupe proprement une chaîne HTML en texte brut, pour le préheader. */
 function toPreviewText(html: string, maxLength: number): string {
@@ -74,6 +87,8 @@ function toPreviewText(html: string, maxLength: number): string {
  * - Rythme d'espacement plus généreux (`shadow-md`/`radius-xl` de
  *   design.md §3, réservés aux cartes mises en avant) et accent de couleur
  *   sur les passages en gras du corps (signature).
+ * - Mention de désinscription, centrée et hors de la carte (voir
+ *   `UNSUBSCRIBE_MAILTO` ci-dessous).
  */
 export function ProspectEmailTemplatePremium({
   body,
@@ -222,6 +237,36 @@ export function ProspectEmailTemplatePremium({
                   Aucun envoi n&apos;est automatique : cet email est toujours
                   relu et validé par un humain avant de partir.
                 </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/*
+          Désinscription : volontairement hors de la carte, comme le
+          bandeau légal des emails transactionnels premium (Stripe, Linear).
+          Sépare visuellement le message de son mention de conformité.
+        */}
+        <table
+          role="presentation"
+          width="100%"
+          cellPadding={0}
+          cellSpacing={0}
+          style={{ maxWidth: 600, margin: "20px auto 0" }}
+        >
+          <tbody>
+            <tr>
+              <td align="center" style={{ padding: "0 24px", textAlign: "center" }}>
+                <span style={{ fontSize: 12, lineHeight: 1.6, color: "#77656C" }}>
+                  Vous recevez cet email dans le cadre d&apos;une démarche de
+                  prospection commerciale.{" "}
+                  <a
+                    href={UNSUBSCRIBE_MAILTO}
+                    style={{ color: "#946315", textDecoration: "underline" }}
+                  >
+                    Se désinscrire
+                  </a>
+                </span>
               </td>
             </tr>
           </tbody>
