@@ -15,11 +15,13 @@ const RichTextController = ({
     name,
     label,
     description,
+    className,
 }: {
     form: UseFormReturn<any>
     name: string
     label: string
     description?: string
+    className?: string
 }) => {
 
     const { control, formState: { errors } } = form
@@ -36,6 +38,7 @@ const RichTextController = ({
                         onChange={field.onChange}
                         onBlur={field.onBlur}
                         ariaLabel={label}
+                        contentClassName={className}
                     />
 
                     {

@@ -5,9 +5,9 @@ import type { Email, EmailVersion } from "../../types/email";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import InputController from "@/components/shared/forms/InputController";
+import RichTextController from "@/components/shared/forms/RichTextController";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { useEmailForm } from "../../_hooks/useEmailForm";
-import { Textarea } from "@/components/ui/textarea";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
 import { useTransition } from "react";
 import { Loader2 } from "lucide-react";
@@ -53,10 +53,12 @@ export const EditEmailForm = ({ email, version }: EditEmailFormProps) => {
                     </Field>
                 </FieldGroup>
                 <FieldGroup>
-                    <Field>
-                        <FieldLabel htmlFor={"body"}>Contenu de l'email</FieldLabel>
-                        <Textarea id={"body"} {...form.register("body")} placeholder={"Contenu de l'email"} className="w-full min-h-48 max-h-72 resize-none" />
-                    </Field>
+                    <RichTextController
+                        form={form}
+                        name={"body"}
+                        label={"Contenu de l'email"}
+                        className="min-h-48 max-h-72 resize-none"
+                    />
                 </FieldGroup>
             </div>
             <DialogFooter>
