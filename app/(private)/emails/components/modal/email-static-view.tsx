@@ -1,3 +1,4 @@
+import { CopyButton } from "@/components/shared/Buttons/CopyButton";
 import { Email, EmailVersion } from "../../types/email";
 
 interface EmailStaticViewProps {
@@ -6,15 +7,20 @@ interface EmailStaticViewProps {
 }
 
 const EmailStaticView = ({ email, version }: EmailStaticViewProps) => {
-
     return (
         <>
             <dl className="flex flex-col gap-2">
-                <div className="flex gap-3">
+                <div className="flex items-center gap-3">
                     <dt className="w-12 shrink-0 text-xs font-semibold tracking-[0.03em] text-ink-500">
                         À
                     </dt>
-                    <dd className="text-[13px] text-ink-700">{email.recipient}</dd>
+                    <dd className="flex items-center gap-1.5 text-[13px] text-ink-700">
+                        {email.recipient}
+                        <CopyButton
+                            text={email.recipient}
+                            label="Copier l'adresse email du destinataire"
+                        />
+                    </dd>
                 </div>
                 <div className="flex gap-3">
                     <dt className="w-12 shrink-0 pt-0.5 text-xs font-semibold tracking-[0.03em] text-ink-500">
