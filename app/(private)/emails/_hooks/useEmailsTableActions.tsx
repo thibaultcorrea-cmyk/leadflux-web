@@ -98,6 +98,7 @@ export function useEmailsTableActions() {
       icon: Check,
       variant: "primary",
       isHidden: (email) => email.status !== "sent",
+      isDisabled: (email) => email.status === "sent",
       onSelect: (email) =>
         null
     },
