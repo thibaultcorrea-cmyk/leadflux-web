@@ -12,8 +12,8 @@ import { EmailReviewingValidateModalContent } from "../components/modal/email-re
 import { dialogMessages } from "../services/dialog-messages";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
-const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
-const EDIT_MODAL_CLASSNAME = "sm:max-w-[42vw]";
+const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[42vw] sm:max-w-[52vw]";
+const EDIT_MODAL_CLASSNAME = "sm:max-w-[45vw]";
 
 
 export const useEmailPreviewAction = () => {

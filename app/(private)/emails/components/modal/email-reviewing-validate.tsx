@@ -5,6 +5,8 @@ import { useState, useTransition } from "react";
 import { Email, EmailVersion } from "../../types/email"
 import { getIdsOfDraftedEmails, getLastVersion } from "../../services/utils";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { waitDelay } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { ArrowLeft, ArrowRight, Loader2, Pencil, Send } from "lucide-react";
@@ -20,6 +22,7 @@ import { useEmailForm } from "../../_hooks/useEmailForm";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
 import type { EmailFormValues } from "../../schema/email-form-schema";
 import { EmailInputView } from "./email-input-view";
+import EmailHtmlPreviewView from "./email-html-preview-view";
 
 type EmailReviewingValidateModalContentProps = {
     selectedEmails: Email[],
@@ -31,6 +34,7 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
     const [currentEmailIndex, setCurrentEmailIndex] = useState(0);
     const [emails, setEmails] = useState(selectedEmails);
     const [isEditing, setIsEditing] = useState(false);
+    const [showHtmlPreview, setShowHtmlPreview] = useState(false);
     const [isSavingEdit, startSavingEdit] = useTransition()
 
     const currentEmail = emails[currentEmailIndex];
@@ -86,6 +90,7 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
         // chargé plutôt que celui de l'email actuellement affiché.
         form.reset(emailToEmailFormFaktorySchema({ email: currentEmail, version: lastVersion }))
         setIsEditing(true)
+        setShowHtmlPreview(false)
     }
 
     const cancelEdit = () => {
@@ -130,9 +135,26 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
 
         <div className="flex flex-col gap-3">
             <HeaderReviewingValidateModalContent email={currentEmail} version={lastVersion} />
+            <div className="flex items-center justify-end gap-2.5">
+                <Label
+                    htmlFor="email-reviewing-html-preview-toggle"
+                    className={isEditing ? "text-ink-500 opacity-50" : "text-ink-700"}
+                >
+                    Aperçu email
+                </Label>
+                <Switch
+                    id="email-reviewing-html-preview-toggle"
+                    checked={showHtmlPreview}
+                    onCheckedChange={setShowHtmlPreview}
+                    disabled={isEditing}
+                    aria-label="Afficher le rendu HTML complet de l'email"
+                />
+            </div>
             {isEditing
                 ? <EmailInputView form={form} email={currentEmail} version={lastVersion} />
-                : <ContentEmailReviewingValidateModalContent email={currentEmail} version={lastVersion} />}
+                : showHtmlPreview
+                    ? <EmailHtmlPreviewView email={currentEmail} version={lastVersion} />
+                    : <ContentEmailReviewingValidateModalContent email={currentEmail} version={lastVersion} />}
             <FooterReviewingValidateModalContent
                 email={currentEmail}
                 version={lastVersion}

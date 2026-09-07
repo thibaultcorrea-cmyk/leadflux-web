@@ -1,5 +1,3 @@
-import { ENV } from "@/core/env";
-
 type ProspectEmailTemplatePremiumProps = {
   /** Corps de l'email au format HTML (paragraphes, listes, gras/italique/souligné). */
   body: string;
@@ -159,8 +157,17 @@ export function ProspectEmailTemplatePremium({
             </tr>
 
             <tr>
-              <td style={{ backgroundColor: "#43142A", padding: "36px 40px" }}>
-                <table role="presentation" cellPadding={0} cellSpacing={0}>
+              <td
+                align="center"
+                style={{ backgroundColor: "#43142A", padding: "36px 40px", textAlign: "center" }}
+              >
+                <table
+                  role="presentation"
+                  cellPadding={0}
+                  cellSpacing={0}
+                  align="center"
+                  style={{ margin: "0 auto" }}
+                >
                   <tbody>
                     <tr>
                       <td style={{ paddingRight: 12, verticalAlign: "middle" }}>
@@ -185,19 +192,7 @@ export function ProspectEmailTemplatePremium({
                         >
                           Leadflux
                         </div>
-                        <div
-                          style={{
-                            marginTop: 2,
-                            fontFamily: FONT_UI,
-                            fontSize: 11,
-                            fontWeight: 500,
-                            letterSpacing: "0.08em",
-                            textTransform: "uppercase",
-                            color: "#F0C87A",
-                          }}
-                        >
-                          Agent de prospection
-                        </div>
+
                       </td>
                     </tr>
                   </tbody>
@@ -217,9 +212,12 @@ export function ProspectEmailTemplatePremium({
 
             <tr>
               <td
+                align="center"
                 style={{
-                  padding: "24px 40px 28px",
+                  padding: "24px 28px 28px",
                   borderTop: "1px solid #E9E1D4",
+                  textAlign: "center",
+                  width: "100%",
                 }}
               >
                 <div

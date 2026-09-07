@@ -3,7 +3,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRenderEmailHtml } from "../../_hooks/useRenderEmailHtml";
 import { Email, EmailVersion } from "../../types/email";
-import EmailRecipientSubjectHeader from "./email-recipient-subject-header";
 
 interface EmailHtmlPreviewViewProps {
     email: Email;
