@@ -75,16 +75,16 @@ export function useEmailsTableActions() {
       variant: "ghost",
       onSelect: openPreview,
     },
-    {
-      // Distinct de l'aperçu ci-dessus : lecture seule, rendu HTML fidèle à
-      // l'email final (template react-email), sur sa propre page plutôt
-      // qu'en modale — pas d'action de régénération/validation ici.
-      id: "apercu-email",
-      label: "Aperçu email",
-      icon: MailOpen,
-      variant: "ghost",
-      onSelect: (email) => router.push(`/emails/${email.id}/apercu-email`),
-    },
+    /* {
+       // Distinct de l'aperçu ci-dessus : lecture seule, rendu HTML fidèle à
+       // l'email final (template react-email), sur sa propre page plutôt
+       // qu'en modale — pas d'action de régénération/validation ici.
+       id: "apercu-email",
+       label: "Aperçu email",
+       icon: MailOpen,
+       variant: "ghost",
+       onSelect: (email) => router.push(`/emails/${email.id}/apercu-email`),
+     },*/
     {
       id: "valider",
       label: "Valider",
