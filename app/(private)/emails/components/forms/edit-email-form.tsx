@@ -59,6 +59,7 @@ export const EditEmailForm = ({ email, version }: EditEmailFormProps) => {
                         name={"body"}
                         label={"Contenu de l'email"}
                         className="min-h-48 max-h-72 resize-none"
+
                     />
                 </FieldGroup>
             </div>

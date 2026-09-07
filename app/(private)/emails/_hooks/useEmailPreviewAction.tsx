@@ -56,15 +56,6 @@ export const useEmailPreviewAction = () => {
             components: (
                 <EmailPreviewModal
                     email={email}
-                    onEdit={(current) =>
-                        confirm({
-                            title: "Modifier le brouillon",
-                            description: `L'éditeur de l'email adressé à ${current.contactName} arrive dans un prochain lot.`,
-                            confirmLabel: "Compris",
-
-                        })
-
-                    }
                     onRegenerate={(current) =>
                         confirm({
                             title: "Régénérer le brouillon",
