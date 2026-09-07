@@ -6,6 +6,7 @@ import { CreateEmailDto } from "@/features/emails/dto/schema"
 import { SMTPServiceImpl } from "@/features/smtp/services"
 import { SendEmailDto } from "@/features/smtp/dto/schema"
 import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
+import { renderProspectEmailHtml } from "@/features/emails/templates/render-email-html"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
@@ -46,10 +47,12 @@ export const AgentEmailService = {
         }
     },
     sendEmail: async (input: AgentEmailSendInput): Promise<AgentEmailSendResult> => {
+        const html = await renderProspectEmailHtml(input.body)
+
         const payload = {
             to: input.to,
             subject: input.subject,
-            html: input.body,
+            html,
         } as SendEmailDto
 
 
