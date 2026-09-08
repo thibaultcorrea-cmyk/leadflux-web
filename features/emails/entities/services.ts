@@ -20,5 +20,6 @@ export type EmailProspectsServices = {
     delete: (id: string) => Promise<void>
     deleteMany: (ids: string[]) => Promise<ManyOperationResult>
     clear: () => Promise<void>
+    hasReply: (threadId: string) => Promise<boolean>
 
 }

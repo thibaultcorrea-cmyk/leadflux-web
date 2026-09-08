@@ -12,6 +12,8 @@ import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/
 import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
 import { ManyOperationResult } from "./entities/type"
 import { ProspectServicesImpl } from "../prospects/services"
+import { FindReplyByThreadIdDto } from "../imap/dto/schema"
+import { IMAPServiceImpl } from "../imap/services"
 
 
 
@@ -287,5 +289,33 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     clear: async () => {
         await EmailWriteRepositoriesImpl.truncate()
     },
+
+    hasReply: async (threadId: string) => {
+        const email = await EmailReadRepositoriesImpl.getByThreadId(threadId)
+        if (!email) {
+            throw new Error("Email not found")
+        }
+
+        if (!email.threadId) {
+            throw new Error("Email thread id not found")
+        }
+
+        const result = await IMAPServiceImpl.hasReply({
+            threadId: email.threadId,
+            mailbox: "INBOX",
+        })
+        if (result) {
+            await EmailWriteRepositoriesImpl.update({
+                id: email.id,
+                status: "replied",
+                repliedAt: new Date(),
+            })
+            return true
+        }
+        return false
+
+    }
+
+
 }
 

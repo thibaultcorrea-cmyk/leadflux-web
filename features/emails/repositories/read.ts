@@ -34,5 +34,11 @@ export const EmailReadRepositoriesImpl: IEmailReadRepository = {
     count: async (query: any) => {
         throw new Error("Method not implemented.")
     },
-
+    getByThreadId: async (threadId: string) => {
+        const [result] = await db.select().from(emails).where(eq(emails.threadId, threadId))
+        if (!result) {
+            throw new Error("Email not found")
+        }
+        return result
+    }
 }

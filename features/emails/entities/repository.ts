@@ -14,6 +14,7 @@ export interface IEmailReadRepository {
      */
     find: (query: any) => Promise<any[]>
     count?: (query: any) => Promise<number>
+    getByThreadId: (threadId: string) => Promise<EmailSqlInfer>
 
 }
 
