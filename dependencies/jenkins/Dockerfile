@@ -10,10 +10,36 @@ FROM jenkins/jenkins:lts
 RUN jenkins-plugin-cli --plugins \
   "configuration-as-code git github workflow-aggregator credentials-binding job-dsl"
 
+# CLI docker en binaire statique (download.docker.com), pas le paquet apt
+# docker.io de l'image de base : sur cette version de Debian, ce paquet
+# n'embarque que dockerd/docker-proxy, pas le binaire client `docker` lui
+# meme, ce qui laisse `docker build`/`docker run` du Jenkinsfile echouer
+# avec "docker: not found".
 USER root
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends docker.io \
+  && apt-get install -y --no-install-recommends curl ca-certificates \
+  && ARCH="$(dpkg --print-architecture)" \
+  && case "$ARCH" in \
+       amd64) DOCKER_ARCH=x86_64 ;; \
+       arm64) DOCKER_ARCH=aarch64 ;; \
+       *) echo "Architecture non supportee: $ARCH" >&2 && exit 1 ;; \
+     esac \
+  && DOCKER_TGZ="$(curl -fsSL "https://download.docker.com/linux/static/stable/${DOCKER_ARCH}/" \
+       | grep -oE "docker-[0-9]+\.[0-9]+\.[0-9]+\.tgz" | sort -V | tail -1)" \
+  && curl -fsSL "https://download.docker.com/linux/static/stable/${DOCKER_ARCH}/${DOCKER_TGZ}" -o /tmp/docker.tgz \
+  && tar -xzf /tmp/docker.tgz -C /tmp docker/docker \
+  && mv /tmp/docker/docker /usr/local/bin/docker \
+  && chmod +x /usr/local/bin/docker \
+  && rm -rf /tmp/docker /tmp/docker.tgz \
+  && apt-get purge -y curl \
+  && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*
+# /var/run/docker.sock (monte depuis l'hote) appartient au groupe root
+# (GID 0) sur ce setup Docker Desktop : sans ca, `docker` renvoie
+# "permission denied" pour l'utilisateur jenkins (uid 1000, pas dans ce
+# groupe). Sur un futur hote de prod avec un vrai groupe `docker` (GID
+# different), ajuster en consequence.
+RUN usermod -aG root jenkins
 USER jenkins
 
 # Hors de /var/jenkins_home : ce chemin est recouvert par le volume
