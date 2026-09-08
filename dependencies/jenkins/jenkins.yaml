@@ -1,0 +1,11 @@
+jenkins:
+  systemMessage: "Leadflux CI — provisionne via Configuration as Code."
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false

@@ -77,6 +77,7 @@ n'est jamais commité.
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` / `SMTP_FROM_ALIAS` | Envoi SMTP applicatif (en local : service `maildev`, catch-all, sans auth réelle) |
 | `IMAP_HOST` / `IMAP_PORT` / `IMAP_USER` / `IMAP_PASS` / `IMAP_SECURE` | Boîte IMAP applicative réelle, lue par `features/imap` pour la détection de réponse. Pas d'équivalent `docker-compose` dédié : pour tester en local, pointer sur `greenmail` (`IMAP_PORT=3143`, `IMAP_SECURE=false`, identifiants alignés sur `SMTP_USER`/`SMTP_PASS`) |
 | `IMAP_TEST_HOST` / `IMAP_TEST_PORT` / `IMAP_TEST_USER` / `IMAP_TEST_PASS` | Boîte IMAP/SMTP de test (service `greenmail`), réservée à la preuve de détection de réponse |
+| `JENKINS_ADMIN_ID` / `JENKINS_ADMIN_PASSWORD` | Compte admin du service `jenkins`, provisionné via Configuration as Code (voir section Déploiement) |
 
 ## Démarrage
 
@@ -186,21 +187,26 @@ proxy ni domaine.
 
 Mise en place d'une instance Jenkins (aucune existante à ce jour) :
 
-1. Lancer le service `jenkins` du `docker-compose` (`pnpm docker:up`, ou
+1. Renseigner `JENKINS_ADMIN_ID` / `JENKINS_ADMIN_PASSWORD` dans `.env.local`,
+   puis lancer le service `jenkins` du `docker-compose` (`pnpm docker:up`, ou
    `docker compose -f dependencies/docker-compose.yml --env-file .env up -d jenkins`
    pour ne démarrer que lui). Le socket Docker de l'hôte est monté dans le
    conteneur (Docker-outside-of-Docker) et l'image
    (`dependencies/jenkins/Dockerfile`) embarque le CLI docker par-dessus
    `jenkins/jenkins:lts` — nécessaire pour que le `Jenkinsfile` puisse
-   `docker build`/`docker run`.
-2. Installer le plugin **GitHub** (webhook + trigger `githubPush()`).
-3. Créer un job **Pipeline**, source SCM = ce repo, branche `*/main`,
+   `docker build`/`docker run`. L'image installe aussi les plugins requis
+   (pipeline, Git, GitHub, credentials-binding) et provisionne le compte
+   admin via Configuration as Code (`dependencies/jenkins/jenkins.yaml`) :
+   pas d'assistant d'installation, pas de mot de passe généré aléatoirement
+   à aller chercher dans le conteneur — se connecter directement sur
+   http://localhost:8180 avec `JENKINS_ADMIN_ID`/`JENKINS_ADMIN_PASSWORD`.
+2. Créer un job **Pipeline**, source SCM = ce repo, branche `*/main`,
    script depuis SCM (`Jenkinsfile` à la racine). Cocher « GitHub hook
    trigger for GITScm polling » dans les Build Triggers.
-4. Sur le repo GitHub, ajouter un webhook vers
+3. Sur le repo GitHub, ajouter un webhook vers
    `http://<host-jenkins>:8180/github-webhook/` (évènement `push`, port hôte
    du service `jenkins` — `8180` en local, cf. `docker-compose.yml`).
-5. Créer une credential Jenkins de type **Secret file**, id
+4. Créer une credential Jenkins de type **Secret file**, id
    `leadflux-web-env`, contenant les variables de prod (`DATABASE_URL`,
    `BETTER_AUTH_SECRET`, `SMTP_*`, `IMAP_*`…) — jamais commitées dans le
    repo. Le `Jenkinsfile` l'injecte au conteneur via `--env-file`.

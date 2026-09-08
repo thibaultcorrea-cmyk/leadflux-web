@@ -75,6 +75,12 @@ services:
     build:
       context: ./jenkins
     restart: unless-stopped
+    environment:
+      # Compte admin fixe au demarrage (Configuration as Code, cf.
+      # jenkins/jenkins.yaml) : evite d'aller chercher le mot de passe
+      # initial genere aleatoirement dans le conteneur.
+      JENKINS_ADMIN_ID: ${JENKINS_ADMIN_ID}
+      JENKINS_ADMIN_PASSWORD: ${JENKINS_ADMIN_PASSWORD}
     ports:
       - "8180:8080" # UI web + webhook GitHub (/github-webhook/)
       - "50000:50000" # Agents JNLP (non utilise en single-host, standard Jenkins)
