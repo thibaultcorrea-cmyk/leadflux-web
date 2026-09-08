@@ -14,7 +14,10 @@
     "db:seed": "tsx ./db/seeds/seeds.ts",
     "db:studio": "drizzle-kit studio",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "docker:up": "docker compose -f dependencies/docker-compose.yml --env-file .env up -d",
+    "docker:down": "docker compose -f dependencies/docker-compose.yml --env-file .env down",
+    "docker:logs": "docker compose -f dependencies/docker-compose.yml --env-file .env logs -f"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",

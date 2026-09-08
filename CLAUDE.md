@@ -290,7 +290,7 @@ chaque page fournit ses colonnes (`ColumnDef[]`) et ses données, jamais son pro
 | `pnpm dev` | Serveur de développement |
 | `pnpm build` / `pnpm lint` | Build et lint (doivent passer avant tout commit) |
 | `pnpm db:generate` / `pnpm db:migrate` / `pnpm db:studio` | Drizzle |
-| `docker compose up -d` | PostgreSQL local |
+| `pnpm docker:up` | Démarre les services locaux (PostgreSQL, MinIO, GreenMail, MailDev) — wrapper autour de `docker compose -f dependencies/docker-compose.yml --env-file .env up -d` |
 
 ---
 
