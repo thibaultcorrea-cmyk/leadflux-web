@@ -13,6 +13,13 @@ const CHECKPOINT_FILE = path.join(process.cwd(), "checkpointer.json")
 
 type ReplyScanCheckpoint = {
     lastUid?: number
+    /**
+     * Un uid n'a de sens que relatif a cette valeur (RFC 3501). Si le
+     * serveur la fait changer (boite reconstruite/migree), lastUid ne veut
+     * plus rien dire : scanReply detecte l'ecart et repart de zero pour la
+     * nouvelle valeur plutot que de continuer a filtrer sur un uid obsolete.
+     */
+    uidValidity?: number
 }
 
 type ReplyScanCheckpointFile = Record<string, ReplyScanCheckpoint>
@@ -71,11 +78,22 @@ export const EmailScanRepositoriesImpl = {
         let matched = 0
 
         while (true) {
-            const batch = await IMAPServiceImpl.fetchMailboxWithRange({
+            const { messages: batch, uidValidity } = await IMAPServiceImpl.fetchMailboxWithRange({
                 mailbox,
                 checkpoint: { sinceUid: checkpoint.lastUid },
                 batchSize,
             })
+
+            if (checkpoint.uidValidity !== undefined && checkpoint.uidValidity !== uidValidity) {
+                // Boite reconstruite cote serveur : lastUid ne correspond plus a rien, on relance
+                // ce passage a zero pour la nouvelle uidValidity plutot que de risquer de rater
+                // ou de mal filtrer des messages.
+                checkpoint.lastUid = undefined
+                checkpoint.uidValidity = uidValidity
+                await writeCheckpoint(mailbox, checkpoint)
+                continue
+            }
+            checkpoint.uidValidity = uidValidity
 
             if (batch.length === 0) {
                 break

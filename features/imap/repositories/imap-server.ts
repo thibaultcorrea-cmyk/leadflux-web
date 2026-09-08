@@ -134,8 +134,15 @@ export class ImapFlowRepository {
      * qu'un uid n'ait ete enregistre. batchSize borne le nombre de messages
      * ramenes par appel ; c'est a l'appelant d'avancer le checkpoint (max
      * des uid recus) et de rappeler tant qu'un batch plein revient.
+     *
+     * uidValidity est renvoye a chaque appel : un uid n'a de sens que
+     * relatif a cette valeur, et un serveur peut la faire changer (boite
+     * reconstruite/migree). A l'appelant de comparer avec la valeur
+     * precedemment stockee et de repartir de zero (sinceUid non fourni) si
+     * elle a change, sous peine de filtrer sur des uid qui ne veulent plus
+     * rien dire.
      */
-    async fetchMailboxWithRange(data: FetchMailboxWithRangeDto): Promise<ImapMessageEnvelope[]> {
+    async fetchMailboxWithRange(data: FetchMailboxWithRangeDto): Promise<{ messages: ImapMessageEnvelope[]; uidValidity: number }> {
         if (!this.client.usable) {
             throw new Error("Server is not ready to fetch our messages");
         }
@@ -154,12 +161,15 @@ export class ImapFlowRepository {
                 ? { since: checkpoint.since }
                 : { all: true };
 
-        const found: ImapMessageEnvelope[] = [];
+        const messages: ImapMessageEnvelope[] = [];
         const lock = await this.client.getMailboxLock(mailbox);
+        let uidValidity = 0;
         try {
+            uidValidity = this.client.mailbox ? Number(this.client.mailbox.uidValidity) : 0;
+
             for await (const message of this.client.fetch(query, { envelope: true, headers: ["references"] })) {
-                found.push(toMessageEnvelope(message));
-                if (found.length >= batchSize) {
+                messages.push(toMessageEnvelope(message));
+                if (messages.length >= batchSize) {
                     break;
                 }
             }
@@ -167,7 +177,7 @@ export class ImapFlowRepository {
             lock.release();
         }
 
-        return found;
+        return { messages, uidValidity };
     }
 
 
