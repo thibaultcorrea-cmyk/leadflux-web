@@ -64,6 +64,24 @@ services:
     volumes:
       - ./volumes/minio-data:/data
 
+  # CI/CD : ecoute le push sur `main` (webhook GitHub) et fait tourner le
+  # Jenkinsfile a la racine du repo (build de l'image app + docker run).
+  # Socket docker de l'hote monte plutot que docker-in-docker : le
+  # Jenkinsfile lance ses `docker build`/`docker run` directement sur le
+  # meme daemon que celui de cette stack (Docker-outside-of-Docker). Image
+  # personnalisee (./jenkins/Dockerfile) : jenkins/jenkins:lts n'embarque
+  # pas le CLI docker necessaire pour parler a ce socket.
+  jenkins:
+    build:
+      context: ./jenkins
+    restart: unless-stopped
+    ports:
+      - "8180:8080" # UI web + webhook GitHub (/github-webhook/)
+      - "50000:50000" # Agents JNLP (non utilise en single-host, standard Jenkins)
+    volumes:
+      - ./volumes/jenkins-home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
   # Declenche POST /api/v1/emails/scan-replies toutes les 15 min, avec un
   # premier appel immediat au demarrage (pas d'attente du premier tick).
   # Boucle shell plutot que crond : crond n'appelle jamais au demarrage sans

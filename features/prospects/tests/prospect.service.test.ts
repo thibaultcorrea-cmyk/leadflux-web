@@ -55,12 +55,23 @@ describe("ProspectServicesImpl", () => {
     })
 
     describe("deleteMany", () => {
-        it("delegue au repository de write", async () => {
-            deleteManyMock.mockResolvedValue(undefined)
+        it("supprime chaque id individuellement et rapporte le compte de succes", async () => {
+            deleteMock.mockResolvedValue(undefined)
 
-            await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
+            const result = await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
 
-            expect(deleteManyMock).toHaveBeenCalledWith(["prospect_1", "prospect_2"])
+            expect(deleteMock).toHaveBeenCalledWith("prospect_1")
+            expect(deleteMock).toHaveBeenCalledWith("prospect_2")
+            expect(deleteMock).toHaveBeenCalledTimes(2)
+            expect(result).toEqual({ success: 2, failed: 0, message: "prospects deleted successfully" })
+        })
+
+        it("comptabilise a part les ids dont la suppression echoue", async () => {
+            deleteMock.mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error("not found"))
+
+            const result = await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
+
+            expect(result).toEqual({ success: 1, failed: 1, message: "prospects deleted successfully" })
         })
     })
 

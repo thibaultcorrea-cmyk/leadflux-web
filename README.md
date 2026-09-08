@@ -111,6 +111,7 @@ Le site est alors disponible sur http://localhost:3000.
 | `maildev` | Capture tout email sortant de l'app (mode brouillon/test), une seule UI catch-all | UI http://localhost:1080, SMTP `1025` |
 | `greenmail` | Boîte IMAP/SMTP de test dédiée à la détection de réponse (`features/imap/tests/imap-reply-detection.e2e.ts`), éphémère, sans persistance | SMTP `3025`, IMAP `3143`, API REST `8080` |
 | `roundcube` | Webmail pour consulter la boîte `greenmail` à la main | http://localhost:8334 |
+| `jenkins` | CI/CD : build + run de l'image app sur push `main` (cf. section Déploiement). Image custom (`dependencies/jenkins/Dockerfile`) avec le CLI docker, socket hôte monté (Docker-outside-of-Docker) | UI http://localhost:8180 |
 
 ## Scripts disponibles
 
@@ -185,22 +186,20 @@ proxy ni domaine.
 
 Mise en place d'une instance Jenkins (aucune existante à ce jour) :
 
-1. Lancer Jenkins avec accès au démon Docker de l'hôte (pour que le
-   pipeline puisse `docker build`/`docker run`) :
-   ```bash
-   docker run -d --name jenkins \
-     -p 8080:8080 -p 50000:50000 \
-     -v jenkins_home:/var/jenkins_home \
-     -v /var/run/docker.sock:/var/run/docker.sock \
-     -v $(which docker):/usr/bin/docker \
-     jenkins/jenkins:lts
-   ```
+1. Lancer le service `jenkins` du `docker-compose` (`pnpm docker:up`, ou
+   `docker compose -f dependencies/docker-compose.yml --env-file .env up -d jenkins`
+   pour ne démarrer que lui). Le socket Docker de l'hôte est monté dans le
+   conteneur (Docker-outside-of-Docker) et l'image
+   (`dependencies/jenkins/Dockerfile`) embarque le CLI docker par-dessus
+   `jenkins/jenkins:lts` — nécessaire pour que le `Jenkinsfile` puisse
+   `docker build`/`docker run`.
 2. Installer le plugin **GitHub** (webhook + trigger `githubPush()`).
 3. Créer un job **Pipeline**, source SCM = ce repo, branche `*/main`,
    script depuis SCM (`Jenkinsfile` à la racine). Cocher « GitHub hook
    trigger for GITScm polling » dans les Build Triggers.
 4. Sur le repo GitHub, ajouter un webhook vers
-   `http://<host-jenkins>:8080/github-webhook/` (évènement `push`).
+   `http://<host-jenkins>:8180/github-webhook/` (évènement `push`, port hôte
+   du service `jenkins` — `8180` en local, cf. `docker-compose.yml`).
 5. Créer une credential Jenkins de type **Secret file**, id
    `leadflux-web-env`, contenant les variables de prod (`DATABASE_URL`,
    `BETTER_AUTH_SECRET`, `SMTP_*`, `IMAP_*`…) — jamais commitées dans le
