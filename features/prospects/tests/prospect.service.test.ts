@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 
 const createMock = vi.fn()
 const deleteMock = vi.fn()
-const deleteMultipleMock = vi.fn()
+const deleteManyMock = vi.fn()
 const truncateMock = vi.fn()
 
 vi.mock("../repositories/write", () => ({
     ProspectWriteRepositoriesImpl: {
         create: (...args: unknown[]) => createMock(...args),
         delete: (...args: unknown[]) => deleteMock(...args),
-        deleteMultiple: (...args: unknown[]) => deleteMultipleMock(...args),
+        deleteMany: (...args: unknown[]) => deleteManyMock(...args),
         truncate: (...args: unknown[]) => truncateMock(...args),
     },
 }))
@@ -20,7 +20,7 @@ describe("ProspectServicesImpl", () => {
     beforeEach(() => {
         createMock.mockReset()
         deleteMock.mockReset()
-        deleteMultipleMock.mockReset()
+        deleteManyMock.mockReset()
         truncateMock.mockReset()
     })
 
@@ -54,21 +54,21 @@ describe("ProspectServicesImpl", () => {
         })
     })
 
-    describe("deleteMultiple", () => {
+    describe("deleteMany", () => {
         it("delegue au repository de write", async () => {
-            deleteMultipleMock.mockResolvedValue(undefined)
+            deleteManyMock.mockResolvedValue(undefined)
 
-            await ProspectServicesImpl.deleteMultiple(["prospect_1", "prospect_2"])
+            await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
 
-            expect(deleteMultipleMock).toHaveBeenCalledWith(["prospect_1", "prospect_2"])
+            expect(deleteManyMock).toHaveBeenCalledWith(["prospect_1", "prospect_2"])
         })
     })
 
-    describe("truncate", () => {
-        it("delegue au repository de write", async () => {
+    describe("clear", () => {
+        it("delegue au repository de write (truncate)", async () => {
             truncateMock.mockResolvedValue(undefined)
 
-            await ProspectServicesImpl.truncate()
+            await ProspectServicesImpl.clear()
 
             expect(truncateMock).toHaveBeenCalled()
         })

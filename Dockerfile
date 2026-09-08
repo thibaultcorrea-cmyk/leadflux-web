@@ -16,6 +16,11 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# `next build` evalue core/env.ts (Zod) pendant la collecte des pages ; seul
+# BETTER_AUTH_SECRET n'a pas de valeur par defaut. Placeholder de build
+# uniquement : le vrai secret est injecte au `docker run` (--env-file), qui
+# prime toujours sur cet ENV fige dans l'image.
+ENV BETTER_AUTH_SECRET="build-time-placeholder-do-not-use-in-prod"
 RUN pnpm build
 
 # 3. Image de prod : uniquement la sortie standalone (cf. next.config.ts)

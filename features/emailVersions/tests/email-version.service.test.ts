@@ -29,7 +29,7 @@ describe("EmailVersionServicesImpl.create", () => {
         await EmailVersionServicesImpl.create({
             emailId: "email_1",
             subject: "Un mot sur votre prospection",
-            body: ["Bonjour Marion,", "Thibault Correa, OxIAgen"],
+            body: "<p>Bonjour Marion,</p><p>Thibault Correa, OxIAgen</p>",
         })
 
         expect(createMock).toHaveBeenCalledWith(

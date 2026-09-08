@@ -30,12 +30,14 @@ describe("EmailProspectsServicesImpl.create", () => {
         createMock.mockResolvedValue({ id: "email_1", prospectName: "Marion Aubert" })
 
         await EmailProspectsServicesImpl.create({
+            prospectId: "prospect_1",
             prospectName: "Marion Aubert",
             prospectEmail: "marion.aubert@aubert-strategie.fr",
         })
 
         expect(createMock).toHaveBeenCalledWith(
             expect.objectContaining({
+                prospectId: "prospect_1",
                 prospectName: "Marion Aubert",
                 prospectEmail: "marion.aubert@aubert-strategie.fr",
             }),

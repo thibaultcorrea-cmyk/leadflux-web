@@ -24,7 +24,7 @@ describe("e2e searchResults : creation d'une apparition prospect/recherche", () 
             await SearchResultWriteRepositoriesImpl.deleteMany(createdKeys)
         }
         if (createdProspectIds.length > 0) {
-            await ProspectWriteRepositoriesImpl.deleteMultiple(createdProspectIds)
+            await ProspectWriteRepositoriesImpl.deleteMany(createdProspectIds)
         }
         if (createdPersonIds.length > 0) {
             await PersonWriteRepositoriesImpl.deleteMany(createdPersonIds)

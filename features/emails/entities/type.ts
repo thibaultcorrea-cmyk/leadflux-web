@@ -8,7 +8,7 @@ export type EmailStatus = "draft" | "sent" | "replied";
 export type EmailVersion = {
     id: string;
     subject: string;
-    /** Corps de l'email, un élément par paragraphe. */
+    /** Corps de l'email au format HTML (paragraphes, listes, gras/italique/souligné). */
     body: string;
     /** Date de génération, ISO. */
     generatedAt: string;
