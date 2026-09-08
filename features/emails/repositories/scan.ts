@@ -91,9 +91,12 @@ export const EmailScanRepositoriesImpl = {
             }
 
             if (tokenToMessage.size > 0) {
-                const updated = await EmailWriteRepositoriesImpl.markRepliedByThreadIds(
-                    Array.from(tokenToMessage.keys()),
-                )
+                const replies = Array.from(tokenToMessage.entries()).map(([threadId, message]) => ({
+                    threadId,
+                    // Date reelle de la reponse recuperee par le scan IMAP, pas la date du passage du job.
+                    repliedAt: message.date ?? new Date(),
+                }))
+                const updated = await EmailWriteRepositoriesImpl.markRepliedByThreadIds(replies)
                 matched += updated.length
             }
 
