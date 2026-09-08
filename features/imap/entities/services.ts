@@ -3,5 +3,5 @@ import { ImapMessageEnvelope } from "./imapflow";
 
 export interface IMAPService {
     search: (input: SearchInboxDto) => Promise<ImapMessageEnvelope[]>;
-    hasReply: (input: FindReplyByThreadIdDto) => Promise<boolean>;
+    hasReply: (input: FindReplyByThreadIdDto) => Promise<ImapMessageEnvelope[]>;
 }

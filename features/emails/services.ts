@@ -10,7 +10,7 @@ import { AgentEmailService } from "../agent/email/service"
 import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
 import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
 import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
-import { ManyOperationResult } from "./entities/type"
+import { HasReplyResult, ManyOperationResult } from "./entities/type"
 import { ProspectServicesImpl } from "../prospects/services"
 import { FindReplyByThreadIdDto } from "../imap/dto/schema"
 import { IMAPServiceImpl } from "../imap/services"
@@ -291,29 +291,55 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     },
 
     hasReply: async (threadId: string) => {
-        const email = await EmailReadRepositoriesImpl.getByThreadId(threadId)
-        if (!email) {
-            throw new Error("Email not found")
-        }
 
-        if (!email.threadId) {
-            throw new Error("Email thread id not found")
-        }
+        try {
+            const reply_index: number = 0
+            const response: HasReplyResult = {
+                from: null,
+                hasReply: false,
+                subject: null,
+                repliedAt: null,
+                message: "Email not replied"
+            }
+            const email = await EmailReadRepositoriesImpl.getByThreadId(threadId)
+            if (!email) {
+                throw new Error("Email not found")
+            }
 
-        const result = await IMAPServiceImpl.hasReply({
-            threadId: email.threadId,
-            mailbox: "INBOX",
-        })
-        if (result) {
-            await EmailWriteRepositoriesImpl.update({
-                id: email.id,
-                status: "replied",
-                // repliedAt: new Date(),
+            if (!email.threadId) {
+                throw new Error("Email thread id not found")
+            }
+
+            const result = await IMAPServiceImpl.hasReply({
+                threadId: email.threadId,
+                mailbox: "INBOX",
             })
-            return true
-        }
-        return false
+            if (result) {
+                response.hasReply = true
 
+                await EmailWriteRepositoriesImpl.update({
+                    id: email.id,
+                    status: "replied",
+                    repliedAt: result[reply_index].date,
+                })
+                response.subject = result[reply_index].subject
+                response.repliedAt = result[reply_index].date
+                response.from = result[reply_index].from
+                response.message = "Email replied successfully"
+                return response
+            }
+            return response
+
+        } catch (error: any) {
+            return {
+                from: null,
+                hasReply: false,
+                subject: null,
+                repliedAt: null,
+                message: "Email not replied",
+                error: error.message
+            }
+        }
     }
 
 

@@ -1,5 +1,5 @@
 import { FindReplyByThreadIdDto, findReplyByThreadIdSchema, SearchInboxDto, searchInboxSchema } from "./dto/schema";
-import { IMAPService } from "./entities/imap";
+import { IMAPService } from "./entities/services";
 import { ImapFlowRepository } from "./repositories/imap-server";
 
 async function withImapConnection<T>(run: (repository: ImapFlowRepository) => Promise<T>): Promise<T> {
@@ -39,6 +39,6 @@ export const IMAPServiceImpl: IMAPService = {
             throw new Error(validateData.error.message);
         }
         const messages = await withImapConnection((repository) => repository.findByThreadId(validateData.data));
-        return messages.length > 0;
+        return messages;
     },
 }

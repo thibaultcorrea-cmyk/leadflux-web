@@ -52,3 +52,12 @@ export type ManyOperationResult = {
     error?: any;
 
 }
+
+export type HasReplyResult = {
+    from?: string | null;
+    hasReply: boolean;
+    subject?: string | null;
+    repliedAt: Date | null;
+    message?: string;
+    error?: any;
+}
