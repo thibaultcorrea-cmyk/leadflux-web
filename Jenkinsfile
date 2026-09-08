@@ -57,6 +57,31 @@ pipeline {
             }
         }
 
+        stage('DB ensure') {
+            steps {
+                // Cree la base cible si elle n'existe pas encore (utile le
+                // jour ou Postgres n'est plus provisionne par ce meme
+                // docker-compose avec POSTGRES_DB=leadflux, cf. CLAUDE.md §8
+                // point 3, hebergement pas encore tranche). \gexec : execute
+                // la commande retournee par le SELECT seulement si la base
+                // manque ; CREATE DATABASE ne peut pas tourner dans une
+                // transaction, d'ou ce detour plutot qu'un bloc DO $$. Passe
+                // par stdin : `psql -c` n'interprete pas les meta-commandes
+                // comme \gexec, seul un script/stdin le fait.
+                withCredentials([file(credentialsId: 'leadflux-web-env', variable: 'ENV_FILE')]) {
+                    sh """
+                        set -a
+                        . "\$ENV_FILE"
+                        set +a
+                        ADMIN_URL="\${DATABASE_URL%/*}/postgres"
+                        DB_NAME="\${DATABASE_URL##*/}"
+                        echo "SELECT 'CREATE DATABASE ' || quote_ident('\$DB_NAME') WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '\$DB_NAME')
+\\gexec" | docker run --rm -i --network ${DB_NETWORK} postgres:16 psql "\$ADMIN_URL"
+                    """
+                }
+            }
+        }
+
         stage('DB sync') {
             steps {
                 // Migre le schema avant de (re)deployer le conteneur app :
