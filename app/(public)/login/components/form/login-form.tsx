@@ -13,6 +13,10 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { form, onSubmit } = useLoginForm();
 
+  const handleCheckedChange = (checked: boolean) => {
+    form.setValue("rememberMe", checked);
+  };
+
   return (
     <form
       className="flex flex-col gap-5"
@@ -71,7 +75,7 @@ export function LoginForm() {
       </div>
 
       <div className="flex items-center gap-2">
-        <Checkbox id="remember-me" name="remember-me" />
+        <Checkbox id="remember-me" name="remember-me" onCheckedChange={handleCheckedChange} />
         <Label htmlFor="remember-me" className="font-normal text-ink-700">
           Se souvenir de moi
         </Label>
