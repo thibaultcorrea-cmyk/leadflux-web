@@ -169,6 +169,46 @@ Convention de structure des pages (`app/`) et des features métier
 (`features/`) détaillée dans `.claude/rules/convention-code.md` et
 `.claude/rules/convention-code-metier.md`.
 
+## Déploiement
+
+**Cible d'hébergement pas encore actée** (CLAUDE.md §2 et §8, point 3) : ce
+qui suit met en place le pipeline de build/run, pas l'endroit où il tourne
+en prod. Pour l'instant l'app est exposée sur un simple port, sans reverse
+proxy ni domaine.
+
+- `Dockerfile` — build multi-stage (pnpm, Node 20), sortie `standalone` de
+  Next.js (`next.config.ts`) pour une image minimale sans `node_modules`
+  complet.
+- `Jenkinsfile` — pipeline déclenché par un **webhook GitHub sur push
+  `main`** (trigger `githubPush()`) : build de l'image puis (re)lancement du
+  conteneur (`docker run`, port simple).
+
+Mise en place d'une instance Jenkins (aucune existante à ce jour) :
+
+1. Lancer Jenkins avec accès au démon Docker de l'hôte (pour que le
+   pipeline puisse `docker build`/`docker run`) :
+   ```bash
+   docker run -d --name jenkins \
+     -p 8080:8080 -p 50000:50000 \
+     -v jenkins_home:/var/jenkins_home \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v $(which docker):/usr/bin/docker \
+     jenkins/jenkins:lts
+   ```
+2. Installer le plugin **GitHub** (webhook + trigger `githubPush()`).
+3. Créer un job **Pipeline**, source SCM = ce repo, branche `*/main`,
+   script depuis SCM (`Jenkinsfile` à la racine). Cocher « GitHub hook
+   trigger for GITScm polling » dans les Build Triggers.
+4. Sur le repo GitHub, ajouter un webhook vers
+   `http://<host-jenkins>:8080/github-webhook/` (évènement `push`).
+5. Créer une credential Jenkins de type **Secret file**, id
+   `leadflux-web-env`, contenant les variables de prod (`DATABASE_URL`,
+   `BETTER_AUTH_SECRET`, `SMTP_*`, `IMAP_*`…) — jamais commitées dans le
+   repo. Le `Jenkinsfile` l'injecte au conteneur via `--env-file`.
+
+Variables Jenkins optionnelles (valeurs par défaut sinon) : `CONTAINER_NAME`
+(`leadflux-web`), `APP_PORT` (`3000`, port hôte exposé).
+
 ## Agent dédié
 
 Le développement de ce site est piloté par l'agent Claude Code

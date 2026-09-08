@@ -8,6 +8,7 @@ import { buildSchema } from 'drizzle-graphql';
 import { isDevMode } from "@/lib/utils";
 import * as schemas from "@/db/schemas";
 import { db } from "@/db";
+import type { NextRequest } from "next/server";
 
 
 
@@ -33,4 +34,13 @@ const server = new ApolloServer({
 
 const handler = startServerAndCreateNextHandler(server);
 
-export { handler as GET, handler as POST };
+// Wrappe explicitement pour une signature App Router unique : le type de
+// `handler` (overload Pages Router + App Router de @as-integrations/next)
+// ne satisfait pas tel quel le RouteHandlerConfig genere par `next build`.
+export function GET(request: NextRequest) {
+    return handler(request);
+}
+
+export function POST(request: NextRequest) {
+    return handler(request);
+}

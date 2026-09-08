@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.env
+.env.local
+.env*.local
+dependencies/volumes
+tests
+.playwright-mcp
+playwright-report
+test-results
+*.pen
+*.tsbuildinfo
+checkpointer.json
+README.md
+CLAUDE.md
+design.md
