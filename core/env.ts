@@ -27,6 +27,10 @@ const envSchema = z.object({
     IMAP_PORT: z.coerce.number().default(993),
     IMAP_USER: z.string().default("assadi.halifa@gmail.com"),
     IMAP_PASS: z.string().default(""),
+    // TLS implicite (port 993) par defaut, comme un vrai serveur IMAP. A
+    // mettre a "false" en local pour pointer sur GreenMail (IMAP en clair,
+    // port 3143) sans changer de code.
+    IMAP_SECURE: z.stringbool().default(true),
 
     // Boite de test GreenMail (docker-compose), pour verifier en local la
     // detection de reponse par IMAP. Jamais utilise en production : la

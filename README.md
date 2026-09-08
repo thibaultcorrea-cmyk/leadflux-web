@@ -75,7 +75,7 @@ n'est jamais commité.
 | `BETTER_AUTH_URL` | URL de base servie à Better Auth |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` / `ADMIN_IMAGE_URL` | Compte admin créé par `pnpm db:seed` |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` / `SMTP_FROM_ALIAS` | Envoi SMTP applicatif (en local : service `maildev`, catch-all, sans auth réelle) |
-| `IMAP_HOST` / `IMAP_PORT` / `IMAP_USER` / `IMAP_PASS` | Boîte IMAP applicative réelle, lue par `features/imap` pour la détection de réponse (pas d'équivalent `docker-compose` en local) |
+| `IMAP_HOST` / `IMAP_PORT` / `IMAP_USER` / `IMAP_PASS` / `IMAP_SECURE` | Boîte IMAP applicative réelle, lue par `features/imap` pour la détection de réponse. Pas d'équivalent `docker-compose` dédié : pour tester en local, pointer sur `greenmail` (`IMAP_PORT=3143`, `IMAP_SECURE=false`, identifiants alignés sur `SMTP_USER`/`SMTP_PASS`) |
 | `IMAP_TEST_HOST` / `IMAP_TEST_PORT` / `IMAP_TEST_USER` / `IMAP_TEST_PASS` | Boîte IMAP/SMTP de test (service `greenmail`), réservée à la preuve de détection de réponse |
 
 ## Démarrage

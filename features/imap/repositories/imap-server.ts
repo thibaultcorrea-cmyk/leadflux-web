@@ -22,7 +22,7 @@ export class ImapFlowRepository {
         this.client = new ImapFlow({
             host: ENV.IMAP_HOST,
             port: ENV.IMAP_PORT,
-            secure: false,
+            secure: ENV.IMAP_SECURE,
             auth: {
                 user: ENV.IMAP_USER,
                 pass: ENV.IMAP_PASS,
