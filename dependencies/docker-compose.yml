@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ../volumes/postgres-data:/var/lib/postgresql/data
+      - ./volumes/postgres-data:/var/lib/postgresql/data
 
   # Faux serveur SMTP + IMAP pour tester en local la detection de reponse
   # (statut "A repondu"), sans toucher a une vraie boite Gmail. Ephemere :
@@ -60,4 +60,4 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server /data --console-address ":9001"
     volumes:
-      - ../volumes/minio-data:/data
+      - ./volumes/minio-data:/data
