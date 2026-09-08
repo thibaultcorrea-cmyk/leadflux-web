@@ -63,3 +63,19 @@ services:
     command: server /data --console-address ":9001"
     volumes:
       - ./volumes/minio-data:/data
+
+  # Declenche POST /api/v1/emails/scan-replies toutes les 15 min, avec un
+  # premier appel immediat au demarrage (pas d'attente du premier tick).
+  # Boucle shell plutot que crond : crond n'appelle jamais au demarrage sans
+  # bricolage, et ses logs ne remontent pas sur stdout par defaut (docker
+  # compose logs serait muet) — une boucle simple regle les deux d'un coup.
+  # host.docker.internal cible l'app qui tourne en local hors docker (pnpm
+  # dev) ; a remplacer par le nom du service applicatif une fois l'app elle
+  # meme dockerisee (hebergement pas encore tranche, CLAUDE.md §8.3).
+  reply-scan-cron:
+    build:
+      context: ./reply-scan-cron
+    restart: unless-stopped
+    environment:
+      SCAN_REPLIES_URL: ${SCAN_REPLIES_URL:-http://host.docker.internal:3000/api/v1/emails/scan-replies}
+      SCAN_REPLIES_INTERVAL_SECONDS: "900"
