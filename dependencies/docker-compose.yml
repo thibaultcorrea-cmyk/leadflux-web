@@ -87,6 +87,12 @@ services:
     volumes:
       - ./volumes/jenkins-home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      # Depot du repo monte tel quel (lecture seule) : le job Pipeline
+      # (cf. jenkins/jenkins.yaml) clone en local via file:///repo-source,
+      # sans cle SSH ni credential GitHub. A remplacer par une vraie
+      # remote GitHub le jour ou Jenkins ne tourne plus sur la meme machine
+      # que le depot.
+      - ..:/repo-source:ro
 
   # Declenche POST /api/v1/emails/scan-replies toutes les 15 min, avec un
   # premier appel immediat au demarrage (pas d'attente du premier tick).

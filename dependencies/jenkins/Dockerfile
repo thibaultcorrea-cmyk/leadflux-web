@@ -5,9 +5,10 @@ FROM jenkins/jenkins:lts
 
 # Plugins requis par le Jenkinsfile : pipeline declaratif, checkout Git,
 # trigger githubPush(), credential "Secret file" (withCredentials([file(...)])),
-# et Configuration as Code (bootstrap de l'admin, cf. jenkins.yaml).
+# Configuration as Code (bootstrap de l'admin, cf. jenkins.yaml) et job-dsl
+# (creation automatique du job Pipeline, cf. jenkins.yaml > jobs:).
 RUN jenkins-plugin-cli --plugins \
-  "configuration-as-code git github workflow-aggregator credentials-binding"
+  "configuration-as-code git github workflow-aggregator credentials-binding job-dsl"
 
 USER root
 RUN apt-get update \
@@ -22,4 +23,8 @@ USER jenkins
 # d'installation ni son mot de passe genere aleatoirement.
 COPY jenkins.yaml /var/jenkins_config/jenkins.yaml
 ENV CASC_JENKINS_CONFIG=/var/jenkins_config/jenkins.yaml
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+# ALLOW_LOCAL_CHECKOUT : le plugin Git bloque par defaut un remote file://
+# (protection contre un checkout local arbitraire), or le job Pipeline
+# clone justement depuis /repo-source (cf. jenkins.yaml > jobs:), un chemin
+# monte volontairement par ce docker-compose, pas une entree utilisateur.
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true"
