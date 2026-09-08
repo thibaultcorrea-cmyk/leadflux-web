@@ -12,6 +12,7 @@ const resolvers = {
         emailSendChart: () => KpisServices.getEmailSendChart(),
         searches: () => ProspectServicesImpl.collections({}),
         emailsProspects: () => EmailProspectsServicesImpl.collections({}),
+        hasReply: (_: any, args: any): Promise<boolean> => EmailProspectsServicesImpl.hasReply(args.threadId),
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),

@@ -186,6 +186,7 @@ type Query {
     recentlyActivity: [RecentlyActivityItem!]!
     lastSearchResults: [SavedSearchItem!]!
     emailSendChart: [FunnelStepItem!]!
+    hasReply(threadId: String!): Boolean!
     
     
 }

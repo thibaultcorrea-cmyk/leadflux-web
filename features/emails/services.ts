@@ -308,7 +308,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             await EmailWriteRepositoriesImpl.update({
                 id: email.id,
                 status: "replied",
-                repliedAt: new Date(),
+                // repliedAt: new Date(),
             })
             return true
         }
