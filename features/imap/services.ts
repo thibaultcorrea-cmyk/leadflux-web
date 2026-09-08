@@ -1,4 +1,4 @@
-import { FindReplyByThreadIdDto, findReplyByThreadIdSchema, SearchInboxDto, searchInboxSchema } from "./dto/schema";
+import { FetchMailboxWithRangeDto, fetchMailboxWithRangeSchema, FindReplyByThreadIdDto, findReplyByThreadIdSchema, SearchInboxDto, searchInboxSchema } from "./dto/schema";
 import { IMAPService } from "./entities/services";
 import { ImapFlowRepository } from "./repositories/imap-server";
 
@@ -40,5 +40,19 @@ export const IMAPServiceImpl: IMAPService = {
         }
         const messages = await withImapConnection((repository) => repository.findByThreadId(validateData.data));
         return messages;
+    },
+
+    /**
+     * Lecture seule, batch borne par input.batchSize : ne met a jour aucun
+     * checkpoint ni statut, c'est a l'appelant (le futur job de detection en
+     * masse) d'avancer son checkpoint sur le max des uid recus et de
+     * rappeler tant qu'un batch plein revient.
+     */
+    fetchMailboxWithRange: async (input: FetchMailboxWithRangeDto) => {
+        const validateData = fetchMailboxWithRangeSchema.safeParse(input);
+        if (!validateData.success) {
+            throw new Error(validateData.error.message);
+        }
+        return withImapConnection((repository) => repository.fetchMailboxWithRange(validateData.data));
     },
 }
