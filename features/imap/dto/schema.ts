@@ -6,3 +6,10 @@ export const searchInboxSchema = z.object({
 })
 
 export type SearchInboxDto = z.infer<typeof searchInboxSchema>
+
+export const findReplyByThreadIdSchema = z.object({
+    mailbox: z.string().min(1).default("INBOX"),
+    threadId: z.string().min(1, "threadId est requis"),
+})
+
+export type FindReplyByThreadIdDto = z.infer<typeof findReplyByThreadIdSchema>

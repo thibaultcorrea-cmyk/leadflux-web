@@ -1,5 +1,6 @@
-import { searchInboxSchema } from "./schema";
+import { findReplyByThreadIdSchema, searchInboxSchema } from "./schema";
 
 export const imapValidator = {
-    search: (inputs: unknown) => searchInboxSchema.safeParse(inputs)
+    search: (inputs: unknown) => searchInboxSchema.safeParse(inputs),
+    findReplyByThreadId: (inputs: unknown) => findReplyByThreadIdSchema.safeParse(inputs),
 }
