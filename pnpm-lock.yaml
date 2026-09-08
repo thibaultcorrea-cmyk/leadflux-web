@@ -71,6 +71,9 @@ importers:
       graphql-request:
         specifier: ^7.4.0
         version: 7.4.0(graphql@16.14.2)
+      imapflow:
+        specifier: ^1.7.8
+        version: 1.7.8
       lucide-react:
         specifier: ^1.27.0
         version: 1.27.0(react@19.2.4)
@@ -150,9 +153,6 @@ importers:
       eslint-config-next:
         specifier: 16.2.10
         version: 16.2.10(@typescript-eslint/parser@8.63.0(eslint@9.39.5(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3))(eslint@9.39.5(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
-      imapflow:
-        specifier: ^1.7.8
-        version: 1.7.8
       tailwindcss:
         specifier: ^4
         version: 4.3.2

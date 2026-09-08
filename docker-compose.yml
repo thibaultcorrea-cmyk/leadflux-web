@@ -14,7 +14,7 @@ services:
   # Faux serveur SMTP + IMAP pour tester en local la detection de reponse
   # (statut "A repondu"), sans toucher a une vraie boite Gmail. Ephemere :
   # aucune persistance, les messages disparaissent a l'arret du conteneur.
-  # Reserve a ce seul usage IMAP (features/smtp/tests/imap-reply-detection.e2e.ts) :
+  # Reserve a ce seul usage IMAP (features/imap/tests/imap-reply-detection.e2e.ts) :
   # l'envoi applicatif normal passe par maildev, pas par greenmail.
   greenmail:
     image: greenmail/standalone:latest

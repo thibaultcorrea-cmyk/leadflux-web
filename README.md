@@ -27,8 +27,12 @@ avant validation humaine.
 - **Authentification** — Better Auth, deux rôles seulement (`admin` /
   `client`), pas d'auto-inscription (compte créé par l'admin), reset de mot
   de passe par email.
-- **Détection de réponse** — surveillance IMAP d'une boîte de test en local
-  pour faire transiter un email vers le statut « A répondu ».
+- **Détection de réponse** — mécanisme IMAP (`features/imap`) capable de
+  chercher un message dans une boîte, brique de base pour faire transiter un
+  email vers le statut « A répondu ». Pas encore câblé à un déclencheur
+  (cron, webhook n8n…) : l'articulation site / workflow n8n reste un point
+  ouvert (CLAUDE.md §8, point 1). Testé en local contre une boîte de test
+  jetable (service `greenmail`).
 - **Mode brouillon systématique** — aucun envoi automatique à aucun moment :
   tout email généré ou modifié reste en brouillon jusqu'à validation humaine
   explicite.
@@ -71,6 +75,7 @@ n'est jamais commité.
 | `BETTER_AUTH_URL` | URL de base servie à Better Auth |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` / `ADMIN_IMAGE_URL` | Compte admin créé par `pnpm db:seed` |
 | `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` / `SMTP_FROM_ALIAS` | Envoi SMTP applicatif (en local : service `maildev`, catch-all, sans auth réelle) |
+| `IMAP_HOST` / `IMAP_PORT` / `IMAP_USER` / `IMAP_PASS` | Boîte IMAP applicative réelle, lue par `features/imap` pour la détection de réponse (pas d'équivalent `docker-compose` en local) |
 | `IMAP_TEST_HOST` / `IMAP_TEST_PORT` / `IMAP_TEST_USER` / `IMAP_TEST_PASS` | Boîte IMAP/SMTP de test (service `greenmail`), réservée à la preuve de détection de réponse |
 
 ## Démarrage
@@ -104,7 +109,7 @@ Le site est alors disponible sur http://localhost:3000.
 |---|---|---|
 | `postgres` | Base de données applicative | `localhost:5432` |
 | `maildev` | Capture tout email sortant de l'app (mode brouillon/test), une seule UI catch-all | UI http://localhost:1080, SMTP `1025` |
-| `greenmail` | Boîte IMAP/SMTP de test dédiée à la détection de réponse (`features/smtp/tests/imap-reply-detection.e2e.ts`), éphémère, sans persistance | SMTP `3025`, IMAP `3143`, API REST `8080` |
+| `greenmail` | Boîte IMAP/SMTP de test dédiée à la détection de réponse (`features/imap/tests/imap-reply-detection.e2e.ts`), éphémère, sans persistance | SMTP `3025`, IMAP `3143`, API REST `8080` |
 | `roundcube` | Webmail pour consulter la boîte `greenmail` à la main | http://localhost:8334 |
 
 ## Scripts disponibles
@@ -141,7 +146,8 @@ feature) : `npx playwright test`.
 │  ├─ prospects/, search/, searchResults/  # sourcing et gestion des leads
 │  ├─ emails/, emailVersions/              # emails, statuts, versions
 │  ├─ agent/                               # génération de contenu par l'agent IA
-│  ├─ smtp/                                # envoi + détection de réponse IMAP
+│  ├─ smtp/                                # envoi d'email applicatif (nodemailer)
+│  ├─ imap/                                # lecture de boîte pour la détection de réponse
 │  ├─ stats/                               # KPIs et activité récente du Tableau
 │  └─ users/                               # comptes et rôles
 ├─ components/
