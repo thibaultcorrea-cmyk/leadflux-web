@@ -2,6 +2,7 @@ import { EmailGenerationInput, EmailSqlInfer, EmailVersionSqlInfer } from "@/db/
 import { CreateEmailByProspectIdDto, CreateEmailDto, UpdateEmailContentDto, UpdateEmailStatusDto } from "../dto/schema"
 import { Email, EmailVersion, GenerateManyResult, HasReplyResult, ManyOperationResult } from "./type"
 import { AgentEmailSendResult } from "@/features/agent/email/entities/agentEmail"
+import { ScanReplyResult } from "../repositories/scan"
 
 
 export type EmailProspectsServices = {
@@ -21,5 +22,6 @@ export type EmailProspectsServices = {
     deleteMany: (ids: string[]) => Promise<ManyOperationResult>
     clear: () => Promise<void>
     hasReply: (threadId: string) => Promise<HasReplyResult>
+    scanReply: (mailbox?: string, batchSize?: number) => Promise<ScanReplyResult>
 
 }

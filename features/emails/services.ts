@@ -14,6 +14,7 @@ import { HasReplyResult, ManyOperationResult } from "./entities/type"
 import { ProspectServicesImpl } from "../prospects/services"
 import { FindReplyByThreadIdDto } from "../imap/dto/schema"
 import { IMAPServiceImpl } from "../imap/services"
+import { EmailScanRepositoriesImpl } from "./repositories/scan"
 
 
 
@@ -340,8 +341,11 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
                 error: error.message
             }
         }
-    }
+    },
 
+    scanReply: async (mailbox?: string, batchSize?: number) => {
+        return EmailScanRepositoriesImpl.scanReply(mailbox, batchSize)
+    },
 
 }
 
