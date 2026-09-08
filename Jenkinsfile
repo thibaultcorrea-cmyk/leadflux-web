@@ -13,6 +13,11 @@ pipeline {
         IMAGE_NAME     = 'leadflux-web'
         CONTAINER_NAME = "${env.CONTAINER_NAME ?: 'leadflux-web'}"
         APP_PORT       = "${env.APP_PORT ?: '3000'}"
+        // Reseau docker-compose (dependencies/docker-compose.yml) ou vit le
+        // service `postgres` : necessaire pour que le conteneur app (Deploy)
+        // et le conteneur de migration (DB sync) puissent le joindre par son
+        // nom de service plutot que `localhost`.
+        DB_NETWORK     = "${env.DB_NETWORK ?: 'leadflux-web_default'}"
     }
 
     options {
@@ -41,7 +46,33 @@ pipeline {
                           --build-arg NEXT_PUBLIC_APP_URL="\$NEXT_PUBLIC_APP_URL" \
                           --build-arg NEXT_PUBLIC_API_URL="\$NEXT_PUBLIC_API_URL" \
                           --build-arg NEXT_PUBLIC_GRAPHQL_URL="\$NEXT_PUBLIC_GRAPHQL_URL" \
+                          --target builder -t ${IMAGE_NAME}:builder .
+                        docker build \
+                          --build-arg NEXT_PUBLIC_APP_URL="\$NEXT_PUBLIC_APP_URL" \
+                          --build-arg NEXT_PUBLIC_API_URL="\$NEXT_PUBLIC_API_URL" \
+                          --build-arg NEXT_PUBLIC_GRAPHQL_URL="\$NEXT_PUBLIC_GRAPHQL_URL" \
                           -t ${IMAGE_NAME}:${GIT_COMMIT} -t ${IMAGE_NAME}:latest .
+                    """
+                }
+            }
+        }
+
+        stage('DB sync') {
+            steps {
+                // Migre le schema avant de (re)deployer le conteneur app :
+                // `drizzle-kit` vit dans les devDependencies, absentes de
+                // l'image finale (stage `runner`, standalone Next.js) — on
+                // reutilise donc l'image intermediaire `builder`, qui a
+                // node_modules complet et le dossier db/. --network pour
+                // joindre `postgres` par son nom de service compose plutot
+                // que `localhost` (cf. DB_NETWORK ci-dessus).
+                withCredentials([file(credentialsId: 'leadflux-web-env', variable: 'ENV_FILE')]) {
+                    sh """
+                        docker run --rm \
+                          --network ${DB_NETWORK} \
+                          --env-file \$ENV_FILE \
+                          ${IMAGE_NAME}:builder \
+                          pnpm run db:sync
                     """
                 }
             }
@@ -58,6 +89,7 @@ pipeline {
                         docker run -d \
                           --name ${CONTAINER_NAME} \
                           --restart unless-stopped \
+                          --network ${DB_NETWORK} \
                           --env-file \$ENV_FILE \
                           -p ${APP_PORT}:3000 \
                           ${IMAGE_NAME}:latest
