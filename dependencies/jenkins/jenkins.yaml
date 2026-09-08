@@ -18,7 +18,7 @@ jenkins:
 # main (Build Now) depuis l'UI.
 jobs:
   - script: >
-      pipelineJob('leadflux-web') {
+      pipelineJob('leadflux-web-pipeline') {
         definition {
           cpsScm {
             scm {
