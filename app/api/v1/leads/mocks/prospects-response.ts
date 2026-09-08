@@ -3,7 +3,7 @@
  *
  * Dérivé de `./prospects.ts` (données de la maquette « Recherche — Résultats »),
  * restructuré pour coller à la forme retournée par la query GraphQL :
- * company.address, company.sector, person, lastSourcedAt.
+ * company.address, company.industry, person, lastSourcedAt.
  */
 
 export type ProspectAddress = {
@@ -57,7 +57,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Cabinet de conseil en stratégie et transformation pour dirigeants de PME.",
       headcountMin: 3,
       headcountMax: 8,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Directeur associé",
@@ -65,6 +65,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Marion Aubert",
     },
     lastSourcedAt: "2026-07-28T09:12:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directeur associé",
+      industry: "Conseil",
+      location: "Dijon",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-02",
@@ -75,7 +85,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Conseil en performance opérationnelle pour entreprises de services.",
       headcountMin: 3,
       headcountMax: 8,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Fondatrice",
@@ -83,6 +93,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Sophie Simon",
     },
     lastSourcedAt: "2026-07-28T09:12:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Fondatrice",
+      industry: "Conseil",
+      location: "Bordeaux",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-03",
@@ -93,7 +113,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Cabinet de conseil en stratégie d'entreprise auprès de dirigeants du Sud-Ouest.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Associé fondateur",
@@ -101,6 +121,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Hugo Simon",
     },
     lastSourcedAt: "2026-07-28T09:12:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Associé fondateur",
+      industry: "Conseil",
+      location: "Bordeaux",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-04",
@@ -111,7 +141,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Prestataire de services BtoB spécialisé dans l'externalisation commerciale.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Services BtoB" },
+      industry: { name: "Services BtoB" },
     },
     person: {
       jobTitle: "Directrice générale",
@@ -119,6 +149,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Pierre Bernard",
     },
     lastSourcedAt: "2026-07-27T15:40:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directrice générale",
+      industry: "Services BtoB",
+      location: "Bordeaux",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-05",
@@ -129,7 +169,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Services BtoB pour PME industrielles : administratif, achats et logistique.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Services BtoB" },
+      industry: { name: "Services BtoB" },
     },
     person: {
       jobTitle: "Directrice des ventes",
@@ -137,6 +177,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Mathieu Dubois",
     },
     lastSourcedAt: "2026-07-27T15:40:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directrice des ventes",
+      industry: "Services BtoB",
+      location: "Dijon",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-06",
@@ -147,7 +197,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Management de transition pour directions financières et opérationnelles.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Management de transition" },
+      industry: { name: "Management de transition" },
     },
     person: {
       jobTitle: "Associée",
@@ -155,6 +205,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Mathieu Dubois",
     },
     lastSourcedAt: "2026-07-27T15:40:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Associée",
+      industry: "Management de transition",
+      location: "Rouen",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-07",
@@ -165,7 +225,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Cabinet de management de transition intervenant sur des missions courtes en PME.",
       headcountMin: 3,
       headcountMax: 8,
-      sector: { name: "Management de transition" },
+      industry: { name: "Management de transition" },
     },
     person: {
       jobTitle: "Associée",
@@ -173,6 +233,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Laura Robert",
     },
     lastSourcedAt: "2026-07-26T11:05:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Associée",
+      industry: "Management de transition",
+      location: "Strasbourg",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-08",
@@ -183,7 +253,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Conseil indépendant en stratégie de croissance pour dirigeants d'ETI.",
       headcountMin: 1,
       headcountMax: 1,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Directeur associé",
@@ -191,6 +261,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Clara Girard",
     },
     lastSourcedAt: "2026-07-26T11:05:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directeur associé",
+      industry: "Conseil",
+      location: "Paris",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-09",
@@ -201,7 +281,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Cabinet de conseil pluridisciplinaire accompagnant la transformation des PME régionales.",
       headcountMin: 15,
       headcountMax: 30,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Président",
@@ -209,6 +289,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Nicolas Lemoine",
     },
     lastSourcedAt: "2026-07-26T11:05:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Président",
+      industry: "Conseil",
+      location: "Lyon",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-10",
@@ -219,7 +309,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Organisme de formation professionnelle certifié Qualiopi pour salariés et dirigeants.",
       headcountMin: 3,
       headcountMax: 8,
-      sector: { name: "Formation" },
+      industry: { name: "Formation" },
     },
     person: {
       jobTitle: "Directrice générale",
@@ -227,6 +317,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Élise Garnier",
     },
     lastSourcedAt: "2026-07-25T08:30:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directrice générale",
+      industry: "Formation",
+      location: "Nantes",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-11",
@@ -237,7 +337,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Conseil RH indépendant : recrutement, marque employeur et organisation du travail.",
       headcountMin: 1,
       headcountMax: 1,
-      sector: { name: "Conseil RH" },
+      industry: { name: "Conseil RH" },
     },
     person: {
       jobTitle: "Fondateur",
@@ -245,6 +345,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Antoine Petit",
     },
     lastSourcedAt: "2026-07-25T08:30:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Fondateur",
+      industry: "Conseil RH",
+      location: "Lille",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-12",
@@ -255,7 +365,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Management de transition sur des missions de direction opérationnelle en PME.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Management de transition" },
+      industry: { name: "Management de transition" },
     },
     person: {
       jobTitle: "Associée",
@@ -263,6 +373,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Julie Moreau",
     },
     lastSourcedAt: "2026-07-25T08:30:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Associée",
+      industry: "Management de transition",
+      location: "Toulouse",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-13",
@@ -273,7 +393,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Services BtoB aux entreprises du secteur logistique et portuaire.",
       headcountMin: 15,
       headcountMax: 30,
-      sector: { name: "Services BtoB" },
+      industry: { name: "Services BtoB" },
     },
     person: {
       jobTitle: "Directeur commercial",
@@ -281,6 +401,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Karim Fontaine",
     },
     lastSourcedAt: "2026-07-24T14:20:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directeur commercial",
+      industry: "Services BtoB",
+      location: "Marseille",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-14",
@@ -291,7 +421,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Formation continue des cadres et dirigeants, en présentiel et à distance.",
       headcountMin: 3,
       headcountMax: 8,
-      sector: { name: "Formation" },
+      industry: { name: "Formation" },
     },
     person: {
       jobTitle: "Directrice pédagogique",
@@ -299,6 +429,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Camille Roussel",
     },
     lastSourcedAt: "2026-07-24T14:20:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Directrice pédagogique",
+      industry: "Formation",
+      location: "Rennes",
+      headcountMin: 1,
+      headcountMax: 10,
+      revenue: "0-100k",
+      employeeRange: "1-10",
+    },
   },
   {
     id: "p-15",
@@ -309,7 +449,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Conseil en organisation et pilotage de la performance pour PME industrielles.",
       headcountMin: 8,
       headcountMax: 15,
-      sector: { name: "Conseil" },
+      industry: { name: "Conseil" },
     },
     person: {
       jobTitle: "Associé",
@@ -317,6 +457,16 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Paul Chevalier",
     },
     lastSourcedAt: "2026-07-24T14:20:00.000Z",
+    prospectedAt: null,
+    criteria: {
+      jobTitle: "Associé",
+      industry: "Conseil",
+      location: "Grenoble",
+      headcountMin: 11,
+      headcountMax: 50,
+      revenue: "101k-500k",
+      employeeRange: "11-50",
+    },
   },
   {
     id: "p-16",
@@ -327,7 +477,7 @@ export const prospectsResponse: ProspectApiItem[] = [
         "Conseil RH à destination des TPE : paie, contrats et accompagnement managérial.",
       headcountMin: 1,
       headcountMax: 1,
-      sector: { name: "Conseil RH" },
+      industry: { name: "Conseil RH" },
     },
     person: {
       jobTitle: "Fondatrice",
@@ -335,6 +485,7 @@ export const prospectsResponse: ProspectApiItem[] = [
       fullName: "Sarah Barbier",
     },
     lastSourcedAt: "2026-07-23T10:00:00.000Z",
+    prospectedAt: null,
     criteria: {
       jobTitle: "Fondatrice",
       industry: "Conseil RH",
@@ -343,7 +494,7 @@ export const prospectsResponse: ProspectApiItem[] = [
       headcountMax: 10,
       revenue: "0-100k",
       employeeRange: "1-10",
-    }
+    },
   },
 ];
 

@@ -2,6 +2,10 @@ import type { Email } from "../types/email";
 
 const KNOWLEDGE_V1 = "12/07/2026";
 
+/** Un paragraphe par élément, assemblés en une seule chaîne HTML (`EmailVersion.body`). */
+const toEmailBody = (paragraphs: string[]): string =>
+  paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
+
 /**
  * Jeu de démonstration, repris de la maquette « Emails — Variante 3 ».
  * Marion Aubert porte deux versions : c'est le cas qui rend l'annuler /
@@ -22,26 +26,26 @@ export const emails: Email[] = [
       {
         id: "e-01-v1",
         subject: "Un mot sur votre prospection",
-        body: [
+        body: toEmailBody([
           "Bonjour Marion,",
           "Aubert Stratégie accompagne des dirigeants de PME sur la transformation. Nous proposons un agent qui prend en charge la prospection sortante.",
           "Seriez-vous disponible pour un échange la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-29T09:12:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
       {
         id: "e-01-v2",
         subject: "Votre approche du conseil en transformation",
-        body: [
+        body: toEmailBody([
           "Bonjour Marion,",
           "J'ai vu qu'Aubert Stratégie accompagne des dirigeants de PME sur la transformation depuis plusieurs années, avec une équipe de cinq personnes.",
           "À cette taille, la prospection retombe presque toujours sur le dirigeant, entre deux missions client. C'est le premier poste qui saute quand le carnet se remplit.",
           "Nous installons chez des cabinets comme le vôtre un agent qui source les entreprises correspondant à votre cible et prépare les emails de premier contact. Vous validez, vous n'écrivez plus.",
           "Est-ce que 30 minutes la semaine prochaine vous conviendraient pour en parler ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-29T10:26:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -61,13 +65,13 @@ export const emails: Email[] = [
       {
         id: "e-02-v1",
         subject: "Structurer la prospection d'Altitude Conseil",
-        body: [
+        body: toEmailBody([
           "Bonjour Sophie,",
           "Altitude Conseil intervient sur des missions de conseil en organisation auprès de PME régionales, avec une équipe resserrée.",
           "Nous installons un agent qui source vos cibles et prépare les premiers emails. Vous relisez et validez, rien ne part sans vous.",
           "Auriez-vous 30 minutes la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-29T09:40:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -87,13 +91,13 @@ export const emails: Email[] = [
       {
         id: "e-03-v1",
         subject: "Trois leviers pour Simon Stratégie",
-        body: [
+        body: toEmailBody([
           "Bonjour Hugo,",
           "Votre cabinet travaille surtout par recommandation. C'est solide, mais difficile à cadencer quand une mission se termine.",
           "Nous préparons chaque semaine une série de premiers contacts qualifiés, que vous validez un par un.",
           "Un échange de 30 minutes vous irait-il ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-29T07:35:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -113,13 +117,13 @@ export const emails: Email[] = [
       {
         id: "e-04-v1",
         subject: "Le sortant chez Cabinet Dubois",
-        body: [
+        body: toEmailBody([
           "Bonjour Fabien,",
           "Le cabinet grandit, et la prospection sortante reste la tâche que personne n'a le temps de tenir dans la durée.",
           "Notre agent la prépare pour vous : sourcing, rédaction, puis votre validation.",
           "Disponible pour en parler la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-29T05:30:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -139,13 +143,13 @@ export const emails: Email[] = [
       {
         id: "e-05-v1",
         subject: "Management de transition et prospection",
-        body: [
+        body: toEmailBody([
           "Bonjour Laura,",
           "Le management de transition se vend par le réseau, mais le réseau seul plafonne vite.",
           "Nous préparons vos premiers contacts sur des entreprises correspondant à vos missions types.",
           "30 minutes pour en parler ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-27T09:00:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -165,13 +169,13 @@ export const emails: Email[] = [
       {
         id: "e-06-v1",
         subject: "Votre distribution B2B et l'IA",
-        body: [
+        body: toEmailBody([
           "Bonjour Pierre,",
           "Votre activité de distribution repose sur un portefeuille de comptes à renouveler régulièrement.",
           "Nous préparons les premiers contacts sur les entreprises qui ressemblent à vos meilleurs clients.",
           "Un échange la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-28T13:40:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -191,13 +195,13 @@ export const emails: Email[] = [
       {
         id: "e-07-v1",
         subject: "Automatiser votre suivi commercial",
-        body: [
+        body: toEmailBody([
           "Bonjour Mathieu,",
           "Le suivi commercial se perd souvent entre deux relances manuelles.",
           "Nous préparons les emails de premier contact et les relances, que vous validez.",
           "Disponible pour un échange ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-28T11:20:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -217,13 +221,13 @@ export const emails: Email[] = [
       {
         id: "e-08-v1",
         subject: "Un point sur votre prospection",
-        body: [
+        body: toEmailBody([
           "Bonjour Clara,",
           "Vous êtes seule à porter le développement d'Altitude Conseil Paris.",
           "Notre agent prend la partie répétitive : sourcing et premier email, préparés pour votre validation.",
           "30 minutes la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-22T08:30:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -243,13 +247,13 @@ export const emails: Email[] = [
       {
         id: "e-09-v1",
         subject: "Négoce Leroy et la prospection sortante",
-        body: [
+        body: toEmailBody([
           "Bonjour Vincent,",
           "Le négoce vit de volume, et le volume vient du nombre de contacts engagés chaque mois.",
           "Nous préparons ces contacts pour vous, vous gardez la main sur ce qui part.",
           "Un échange rapide ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-22T15:45:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -269,13 +273,13 @@ export const emails: Email[] = [
       {
         id: "e-10-v1",
         subject: "Remplir vos sessions de formation",
-        body: [
+        body: toEmailBody([
           "Bonjour Élise,",
           "Le remplissage des sessions dépend encore beaucoup du bouche-à-oreille.",
           "Nous préparons des premiers contacts sur les entreprises qui forment déjà leurs équipes.",
           "Un échange la semaine prochaine ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-22T10:00:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -295,13 +299,13 @@ export const emails: Email[] = [
       {
         id: "e-11-v1",
         subject: "Votre conseil RH auprès des PME",
-        body: [
+        body: toEmailBody([
           "Bonjour Antoine,",
           "Vous accompagnez des PME sur leurs sujets RH, souvent en solo.",
           "Notre agent prépare vos premiers contacts pour que la prospection ne dépende plus de votre disponibilité.",
           "Disponible pour en parler ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-21T16:30:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },
@@ -321,13 +325,13 @@ export const emails: Email[] = [
       {
         id: "e-12-v1",
         subject: "Vos missions de transition en 2026",
-        body: [
+        body: toEmailBody([
           "Bonjour Julie,",
           "Les missions de transition s'enchaînent rarement sans trou dans le planning.",
           "Nous préparons en continu des premiers contacts qualifiés, que vous validez.",
           "Un échange de 30 minutes ?",
           "Thibault Correa, OxIAgen",
-        ],
+        ]),
         generatedAt: "2026-07-19T14:20:00.000Z",
         knowledgeVersion: KNOWLEDGE_V1,
       },

@@ -1,0 +1,35 @@
+jenkins:
+  systemMessage: "Leadflux CI — provisionne via Configuration as Code."
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_ADMIN_ID}"
+          password: "${JENKINS_ADMIN_PASSWORD}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+# Cree le job Pipeline au demarrage : source = le depot monte en local
+# (/repo-source, cf. docker-compose.yml), pas de cle SSH / credential
+# GitHub necessaire tant que Jenkins tourne sur la meme machine que le
+# depot. githubPush() reste declare dans le Jenkinsfile pour le jour ou un
+# vrai webhook GitHub sera cable ; en attendant, declencher les builds a la
+# main (Build Now) depuis l'UI.
+jobs:
+  - script: >
+      pipelineJob('leadflux-web') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('file:///repo-source')
+                }
+                branch('*/main')
+              }
+            }
+            scriptPath('Jenkinsfile')
+          }
+        }
+      }

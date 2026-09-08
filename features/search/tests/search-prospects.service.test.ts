@@ -5,10 +5,15 @@ const searchCreateMock = vi.fn()
 const searchUpdateMock = vi.fn()
 const leadFinderMock = vi.fn()
 const addressCreateMock = vi.fn()
+const addressClearMock = vi.fn()
 const companyCreateMock = vi.fn()
+const companyClearMock = vi.fn()
 const personCreateMock = vi.fn()
+const personClearMock = vi.fn()
 const prospectCreateMock = vi.fn()
+const prospectClearMock = vi.fn()
 const searchResultCreateMock = vi.fn()
+const searchResultClearMock = vi.fn()
 
 vi.mock("../../users/services", () => ({
     UserServices: {
@@ -28,19 +33,34 @@ vi.mock("../mocks/lead-finder", () => ({
 }))
 
 vi.mock("@/features/adresses/services", () => ({
-    AddressServicesImpl: { create: (...args: unknown[]) => addressCreateMock(...args) },
+    AddressServicesImpl: {
+        create: (...args: unknown[]) => addressCreateMock(...args),
+        clear: (...args: unknown[]) => addressClearMock(...args),
+    },
 }))
 vi.mock("@/features/companies/services", () => ({
-    CompanyServicesImpl: { create: (...args: unknown[]) => companyCreateMock(...args) },
+    CompanyServicesImpl: {
+        create: (...args: unknown[]) => companyCreateMock(...args),
+        clear: (...args: unknown[]) => companyClearMock(...args),
+    },
 }))
 vi.mock("@/features/persons/services", () => ({
-    PersonServicesImpl: { create: (...args: unknown[]) => personCreateMock(...args) },
+    PersonServicesImpl: {
+        create: (...args: unknown[]) => personCreateMock(...args),
+        clear: (...args: unknown[]) => personClearMock(...args),
+    },
 }))
 vi.mock("@/features/prospects/services", () => ({
-    ProspectServicesImpl: { create: (...args: unknown[]) => prospectCreateMock(...args) },
+    ProspectServicesImpl: {
+        create: (...args: unknown[]) => prospectCreateMock(...args),
+        clear: (...args: unknown[]) => prospectClearMock(...args),
+    },
 }))
 vi.mock("@/features/searchResults/services", () => ({
-    SearchResultServicesImpl: { create: (...args: unknown[]) => searchResultCreateMock(...args) },
+    SearchResultServicesImpl: {
+        create: (...args: unknown[]) => searchResultCreateMock(...args),
+        clear: (...args: unknown[]) => searchResultClearMock(...args),
+    },
 }))
 
 import { SearchProspectsServicesImpl } from "../services"
@@ -74,6 +94,11 @@ describe("SearchProspectsServicesImpl.searchProspects", () => {
             Promise.resolve({ id: data.id, resultCount: data.resultCount, launchedAt: new Date("2026-01-01T00:00:00.000Z") }),
         )
         leadFinderMock.mockReset()
+        addressClearMock.mockReset().mockResolvedValue(undefined)
+        companyClearMock.mockReset().mockResolvedValue(undefined)
+        personClearMock.mockReset().mockResolvedValue(undefined)
+        prospectClearMock.mockReset().mockResolvedValue(undefined)
+        searchResultClearMock.mockReset().mockResolvedValue(undefined)
         addressCreateMock.mockReset().mockResolvedValue({ id: "address_1" })
         companyCreateMock.mockReset().mockImplementation((input: { addressId?: string }) =>
             Promise.resolve({ id: "company_1", addressId: input.addressId }),

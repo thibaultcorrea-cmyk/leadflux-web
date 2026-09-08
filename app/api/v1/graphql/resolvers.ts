@@ -1,6 +1,8 @@
+import { HasReplyResult } from "@/features/emails/entities/type";
 import { EmailProspectsServicesImpl } from "@/features/emails/services";
 import { ProspectServicesImpl } from "@/features/prospects/services";
 import { SearchProspectsServicesImpl } from "@/features/search/services";
+import { SearchResultServicesImpl } from "@/features/searchResults/services";
 import { KpisServices } from "@/features/stats/kpis/services";
 
 const resolvers = {
@@ -11,6 +13,7 @@ const resolvers = {
         emailSendChart: () => KpisServices.getEmailSendChart(),
         searches: () => ProspectServicesImpl.collections({}),
         emailsProspects: () => EmailProspectsServicesImpl.collections({}),
+        hasReply: (_: any, args: any): Promise<HasReplyResult> => EmailProspectsServicesImpl.hasReply(args.threadId),
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
@@ -19,6 +22,14 @@ const resolvers = {
             const result = await SearchProspectsServicesImpl.clear()
             const message = result ? "Search results cleared successfully" : "Failed to clear search results"
             return { success: result, message }
+        },
+        clearSavedSearches: async (): Promise<{ success: boolean, message: string }> => {
+            try {
+                await SearchProspectsServicesImpl.clearSavedSearches()
+                return { success: true, message: "Search results cleared successfully" }
+            } catch (error) {
+                return { success: false, message: "Failed to clear saved searches" }
+            }
         },
         clearEmailProspects: async (): Promise<{ success: boolean, message: string }> => {
             try {

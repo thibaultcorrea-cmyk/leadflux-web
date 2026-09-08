@@ -1,6 +1,7 @@
 "use client";
 
-import { Eye, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
+import { Check, Eye, MailOpen, Pencil, Repeat2, Reply, Send, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { ConfirmActionMessages, ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
@@ -32,6 +33,7 @@ const PREVIEW_MODAL_CLASSNAME = "sm:max-w-[720px]";
  */
 export function useEmailsTableActions() {
 
+  const router = useRouter();
   const { open } = useModalController();
 
   const { openPreview, openEditView, openReviewingValidateView } = useEmailPreviewAction();
@@ -73,6 +75,16 @@ export function useEmailsTableActions() {
       variant: "ghost",
       onSelect: openPreview,
     },
+    /* {
+       // Distinct de l'aperçu ci-dessus : lecture seule, rendu HTML fidèle à
+       // l'email final (template react-email), sur sa propre page plutôt
+       // qu'en modale — pas d'action de régénération/validation ici.
+       id: "apercu-email",
+       label: "Aperçu email",
+       icon: MailOpen,
+       variant: "ghost",
+       onSelect: (email) => router.push(`/emails/${email.id}/apercu-email`),
+     },*/
     {
       id: "valider",
       label: "Valider",
@@ -93,31 +105,42 @@ export function useEmailsTableActions() {
 
     },
     {
-      id: "repondre",
-      label: "Répondre",
-      icon: Reply,
-      variant: "primary",
-      isHidden: (email) => email.status !== "replied",
-      onSelect: (email) =>
-        confirm({
-          title: "Répondre",
-          description: `Une réponse sera préparée pour ${email.contactName}, en brouillon comme le reste.`,
-          confirmLabel: "Préparer la réponse",
-        }),
-    },
-    {
-      id: "relancer",
-      label: "Relancer",
-      icon: Repeat2,
+      id: "envoyé",
+      label: "Envoyé",
+      icon: Check,
       variant: "primary",
       isHidden: (email) => email.status !== "sent",
+      isDisabled: (email) => email.status === "sent",
       onSelect: (email) =>
-        confirm({
-          title: "Relancer",
-          description: `Une relance sera rédigée pour ${email.contactName}, à valider avant envoi.`,
-          confirmLabel: "Préparer la relance",
-        }),
+        null
     },
+    /* 
+     {
+        id: "repondre",
+        label: "Répondre",
+        icon: Reply,
+        variant: "primary",
+        isHidden: (email) => email.status !== "replied",
+        onSelect: (email) =>
+          confirm({
+            title: "Répondre",
+            description: `Une réponse sera préparée pour ${email.contactName}, en brouillon comme le reste.`,
+            confirmLabel: "Préparer la réponse",
+          }),
+      },
+      {
+        id: "relancer",
+        label: "Relancer",
+        icon: Repeat2,
+        variant: "primary",
+        isHidden: (email) => email.status !== "sent",
+        onSelect: (email) =>
+          confirm({
+            title: "Relancer",
+            description: `Une relance sera rédigée pour ${email.contactName}, à valider avant envoi.`,
+            confirmLabel: "Préparer la relance",
+          }),
+      },*/
     {
       id: "modifier",
       label: "Modifier l'email",

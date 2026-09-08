@@ -14,6 +14,7 @@ export interface IEmailReadRepository {
      */
     find: (query: any) => Promise<any[]>
     count?: (query: any) => Promise<number>
+    getByThreadId: (threadId: string) => Promise<EmailSqlInfer>
 
 }
 
@@ -23,5 +24,15 @@ export interface IEmailWriteRepository {
     delete: (id: string) => Promise<void>
     deleteMany: (ids: string[]) => Promise<void>
     truncate: () => Promise<void>
+    /**
+     * Bascule en masse tout email "sent" dont le thread_id figure dans la
+     * liste vers "replied" (cf. features/emails/repositories/scan.ts).
+     * repliedAt vient de la date reelle du message de reponse recupere par le
+     * scan IMAP, pas de la date du passage du job : chaque entree peut donc
+     * porter une date differente, d'ou une transaction avec une mise a jour
+     * par threadId plutot qu'un UPDATE ... WHERE IN unique. Les threadId sans
+     * email "sent" correspondant sont ignores silencieusement.
+     */
+    markRepliedByThreadIds: (replies: { threadId: string; repliedAt: Date }[]) => Promise<EmailSqlInfer[]>
 
 }

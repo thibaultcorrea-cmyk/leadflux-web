@@ -1,6 +1,6 @@
 import { GRAPHQL_BASE_URL } from "@/core/params";
 import request from "graphql-request";
-import { GET_KPIS_QUERY, GET_RECENTLY_ACTIVITY_QUERY, GET_SAVED_SEARCH_QUERY } from "../_hooks/queries";
+import { CLEAR_SAVED_SEARCHES_MUTATION, GET_KPIS_QUERY, GET_RECENTLY_ACTIVITY_QUERY, GET_SAVED_SEARCH_QUERY } from "../_hooks/queries";
 import { GraphqlApiReturn } from "@/types/apis.-services";
 import { KpiApiReturn, RecentActivityRow, SavedSearchReturn } from "../types/tableau";
 
@@ -25,4 +25,8 @@ export const retrieveFunnelStep = async (): Promise<GraphqlApiReturn<"kpis", Kpi
 
 export const retrieveEmailSendChart = async (): Promise<[]> => {
     return []
+}
+
+export const clearSavedSearches = async (): Promise<GraphqlApiReturn<"clearSearchResults", { success: boolean; message: string }>> => {
+    return request(GRAPHQL_BASE_URL, CLEAR_SAVED_SEARCHES_MUTATION);
 }

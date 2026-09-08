@@ -20,7 +20,7 @@ export type EmailStatusFilter = (typeof EMAIL_STATUS_FILTERS)[number];
 export type EmailVersion = {
   id: string;
   subject: string;
-  /** Corps de l'email, un élément par paragraphe. */
+  /** Corps de l'email au format HTML (un `<p>` par paragraphe). */
   body: string;
   /** Date de génération, ISO. */
   generatedAt: string;

@@ -42,3 +42,19 @@ export const GET_RECENTLY_ACTIVITY_QUERY = gql`
   }
 `
 
+export const CLEAR_SEARCH_RESULTS_MUTATION = gql`
+mutation ClearSearchResults {
+   clearSearchResults {
+    message
+    success
+  }
+}
+`
+
+export const CLEAR_SAVED_SEARCHES_MUTATION = gql`
+mutation ClearSavedSearches {
+   clearSavedSearches {
+    message
+    success
+  }
+}`

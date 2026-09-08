@@ -5,9 +5,11 @@ import { useState, useTransition } from "react";
 import { Email, EmailVersion } from "../../types/email"
 import { getIdsOfDraftedEmails, getLastVersion } from "../../services/utils";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { waitDelay } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArrowLeft, ArrowRight, Loader2, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, Pencil, Send } from "lucide-react";
 import { useModalController } from "@/hooks/useModalController";
 import { showUserInitials } from "@/lib/user-session";
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -16,6 +18,11 @@ import { useEmailMutation } from "../../_hooks/useEmailMutation";
 import { toast } from "@/lib/toaster";
 import { dialogMessages } from "../../services/dialog-messages";
 import { reportErrorClient } from "@/lib/report-error-client";
+import { useEmailForm } from "../../_hooks/useEmailForm";
+import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
+import type { EmailFormValues } from "../../schema/email-form-schema";
+import { EmailInputView } from "./email-input-view";
+import EmailHtmlPreviewView from "./email-html-preview-view";
 
 type EmailReviewingValidateModalContentProps = {
     selectedEmails: Email[],
@@ -23,12 +30,18 @@ type EmailReviewingValidateModalContentProps = {
 
 export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailReviewingValidateModalContentProps) => {
 
-    const { validateSendEmailsMany } = useEmailMutation()
+    const { validateSendEmailsMany, update } = useEmailMutation()
     const [currentEmailIndex, setCurrentEmailIndex] = useState(0);
+    const [emails, setEmails] = useState(selectedEmails);
+    const [isEditing, setIsEditing] = useState(false);
+    const [showHtmlPreview, setShowHtmlPreview] = useState(false);
+    const [isSavingEdit, startSavingEdit] = useTransition()
 
-    const currentEmail = selectedEmails[currentEmailIndex];
-    const CAN_NEXT = currentEmailIndex < selectedEmails.length - 1;
-    const CAN_PREVIOUS = currentEmailIndex > 0;
+    const currentEmail = emails[currentEmailIndex];
+    // Navigation désactivée pendant l'édition : changer d'email laisserait le
+    // formulaire pointer sur une version qui n'est plus affichée.
+    const CAN_NEXT = currentEmailIndex < emails.length - 1 && !isEditing;
+    const CAN_PREVIOUS = currentEmailIndex > 0 && !isEditing;
 
     const handleNext = () => {
         if (CAN_NEXT) {
@@ -44,7 +57,7 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
 
     const sendValidateEmails = async () => {
         try {
-            const ids = getIdsOfDraftedEmails(selectedEmails)
+            const ids = getIdsOfDraftedEmails(emails)
             const { validateAndSendEmailsMany } = await validateSendEmailsMany({ ids })
 
             const success = validateAndSendEmailsMany.success
@@ -62,18 +75,102 @@ export const EmailReviewingValidateModalContent = ({ selectedEmails }: EmailRevi
 
     }
 
-    const sizeTotalEmails = selectedEmails.length;
+    const sizeTotalEmails = emails.length;
     const currentEmailNumber = currentEmailIndex + 1;
 
     const lastVersion = getLastVersion(currentEmail.versions)
+
+    const defaultValues = emailToEmailFormFaktorySchema({ email: currentEmail, version: lastVersion })
+    const { form } = useEmailForm({ email: currentEmail, version: lastVersion, defaultValues })
+
+    const enterEditMode = () => {
+        // useForm ne reprend ses defaultValues qu'au montage : ce composant ne
+        // remonte pas quand on navigue d'un email à l'autre, donc sans ce
+        // reset explicite le formulaire garderait le tout premier contenu
+        // chargé plutôt que celui de l'email actuellement affiché.
+        form.reset(emailToEmailFormFaktorySchema({ email: currentEmail, version: lastVersion }))
+        setIsEditing(true)
+        setShowHtmlPreview(false)
+    }
+
+    const cancelEdit = () => {
+        setIsEditing(false)
+    }
+
+    const onConfirmEdit = (values: EmailFormValues) => {
+        startSavingEdit(async () => {
+            try {
+                await update({
+                    emailId: currentEmail.id,
+                    versionId: lastVersion.id,
+                    ...values,
+                })
+
+                setEmails((current) =>
+                    current.map((e, index) => {
+                        if (index !== currentEmailIndex) return e
+                        return {
+                            ...e,
+                            recipient: values.recipient,
+                            versions: e.versions.map((v, vIndex) =>
+                                vIndex === e.versions.length - 1
+                                    ? { ...v, subject: values.subject, body: values.body }
+                                    : v,
+                            ),
+                        }
+                    }),
+                )
+
+                toast.success(dialogMessages.update.success)
+                setIsEditing(false)
+            } catch (error) {
+                reportErrorClient(error as Error, dialogMessages.update.error.title)
+                toast.error(dialogMessages.update.error)
+            }
+        })
+    }
 
     return (
 
 
         <div className="flex flex-col gap-3">
             <HeaderReviewingValidateModalContent email={currentEmail} version={lastVersion} />
-            <ContentEmailReviewingValidateModalContent email={currentEmail} version={lastVersion} />
-            <FooterReviewingValidateModalContent email={currentEmail} version={lastVersion} canNext={CAN_NEXT} canPrev={CAN_PREVIOUS} currentEmailNumber={currentEmailNumber} sizeTotalEmails={sizeTotalEmails} handleNext={handleNext} handlePrev={handlePrevious} submit={sendValidateEmails} />
+            <div className="flex items-center justify-end gap-2.5">
+                <Label
+                    htmlFor="email-reviewing-html-preview-toggle"
+                    className={isEditing ? "text-ink-500 opacity-50" : "text-ink-700"}
+                >
+                    Aperçu email
+                </Label>
+                <Switch
+                    id="email-reviewing-html-preview-toggle"
+                    checked={showHtmlPreview}
+                    onCheckedChange={setShowHtmlPreview}
+                    disabled={isEditing}
+                    aria-label="Afficher le rendu HTML complet de l'email"
+                />
+            </div>
+            {isEditing
+                ? <EmailInputView form={form} email={currentEmail} version={lastVersion} />
+                : showHtmlPreview
+                    ? <EmailHtmlPreviewView email={currentEmail} version={lastVersion} />
+                    : <ContentEmailReviewingValidateModalContent email={currentEmail} version={lastVersion} />}
+            <FooterReviewingValidateModalContent
+                email={currentEmail}
+                version={lastVersion}
+                canNext={CAN_NEXT}
+                canPrev={CAN_PREVIOUS}
+                currentEmailNumber={currentEmailNumber}
+                sizeTotalEmails={sizeTotalEmails}
+                handleNext={handleNext}
+                handlePrev={handlePrevious}
+                submit={sendValidateEmails}
+                isEditing={isEditing}
+                isSavingEdit={isSavingEdit}
+                onEnterEdit={enterEditMode}
+                onCancelEdit={cancelEdit}
+                onConfirmEdit={form.handleSubmit(onConfirmEdit)}
+            />
         </div>
 
     )
@@ -129,16 +226,46 @@ const ContentEmailReviewingValidateModalContent = ({ email, version }: { email: 
                     </dd>
                 </div>
             </dl>
-            <div className="flex flex-col gap-3 border-t border-border pt-4 ">
-                <p className="text-sm leading-relaxed text-ink-700 whitespace-pre-line px-1.5 overflow-y-auto max-h-[42vh]">
-                    {version.body}
-                </p>
-            </div>
+
+            <div
+                className="text-sm leading-relaxed text-ink-700 px-1.5 overflow-y-auto max-h-[42vh] [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-5 [&_ol]:pl-5 [&_strong]:font-semibold [&_em]:italic [&_u]:underline"
+                dangerouslySetInnerHTML={{ __html: version.body }}
+            />
         </>
     )
 }
 
-const FooterReviewingValidateModalContent = ({ email, version, canPrev, canNext, currentEmailNumber, sizeTotalEmails, handlePrev, handleNext, submit }: { email: Email, version: EmailVersion, canPrev: boolean, canNext: boolean, currentEmailNumber: number, sizeTotalEmails: number, handlePrev: () => void, handleNext: () => void, submit: () => Promise<void> }) => {
+const FooterReviewingValidateModalContent = ({
+    email,
+    version,
+    canPrev,
+    canNext,
+    currentEmailNumber,
+    sizeTotalEmails,
+    handlePrev,
+    handleNext,
+    submit,
+    isEditing,
+    isSavingEdit,
+    onEnterEdit,
+    onCancelEdit,
+    onConfirmEdit,
+}: {
+    email: Email,
+    version: EmailVersion,
+    canPrev: boolean,
+    canNext: boolean,
+    currentEmailNumber: number,
+    sizeTotalEmails: number,
+    handlePrev: () => void,
+    handleNext: () => void,
+    submit: () => Promise<void>,
+    isEditing: boolean,
+    isSavingEdit: boolean,
+    onEnterEdit: () => void,
+    onCancelEdit: () => void,
+    onConfirmEdit: () => void,
+}) => {
 
     const [isPending, startTransition] = useTransition()
     const { close } = useModalController()
@@ -200,16 +327,53 @@ const FooterReviewingValidateModalContent = ({ email, version, canPrev, canNext,
                 </Tooltip>
             </div>
             <div className="flex items-center gap-3">
-                <Button
-                    type="button"
-                    size="lg"
-                    className="h-11 gap-2 px-5 text-[15px] font-semibold"
-                    onClick={handleValidate}
-                    disabled={isPending}
-                >
-                    {isPending ? <Loader2 className="animate-spin inline-block size-4" /> : <Send className="size-4" aria-hidden />}
-                    {isPending ? "Envoi en cours" : "Envoyer"}
-                </Button>
+                {isEditing ? (
+                    <>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            className="h-11 gap-2 px-4 text-sm"
+                            onClick={onCancelEdit}
+                            disabled={isSavingEdit}
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            type="button"
+                            size="lg"
+                            className="h-11 gap-2 px-5 text-[15px] font-semibold"
+                            onClick={onConfirmEdit}
+                            disabled={isSavingEdit}
+                        >
+                            {isSavingEdit && <Loader2 className="size-4 animate-spin" aria-hidden />}
+                            Confirmer
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            className="h-11 gap-2 px-4 text-sm"
+                            onClick={onEnterEdit}
+                        >
+                            <Pencil className="size-4" aria-hidden />
+                            Modifier
+                        </Button>
+                        <Button
+                            type="button"
+                            size="lg"
+                            className="h-11 gap-2 px-5 text-[15px] font-semibold"
+                            onClick={handleValidate}
+                            disabled={isPending}
+                        >
+                            {isPending ? <Loader2 className="animate-spin inline-block size-4" /> : <Send className="size-4" aria-hidden />}
+                            {isPending ? "Envoi en cours" : "Envoyer"}
+                        </Button>
+                    </>
+                )}
             </div>
         </div>
 

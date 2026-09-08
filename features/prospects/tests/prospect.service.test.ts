@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it, vi } from "vitest"
 
 const createMock = vi.fn()
 const deleteMock = vi.fn()
-const deleteMultipleMock = vi.fn()
+const deleteManyMock = vi.fn()
 const truncateMock = vi.fn()
 
 vi.mock("../repositories/write", () => ({
     ProspectWriteRepositoriesImpl: {
         create: (...args: unknown[]) => createMock(...args),
         delete: (...args: unknown[]) => deleteMock(...args),
-        deleteMultiple: (...args: unknown[]) => deleteMultipleMock(...args),
+        deleteMany: (...args: unknown[]) => deleteManyMock(...args),
         truncate: (...args: unknown[]) => truncateMock(...args),
     },
 }))
@@ -20,7 +20,7 @@ describe("ProspectServicesImpl", () => {
     beforeEach(() => {
         createMock.mockReset()
         deleteMock.mockReset()
-        deleteMultipleMock.mockReset()
+        deleteManyMock.mockReset()
         truncateMock.mockReset()
     })
 
@@ -54,21 +54,32 @@ describe("ProspectServicesImpl", () => {
         })
     })
 
-    describe("deleteMultiple", () => {
-        it("delegue au repository de write", async () => {
-            deleteMultipleMock.mockResolvedValue(undefined)
+    describe("deleteMany", () => {
+        it("supprime chaque id individuellement et rapporte le compte de succes", async () => {
+            deleteMock.mockResolvedValue(undefined)
 
-            await ProspectServicesImpl.deleteMultiple(["prospect_1", "prospect_2"])
+            const result = await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
 
-            expect(deleteMultipleMock).toHaveBeenCalledWith(["prospect_1", "prospect_2"])
+            expect(deleteMock).toHaveBeenCalledWith("prospect_1")
+            expect(deleteMock).toHaveBeenCalledWith("prospect_2")
+            expect(deleteMock).toHaveBeenCalledTimes(2)
+            expect(result).toEqual({ success: 2, failed: 0, message: "prospects deleted successfully" })
+        })
+
+        it("comptabilise a part les ids dont la suppression echoue", async () => {
+            deleteMock.mockResolvedValueOnce(undefined).mockRejectedValueOnce(new Error("not found"))
+
+            const result = await ProspectServicesImpl.deleteMany(["prospect_1", "prospect_2"])
+
+            expect(result).toEqual({ success: 1, failed: 1, message: "prospects deleted successfully" })
         })
     })
 
-    describe("truncate", () => {
-        it("delegue au repository de write", async () => {
+    describe("clear", () => {
+        it("delegue au repository de write (truncate)", async () => {
             truncateMock.mockResolvedValue(undefined)
 
-            await ProspectServicesImpl.truncate()
+            await ProspectServicesImpl.clear()
 
             expect(truncateMock).toHaveBeenCalled()
         })

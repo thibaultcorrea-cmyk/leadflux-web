@@ -10,8 +10,11 @@ import { AgentEmailService } from "../agent/email/service"
 import { emailFromRow, emailToAgentSendInput } from "./factory/email-factory"
 import { EmailVersionReadRepositoriesImpl } from "../emailVersions/repositories/read"
 import { ProspectReadRepositoriesImpl } from "../prospects/repositories/read"
-import { ManyOperationResult } from "./entities/type"
+import { HasReplyResult, ManyOperationResult } from "./entities/type"
 import { ProspectServicesImpl } from "../prospects/services"
+import { FindReplyByThreadIdDto } from "../imap/dto/schema"
+import { IMAPServiceImpl } from "../imap/services"
+import { EmailScanRepositoriesImpl } from "./repositories/scan"
 
 
 
@@ -287,5 +290,62 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
     clear: async () => {
         await EmailWriteRepositoriesImpl.truncate()
     },
+
+    hasReply: async (threadId: string) => {
+
+        try {
+            const reply_index: number = 0
+            const response: HasReplyResult = {
+                from: null,
+                hasReply: false,
+                subject: null,
+                repliedAt: null,
+                message: "Email not replied"
+            }
+            const email = await EmailReadRepositoriesImpl.getByThreadId(threadId)
+            if (!email) {
+                throw new Error("Email not found")
+            }
+
+            if (!email.threadId) {
+                throw new Error("Email thread id not found")
+            }
+
+            const result = await IMAPServiceImpl.hasReply({
+                threadId: email.threadId,
+                mailbox: "INBOX",
+            })
+            if (result) {
+                response.hasReply = true
+
+                await EmailWriteRepositoriesImpl.update({
+                    id: email.id,
+                    status: "replied",
+                    repliedAt: result.at(reply_index)?.date,
+                })
+                response.subject = result.at(reply_index)?.subject ?? null
+                response.repliedAt = result.at(reply_index)?.date?.toISOString() ?? null
+                response.from = result.at(reply_index)?.from ?? null
+                response.message = "Email replied successfully"
+                return response
+            }
+            return response
+
+        } catch (error: any) {
+            return {
+                from: null,
+                hasReply: false,
+                subject: null,
+                repliedAt: null,
+                message: "Email not replied",
+                error: error.message
+            }
+        }
+    },
+
+    scanReply: async (mailbox?: string, batchSize?: number) => {
+        return EmailScanRepositoriesImpl.scanReply(mailbox, batchSize)
+    },
+
 }
 

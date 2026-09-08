@@ -14,7 +14,10 @@
     "db:seed": "tsx ./db/seeds/seeds.ts",
     "db:studio": "drizzle-kit studio",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "docker:up": "docker compose -f dependencies/docker-compose.yml --env-file .env up -d",
+    "docker:down": "docker compose -f dependencies/docker-compose.yml --env-file .env down",
+    "docker:logs": "docker compose -f dependencies/docker-compose.yml --env-file .env logs -f"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
@@ -22,8 +25,14 @@
     "@base-ui/react": "^1.6.0",
     "@graphql-tools/schema": "^10.0.38",
     "@hookform/resolvers": "^5.5.7",
+    "@react-email/render": "^2.1.0",
     "@tanstack/react-query": "^5.101.4",
     "@tanstack/react-table": "^8.21.3",
+    "@tiptap/extension-bubble-menu": "^3.31.3",
+    "@tiptap/extension-floating-menu": "^3.31.3",
+    "@tiptap/pm": "^3.31.3",
+    "@tiptap/react": "^3.31.3",
+    "@tiptap/starter-kit": "^3.31.3",
     "@types/nodemailer": "^8.0.1",
     "better-auth": "^1.7.2",
     "class-variance-authority": "^0.7.1",
@@ -32,6 +41,7 @@
     "drizzle-orm": "^0.45.2",
     "graphql": "^16.14.2",
     "graphql-request": "^7.4.0",
+    "imapflow": "^1.7.8",
     "lucide-react": "^1.27.0",
     "motion": "^12.43.0",
     "next": "16.2.10",
@@ -60,7 +70,6 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
-    "imapflow": "^1.7.8",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.10"

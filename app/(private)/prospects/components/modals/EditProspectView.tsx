@@ -1,7 +1,6 @@
 "use client"
 
 import { DialogFooter } from "@/components/ui/dialog";
-import { useProspectModal } from "../../_hooks/useProspectModal"
 import { Button } from "@/components/ui/button";
 import { DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import type { Prospect } from "../../types/prospect";

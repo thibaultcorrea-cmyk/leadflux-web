@@ -22,7 +22,7 @@ describe("e2e search : persistance d'un lead source", () => {
 
     afterAll(async () => {
         if (createdProspectIds.length > 0) {
-            await ProspectWriteRepositoriesImpl.deleteMultiple(createdProspectIds)
+            await ProspectWriteRepositoriesImpl.deleteMany(createdProspectIds)
         }
         if (createdPersonIds.length > 0) {
             await PersonWriteRepositoriesImpl.deleteMany(createdPersonIds)

@@ -1,6 +1,6 @@
 import { db } from "@/db"
 import { emails, EmailSqlInfer, EmailSqlInsert } from "@/db/schemas"
-import { eq, inArray } from "drizzle-orm"
+import { and, eq, inArray } from "drizzle-orm"
 import { IEmailWriteRepository } from "../entities/repository"
 
 
@@ -30,5 +30,24 @@ export const EmailWriteRepositoriesImpl: IEmailWriteRepository = {
 
     truncate: async () => {
         await db.delete(emails)
+    },
+
+    markRepliedByThreadIds: async (replies: { threadId: string; repliedAt: Date }[]) => {
+        if (replies.length === 0) {
+            return []
+        }
+        return db.transaction(async (tx) => {
+            const updated: EmailSqlInfer[] = []
+            for (const { threadId, repliedAt } of replies) {
+                const [result] = await tx.update(emails)
+                    .set({ status: "replied", repliedAt, lastActivityAt: repliedAt })
+                    .where(and(eq(emails.threadId, threadId), eq(emails.status, "sent")))
+                    .returning()
+                if (result) {
+                    updated.push(result)
+                }
+            }
+            return updated
+        })
     },
 }

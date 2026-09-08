@@ -18,6 +18,20 @@ const envSchema = z.object({
     SMTP_FROM: z.string().default("assadi.halifa@gmail.com"),
     SMTP_FROM_ALIAS: z.string().default("LeadFlux"),
 
+    // Boite IMAP applicative reelle, lue par features/imap pour la detection
+    // de reponse. Distincte de IMAP_TEST_* : celles-ci pointent sur la boite
+    // GreenMail de docker-compose (preuve de faisabilite locale), celles-ci
+    // pointent sur la vraie boite en prod. Cf. CLAUDE.md §8, point 1 : le lieu
+    // d'execution reel (site vs workflow n8n) n'est pas encore tranche.
+    IMAP_HOST: z.string().default("localhost"),
+    IMAP_PORT: z.coerce.number().default(993),
+    IMAP_USER: z.string().default("assadi.halifa@gmail.com"),
+    IMAP_PASS: z.string().default(""),
+    // TLS implicite (port 993) par defaut, comme un vrai serveur IMAP. A
+    // mettre a "false" en local pour pointer sur GreenMail (IMAP en clair,
+    // port 3143) sans changer de code.
+    IMAP_SECURE: z.stringbool().default(true),
+
     // Boite de test GreenMail (docker-compose), pour verifier en local la
     // detection de reponse par IMAP. Jamais utilise en production : la
     // detection reelle passe par le workflow n8n (CLAUDE.md §8, point 1).

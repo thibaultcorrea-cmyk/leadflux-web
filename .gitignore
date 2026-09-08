@@ -37,6 +37,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# docker (data persistee des services locaux : postgres, minio)
+/dependencies/volumes/*
+
+# checkpoint du scan IMAP de detection de reponses (features/emails/repositories/scan.ts)
+/checkpointer.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

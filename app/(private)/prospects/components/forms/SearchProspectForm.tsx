@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/lib/toaster";
 import { reportErrorClient } from "@/lib/report-error-client";
 import { dialogMessages } from "../../services/dialog-messages";
+import { waitDelay } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 
 
@@ -27,10 +29,14 @@ export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
         modalController.close()
     }
 
+    const isSubmitting = form.formState.isSubmitting;
+    const label = isSubmitting ? "Recherche en cours..." : "Lancer le sourcing";
+
 
 
     const onSubmit = async (data: LeadFinderFormSchemaType) => {
         try {
+            await waitDelay(3000)
             await createSearchProspect(data)
             close();
             if (redirect) {
@@ -57,8 +63,9 @@ export const SearchProspectForm = ({ redirect }: { redirect?: boolean }) => {
                 <Button type="button" variant="outline" size="lg" onClick={close} >
                     Annuler
                 </Button>
-                <Button type="submit" size="lg" >
-                    Lancer le sourcing
+                <Button type="submit" size="lg" disabled={isSubmitting} >
+                    {isSubmitting && <Loader2 className="size-3.5 animate-spin" aria-hidden />}
+                    {label}
                 </Button>
             </div>
         </form>

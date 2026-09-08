@@ -481,7 +481,9 @@ function ActionBarItem(props: ActionBarItemProps) {
     };
   }, [focusContext, itemId, disabled]);
 
-  const onClick: ActionBarItemProps["onClick"] = React.useCallback(
+  const onClick: ActionBarItemProps["onClick"] = React.useCallback<
+    NonNullable<ActionBarItemProps["onClick"]>
+  >(
     (event) => {
       onClickProp?.(event);
       if (event.defaultPrevented) return;
@@ -507,7 +509,9 @@ function ActionBarItem(props: ActionBarItemProps) {
     [onClickProp, onOpenChange, onSelect],
   );
 
-  const onFocus: ActionBarItemProps["onFocus"] = React.useCallback(
+  const onFocus: ActionBarItemProps["onFocus"] = React.useCallback<
+    NonNullable<ActionBarItemProps["onFocus"]>
+  >(
     (event) => {
       onFocusProp?.(event);
       if (event.defaultPrevented) return;
@@ -518,7 +522,9 @@ function ActionBarItem(props: ActionBarItemProps) {
     [onFocusProp, focusContext, itemId],
   );
 
-  const onKeyDown: ActionBarItemProps["onKeyDown"] = React.useCallback(
+  const onKeyDown: ActionBarItemProps["onKeyDown"] = React.useCallback<
+    NonNullable<ActionBarItemProps["onKeyDown"]>
+  >(
     (event) => {
       onKeyDownProp?.(event);
       if (event.defaultPrevented) return;
@@ -571,7 +577,9 @@ function ActionBarItem(props: ActionBarItemProps) {
     [onKeyDownProp, focusContext, dir, orientation, loop],
   );
 
-  const onMouseDown: ActionBarItemProps["onMouseDown"] = React.useCallback(
+  const onMouseDown: ActionBarItemProps["onMouseDown"] = React.useCallback<
+    NonNullable<ActionBarItemProps["onMouseDown"]>
+  >(
     (event) => {
       onMouseDownProp?.(event);
       if (event.defaultPrevented) return;
@@ -618,7 +626,9 @@ function ActionBarClose({
 }: ActionBarCloseProps) {
   const { onOpenChange } = useActionBarContext(CLOSE_NAME);
 
-  const onCloseClick: ActionBarCloseProps["onClick"] = React.useCallback(
+  const onCloseClick: ActionBarCloseProps["onClick"] = React.useCallback<
+    NonNullable<ActionBarCloseProps["onClick"]>
+  >(
     (event) => {
       onClick?.(event);
       if (event.defaultPrevented) return;

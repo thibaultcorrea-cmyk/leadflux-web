@@ -71,7 +71,7 @@ describe("e2e prospects : creation et suppression d'un prospect", () => {
         const createdFirst = await ProspectServicesImpl.create({ personId: first.person.id, companyId: first.company.id })
         const createdSecond = await ProspectServicesImpl.create({ personId: second.person.id, companyId: second.company.id })
 
-        await ProspectServicesImpl.deleteMultiple([createdFirst.id, createdSecond.id])
+        await ProspectServicesImpl.deleteMany([createdFirst.id, createdSecond.id])
 
         await expect(ProspectReadRepositoriesImpl.get(createdFirst.id)).rejects.toBeTruthy()
         await expect(ProspectReadRepositoriesImpl.get(createdSecond.id)).rejects.toBeTruthy()

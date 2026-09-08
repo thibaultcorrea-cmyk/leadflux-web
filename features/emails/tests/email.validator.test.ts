@@ -4,6 +4,7 @@ import { emailValidator } from "../dto/validator"
 describe("emailValidator.validate", () => {
     it("accepte un email valide avec uniquement les champs requis", () => {
         const result = emailValidator.validate({
+            prospectId: "prospect_1",
             prospectName: "Marion Aubert",
             prospectEmail: "marion.aubert@aubert-strategie.fr",
         })
@@ -13,6 +14,7 @@ describe("emailValidator.validate", () => {
 
     it("accepte un email valide avec tous les champs", () => {
         const result = emailValidator.validate({
+            prospectId: "prospect_1",
             prospectName: "Marion Aubert",
             prospectJob: "Directrice associee",
             prospectEmail: "marion.aubert@aubert-strategie.fr",
@@ -41,6 +43,7 @@ describe("emailValidator.validate", () => {
 
     it("rejette un statut fourni a la creation", () => {
         const result = emailValidator.validate({
+            prospectId: "prospect_1",
             prospectName: "Marion Aubert",
             prospectEmail: "marion.aubert@aubert-strategie.fr",
             status: "sent",

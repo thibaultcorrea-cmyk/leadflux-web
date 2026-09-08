@@ -12,8 +12,8 @@ import { EmailReviewingValidateModalContent } from "../components/modal/email-re
 import { dialogMessages } from "../services/dialog-messages";
 
 /** L'aperçu suit la longueur de ligne de lecture du design system : 720 px. */
-const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[38vw] sm:max-w-[46vw]";
-const EDIT_MODAL_CLASSNAME = "sm:max-w-[42vw]";
+const PREVIEW_MODAL_CLASSNAME = "sm:min-w-[42vw] sm:max-w-[52vw]";
+const EDIT_MODAL_CLASSNAME = "sm:max-w-[45vw]";
 
 
 export const useEmailPreviewAction = () => {
@@ -56,15 +56,6 @@ export const useEmailPreviewAction = () => {
             components: (
                 <EmailPreviewModal
                     email={email}
-                    onEdit={(current) =>
-                        confirm({
-                            title: "Modifier le brouillon",
-                            description: `L'éditeur de l'email adressé à ${current.contactName} arrive dans un prochain lot.`,
-                            confirmLabel: "Compris",
-
-                        })
-
-                    }
                     onRegenerate={(current) =>
                         confirm({
                             title: "Régénérer le brouillon",
@@ -96,7 +87,15 @@ export const useEmailPreviewAction = () => {
 
     const openEditView = (email: Email) => open({
         contentClassName: EDIT_MODAL_CLASSNAME,
-        components: <EditEmailForm email={email} version={getLastVersion(email.versions)} />
+        // key unique par ouverture : la modale reste montée en permanence
+        // (ModalProvider ne fait que remplacer `components`), et l'id de
+        // version ne change pas lors d'une simple édition de contenu. Sans
+        // clé qui change à chaque ouverture, React met à jour la même
+        // instance d'EditEmailForm au lieu de la remonter, et useForm ne
+        // reprend ses defaultValues qu'au montage : rouvrir le même email
+        // après l'avoir modifié laissait le formulaire (et l'éditeur riche)
+        // sur ses valeurs de la toute première ouverture.
+        components: <EditEmailForm key={`${email.id}-${Date.now()}`} email={email} version={getLastVersion(email.versions)} />
     })
 
     const openReviewingValidateView = (selectedEmails: Email[]) => open({

@@ -1,11 +1,13 @@
 "use client";
 
-import { FileText, Pencil, RefreshCw, Redo2, Send, Undo2, Loader2 } from "lucide-react";
-import { useEffect, useEffectEvent, useState, useTransition } from "react";
+import { Pencil, RefreshCw, Redo2, Send, Undo2, Loader2 } from "lucide-react";
+import { useState, useTransition } from "react";
 
 import { EmailStatusBadge } from "@/components/shared/badges/email-status-badge";
 import { Button } from "@/components/ui/button";
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import {
   Tooltip,
   TooltipContent,
@@ -13,9 +15,11 @@ import {
 } from "@/components/ui/tooltip";
 import type { Email, EmailVersion } from "../../types/email";
 import EmailStaticView from "./email-static-view";
+import EmailHtmlPreviewView from "./email-html-preview-view";
 import { EmailInputView } from "./email-input-view";
 import { useEmailForm } from "../../_hooks/useEmailForm";
 import { emailToEmailFormFaktorySchema } from "../../schema/email-schema-faktory";
+import type { EmailFormValues } from "../../schema/email-form-schema";
 import { useEmailMutation } from "../../_hooks/useEmailMutation";
 import { toast } from "@/lib/toaster";
 import { dialogMessages } from "../../services/dialog-messages";
@@ -33,7 +37,6 @@ function getInitials(name: string) {
 
 type EmailPreviewModalProps = {
   email: Email;
-  onEdit: (email: Email) => void;
   onRegenerate: (email: Email) => void;
   onValidate: (email: Email) => void;
 };
@@ -54,17 +57,26 @@ export function EmailPreviewModal({
   const lastIndex = email.versions.length - 1;
   const [versionIndex, setVersionIndex] = useState(lastIndex);
   const [isEditing, setIsEditing] = useState(false);
+  const [showHtmlPreview, setShowHtmlPreview] = useState(false);
   const [versions, setVersions] = useState(email.versions)
+  const [recipient, setRecipient] = useState(email.recipient)
   const [isPending, startTransition] = useTransition()
+  const [isSavingEdit, startSavingEdit] = useTransition()
 
   const version = versions[versionIndex];
+  // Copie d'affichage locale : le destinataire vit sur `emails`, pas sur la
+  // version, mais se modifie dans le même formulaire. `email` reste le prop
+  // d'origine (jamais rafraîchi tant que la modale ne se remonte pas), donc
+  // toute donnée éditable affichée doit passer par cette copie locale plutôt
+  // que par `email` directement (même logique que `versions` ci-dessus).
+  const displayEmail = { ...email, recipient }
 
-  const canUndo = versionIndex > 0;
-  const canRedo = versionIndex < versions.length - 1;
+  const canUndo = versionIndex > 0 && !isEditing;
+  const canRedo = versionIndex < versions.length - 1 && !isEditing;
 
-  const defaultValues = emailToEmailFormFaktorySchema({ email, version: version })
-  const { form } = useEmailForm({ email, version, defaultValues })
-  const { regenerate } = useEmailMutation()
+  const defaultValues = emailToEmailFormFaktorySchema({ email: displayEmail, version: version })
+  const { form } = useEmailForm({ email: displayEmail, version, defaultValues })
+  const { regenerate, update } = useEmailMutation()
 
 
   const undo = () => {
@@ -110,6 +122,44 @@ export function EmailPreviewModal({
     })
   };
 
+  const enterEditMode = () => {
+    // useForm ne reprend ses defaultValues qu'au montage : sans ce reset
+    // explicite, rouvrir l'édition après une régénération (undo/redo) ou une
+    // édition déjà confirmée réafficherait le tout premier contenu chargé.
+    form.reset(emailToEmailFormFaktorySchema({ email: displayEmail, version }))
+    setIsEditing(true)
+    setShowHtmlPreview(false)
+  }
+
+  const cancelEdit = () => {
+    setIsEditing(false)
+  }
+
+  const onConfirmEdit = (values: EmailFormValues) => {
+    startSavingEdit(async () => {
+      try {
+        await update({
+          emailId: email.id,
+          versionId: version.id,
+          ...values,
+        })
+
+        setVersions((current) =>
+          current.map((v, index) =>
+            index === versionIndex ? { ...v, subject: values.subject, body: values.body } : v,
+          ),
+        )
+        setRecipient(values.recipient)
+
+        toast.success(dialogMessages.update.success)
+        setIsEditing(false)
+      } catch (error) {
+        reportErrorClient(error as Error, dialogMessages.update.error.title)
+        toast.error(dialogMessages.update.error)
+      }
+    })
+  };
+
 
 
   return (
@@ -136,16 +186,30 @@ export function EmailPreviewModal({
           <EmailStatusBadge status={email.status} className="mr-9 py-1.5" />
         </header>
 
-        <p className="text-xs text-ink-500">
-          {versions.length > 1
-            ? `Version ${versionIndex + 1} sur ${versions.length}`
-            : "Version initiale"}{" "}
-          · Rédaction puis passe d&apos;humanisation · Jamais envoyé
-          automatiquement
-        </p>
+        <div className="flex items-center justify-end gap-2.5">
+          <Label
+            htmlFor="email-html-preview-toggle"
+            className={isEditing ? "text-ink-500 opacity-50" : "text-ink-700"}
+          >
+            Aperçu email
+          </Label>
+          <Switch
+            id="email-html-preview-toggle"
+            checked={showHtmlPreview}
+            onCheckedChange={setShowHtmlPreview}
+            disabled={isEditing}
+            aria-label="Afficher le rendu HTML complet de l'email"
+          />
+        </div>
 
         <div className="border-t border-border" />
-        {isEditing ? <EmailInputView form={form} email={email} version={version} /> : <EmailStaticView email={email} version={version} />}
+        {isEditing ? (
+          <EmailInputView form={form} email={displayEmail} version={version} />
+        ) : showHtmlPreview ? (
+          <EmailHtmlPreviewView email={displayEmail} version={version} />
+        ) : (
+          <EmailStaticView email={displayEmail} version={version} />
+        )}
 
         {/* 
           <p className="flex items-start gap-2.5 rounded-lg border border-border bg-background-100 p-3 text-xs leading-relaxed text-ink-700">
@@ -195,39 +259,64 @@ export function EmailPreviewModal({
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
-          {/*  <Button
-            type="button"
-            variant="outline"
-            size="lg"
-            className="h-11 gap-2 px-4 text-sm"
-            onClick={() => setIsEditing(!isEditing)}
-          >
-            <Pencil className="size-4" aria-hidden />
-            {isEditing ? "Annuler" : "Modifier"}
-          </Button>
-          */}
-
-          <Button
-            type="button"
-            variant="outline"
-            size="lg"
-            className="h-11 gap-2 px-4 text-sm"
-            onClick={onRegenerateHandler}
-            disabled={isPending}
-          >
-            {isPending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <RefreshCw className="size-4" aria-hidden />}
-            {isPending ? "Régénération en cours..." : "Régénérer"}
-          </Button>
-          <Button
-            type="button"
-            size="lg"
-            className="h-11 gap-2 px-5 text-[15px] font-semibold"
-            onClick={() => onValidate(email)}
-            disabled={isPending}
-          >
-            <Send className="size-4" aria-hidden />
-            Valider et envoyer
-          </Button>
+          {isEditing ? (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="h-11 gap-2 px-4 text-sm"
+                onClick={cancelEdit}
+                disabled={isSavingEdit}
+              >
+                Annuler
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                className="h-11 gap-2 px-5 text-[15px] font-semibold"
+                onClick={form.handleSubmit(onConfirmEdit)}
+                disabled={isSavingEdit}
+              >
+                {isSavingEdit && <Loader2 className="size-4 animate-spin" aria-hidden />}
+                Confirmer
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="h-11 gap-2 px-4 text-sm"
+                onClick={enterEditMode}
+              >
+                <Pencil className="size-4" aria-hidden />
+                Modifier
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="h-11 gap-2 px-4 text-sm"
+                onClick={onRegenerateHandler}
+                disabled={isPending}
+              >
+                {isPending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <RefreshCw className="size-4" aria-hidden />}
+                {isPending ? "Régénération en cours..." : "Régénérer"}
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                className="h-11 gap-2 px-5 text-[15px] font-semibold"
+                onClick={() => onValidate(email)}
+                disabled={isPending}
+              >
+                <Send className="size-4" aria-hidden />
+                Valider et envoyer
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,111 @@
+name: ${CONTAINER_NAME:-leadflux-web}
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: leadflux
+      POSTGRES_PASSWORD: leadflux
+      POSTGRES_DB: leadflux
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volumes/postgres-data:/var/lib/postgresql/data
+
+  # Faux serveur SMTP + IMAP pour tester en local la detection de reponse
+  # (statut "A repondu"), sans toucher a une vraie boite Gmail. Ephemere :
+  # aucune persistance, les messages disparaissent a l'arret du conteneur.
+  # Reserve a ce seul usage IMAP (features/imap/tests/imap-reply-detection.e2e.ts) :
+  # l'envoi applicatif normal passe par maildev, pas par greenmail.
+  greenmail:
+    image: greenmail/standalone:latest
+    restart: unless-stopped
+    environment:
+      GREENMAIL_OPTS: >-
+        -Dgreenmail.setup.test.smtp -Dgreenmail.setup.test.imap -Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users=${SMTP_USER}:${SMTP_PASS} -Dgreenmail.verbose
+    ports:
+      - "3025:3025" # SMTP de test
+      - "3143:3143" # IMAP de test
+      - "8080:8080" # API REST GreenMail (creer/lister/supprimer des comptes)
+
+  roundcube:
+    image: roundcube/roundcubemail:latest
+    depends_on:
+      - greenmail
+    ports:
+      - 8334:80
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_HOST=greenmail
+      - ROUNDCUBEMAIL_DEFAULT_PORT=3143
+      - ROUNDCUBEMAIL_SMTP_SERVER=greenmail
+      - ROUNDCUBEMAIL_SMTP_PORT=3025
+
+  # Capture tout email sortant de l'app (mode brouillon/test local) dans une
+  # seule UI web, quel que soit le destinataire : pas de notion de boite par
+  # compte comme greenmail, donc pas besoin de redirection cote code.
+  maildev:
+    image: maildev/maildev:latest
+    restart: unless-stopped
+    ports:
+      - "1080:1080" # UI web
+      - "1025:1025" # SMTP
+
+  minio:
+    image: minio/minio
+    restart: unless-stopped
+    ports:
+      - "${S3_STORAGE_PORT}:9000"
+      - "${S3_WEB_PORT}:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./volumes/minio-data:/data
+
+  # CI/CD : ecoute le push sur `main` (webhook GitHub) et fait tourner le
+  # Jenkinsfile a la racine du repo (build de l'image app + docker run).
+  # Socket docker de l'hote monte plutot que docker-in-docker : le
+  # Jenkinsfile lance ses `docker build`/`docker run` directement sur le
+  # meme daemon que celui de cette stack (Docker-outside-of-Docker). Image
+  # personnalisee (./jenkins/Dockerfile) : jenkins/jenkins:lts n'embarque
+  # pas le CLI docker necessaire pour parler a ce socket.
+  jenkins:
+    build:
+      context: ./jenkins
+    restart: unless-stopped
+    environment:
+      # Compte admin fixe au demarrage (Configuration as Code, cf.
+      # jenkins/jenkins.yaml) : evite d'aller chercher le mot de passe
+      # initial genere aleatoirement dans le conteneur.
+      JENKINS_ADMIN_ID: ${JENKINS_ADMIN_ID}
+      JENKINS_ADMIN_PASSWORD: ${JENKINS_ADMIN_PASSWORD}
+    ports:
+      - "8180:8080" # UI web + webhook GitHub (/github-webhook/)
+      - "50000:50000" # Agents JNLP (non utilise en single-host, standard Jenkins)
+    volumes:
+      - ./volumes/jenkins-home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Depot du repo monte tel quel (lecture seule) : le job Pipeline
+      # (cf. jenkins/jenkins.yaml) clone en local via file:///repo-source,
+      # sans cle SSH ni credential GitHub. A remplacer par une vraie
+      # remote GitHub le jour ou Jenkins ne tourne plus sur la meme machine
+      # que le depot.
+      - ..:/repo-source:ro
+
+  # Declenche POST /api/v1/emails/scan-replies toutes les 15 min, avec un
+  # premier appel immediat au demarrage (pas d'attente du premier tick).
+  # Boucle shell plutot que crond : crond n'appelle jamais au demarrage sans
+  # bricolage, et ses logs ne remontent pas sur stdout par defaut (docker
+  # compose logs serait muet) — une boucle simple regle les deux d'un coup.
+  # host.docker.internal cible l'app qui tourne en local hors docker (pnpm
+  # dev) ; a remplacer par le nom du service applicatif une fois l'app elle
+  # meme dockerisee (hebergement pas encore tranche, CLAUDE.md §8.3).
+  reply-scan-cron:
+    build:
+      context: ./reply-scan-cron
+    restart: unless-stopped
+    environment:
+      SCAN_REPLIES_URL: ${SCAN_REPLIES_URL:-http://host.docker.internal:3000/api/v1/emails/scan-replies}
+      SCAN_REPLIES_INTERVAL_SECONDS: "900"
