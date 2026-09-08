@@ -57,7 +57,7 @@ export type HasReplyResult = {
     from?: string | null;
     hasReply: boolean;
     subject?: string | null;
-    repliedAt: Date | null;
+    repliedAt: string | null;
     message?: string;
     error?: any;
 }

@@ -320,11 +320,11 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
                 await EmailWriteRepositoriesImpl.update({
                     id: email.id,
                     status: "replied",
-                    repliedAt: result[reply_index].date,
+                    repliedAt: result.at(reply_index)?.date,
                 })
-                response.subject = result[reply_index].subject
-                response.repliedAt = result[reply_index].date
-                response.from = result[reply_index].from
+                response.subject = result.at(reply_index)?.subject ?? null
+                response.repliedAt = result.at(reply_index)?.date?.toISOString() ?? null
+                response.from = result.at(reply_index)?.from ?? null
                 response.message = "Email replied successfully"
                 return response
             }

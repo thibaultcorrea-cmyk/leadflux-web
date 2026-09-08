@@ -178,6 +178,15 @@ type EmailProspect {
     versions: [EmailVersion!]!
 }
 
+type HasReplyResult {
+    from: String
+    hasReply: Boolean!
+    subject: String
+    repliedAt: String
+    message: String!
+    error: String
+}
+
 type Query {
     searches: [ProspectSearch!]
     emailsProspects: [EmailProspect!]
@@ -186,7 +195,7 @@ type Query {
     recentlyActivity: [RecentlyActivityItem!]!
     lastSearchResults: [SavedSearchItem!]!
     emailSendChart: [FunnelStepItem!]!
-    hasReply(threadId: String!): Boolean!
+    hasReply(threadId: String!): HasReplyResult!
     
     
 }

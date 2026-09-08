@@ -1,3 +1,4 @@
+import { HasReplyResult } from "@/features/emails/entities/type";
 import { EmailProspectsServicesImpl } from "@/features/emails/services";
 import { ProspectServicesImpl } from "@/features/prospects/services";
 import { SearchProspectsServicesImpl } from "@/features/search/services";
@@ -12,7 +13,7 @@ const resolvers = {
         emailSendChart: () => KpisServices.getEmailSendChart(),
         searches: () => ProspectServicesImpl.collections({}),
         emailsProspects: () => EmailProspectsServicesImpl.collections({}),
-        hasReply: (_: any, args: any): Promise<boolean> => EmailProspectsServicesImpl.hasReply(args.threadId),
+        hasReply: (_: any, args: any): Promise<HasReplyResult> => EmailProspectsServicesImpl.hasReply(args.threadId),
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
