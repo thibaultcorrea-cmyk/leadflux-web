@@ -1,7 +1,7 @@
 import { Image as ImageIcon, Trash2, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { logoMock } from "../../../services/logo-mock";
+import { logoMock } from "../../../../services/logo-mock";
 import { LogoPreviewSwatch } from "./LogoPreviewSwatch";
 
 /**

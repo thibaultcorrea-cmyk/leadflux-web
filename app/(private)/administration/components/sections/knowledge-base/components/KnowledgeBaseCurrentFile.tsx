@@ -4,8 +4,8 @@ import { Download, Eye, FileText } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useTextPreviewAction } from "../../../hooks/useTextPreviewAction";
-import type { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../types/knowledge-base";
+import { useTextPreviewAction } from "../hooks/useTextPreviewAction";
+import type { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 import { KnowledgeBaseIndexStatsView } from "./KnowledgeBaseIndexStatsView";
 import { KnowledgeBaseSaveProgress } from "./KnowledgeBaseSaveProgress";
 

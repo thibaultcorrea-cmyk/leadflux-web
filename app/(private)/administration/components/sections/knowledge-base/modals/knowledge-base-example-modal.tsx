@@ -1,7 +1,7 @@
 import { FileCheck2 } from "lucide-react";
 
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { knowledgeBaseMock } from "../../services/knowledge-base-mock";
+import { knowledgeBaseMock } from "../../../../services/knowledge-base-mock";
 import { MarkdownPreview } from "./markdown-preview";
 
 /**
@@ -24,7 +24,7 @@ export function KnowledgeBaseExampleModal() {
             Exemple de base de connaissance
           </DialogTitle>
           <DialogDescription className="text-xs text-ink-500">
-            Les 6 blocs attendus, dans l&apos;ordre, un fait par paragraphe.
+            Les 4 blocs attendus, dans l&apos;ordre, un fait par paragraphe.
           </DialogDescription>
         </div>
       </header>

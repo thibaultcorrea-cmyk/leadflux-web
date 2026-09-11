@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { toast } from "@/lib/toaster";
 import { waitDelay } from "@/lib/utils";
-import type { KnowledgeBaseIndexStats } from "../types/knowledge-base";
+import type { KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 
 type KnowledgeBaseSaveStatus = "idle" | "saving";
 

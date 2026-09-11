@@ -7,10 +7,10 @@ import { knowledgeBaseMock } from "../services/knowledge-base-mock";
 import type { AdminSection } from "../types/section";
 import { AdminSectionsNav } from "./nav/AdminSectionsNav";
 import { AdminSectionShell } from "./sections/AdminSectionShell";
-import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/KnowledgeBaseFormattingHelp";
-import { KnowledgeBaseSection } from "./sections/knowledge-base/KnowledgeBaseSection";
-import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/KnowledgeBaseVersionBar";
-import { LogoSection } from "./sections/logo/LogoSection";
+import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/components/KnowledgeBaseFormattingHelp";
+import { KnowledgeBaseSection } from "./sections/knowledge-base/components/KnowledgeBaseSection";
+import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/KnowledgeBaseVersionBar";
+import { LogoSection } from "./sections/logo/components/LogoSection";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {

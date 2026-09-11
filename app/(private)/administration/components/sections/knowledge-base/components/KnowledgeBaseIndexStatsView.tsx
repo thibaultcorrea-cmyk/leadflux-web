@@ -1,6 +1,6 @@
 import { Layers, RefreshCw } from "lucide-react";
 
-import type { KnowledgeBaseIndexStats } from "../../../types/knowledge-base";
+import type { KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 
 type KnowledgeBaseIndexStatsViewProps = {
   stats: KnowledgeBaseIndexStats;

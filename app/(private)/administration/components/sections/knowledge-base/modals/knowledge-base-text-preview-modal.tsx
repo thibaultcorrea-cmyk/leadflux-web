@@ -4,7 +4,7 @@ import { FileText } from "lucide-react";
 import dynamic from "next/dynamic";
 
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import type { KnowledgeBaseFile } from "../../types/knowledge-base";
+import type { KnowledgeBaseFile } from "../../../../types/knowledge-base";
 import { MarkdownPreview } from "./markdown-preview";
 import { PlainTextPreview } from "./plain-text-preview";
 

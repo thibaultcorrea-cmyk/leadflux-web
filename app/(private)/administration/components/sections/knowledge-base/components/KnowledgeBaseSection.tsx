@@ -4,8 +4,8 @@ import { Save } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { useKnowledgeBaseSave } from "../../../hooks/useKnowledgeBaseSave";
-import { knowledgeBaseMock } from "../../../services/knowledge-base-mock";
+import { useKnowledgeBaseSave } from "../hooks/useKnowledgeBaseSave";
+import { knowledgeBaseMock } from "../../../../services/knowledge-base-mock";
 import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
 import { KnowledgeBaseDropzone } from "./KnowledgeBaseDropzone";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";

@@ -2,7 +2,7 @@
 
 import { CircleCheck, CircleX, ExternalLink, FileDown, Lightbulb, Scissors, ShieldAlert } from "lucide-react";
 
-import { useKnowledgeBaseExampleAction } from "../../../hooks/useKnowledgeBaseExampleAction";
+import { useKnowledgeBaseExampleAction } from "../hooks/useKnowledgeBaseExampleAction";
 
 const CHUNKING_TIPS = [
   {

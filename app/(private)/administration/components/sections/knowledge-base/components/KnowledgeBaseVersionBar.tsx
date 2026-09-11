@@ -2,7 +2,7 @@ import { CircleCheck, History } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { KnowledgeBaseVersion } from "../../../types/knowledge-base";
+import type { KnowledgeBaseVersion } from "../../../../types/knowledge-base";
 
 type KnowledgeBaseVersionBarProps = {
   version: KnowledgeBaseVersion;
