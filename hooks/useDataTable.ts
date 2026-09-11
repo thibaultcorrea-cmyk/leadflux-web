@@ -8,6 +8,7 @@ import {
   useReactTable,
   type ColumnDef,
   type ColumnFiltersState,
+  type FilterFn,
   type PaginationState,
   type Row,
   type RowSelectionState,
@@ -33,6 +34,14 @@ export type UseDataTableOptions<TData, TValue = unknown> = {
    * La source de vérité reste l'appelant : le tableau ne les modifie jamais.
    */
   columnFilters?: ColumnFiltersState;
+  /**
+   * Recherche texte libre, pilotée depuis l'extérieur comme `columnFilters`
+   * (le tableau ne la modifie jamais). `globalFilterFn` décrit sur quels
+   * champs elle porte, car une valeur affichée (ex. l'email dans la cellule
+   * Utilisateur) n'est pas forcément la valeur d'une colonne.
+   */
+  globalFilter?: string;
+  globalFilterFn?: FilterFn<TData>;
 };
 
 export type UseDataTableResult<TData> = {
@@ -63,6 +72,8 @@ export function useDataTable<TData, TValue = unknown>({
   initialSorting = [],
   initialColumnVisibility = {},
   columnFilters,
+  globalFilter,
+  globalFilterFn,
 }: UseDataTableOptions<TData, TValue>): UseDataTableResult<TData> {
   const [sorting, setSorting] = useState<SortingState>(initialSorting);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -83,8 +94,10 @@ export function useDataTable<TData, TValue = unknown>({
       rowSelection,
       columnVisibility,
       ...(columnFilters ? { columnFilters } : {}),
+      ...(globalFilter !== undefined ? { globalFilter } : {}),
       ...(enablePagination ? { pagination } : {}),
     },
+    ...(globalFilterFn ? { globalFilterFn } : {}),
     enableRowSelection,
     // Le retour automatique en page 1 de TanStack déclenche un `setState`
     // pendant le premier rendu (avant montage) : on le désactive et on gère ce
@@ -104,7 +117,7 @@ export function useDataTable<TData, TValue = unknown>({
 
   // Un nouveau jeu de données (nouveau sourcing) ou un nouveau filtre change ce
   // qui est affiché : rester en page 3 montrerait une page vide.
-  const filtersKey = JSON.stringify(columnFilters ?? []);
+  const filtersKey = JSON.stringify(columnFilters ?? []) + (globalFilter ?? "");
   const previousInputs = useRef({ data, filtersKey });
   useEffect(() => {
     if (data.length === 0) return

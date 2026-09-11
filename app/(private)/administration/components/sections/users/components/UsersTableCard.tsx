@@ -12,23 +12,26 @@ import { DataTableViewOptions } from "@/components/shared/tables/data-table-view
 import { useDataTable } from "@/hooks/useDataTable";
 import { useUserStatusFilter } from "../hooks/useUserStatusFilter";
 import { useUsersMutation } from "../hooks/useUsersMutation";
+import { useUsersSearch, usersGlobalFilterFn } from "../hooks/useUsersSearch";
 import { useUsersTableActions } from "../hooks/useUsersTableActions";
 import { getUsersColumns } from "./users-columns";
+import { UsersSearchInput } from "./UsersSearchInput";
 
 const PAGE_SIZE = 10;
 
 /**
- * Corps de la section "Utilisateurs" (maquette "Users Table") : filtre de
- * statut, sélection multiple, tri, pagination et actions de ligne/groupées —
- * même logique que la table Emails (`EmailsTablePanel`). La section occupe
- * toute la hauteur de l'écran (cf. `AdminSectionShell` avec `fullHeight`) :
- * seule la liste des lignes défile, l'en-tête d'actions et la note de pied de
- * tableau restent visibles.
+ * Corps de la section "Utilisateurs" (maquette "Users Table") : recherche par
+ * nom/email, filtre de statut, sélection multiple, tri, pagination et actions
+ * de ligne/groupées — même logique que la table Emails (`EmailsTablePanel`).
+ * La section occupe toute la hauteur de l'écran (cf. `AdminSectionShell` avec
+ * `fullHeight`) : seule la liste des lignes défile, l'en-tête d'actions et la
+ * note de pied de tableau restent visibles.
  */
 export function UsersTableCard() {
   const { users, removeUsers } = useUsersMutation();
   const { rowActions, bulkActions } = useUsersTableActions(users, removeUsers);
   const { status, setStatus, items, columnFilters } = useUserStatusFilter(users);
+  const { search, setSearch } = useUsersSearch();
 
   const columns = useMemo(() => getUsersColumns(rowActions), [rowActions]);
 
@@ -41,6 +44,8 @@ export function UsersTableCard() {
     enablePagination: true,
     pageSize: PAGE_SIZE,
     columnFilters,
+    globalFilter: search,
+    globalFilterFn: usersGlobalFilterFn,
   });
 
   return (
@@ -53,7 +58,8 @@ export function UsersTableCard() {
       />
 
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border bg-card">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border px-5 py-3.5">
+        <div className="flex flex-wrap items-center gap-4 border-b border-border px-5 py-3.5">
+          <UsersSearchInput value={search} onValueChange={setSearch} />
           <DataTableSelectionActions
             selectedRows={selectedRows}
             actions={bulkActions}
@@ -66,7 +72,14 @@ export function UsersTableCard() {
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5">
-          <DataTable table={table} emptyMessage="Aucun utilisateur pour ce statut." />
+          <DataTable
+            table={table}
+            emptyMessage={
+              search
+                ? "Aucun utilisateur ne correspond à cette recherche."
+                : "Aucun utilisateur pour ce statut."
+            }
+          />
         </div>
 
         <div className="flex items-start gap-2 border-t border-border px-5 py-3">
