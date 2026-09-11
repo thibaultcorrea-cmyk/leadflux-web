@@ -8,10 +8,10 @@ import { AdminSectionsNav } from "./nav/AdminSectionsNav";
 import { AdminSectionShell } from "./sections/AdminSectionShell";
 
 const ADMIN_SECTIONS: AdminSection[] = [
-  { id: "base-de-connaissances", label: "Base de connaissances", icon: BookOpen },
-  { id: "logo-de-lentreprise", label: "Logo de l'entreprise", icon: ImageIcon },
-  { id: "utilisateurs", label: "Utilisateurs", icon: Users },
-  { id: "zone-sensible", label: "Zone sensible", icon: TriangleAlert },
+  { id: "base-de-connaissances", label: "Base de connaissances", shortLabel: "Base", icon: BookOpen },
+  { id: "logo-de-lentreprise", label: "Logo de l'entreprise", shortLabel: "Logo", icon: ImageIcon },
+  { id: "utilisateurs", label: "Utilisateurs", shortLabel: "Comptes", icon: Users },
+  { id: "zone-sensible", label: "Zone sensible", shortLabel: "Sensible", icon: TriangleAlert },
 ];
 
 const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
@@ -26,7 +26,7 @@ export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
 
   return (
-    <div className="flex items-start gap-7">
+    <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-7">
       <AdminSectionsNav sections={ADMIN_SECTIONS} activeId={activeId} />
       <div className="flex min-w-0 flex-1 flex-col gap-10">
         {ADMIN_SECTIONS.map((section) => (

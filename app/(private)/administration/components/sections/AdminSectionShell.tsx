@@ -11,7 +11,7 @@ type AdminSectionShellProps = {
  */
 export function AdminSectionShell({ id, title, children }: AdminSectionShellProps) {
   return (
-    <section id={id} className="scroll-mt-6">
+    <section id={id} className="scroll-mt-16 md:scroll-mt-6">
       <h2 className="font-display text-[28px] leading-none tracking-[0.01em] text-primary-700">
         {title}
       </h2>
