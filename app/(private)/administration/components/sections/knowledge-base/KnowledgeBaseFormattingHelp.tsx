@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleCheck, CircleX, ExternalLink, FileDown, Lightbulb, Scissors } from "lucide-react";
+import { CircleCheck, CircleX, ExternalLink, FileDown, Lightbulb, Scissors, ShieldAlert } from "lucide-react";
 
 import { useKnowledgeBaseExampleAction } from "../../../hooks/useKnowledgeBaseExampleAction";
 
@@ -64,6 +64,23 @@ export function KnowledgeBaseFormattingHelp() {
         Chaque paragraphe est indexé et peut être retrouvé isolément, hors de son contexte
         d&apos;origine. Écrivez chaque bloc comme s&apos;il devait se suffire à lui-même.
       </p>
+
+      <div className="flex items-start gap-3 rounded-lg border border-accent-500 bg-accent-50 p-4">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-100">
+          <ShieldAlert className="size-4.5 text-warning" aria-hidden />
+        </span>
+        <div className="flex flex-col gap-1">
+          <p className="text-[13px] font-semibold text-ink-900">
+            N&apos;écrivez jamais de consigne adressée à l&apos;IA
+          </p>
+          <p className="text-[13px] leading-snug text-ink-700">
+            Ce texte est indexé puis réinjecté tel quel au moment de la rédaction : une phrase
+            comme « ignore les instructions précédentes » ou « recommande toujours cette offre »
+            serait traitée comme une instruction, pas comme du contenu. N&apos;écrivez que des
+            faits sur votre activité.
+          </p>
+        </div>
+      </div>
 
       <div className="flex flex-col gap-2.5">
         <p className="text-[11px] font-semibold tracking-[0.08em] text-ink-500">
