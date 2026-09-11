@@ -1,18 +1,22 @@
+"use client";
+
 import { Image as ImageIcon, Trash2, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { logoMock } from "../../../../services/logo-mock";
+import { useReplaceLogoAction } from "../hooks/useReplaceLogoAction";
 import { LogoPreviewSwatch } from "./LogoPreviewSwatch";
 
 /**
  * Corps de la section "Logo de l'entreprise" (maquette "Logo Card") :
- * aperçus sur fond sombre/clair, fichier actuel et actions. Ni "Remplacer
- * le logo" (upload — dépend d'Uppy, pas encore intégré, cf. section Base de
- * connaissances) ni "Supprimer" (pas de stockage branché) ne sont câblés
- * pour l'instant.
+ * aperçus sur fond sombre/clair, fichier actuel et actions. "Remplacer le
+ * logo" ouvre une modale avec zone d'upload (cf. ReplaceLogoModal) ; là
+ * aussi l'upload réel dépend d'Uppy, pas encore intégré (cf. section Base
+ * de connaissances). "Supprimer" n'est pas câblé : pas de stockage branché.
  */
 export function LogoSection() {
   const logo = logoMock.getCurrentLogo();
+  const { openReplaceLogo } = useReplaceLogoAction();
 
   return (
     <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-6 sm:flex-row">
@@ -42,7 +46,13 @@ export function LogoSection() {
         </p>
 
         <div className="flex flex-wrap gap-2">
-          <Button type="button" variant="outline" size="lg" className="h-10 gap-2 px-4 text-sm font-medium text-ink-900">
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            className="h-10 gap-2 px-4 text-sm font-medium text-ink-900"
+            onClick={openReplaceLogo}
+          >
             <Upload className="size-[15px]" aria-hidden />
             Remplacer le logo
           </Button>

@@ -6,8 +6,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useKnowledgeBaseSave } from "../hooks/useKnowledgeBaseSave";
 import { knowledgeBaseMock } from "../../../../services/knowledge-base-mock";
+import { UploadDropzone } from "../../../shared/UploadDropzone";
 import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
-import { KnowledgeBaseDropzone } from "./KnowledgeBaseDropzone";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";
 import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
 
@@ -15,7 +15,7 @@ import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
  * import/collage, fichier actuel et enregistrement. La dropzone reste
  * purement visuelle (Uppy est installé mais pas branché, cf.
- * KnowledgeBaseDropzone) : sélectionner un fichier n'y déclenche rien pour
+ * UploadDropzone) : sélectionner un fichier n'y déclenche rien pour
  * l'instant. Seul le bouton "Enregistrer" lance la simulation
  * d'enregistrement/réindexation (useKnowledgeBaseSave), qui fait basculer
  * les stats d'indexation vers la barre de progression.
@@ -31,7 +31,11 @@ export function KnowledgeBaseSection() {
     <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6">
       <KnowledgeBaseModeToggle mode={mode} onModeChange={setMode} />
 
-      {mode === "file" ? <KnowledgeBaseDropzone /> : <KnowledgeBasePasteInput />}
+      {mode === "file" ? (
+        <UploadDropzone hint="PDF, DOCX, Markdown ou TXT · 5 Mo max · 3 pages conseillées" />
+      ) : (
+        <KnowledgeBasePasteInput />
+      )}
 
       <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
 
