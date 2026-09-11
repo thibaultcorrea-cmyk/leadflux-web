@@ -1,9 +1,13 @@
+import { cn } from "@/lib/utils";
+
 type AdminSectionShellProps = {
   id: string;
   title: string;
   description?: string;
   /** Emplacement à droite du titre (ex. badge de version), cf. maquette "Section Header". */
   headerAction?: React.ReactNode;
+  /** La section occupe toute la hauteur de l'écran plutôt que sa hauteur intrinsèque (ex. Utilisateurs, dont le tableau doit pouvoir grandir). */
+  fullHeight?: boolean;
   children?: React.ReactNode;
 };
 
@@ -18,10 +22,17 @@ export function AdminSectionShell({
   title,
   description,
   headerAction,
+  fullHeight,
   children,
 }: AdminSectionShellProps) {
   return (
-    <section id={id} className="flex scroll-mt-16 flex-col gap-4 md:scroll-mt-6">
+    <section
+      id={id}
+      className={cn(
+        "flex scroll-mt-16 flex-col gap-4 md:scroll-mt-6",
+        fullHeight && "min-h-svh"
+      )}
+    >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <h2 className="font-display text-[28px] leading-none tracking-[0.01em] text-primary-700">
@@ -33,7 +44,11 @@ export function AdminSectionShell({
         </div>
         {headerAction}
       </div>
-      {children}
+      {fullHeight ? (
+        <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+      ) : (
+        children
+      )}
     </section>
   );
 }

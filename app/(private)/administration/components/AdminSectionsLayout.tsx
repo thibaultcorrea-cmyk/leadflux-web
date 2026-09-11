@@ -11,6 +11,8 @@ import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/component
 import { KnowledgeBaseSection } from "./sections/knowledge-base/components/KnowledgeBaseSection";
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/KnowledgeBaseVersionBar";
 import { LogoSection } from "./sections/logo/components/LogoSection";
+import { InviteUserButton } from "./sections/users/components/InviteUserButton";
+import { UsersTableCard } from "./sections/users/components/UsersTableCard";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -73,8 +75,11 @@ export function AdminSectionsLayout() {
             headerAction={
               section.id === "base-de-connaissances" ? (
                 <KnowledgeBaseVersionBar version={knowledgeBaseMock.getCurrentVersion()} />
+              ) : section.id === "utilisateurs" ? (
+                <InviteUserButton />
               ) : undefined
             }
+            fullHeight={section.id === "utilisateurs"}
           >
             {section.id === "base-de-connaissances" && (
               <>
@@ -83,6 +88,7 @@ export function AdminSectionsLayout() {
               </>
             )}
             {section.id === "logo-de-lentreprise" && <LogoSection />}
+            {section.id === "utilisateurs" && <UsersTableCard />}
           </AdminSectionShell>
         ))}
       </div>

@@ -9,6 +9,7 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type PaginationState,
+  type Row,
   type RowSelectionState,
   type SortingState,
   type Table,
@@ -21,7 +22,8 @@ export type UseDataTableOptions<TData, TValue = unknown> = {
   columns: ColumnDef<TData, TValue>[];
   /** Identifiant stable d'une ligne : indispensable pour que la sélection survive au tri et à la pagination. */
   getRowId?: (row: TData, index: number) => string;
-  enableRowSelection?: boolean;
+  /** Fonction pour interdire la sélection de certaines lignes (ex. son propre compte). */
+  enableRowSelection?: boolean | ((row: Row<TData>) => boolean);
   enablePagination?: boolean;
   pageSize?: number;
   initialSorting?: SortingState;
