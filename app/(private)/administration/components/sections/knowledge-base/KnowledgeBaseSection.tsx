@@ -13,10 +13,12 @@ import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
- * import/collage, fichier actuel et enregistrement. Le bouton d'upload de la
- * dropzone et "Enregistrer" partagent la même simulation d'enregistrement
- * (useKnowledgeBaseSave) tant qu'Uppy n'est pas branché : les deux doivent
- * faire basculer les stats d'indexation vers la barre de progression.
+ * import/collage, fichier actuel et enregistrement. La dropzone reste
+ * purement visuelle (Uppy est installé mais pas branché, cf.
+ * KnowledgeBaseDropzone) : sélectionner un fichier n'y déclenche rien pour
+ * l'instant. Seul le bouton "Enregistrer" lance la simulation
+ * d'enregistrement/réindexation (useKnowledgeBaseSave), qui fait basculer
+ * les stats d'indexation vers la barre de progression.
  */
 export function KnowledgeBaseSection() {
   const [mode, setMode] = useState<KnowledgeBaseMode>("file");
@@ -29,11 +31,7 @@ export function KnowledgeBaseSection() {
     <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6">
       <KnowledgeBaseModeToggle mode={mode} onModeChange={setMode} />
 
-      {mode === "file" ? (
-        <KnowledgeBaseDropzone onBrowseClick={save} isUploading={isSaving} />
-      ) : (
-        <KnowledgeBasePasteInput />
-      )}
+      {mode === "file" ? <KnowledgeBaseDropzone /> : <KnowledgeBasePasteInput />}
 
       <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
 
