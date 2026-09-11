@@ -41,7 +41,7 @@ const mockKnowledgeBaseIndexStats: KnowledgeBaseIndexStats = {
 };
 
 /**
- * Exemple complet respectant les 6 blocs attendus (cf. "Rédiger une bonne
+ * Exemple complet respectant les 4 blocs attendus (cf. "Rédiger une bonne
  * base de connaissance") : un titre par paragraphe, un fait par paragraphe,
  * le nom plutôt qu'un renvoi. Affiché tel quel dans la modale "Voir un
  * exemple complet", via le même rendu Markdown que l'aperçu de texte.
@@ -68,17 +68,7 @@ Le décideur visé est le dirigeant ou le responsable commercial, rarement un po
 
 OxIAgen utilise Leadflux en interne depuis janvier 2026 pour sa propre prospection, avant même de le commercialiser.
 
-Un client pilote a obtenu 12 rendez-vous qualifiés en un mois, avec un taux de réponse de 18 %.
-
-## Ton
-
-Leadflux tutoie ses interlocuteurs et va droit au but : jamais plus de 120 mots par email.
-
-Les mots interdits sont « solution », « disruptif » et « écosystème ».
-
-## Appel à l'action
-
-Chaque email se termine par une seule demande : un créneau de 15 minutes dans la semaine, jamais un lien de calendrier générique.`;
+Un client pilote a obtenu 12 rendez-vous qualifiés en un mois, avec un taux de réponse de 18 %.`;
 
 export const knowledgeBaseMock = {
   getCurrentFile: (): KnowledgeBaseFile => mockKnowledgeBaseFile,

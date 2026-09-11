@@ -28,8 +28,6 @@ const EXPECTED_BLOCKS = [
   { title: "Offre :", example: "ce que vous vendez, pour qui, à quel prix d'entrée" },
   { title: "Cible (ICP) :", example: "secteur, taille, poste du décideur, douleur" },
   { title: "Preuves :", example: "chiffres, clients citables, résultats datés" },
-  { title: "Ton :", example: "tutoiement ou vouvoiement, longueur, mots interdits" },
-  { title: "Appel à l'action :", example: "la seule chose demandée en fin d'email" },
 ];
 
 const NEVER_INCLUDE = [
@@ -46,7 +44,7 @@ const NEVER_INCLUDE = [
  * Formatage") : rappelle que chaque paragraphe est indexé et retrouvé
  * isolément, d'où les règles de découpage. Le lien "Voir un exemple
  * complet" ouvre une modale scrollable avec un exemple mocké respectant
- * les 6 blocs attendus.
+ * les 4 blocs attendus.
  */
 export function KnowledgeBaseFormattingHelp() {
   const { openExample } = useKnowledgeBaseExampleAction();
@@ -100,7 +98,7 @@ export function KnowledgeBaseFormattingHelp() {
       <div className="flex flex-col gap-7 md:flex-row">
         <div className="flex flex-1 flex-col gap-2.5">
           <p className="text-[11px] font-semibold tracking-[0.08em] text-ink-500">
-            6 BLOCS ATTENDUS, DANS CET ORDRE
+            4 BLOCS ATTENDUS, DANS CET ORDRE
           </p>
           {EXPECTED_BLOCKS.map((block) => (
             <div key={block.title} className="flex items-start gap-2">
