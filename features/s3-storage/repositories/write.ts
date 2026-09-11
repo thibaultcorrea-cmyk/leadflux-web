@@ -1,4 +1,5 @@
 import { DeleteObjectCommand, DeleteObjectsCommand, ListObjectsV2Command, PutObjectCommand } from "@aws-sdk/client-s3"
+import { Upload } from "@aws-sdk/lib-storage"
 import { s3Client, S3_BUCKET } from "../client"
 import { IS3StorageWriteRepository } from "../entities/repository"
 
@@ -12,6 +13,28 @@ export const S3StorageWriteRepositoriesImpl: IS3StorageWriteRepository = {
             Body: body,
             ContentType: contentType,
         }))
+
+        return { key, bucket: S3_BUCKET }
+    },
+
+    uploadMultipart: async ({ key, contentType, body }, onProgress) => {
+        // Upload decoupe et envoie les parts (5 Mo par defaut, 4 en parallele) ;
+        // en dessous du seuil de decoupage il retombe sur un PutObject simple.
+        const upload = new Upload({
+            client: s3Client,
+            params: {
+                Bucket: S3_BUCKET,
+                Key: key,
+                Body: body,
+                ContentType: contentType,
+            },
+        })
+
+        if (onProgress) {
+            upload.on("httpUploadProgress", onProgress)
+        }
+
+        await upload.done()
 
         return { key, bucket: S3_BUCKET }
     },
