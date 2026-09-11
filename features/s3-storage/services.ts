@@ -30,7 +30,7 @@ export const S3StorageServicesImpl: S3StorageServices = {
     },
 
     uploadMultipart: async (input) => {
-        const validated = s3StorageValidator.validate(input)
+        const validated = s3StorageValidator.validateMultipart(input)
         if (!validated.success) {
             throw validated.error
         }

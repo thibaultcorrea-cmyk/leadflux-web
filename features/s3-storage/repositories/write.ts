@@ -17,11 +17,13 @@ export const S3StorageWriteRepositoriesImpl: IS3StorageWriteRepository = {
         return { key, bucket: S3_BUCKET }
     },
 
-    uploadMultipart: async ({ key, contentType, body }, onProgress) => {
+    uploadMultipart: async ({ key, contentType, body, partSize }, onProgress) => {
         // Upload decoupe et envoie les parts (5 Mo par defaut, 4 en parallele) ;
         // en dessous du seuil de decoupage il retombe sur un PutObject simple.
+        // partSize non fourni => lib-storage applique son propre defaut (5 Mo).
         const upload = new Upload({
             client: s3Client,
+            partSize,
             params: {
                 Bucket: S3_BUCKET,
                 Key: key,
