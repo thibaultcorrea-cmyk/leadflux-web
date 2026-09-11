@@ -40,6 +40,15 @@ const envSchema = z.object({
     IMAP_TEST_USER: z.string().default("test@leadflux.local"),
     IMAP_TEST_PASS: z.string().default("test"),
 
+    // MinIO (docker-compose) parle le protocole S3 : le SDK AWS s'y connecte
+    // avec forcePathStyle + une region factice (cf. features/s3-storage).
+    // Cle/secret identiques a MINIO_ROOT_USER/PASSWORD, c'est le meme MinIO.
+    S3_ENDPOINT: z.string().default("http://localhost:9000"),
+    S3_REGION: z.string().default("us-east-1"),
+    S3_ACCESS_KEY_ID: z.string().default("leadflux"),
+    S3_SECRET_ACCESS_KEY: z.string().default("leadflux"),
+    S3_BUCKET: z.string().default("leadflux"),
+
 });
 
 export const ENV = envSchema.parse(process.env);

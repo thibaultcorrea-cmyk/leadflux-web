@@ -1,0 +1,12 @@
+import { FileSqlInfer } from "@/db/schemas"
+import { CreateFileDto } from "../dto/schema"
+
+export type FileServices = {
+    create: (file: CreateFileDto) => Promise<FileSqlInfer>
+    collections: (query: any) => Promise<FileSqlInfer[]>
+    update: (file: Partial<FileSqlInfer>) => Promise<FileSqlInfer>
+    delete: (id: string) => Promise<void>
+    deleteMany: (ids: string[]) => Promise<void>
+    clear: () => Promise<void>
+
+}
