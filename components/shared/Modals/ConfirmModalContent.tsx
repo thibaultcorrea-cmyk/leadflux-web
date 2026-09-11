@@ -7,11 +7,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { useModalController } from "@/hooks/useModalController";
 import { reportErrorClient } from "@/lib/report-error-client";
 import { toast } from "@/lib/toaster";
 import { Loader2 } from "lucide-react";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 
 type ConfirmModalContentProps = {
   title: string;
@@ -25,6 +27,13 @@ type ConfirmModalContentProps = {
   onConfirm?: () => Promise<unknown>;
   onCancel?: () => Promise<void>;
   messages?: ConfirmActionMessages;
+  /**
+   * Mot que l'utilisateur doit saisir à l'identique (insensible à la casse)
+   * pour activer le bouton de confirmation — garde-fou supplémentaire pour
+   * les actions les plus sensibles (ex. Zone sensible), en plus du clic de
+   * confirmation lui-même.
+   */
+  confirmationWord?: string;
 };
 
 type ConfirmMessage = { title: string, description: string };
@@ -32,10 +41,12 @@ type ConfirmMessage = { title: string, description: string };
 /**
  * `success` peut dependre du resultat de `onConfirm` (ex. nombre de
  * brouillons rediges) : le resoudre en fonction evite de figer le message
- * avant que l'action ait tourne (cf. dialogMessages.drafting).
+ * avant que l'action ait tourne (cf. dialogMessages.drafting). Optionnel :
+ * une action qui redirige au succès (ex. réinitialisation) n'a rien à
+ * afficher, la page suivante en tient déjà lieu.
  */
 export type ConfirmActionMessages = {
-  success: ConfirmMessage | ((result: unknown) => ConfirmMessage);
+  success?: ConfirmMessage | ((result: unknown) => ConfirmMessage);
   error: ConfirmMessage;
 }
 
@@ -57,9 +68,15 @@ export function ConfirmModalContent({
   onConfirm,
   onCancel,
   messages,
+  confirmationWord,
 }: ConfirmModalContentProps) {
   const { close } = useModalController();
   const [isPending, startTransition] = useTransition();
+  const [confirmationInput, setConfirmationInput] = useState("");
+
+  const isConfirmationWordMissing =
+    !!confirmationWord &&
+    confirmationInput.trim().toLowerCase() !== confirmationWord.trim().toLowerCase();
 
   const confirmLabelText = isLoading ? "Traitement en cours ..." : confirmLabel;
   const handleCancel = async () => {
@@ -107,6 +124,24 @@ export function ConfirmModalContent({
         </DialogDescription>
       </DialogHeader>
 
+      {confirmationWord && (
+        <Field>
+          <FieldLabel htmlFor="confirmation-word">
+            Saisissez <strong className="font-semibold text-ink-900">{confirmationWord}</strong>{" "}
+            pour continuer.
+          </FieldLabel>
+          <Input
+            id="confirmation-word"
+            value={confirmationInput}
+            onChange={(event) => setConfirmationInput(event.target.value)}
+            placeholder={confirmationWord}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+        </Field>
+      )}
+
       <DialogFooter>
         <Button type="button" variant="outline" size="lg" onClick={handleCancel}>
           {cancelLabel}
@@ -116,7 +151,7 @@ export function ConfirmModalContent({
           size="lg"
           variant={tone === "destructive" ? "destructive" : "default"}
           onClick={handleConfirm}
-          disabled={isLoading || isPending}
+          disabled={isLoading || isPending || isConfirmationWordMissing}
         >
           {isLoading || isPending && <Loader2 className="animate-spin" />}
           {confirmLabelText}

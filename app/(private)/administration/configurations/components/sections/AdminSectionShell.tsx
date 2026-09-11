@@ -28,7 +28,7 @@ export function AdminSectionShell({
             {title}
           </h2>
           {description && (
-            <p className="max-w-[62ch] text-sm leading-normal text-ink-500">{description}</p>
+            <p className="max-w-[100ch] text-sm leading-normal text-ink-500">{description}</p>
           )}
         </div>
         {headerAction}

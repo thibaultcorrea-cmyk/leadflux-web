@@ -11,6 +11,7 @@ import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/component
 import { KnowledgeBaseSection } from "./sections/knowledge-base/components/KnowledgeBaseSection";
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/KnowledgeBaseVersionBar";
 import { LogoSection } from "./sections/logo/components/LogoSection";
+import { ZoneSensibleSection } from "./sections/zone-sensible/components/ZoneSensibleSection";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -75,6 +76,7 @@ export function AdminSectionsLayout() {
               </>
             )}
             {section.id === "logo-de-lentreprise" && <LogoSection />}
+            {section.id === "zone-sensible" && <ZoneSensibleSection />}
           </AdminSectionShell>
         ))}
       </div>
