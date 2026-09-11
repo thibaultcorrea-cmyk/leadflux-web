@@ -9,6 +9,8 @@ import { prospects } from "./prospects";
 import { searches, searchResults } from "./searches";
 import { emails, emailVersions } from "./emails";
 import { user } from "./authSchema";
+import { files } from "./files";
+import { knowledgeBase } from "./knowledgeBase";
 
 /**
  * Toutes les relations du domaine sont declarees ici plutot qu'au bas de chaque
@@ -123,4 +125,24 @@ export const emailVersionRelations = relations(emailVersions, ({ one }) => ({
     fields: [emailVersions.emailId],
     references: [emails.id],
   }),
+  knowledgeBase: one(knowledgeBase, {
+    fields: [emailVersions.knowledgeBaseId],
+    references: [knowledgeBase.id],
+  }),
+}));
+
+export const fileRelations = relations(files, ({ one }) => ({
+  knowledgeBase: one(knowledgeBase),
+}));
+
+export const knowledgeBaseRelations = relations(knowledgeBase, ({ one, many }) => ({
+  file: one(files, {
+    fields: [knowledgeBase.fileId],
+    references: [files.id],
+  }),
+  indexer: one(user, {
+    fields: [knowledgeBase.indexedBy],
+    references: [user.id],
+  }),
+  emailVersions: many(emailVersions),
 }));

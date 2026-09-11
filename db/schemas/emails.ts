@@ -8,6 +8,7 @@ import {
   index,
 } from "drizzle-orm/pg-core";
 import { user } from "./authSchema";
+import { knowledgeBase } from "./knowledgeBase";
 import { AgentEmailGenerateApiInput } from "@/features/agent/email/entities/agentEmail";
 
 /**
@@ -117,12 +118,14 @@ export const emailVersions = pgTable(
     body: jsonb("body").$type<string>().notNull(),
 
     /**
-     * Libelle de version du PDF de connaissance client ("12/07/2026"), texte
-     * libre en attendant que le stockage du PDF soit tranche (CLAUDE.md §8,
-     * point 5). A remplacer par une reference vers une table de versions du
-     * PDF le jour ou ce point est arrete.
+     * Base de connaissance utilisee pour cette generation. Obligatoire : on
+     * ne redige jamais un email sans base de connaissance (CLAUDE.md §4).
+     * Restrict plutot que cascade : une base de connaissance liee a au moins
+     * une version d'email ne doit jamais pouvoir etre supprimee.
      */
-    knowledgeVersion: text("knowledge_version"),
+    knowledgeBaseId: uuid("knowledge_base_id")
+      .notNull()
+      .references(() => knowledgeBase.id, { onDelete: "restrict" }),
 
     generatedAt: timestamp("generated_at").defaultNow().notNull(),
 
@@ -134,6 +137,7 @@ export const emailVersions = pgTable(
   },
   (table) => [
     index("email_versions_email_id_idx").on(table.emailId),
+    index("email_versions_knowledge_base_id_idx").on(table.knowledgeBaseId),
   ],
 );
 

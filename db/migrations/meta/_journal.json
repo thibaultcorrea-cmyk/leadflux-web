@@ -64,6 +64,27 @@
       "when": 1788532245753,
       "tag": "0008_unique_callisto",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1789166947160,
+      "tag": "0009_old_harpoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1789166962622,
+      "tag": "0010_nostalgic_plazm",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1789167260751,
+      "tag": "0011_simple_squadron_supreme",
+      "breakpoints": true
     }
   ]
 }
