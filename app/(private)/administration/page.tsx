@@ -1,4 +1,5 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { AdminSectionsLayout } from "./components/AdminSectionsLayout";
 
 // TODO: implémenter la redirection des non-admin (rôle "client") vers /tableau.
 // Le layout (private) ne vérifie aujourd'hui que la présence d'une session,
@@ -15,11 +16,13 @@ export default function AdministrationPage() {
               Administration
             </h1>
             <p className="mt-1 text-sm text-ink-500">
-              Gestion des comptes et des paramètres réservés aux administrateurs
+              Base de connaissances, identité, comptes et maintenance. Réservé aux administrateurs.
             </p>
           </div>
         </div>
       </header>
+
+      <AdminSectionsLayout />
     </div>
   );
 }
