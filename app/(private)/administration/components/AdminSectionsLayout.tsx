@@ -7,6 +7,7 @@ import { knowledgeBaseMock } from "../services/knowledge-base-mock";
 import type { AdminSection } from "../types/section";
 import { AdminSectionsNav } from "./nav/AdminSectionsNav";
 import { AdminSectionShell } from "./sections/AdminSectionShell";
+import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/KnowledgeBaseFormattingHelp";
 import { KnowledgeBaseSection } from "./sections/knowledge-base/KnowledgeBaseSection";
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/KnowledgeBaseVersionBar";
 
@@ -74,7 +75,12 @@ export function AdminSectionsLayout() {
               ) : undefined
             }
           >
-            {section.id === "base-de-connaissances" && <KnowledgeBaseSection />}
+            {section.id === "base-de-connaissances" && (
+              <>
+                <KnowledgeBaseSection />
+                <KnowledgeBaseFormattingHelp />
+              </>
+            )}
           </AdminSectionShell>
         ))}
       </div>
