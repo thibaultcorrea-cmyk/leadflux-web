@@ -10,6 +10,7 @@ import { AdminSectionShell } from "./sections/AdminSectionShell";
 import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/KnowledgeBaseFormattingHelp";
 import { KnowledgeBaseSection } from "./sections/knowledge-base/KnowledgeBaseSection";
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/KnowledgeBaseVersionBar";
+import { LogoSection } from "./sections/logo/LogoSection";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -52,9 +53,9 @@ const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
  * Compose la nav d'ancrage et les sections de la page Administration
  * (maquette "Variante A — Page à sections + ancres"). Seul point du dossier
  * qui connaît la liste des sections : la nav et le hook de scroll-spy
- * restent génériques et reçoivent tout en props. Pour l'instant, seule
- * "Base de connaissances" a un contenu réel ; les autres sont traitées une
- * par une.
+ * restent génériques et reçoivent tout en props. Pour l'instant, "Base de
+ * connaissances" et "Logo de l'entreprise" ont un contenu réel ; les autres
+ * sont traitées une par une.
  */
 export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
@@ -81,6 +82,7 @@ export function AdminSectionsLayout() {
                 <KnowledgeBaseFormattingHelp />
               </>
             )}
+            {section.id === "logo-de-lentreprise" && <LogoSection />}
           </AdminSectionShell>
         ))}
       </div>
