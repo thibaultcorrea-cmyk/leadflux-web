@@ -3,7 +3,7 @@
 import type { FilterFn } from "@tanstack/react-table";
 import { useState } from "react";
 
-import type { UserAccount } from "../../../../types/user";
+import type { UserAccount } from "../types/user";
 
 /**
  * Cherche à la fois sur le nom et l'email : la colonne "Utilisateur" n'expose

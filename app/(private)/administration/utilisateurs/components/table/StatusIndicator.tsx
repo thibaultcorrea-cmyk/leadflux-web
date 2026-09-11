@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { UserStatus } from "../../../../types/user";
+import type { UserStatus } from "../../types/user";
 
 const STATUS_LABELS: Record<UserStatus, string> = {
   active: "Actif",

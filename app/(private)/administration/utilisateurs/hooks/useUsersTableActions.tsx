@@ -8,7 +8,7 @@ import type {
   DataTableRowAction,
 } from "@/components/shared/tables/types";
 import { useModalController } from "@/hooks/useModalController";
-import type { UserAccount } from "../../../../types/user";
+import type { UserAccount } from "../types/user";
 
 const DELETE_MESSAGES = {
   success: { title: "Suppression", description: "Utilisateur supprimé avec succès." },

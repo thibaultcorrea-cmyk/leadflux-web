@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, Image as ImageIcon, TriangleAlert, Users } from "lucide-react";
+import { BookOpen, Image as ImageIcon, TriangleAlert } from "lucide-react";
 
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { knowledgeBaseMock } from "../services/knowledge-base-mock";
@@ -11,8 +11,6 @@ import { KnowledgeBaseFormattingHelp } from "./sections/knowledge-base/component
 import { KnowledgeBaseSection } from "./sections/knowledge-base/components/KnowledgeBaseSection";
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/KnowledgeBaseVersionBar";
 import { LogoSection } from "./sections/logo/components/LogoSection";
-import { InviteUserButton } from "./sections/users/components/InviteUserButton";
-import { UsersTableCard } from "./sections/users/components/UsersTableCard";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -32,14 +30,6 @@ const ADMIN_SECTIONS: AdminSection[] = [
       "Affiché dans la barre latérale et dans la signature des emails envoyés. Servi en PNG aux clients mail, quel que soit le format importé.",
   },
   {
-    id: "utilisateurs",
-    label: "Utilisateurs",
-    shortLabel: "Comptes",
-    icon: Users,
-    description:
-      "Deux rôles, admin et client. Aucune inscription publique : un compte n'existe que si un administrateur l'a invité ici.",
-  },
-  {
     id: "zone-sensible",
     label: "Zone sensible",
     shortLabel: "Sensible",
@@ -52,12 +42,12 @@ const ADMIN_SECTIONS: AdminSection[] = [
 const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
 
 /**
- * Compose la nav d'ancrage et les sections de la page Administration
+ * Compose la nav d'ancrage et les sections de la page Configurations
  * (maquette "Variante A — Page à sections + ancres"). Seul point du dossier
  * qui connaît la liste des sections : la nav et le hook de scroll-spy
- * restent génériques et reçoivent tout en props. Pour l'instant, "Base de
- * connaissances" et "Logo de l'entreprise" ont un contenu réel ; les autres
- * sont traitées une par une.
+ * restent génériques et reçoivent tout en props. La section "Utilisateurs"
+ * a été déplacée sur sa propre page (`/administration/utilisateurs`) : elle
+ * n'apparaît plus ici.
  */
 export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
@@ -75,11 +65,8 @@ export function AdminSectionsLayout() {
             headerAction={
               section.id === "base-de-connaissances" ? (
                 <KnowledgeBaseVersionBar version={knowledgeBaseMock.getCurrentVersion()} />
-              ) : section.id === "utilisateurs" ? (
-                <InviteUserButton />
               ) : undefined
             }
-            fullHeight={section.id === "utilisateurs"}
           >
             {section.id === "base-de-connaissances" && (
               <>
@@ -88,7 +75,6 @@ export function AdminSectionsLayout() {
               </>
             )}
             {section.id === "logo-de-lentreprise" && <LogoSection />}
-            {section.id === "utilisateurs" && <UsersTableCard />}
           </AdminSectionShell>
         ))}
       </div>

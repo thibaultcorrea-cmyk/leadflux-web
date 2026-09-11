@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { UserAccount } from "../../../../types/user";
+import type { UserAccount } from "../../types/user";
 
 export function UserCell({ user }: { user: UserAccount }) {
   const isPending = user.status === "pending";

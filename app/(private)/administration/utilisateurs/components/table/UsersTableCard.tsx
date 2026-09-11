@@ -10,22 +10,22 @@ import { DataTableSortMenu } from "@/components/shared/tables/data-table-sort-me
 import { DataTableStatusFilter } from "@/components/shared/tables/data-table-status-filter";
 import { DataTableViewOptions } from "@/components/shared/tables/data-table-view-options";
 import { useDataTable } from "@/hooks/useDataTable";
-import { useUserStatusFilter } from "../hooks/useUserStatusFilter";
-import { useUsersMutation } from "../hooks/useUsersMutation";
-import { useUsersSearch, usersGlobalFilterFn } from "../hooks/useUsersSearch";
-import { useUsersTableActions } from "../hooks/useUsersTableActions";
+import { useUserStatusFilter } from "../../hooks/useUserStatusFilter";
+import { useUsersMutation } from "../../hooks/useUsersMutation";
+import { useUsersSearch, usersGlobalFilterFn } from "../../hooks/useUsersSearch";
+import { useUsersTableActions } from "../../hooks/useUsersTableActions";
 import { getUsersColumns } from "./users-columns";
 import { UsersSearchInput } from "./UsersSearchInput";
 
 const PAGE_SIZE = 10;
 
 /**
- * Corps de la section "Utilisateurs" (maquette "Users Table") : recherche par
+ * Corps de la page Utilisateurs (maquette "Users Table") : recherche par
  * nom/email, filtre de statut, sélection multiple, tri, pagination et actions
  * de ligne/groupées — même logique que la table Emails (`EmailsTablePanel`).
- * La section occupe toute la hauteur de l'écran (cf. `AdminSectionShell` avec
- * `fullHeight`) : seule la liste des lignes défile, l'en-tête d'actions et la
- * note de pied de tableau restent visibles.
+ * Occupe toute la hauteur disponible de la page (cf. `UtilisateursPage`) :
+ * seule la liste des lignes défile, l'en-tête d'actions et la note de pied
+ * de tableau restent visibles.
  */
 export function UsersTableCard() {
   const { users, removeUsers } = useUsersMutation();

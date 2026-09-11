@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { UserRole } from "../../../../types/user";
+import type { UserRole } from "../../types/user";
 
 const ROLE_LABELS: Record<UserRole, string> = { admin: "Admin", client: "Client" };
 

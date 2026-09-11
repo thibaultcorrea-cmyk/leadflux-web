@@ -6,7 +6,7 @@ import { DataTableColumnHeader } from "@/components/shared/tables/data-table-col
 import { createRowActionsMenuColumn } from "@/components/shared/tables/data-table-row-actions";
 import { createSelectionColumn } from "@/components/shared/tables/data-table-selection-column";
 import type { DataTableRowAction } from "@/components/shared/tables/types";
-import type { UserAccount } from "../../../../types/user";
+import type { UserAccount } from "../../types/user";
 import { RoleBadge } from "./RoleBadge";
 import { StatusIndicator } from "./StatusIndicator";
 import { UserCell } from "./UserCell";

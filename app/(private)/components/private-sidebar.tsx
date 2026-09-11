@@ -14,7 +14,8 @@ import { currentUser } from "../mocks/current-user";
  *
  * La navigation contient Tableau, Prospects, Emails et Administration : la
  * recherche est une action (modale), pas une destination, et l'onglet Analyse
- * a été supprimé (cf. CLAUDE.md §3).
+ * a été supprimé (cf. CLAUDE.md §3). Administration se déplie en sous-nav
+ * (Configurations, Utilisateurs, Historiques).
  */
 const NAV_ITEMS: AppSidebarNavItem[] = [
   { label: "Tableau", href: "/tableau", icon: LayoutDashboard },
@@ -22,7 +23,16 @@ const NAV_ITEMS: AppSidebarNavItem[] = [
   { label: "Emails", href: "/emails", icon: Mail },
   // TODO: la route est visible dans la nav pour tout utilisateur connecté ;
   // implémenter la redirection des non-admin (rôle "client") hors de /administration.
-  { label: "Administration", href: "/administration", icon: Settings },
+  {
+    label: "Administration",
+    href: "/administration/configurations",
+    icon: Settings,
+    items: [
+      { label: "Configurations", href: "/administration/configurations" },
+      { label: "Utilisateurs", href: "/administration/utilisateurs" },
+      { label: "Historiques", href: "/administration/historiques" },
+    ],
+  },
 ];
 
 export function PrivateSidebar({ currentUser }: { currentUser: AppSidebarUser }) {

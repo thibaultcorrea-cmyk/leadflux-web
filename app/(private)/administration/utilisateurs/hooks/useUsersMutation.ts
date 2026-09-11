@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { waitDelay } from "@/lib/utils";
-import { usersMock } from "../../../../services/users-mock";
-import type { UserAccount } from "../../../../types/user";
+import { usersMock } from "../services/users-mock";
+import type { UserAccount } from "../types/user";
 
 /**
  * État local simulé de la liste des utilisateurs : aucune API n'est branchée

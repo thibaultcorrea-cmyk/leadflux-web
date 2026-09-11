@@ -9,7 +9,7 @@ import {
   USER_STATUS_FILTERS,
   type UserAccount,
   type UserStatusFilter,
-} from "../../../../types/user";
+} from "../types/user";
 
 const FILTER_LABELS: Record<UserStatusFilter, string> = {
   tous: "Tous",
