@@ -12,6 +12,9 @@ export function useReplaceLogoAction() {
     open({
       contentClassName: REPLACE_LOGO_MODAL_CLASSNAME,
       components: <ReplaceLogoModal />,
+      // Un clic à l'extérieur pendant une sélection de fichier ne doit pas
+      // fermer la modale et faire perdre l'action en cours.
+      disablePointerDismissal: true,
     });
 
   return { openReplaceLogo };
