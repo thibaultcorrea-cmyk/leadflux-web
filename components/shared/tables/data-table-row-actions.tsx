@@ -1,8 +1,17 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import { Ellipsis } from "lucide-react";
+import { Fragment } from "react";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
@@ -111,5 +120,89 @@ export function DataTableRowActions<TData>({
         );
       })}
     </div>
+  );
+}
+
+/**
+ * Variante "menu ⋯" de la colonne Actions : un seul bouton icône qui ouvre un
+ * menu déroulant, plutôt que des boutons inline. Même contrat `DataTableRowAction`
+ * que `createRowActionsColumn` — seul le rendu change, pour les tables où la
+ * liste d'actions est trop longue ou trop secondaire pour rester inline.
+ */
+export function createRowActionsMenuColumn<TData>({
+  actions,
+  header = "Actions",
+  size = 60,
+  triggerLabel = "Actions",
+}: RowActionsColumnOptions<TData> & { triggerLabel?: string }): ColumnDef<TData> {
+  return {
+    id: "actions",
+    header,
+    size,
+    enableSorting: false,
+    enableHiding: false,
+    meta: { label: header, headerClassName: "text-right", cellClassName: "text-right" },
+    cell: ({ row }) => (
+      <DataTableRowActionsMenu actions={actions} row={row.original} triggerLabel={triggerLabel} />
+    ),
+  };
+}
+
+export function DataTableRowActionsMenu<TData>({
+  actions,
+  row,
+  triggerLabel = "Actions",
+}: {
+  actions: DataTableRowAction<TData>[];
+  row: TData;
+  triggerLabel?: string;
+}) {
+  const visibleActions = actions.filter((action) => !action.isHidden?.(row));
+
+  if (visibleActions.length === 0) {
+    return null;
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            aria-label={triggerLabel}
+            className="text-ink-500"
+          />
+        }
+      >
+        <Ellipsis className="size-4" aria-hidden />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-52 min-w-52">
+        {visibleActions.map((action, index) => {
+          const Icon = action.icon;
+          const disabled = action.isDisabled?.(row) ?? false;
+          // Une séparation avant la première action destructive : elle reste
+          // groupée avec les autres actions destructives s'il y en a plusieurs.
+          const previousAction = visibleActions[index - 1];
+          const needsSeparator =
+            action.variant === "destructive" && previousAction?.variant !== "destructive";
+
+          return (
+            <Fragment key={action.id}>
+              {needsSeparator && <DropdownMenuSeparator />}
+              <DropdownMenuItem
+                variant={action.variant === "destructive" ? "destructive" : "default"}
+                disabled={disabled}
+                onClick={() => action.onSelect(row)}
+              >
+                <Icon aria-hidden />
+                {action.label}
+              </DropdownMenuItem>
+            </Fragment>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

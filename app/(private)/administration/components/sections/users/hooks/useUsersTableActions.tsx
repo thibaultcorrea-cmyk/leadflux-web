@@ -1,6 +1,6 @@
 "use client";
 
-import { Send, Trash2, UserCog } from "lucide-react";
+import { KeyRound, Send, Trash2, UserCog } from "lucide-react";
 
 import { ConfirmModalContent } from "@/components/shared/Modals/ConfirmModalContent";
 import type {
@@ -21,12 +21,14 @@ const DELETE_MANY_MESSAGES = {
 };
 
 /**
- * Actions de la section Utilisateurs : colonne Actions et barre d'actions
- * groupées, même logique que `useEmailsTableActions`.
+ * Actions de la section Utilisateurs : menu "⋯" par ligne et barre d'actions
+ * groupées, même logique que `useEmailsTableActions` (juste un rendu en menu
+ * déroulant plutôt qu'en boutons inline, cf. `createRowActionsMenuColumn`).
  *
- * "Modifier le rôle" et "Renvoyer l'invitation" restent des actions sans
- * effet (pas de modale d'édition de rôle ni d'API de renvoi conçues côté
- * maquette) — même traitement que l'action "Envoyé" des emails. Seule la
+ * "Modifier le profil" et "Changer le mot de passe" restent des actions sans
+ * effet (pas de modale conçue côté maquette) — même traitement que l'action
+ * "Envoyé" des emails — et n'ont pas de sens tant que l'invitation n'a pas été
+ * acceptée, d'où leur masquage sur les comptes en attente. Seule la
  * suppression, seule action détaillée par la maquette (note de pied de
  * tableau), passe par une confirmation réelle.
  */
@@ -43,10 +45,16 @@ export function useUsersTableActions(
 
   const rowActions: DataTableRowAction<UserAccount>[] = [
     {
-      id: "modifier-role",
-      label: "Modifier le rôle",
+      id: "modifier-profil",
+      label: "Modifier le profil",
       icon: UserCog,
-      variant: "primary",
+      isHidden: (user) => user.status === "pending",
+      onSelect: () => null,
+    },
+    {
+      id: "changer-mot-de-passe",
+      label: "Changer le mot de passe",
+      icon: KeyRound,
       isHidden: (user) => user.status === "pending",
       onSelect: () => null,
     },
@@ -54,7 +62,6 @@ export function useUsersTableActions(
       id: "renvoyer-invitation",
       label: "Renvoyer l'invitation",
       icon: Send,
-      variant: "primary",
       isHidden: (user) => user.status !== "pending",
       onSelect: () => null,
     },

@@ -85,8 +85,10 @@ export function UsersTableCard() {
         <div className="flex items-start gap-2 border-t border-border px-5 py-3">
           <Info className="mt-0.5 size-3.5 shrink-0 text-ink-500" aria-hidden />
           <p className="text-xs leading-[1.4] text-ink-500">
-            Supprimer un compte nécessite une confirmation. Le dernier administrateur ne peut
-            pas être retiré. Une invitation expire après 7 jours.
+            Modifier le profil, changer le mot de passe, renvoyer une invitation ou supprimer un
+            compte se font depuis le menu «&nbsp;…&nbsp;» de chaque ligne. La suppression demande
+            une confirmation, et le dernier administrateur ne peut pas être retiré. Une
+            invitation expire après 7 jours.
           </p>
         </div>
 

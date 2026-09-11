@@ -3,7 +3,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "@/components/shared/tables/data-table-column-header";
-import { createRowActionsColumn } from "@/components/shared/tables/data-table-row-actions";
+import { createRowActionsMenuColumn } from "@/components/shared/tables/data-table-row-actions";
 import { createSelectionColumn } from "@/components/shared/tables/data-table-selection-column";
 import type { DataTableRowAction } from "@/components/shared/tables/types";
 import type { UserAccount } from "../../../../types/user";
@@ -60,6 +60,10 @@ export function getUsersColumns(
         <span className="text-[13px] text-ink-700">{row.original.lastActivityLabel}</span>
       ),
     },
-    createRowActionsColumn<UserAccount>({ actions: rowActions, size: 240 }),
+    createRowActionsMenuColumn<UserAccount>({
+      actions: rowActions,
+      size: 60,
+      triggerLabel: "Actions sur cet utilisateur",
+    }),
   ];
 }
