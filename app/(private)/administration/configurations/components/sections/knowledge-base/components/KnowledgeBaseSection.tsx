@@ -13,6 +13,7 @@ import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";
 import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
 import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePreview";
+import { KnowledgeBaseFile } from "../../../../types/knowledge-base";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
@@ -23,7 +24,7 @@ import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePre
  * mockee (knowledgeBaseMock), hors scope de ce chantier.
  */
 type KnowledgeBaseSectionProps = {
-  currentKnowledgeBaseFile: any
+  currentKnowledgeBaseFile: KnowledgeBaseFile
 }
 export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBaseSectionProps) {
   const [mode, setMode] = useState<KnowledgeBaseMode>("file");
@@ -86,20 +87,20 @@ export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBase
         <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
-        <p className="max-w-[46ch] text-xs leading-relaxed text-ink-500">
+      <div className="flex flex-col  gap-4 border-t border-border pt-5">
+        <p className=" text-xs leading-relaxed text-ink-500">
           Chaque enregistrement remplace le texte source et relance l&apos;indexation. Les emails
           déjà générés gardent les passages qu&apos;ils ont utilisés au moment de leur rédaction.
         </p>
         <Button
           type="button"
           size="lg"
-          className="h-11 gap-2 px-[18px] text-[15px] font-semibold"
+          className="h-11 gap-2 px-[18px] text-xs font-semibold sm:self-end"
           onClick={handleSave}
           disabled={isSaving || isUploading}
         >
           <Save className="size-4" aria-hidden />
-          {isUploading ? "Envoi en cours…" : `Enregistrer en version ${version.number + 1}`}
+          {isUploading ? "Envoi en cours…" : `Enregistrer la nouvelle version`}
         </Button>
       </div>
     </div>
