@@ -12,6 +12,7 @@ import { UploadDropzone } from "../../../shared/UploadDropzone";
 import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";
 import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
+import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePreview";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
@@ -34,6 +35,11 @@ export function KnowledgeBaseSection() {
   const handleFileSelected = (selected: File) => {
     upload.selectFile(selected);
     setHasSelectedFile(true);
+  };
+
+  const handleRemoveSelectedFile = () => {
+    upload.reset();
+    setHasSelectedFile(false);
   };
 
   const handleSave = async () => {
@@ -67,7 +73,15 @@ export function KnowledgeBaseSection() {
         <KnowledgeBasePasteInput />
       )}
 
-      <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
+      {hasSelectedFile && upload.selectedFile ? (
+        <KnowledgeBaseSelectedFilePreview
+          file={upload.selectedFile}
+          onRemove={handleRemoveSelectedFile}
+          disabled={isUploading}
+        />
+      ) : (
+        <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
+      )}
 
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
         <p className="max-w-[46ch] text-xs leading-relaxed text-ink-500">
