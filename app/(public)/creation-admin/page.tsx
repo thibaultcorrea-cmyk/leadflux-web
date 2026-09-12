@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import {
@@ -7,31 +6,27 @@ import {
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
-import { auth } from "@/lib/auth";
 import { UserServices } from "@/features/users/services";
-import { LoginForm } from "./components/form/login-form";
+import { CreateAdminForm } from "./components/form/create-admin-form";
 
-export default async function LoginPage() {
+export default async function CreationAdminPage() {
   const needsInitialSetup = await UserServices.needsInitialSetup();
-  if (needsInitialSetup) redirect("/creation-admin");
-
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (session) redirect("/tableau");
+  if (!needsInitialSetup) redirect("/login");
 
   return (
     <main className="flex min-h-dvh items-center justify-center bg-background px-4 py-16">
       <Card className="w-full max-w-md">
         <CardHeader className="items-center gap-2 text-center">
           <h1 className="font-display text-display-sm tracking-[0.02em] text-primary-700">
-            Connexion
+            Création du compte admin
           </h1>
-          <CardDescription>Accédez à votre espace Leadflux.</CardDescription>
+          <CardDescription>
+            Aucun administrateur n&apos;existe encore. Créez le premier compte
+            pour démarrer.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <CreateAdminForm />
         </CardContent>
       </Card>
     </main>

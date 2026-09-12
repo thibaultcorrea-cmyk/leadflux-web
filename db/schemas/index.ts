@@ -14,4 +14,5 @@ export * from "./searches";
 export * from "./files";
 export * from "./knowledgeBase";
 export * from "./emails";
+export * from "./settings";
 export * from "./relations";

@@ -11,6 +11,7 @@ import { emails, emailVersions } from "./emails";
 import { user } from "./authSchema";
 import { files } from "./files";
 import { knowledgeBase } from "./knowledgeBase";
+import { settings } from "./settings";
 
 /**
  * Toutes les relations du domaine sont declarees ici plutot qu'au bas de chaque
@@ -145,4 +146,11 @@ export const knowledgeBaseRelations = relations(knowledgeBase, ({ one, many }) =
     references: [user.id],
   }),
   emailVersions: many(emailVersions),
+}));
+
+export const settingsRelations = relations(settings, ({ one }) => ({
+  user: one(user, {
+    fields: [settings.userId],
+    references: [user.id],
+  }),
 }));
