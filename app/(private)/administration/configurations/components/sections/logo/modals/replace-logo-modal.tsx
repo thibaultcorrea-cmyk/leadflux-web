@@ -9,6 +9,8 @@ import { toast } from "@/lib/toaster";
 import { useChunkedUploader } from "../../../../hooks/useChunkedUploader";
 import { UploadDropzone } from "../../../shared/UploadDropzone";
 import { LogoFilePreviewCard } from "../components/LogoFilePreviewCard";
+import { useQueryClient } from "@tanstack/react-query";
+import { LOGO_QUERY_KEY } from "@/hooks/useCurrentCompanyLogo";
 
 const LOGO_MAX_SIZE_BYTES = 2 * 1024 * 1024;
 
@@ -36,8 +38,11 @@ export function ReplaceLogoModal() {
     },
   });
 
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     if (status === "success" && result) {
+      queryClient.invalidateQueries({ queryKey: [LOGO_QUERY_KEY.GET_CURRENT_COMPANY_LOGO] })
       toast.success({
         title: "Logo remplacé",
         description: "Le nouveau logo a bien été envoyé.",

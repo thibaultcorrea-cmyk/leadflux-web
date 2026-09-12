@@ -187,6 +187,12 @@ type HasReplyResult {
     error: String
 }
 
+type CurrentLogo {
+    id:String
+    key:String!
+    url: String
+}
+
 type Query {
     searches: [ProspectSearch!]
     emailsProspects: [EmailProspect!]
@@ -196,6 +202,8 @@ type Query {
     lastSearchResults: [SavedSearchItem!]!
     emailSendChart: [FunnelStepItem!]!
     hasReply(threadId: String!): HasReplyResult!
+    # Logo actuel
+    currentLogo: CurrentLogo!
     
     
 }

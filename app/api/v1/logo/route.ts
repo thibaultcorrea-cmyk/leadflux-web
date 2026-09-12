@@ -1,10 +1,8 @@
 import { Readable } from "node:stream"
 import { NextRequest, NextResponse } from "next/server"
-import { LOGO_SETTING_KEY } from "@/features/settings/dto/schema"
-import { settingsValidator } from "@/features/settings/dto/validator"
-import { SettingsServicesImpl } from "@/features/settings/services"
 import { UploadsServicesImpl } from "@/features/uploads/services"
 import { errorApiHandler } from "@/lib/handler"
+import { SystemServicesImpl } from "@/features/system/services"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -17,16 +15,39 @@ export const dynamic = "force-dynamic"
  */
 export const GET = async (_request: NextRequest) => {
     try {
-        // SettingsServicesImpl.get resout l'utilisateur courant depuis la
-        // session : leve si personne n'est connecte.
-        const setting = await SettingsServicesImpl.get(LOGO_SETTING_KEY)
+        const file = await SystemServicesImpl.currentLogo()
+        const { stream } = await UploadsServicesImpl.readByPath(file.path)
 
-        const validated = settingsValidator.validateLogoValue(setting?.value)
-        if (!validated.success) {
-            return NextResponse.json({ message: "Aucun logo n'est configuré." }, { status: 404 })
+        return new NextResponse(Readable.toWeb(stream) as ReadableStream, {
+            headers: {
+                "Content-Type": file.type,
+                "Content-Length": String(file.size),
+            },
+        })
+    } catch (error) {
+        return errorApiHandler(error)
+    }
+}
+
+/**
+ * Diffuse le blob d'un fichier arbitraire par sa cle de stockage (files.path)
+ * ou son id (files.id), transmis dans le corps JSON de la requete. Aucun des
+ * deux champs n'est requis individuellement, mais l'un des deux doit etre
+ * present (400 sinon) ; key est prioritaire si les deux sont fournis.
+ */
+export const POST = async (request: NextRequest) => {
+    try {
+        const body = await request.json().catch(() => null)
+        const key = typeof body?.key === "string" ? body.key : undefined
+        const id = typeof body?.id === "string" ? body.id : undefined
+
+        if (!key && !id) {
+            return NextResponse.json({ message: "Le champ \"key\" ou \"id\" est requis." }, { status: 400 })
         }
 
-        const { file, stream } = await UploadsServicesImpl.readByPath(validated.data.key)
+        const { file, stream } = key
+            ? await UploadsServicesImpl.readByPath(key)
+            : await UploadsServicesImpl.read(id!)
 
         return new NextResponse(Readable.toWeb(stream) as ReadableStream, {
             headers: {

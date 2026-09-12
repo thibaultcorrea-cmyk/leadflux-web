@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sidebar";
 import UserDropDown from "./UserDropDown";
 import { Button } from "@/components/ui/button";
+import { BrandIcon } from "./BrandIcon";
 
 export type AppSidebarSubNavItem = {
   label: string;
@@ -167,19 +168,18 @@ function SidebarNavCollapsible({ item, pathname }: { item: AppSidebarNavItem; pa
  */
 export function AppSidebar({ brand, navItems, user }: AppSidebarProps) {
   const pathname = usePathname();
-  const BrandIcon = brand.icon;
+
+
 
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="gap-0 p-0">
-        <div className="flex items-center justify-between gap-2 px-4 py-5 group-data-[collapsible=icon]:px-2 relative">
+        <div className="flex items-center justify-between gap-2 px-4 py-5 group-data-[collapsible=icon]:px-2 relative group-data-[collapsible=icon]:justify-center">
           <Link
             href={brand.href}
             className="flex items-center gap-2.5 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
           >
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-sidebar-accent">
-              <BrandIcon className="size-[17px] text-accent-500" aria-hidden />
-            </span>
+            <BrandIcon Icon={brand.icon} className="text-accent-500" aria-hidden />
             <span className="font-display text-[26px] leading-none tracking-[0.02em] text-sidebar-foreground group-data-[collapsible=icon]:hidden">
               {brand.label}
             </span>

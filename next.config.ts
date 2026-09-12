@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   // en entier.
   reactStrictMode: false,
   output: "standalone",
+  images: {
+    remotePatterns: [{ hostname: "localhost" }]
+  },
 };
 
 export default nextConfig;

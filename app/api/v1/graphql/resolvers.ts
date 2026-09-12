@@ -3,7 +3,9 @@ import { EmailProspectsServicesImpl } from "@/features/emails/services";
 import { ProspectServicesImpl } from "@/features/prospects/services";
 import { SearchProspectsServicesImpl } from "@/features/search/services";
 import { SearchResultServicesImpl } from "@/features/searchResults/services";
+import { SettingsServicesImpl } from "@/features/settings/services";
 import { KpisServices } from "@/features/stats/kpis/services";
+import { SystemServicesImpl } from "@/features/system/services";
 
 const resolvers = {
     Query: {
@@ -14,6 +16,14 @@ const resolvers = {
         searches: () => ProspectServicesImpl.collections({}),
         emailsProspects: () => EmailProspectsServicesImpl.collections({}),
         hasReply: (_: any, args: any): Promise<HasReplyResult> => EmailProspectsServicesImpl.hasReply(args.threadId),
+        currentLogo: async (_: any, args: any) => {
+            const file = await SystemServicesImpl.currentLogo()
+            return {
+                id: file.id,
+                key: file.path,
+                url: `/api/v1/logo?key=${file.path}`,
+            }
+        },
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),
