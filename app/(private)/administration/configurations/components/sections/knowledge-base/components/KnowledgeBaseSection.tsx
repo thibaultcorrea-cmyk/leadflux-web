@@ -13,9 +13,10 @@ import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";
 import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
 import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePreview";
-import { KnowledgeBaseFile } from "../../../../types/knowledge-base";
+import { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 import { useQueryClient } from "@tanstack/react-query";
 import { KNOWLEDGE_BASE_QUERIES_KEYS } from "../services/queries";
+import { formatRelativeTime } from "@/lib/date-format";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
@@ -32,12 +33,24 @@ export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBase
   const [mode, setMode] = useState<KnowledgeBaseMode>("file");
   const [hasSelectedFile, setHasSelectedFile] = useState(false);
   const file = currentKnowledgeBaseFile;
-  const version = currentKnowledgeBaseFile;
-  const { status, progress, stats, save } = useKnowledgeBaseSave(knowledgeBaseMock.getIndexStats());
+
+
+  const KnowledgeBaseIndex = {
+    passagesIndexed: file.wordCount,
+    reindexedAtLabel: file.uploadedAtDatetime,
+  } satisfies KnowledgeBaseIndexStats
+
+
+
+  const { status, progress, stats, save } = useKnowledgeBaseSave(KnowledgeBaseIndex);
+
+
   const upload = useKnowledgeBaseUpload();
   const isSaving = status === "saving";
   const isUploading = upload.status === "uploading";
   const queryClient = useQueryClient();
+
+
 
   const handleFileSelected = (selected: File) => {
     upload.selectFile(selected);

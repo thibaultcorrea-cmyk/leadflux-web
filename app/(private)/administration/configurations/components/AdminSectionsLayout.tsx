@@ -53,7 +53,7 @@ const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
  */
 export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
-  const { data: currentKnowledgeBase, currentVersion, currentKnowledgeBaseFile } = useFetchCurrentKnowledgeBase()
+  const { currentVersion, currentKnowledgeBaseFile } = useFetchCurrentKnowledgeBase()
 
 
 

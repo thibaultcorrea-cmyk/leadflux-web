@@ -1,4 +1,4 @@
-import { formatLongDate, formatLongDateTime } from "@/lib/date-format";
+import { formatLongDate, formatLongDateTime, formatRelativeTime } from "@/lib/date-format";
 import { formatFileSize } from "@/lib/utils";
 import type {
   KnowledgeBaseFile,
@@ -19,6 +19,7 @@ const mockKnowledgeBaseFile: KnowledgeBaseFile = {
   sizeLabel: formatFileSize(43_008),
   uploadedAtLabel: formatLongDate("2026-08-12"),
   uploadedAtDatetime: formatLongDateTime("2026-08-12T10:00:00Z"),
+  distanceDateTime: formatRelativeTime("2026-08-12T10:00:00Z"),
   wordCount: 1480,
   previewUrl: "/mocks/base-connaissance-oxiagen-v3.pdf",
   extractedText:

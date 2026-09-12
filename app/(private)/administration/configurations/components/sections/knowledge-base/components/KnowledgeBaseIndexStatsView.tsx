@@ -7,6 +7,8 @@ type KnowledgeBaseIndexStatsViewProps = {
 };
 
 export function KnowledgeBaseIndexStatsView({ stats }: KnowledgeBaseIndexStatsViewProps) {
+
+
   return (
     <div className="flex flex-wrap items-center gap-3.5">
       <span className="flex items-center gap-2 text-xs font-semibold text-ink-700">

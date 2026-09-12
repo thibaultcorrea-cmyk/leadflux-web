@@ -21,7 +21,8 @@ const STEP_DELAY_MS = 300;
 export function useKnowledgeBaseSave(initialStats: KnowledgeBaseIndexStats) {
   const [status, setStatus] = useState<KnowledgeBaseSaveStatus>("idle");
   const [progress, setProgress] = useState(0);
-  const [stats, setStats] = useState(initialStats);
+  const [stats, setStats] = useState(structuredClone(initialStats));
+
 
   const save = async () => {
     if (status === "saving") return;
@@ -44,6 +45,8 @@ export function useKnowledgeBaseSave(initialStats: KnowledgeBaseIndexStats) {
       description: "La nouvelle version est prise en compte pour les prochains emails générés.",
     });
   };
+
+
 
   return { status, progress, stats, save };
 }

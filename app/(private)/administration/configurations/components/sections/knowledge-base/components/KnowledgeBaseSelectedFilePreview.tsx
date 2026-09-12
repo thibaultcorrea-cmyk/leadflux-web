@@ -34,7 +34,7 @@ export function KnowledgeBaseSelectedFilePreview({
   const Icon = FILE_TYPE_ICONS[extension] ?? FileIcon;
 
   return (
-    <div className="flex items-center justify-between gap-4 rounded-md border border-border bg-background-100 p-4">
+    <div className="flex min-w-0 items-center justify-between gap-4 rounded-md border border-border bg-background-100 p-4">
       <div className="flex min-w-0 items-center gap-3">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary-50">
           <Icon className="size-5 text-primary-700" aria-hidden />

@@ -8,6 +8,7 @@ import { useTextPreviewAction } from "../hooks/useTextPreviewAction";
 import type { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 import { KnowledgeBaseIndexStatsView } from "./KnowledgeBaseIndexStatsView";
 import { KnowledgeBaseSaveProgress } from "./KnowledgeBaseSaveProgress";
+import { formatRelativeTime } from "@/lib/date-format";
 
 type KnowledgeBaseCurrentFileProps = {
   file: KnowledgeBaseFile;
