@@ -5,6 +5,7 @@ import { UserWriteRepository } from "./repository/write";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { CreateInitialAdminDto } from "./dto/schema";
+import { SettingsServicesImpl } from "../settings/services";
 
 export const UserServices = {
 
@@ -61,6 +62,7 @@ export const UserServices = {
 
         const id = (created.user as { id: string }).id;
         await UserWriteRepository.setAdminStatus(id, true);
+        await SettingsServicesImpl.initializeForUser(id);
 
         return created.user;
     },

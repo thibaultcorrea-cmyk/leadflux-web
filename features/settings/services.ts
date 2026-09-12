@@ -5,8 +5,18 @@ import { SettingsReadRepositoriesImpl } from "./repositories/read"
 import { SettingsWriteRepositoriesImpl } from "./repositories/write"
 import { SettingsServices } from "./entities/services"
 
+/** Cle du logo actif (cf. replace-logo-modal.tsx) : seul reglage existant a ce jour. */
+const LOGO_SETTING_KEY = "logo"
 
 export const SettingsServicesImpl: SettingsServices = {
+    initializeForUser: async (userId: string) => {
+        return SettingsWriteRepositoriesImpl.create({
+            userId,
+            key: LOGO_SETTING_KEY,
+            value: null,
+        })
+    },
+
     set: async (input: SetSettingDto) => {
         const validated = settingsValidator.validateSet(input)
         if (!validated.success) {
