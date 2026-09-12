@@ -1,3 +1,5 @@
+import { formatLongDate } from "@/lib/date-format";
+import { formatFileSize } from "@/lib/utils";
 import type {
   KnowledgeBaseFile,
   KnowledgeBaseIndexStats,
@@ -14,8 +16,8 @@ import type {
 const mockKnowledgeBaseFile: KnowledgeBaseFile = {
   name: "base-connaissance-oxiagen-v3.pdf",
   type: "pdf",
-  sizeLabel: "42 Ko",
-  uploadedAtLabel: "12 août 2026",
+  sizeLabel: formatFileSize(43_008),
+  uploadedAtLabel: formatLongDate("2026-08-12"),
   wordCount: 1480,
   previewUrl: "/mocks/base-connaissance-oxiagen-v3.pdf",
   extractedText:
@@ -30,9 +32,9 @@ const mockKnowledgeBaseFile: KnowledgeBaseFile = {
 };
 
 const mockKnowledgeBaseVersion: KnowledgeBaseVersion = {
-  number: 3,
-  indexedAtLabel: "12 août 2026",
-  author: "Thibault",
+  name: "test-12345678",
+  indexedAtLabel: "2026-09-12T14:08:59.848Z",
+  author: "Test Test",
 };
 
 const mockKnowledgeBaseIndexStats: KnowledgeBaseIndexStats = {

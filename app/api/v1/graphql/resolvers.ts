@@ -1,5 +1,6 @@
 import { HasReplyResult } from "@/features/emails/entities/type";
 import { EmailProspectsServicesImpl } from "@/features/emails/services";
+import { KnowledgeBaseServicesImpl } from "@/features/knowledge-bases/services";
 import { ProspectServicesImpl } from "@/features/prospects/services";
 import { SearchProspectsServicesImpl } from "@/features/search/services";
 import { SearchResultServicesImpl } from "@/features/searchResults/services";
@@ -24,6 +25,10 @@ const resolvers = {
                 url: `/api/v1/logo?key=${file.path}`,
             }
         },
+        lastKnowledgeVersion: async (_: any, args: any) => {
+            const version = await KnowledgeBaseServicesImpl.getLastKnowledgeVersion()
+            return version
+        }
     },
     Mutation: {
         createSearchResults: (_: any, args: any) => SearchProspectsServicesImpl.searchProspects(args.inputs),

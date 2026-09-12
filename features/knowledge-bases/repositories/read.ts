@@ -1,6 +1,6 @@
 import { db } from "@/db"
 import { knowledgeBase } from "@/db/schemas"
-import { eq } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 import { IKnowledgeBaseReadRepository } from "../entities/repository"
 
 export const KnowledgeBaseReadRepositoriesImpl: IKnowledgeBaseReadRepository = {
@@ -19,5 +19,26 @@ export const KnowledgeBaseReadRepositoriesImpl: IKnowledgeBaseReadRepository = {
     count: async (query: any) => {
         throw new Error("Method not implemented.")
     },
+    findByUserId: async (userId: string) => {
+        const result = await KnowledgeBaseWithRelations(userId)
+        return result
+
+    }
 
 }
+
+
+export const KnowledgeBaseWithRelations = (userId: string) => {
+    return db.query.knowledgeBase.findFirst({
+        with: {
+            file: true,
+            indexer: true
+        }
+        ,
+        where: eq(knowledgeBase.indexedBy, userId),
+        orderBy: desc(knowledgeBase.createdAt),
+
+    })
+}
+
+

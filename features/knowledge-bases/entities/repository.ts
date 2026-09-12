@@ -1,4 +1,5 @@
 import { KnowledgeBaseSqlInfer, KnowledgeBaseSqlInsert } from "@/db/schemas"
+import { LastKnowledgeBase } from "./generic"
 
 
 
@@ -6,6 +7,7 @@ export interface IKnowledgeBaseReadRepository {
     get: (id: string) => Promise<KnowledgeBaseSqlInfer>
     find: (query: any) => Promise<KnowledgeBaseSqlInfer[]>
     count?: (query: any) => Promise<number>
+    findByUserId: (userId: string) => Promise<any>
 
 }
 

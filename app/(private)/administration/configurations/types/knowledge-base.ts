@@ -13,7 +13,7 @@ export type KnowledgeBaseFile = {
 };
 
 export type KnowledgeBaseVersion = {
-  number: number;
+  name: string;
   indexedAtLabel: string;
   author: string;
 };

@@ -16,7 +16,7 @@ export function KnowledgeBaseVersionBar({ version }: KnowledgeBaseVersionBarProp
         className="h-auto gap-1.5 rounded-full border-transparent bg-success-50 px-2.5 py-1.5 text-xs font-semibold text-success"
       >
         <CircleCheck className="size-3.5" aria-hidden />
-        Version {version.number} indexée · {version.indexedAtLabel} · {version.author}
+        Version {version.name} · {version.indexedAtLabel} · {version.author}
       </Badge>
       <Button
         type="button"

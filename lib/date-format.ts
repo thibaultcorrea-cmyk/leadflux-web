@@ -3,6 +3,19 @@ export const formatDate = (date: Date) => {
     return date.toISOString()
 }
 
+/**
+ * Libellé long en français ("12 août 2026"), utilisé pour les dates
+ * affichées telles quelles (fichier importé le, version indexée le…), par
+ * opposition à `formatRelativeTime` qui reste relatif au moment présent.
+ */
+export const formatLongDate = (date: Date | string) => {
+    const target = typeof date === "string" ? new Date(date) : date
+    // timeZone: "UTC" fige la date affichée sur celle stockée (souvent une
+    // simple date "YYYY-MM-DD", interprétée en UTC) : sans ça, un fuseau
+    // local en arrière sur UTC ferait glisser l'affichage d'un jour.
+    return target.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
+}
+
 const MINUTE = 60 * 1000
 const HOUR = 60 * MINUTE
 const DAY = 24 * HOUR

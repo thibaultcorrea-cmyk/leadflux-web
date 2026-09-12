@@ -12,6 +12,7 @@ import { KnowledgeBaseSection } from "./sections/knowledge-base/components/Knowl
 import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/KnowledgeBaseVersionBar";
 import { LogoSection } from "./sections/logo/components/LogoSection";
 import { ZoneSensibleSection } from "./sections/zone-sensible/components/ZoneSensibleSection";
+import { useFetchCurrentKnowledgeBase } from "./sections/knowledge-base/hooks/useFetchCurrentKnowledgeBase";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -52,6 +53,9 @@ const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
  */
 export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
+  const { data: currentKnowledgeBase, currentVersion, currentKnowledgeBaseFile } = useFetchCurrentKnowledgeBase()
+
+
 
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-7">
@@ -65,13 +69,13 @@ export function AdminSectionsLayout() {
             description={section.description}
             headerAction={
               section.id === "base-de-connaissances" ? (
-                <KnowledgeBaseVersionBar version={knowledgeBaseMock.getCurrentVersion()} />
+                <KnowledgeBaseVersionBar version={currentVersion} />
               ) : undefined
             }
           >
             {section.id === "base-de-connaissances" && (
               <>
-                <KnowledgeBaseSection />
+                <KnowledgeBaseSection currentKnowledgeBaseFile={currentKnowledgeBaseFile} />
                 <KnowledgeBaseFormattingHelp />
               </>
             )}

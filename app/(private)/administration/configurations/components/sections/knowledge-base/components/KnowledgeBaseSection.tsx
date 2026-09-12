@@ -22,11 +22,14 @@ import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePre
  * existante (useKnowledgeBaseSave) — quelle version est "active" reste
  * mockee (knowledgeBaseMock), hors scope de ce chantier.
  */
-export function KnowledgeBaseSection() {
+type KnowledgeBaseSectionProps = {
+  currentKnowledgeBaseFile: any
+}
+export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBaseSectionProps) {
   const [mode, setMode] = useState<KnowledgeBaseMode>("file");
   const [hasSelectedFile, setHasSelectedFile] = useState(false);
   const file = knowledgeBaseMock.getCurrentFile();
-  const version = knowledgeBaseMock.getCurrentVersion();
+  const version = currentKnowledgeBaseFile;
   const { status, progress, stats, save } = useKnowledgeBaseSave(knowledgeBaseMock.getIndexStats());
   const upload = useKnowledgeBaseUpload();
   const isSaving = status === "saving";

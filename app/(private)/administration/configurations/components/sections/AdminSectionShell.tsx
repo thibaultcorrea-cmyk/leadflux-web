@@ -22,7 +22,7 @@ export function AdminSectionShell({
 }: AdminSectionShellProps) {
   return (
     <section id={id} className="flex scroll-mt-16 flex-col gap-4 md:scroll-mt-6">
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <div className="flex flex-col gap-6">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <h2 className="font-display text-[28px] leading-none tracking-[0.01em] text-primary-700">
             {title}

@@ -4,6 +4,8 @@ import { knowledgeBaseValidator } from "./dto/validator"
 import { KnowledgeBaseWriteRepositoriesImpl } from "./repositories/write"
 import { KnowledgeBaseReadRepositoriesImpl } from "./repositories/read"
 import { UserServices } from "../users/services"
+import { mapLastKnowledgeBase } from "./factory/knowledge-base-factory"
+import { LastKnowledgeBase } from "./entities/generic"
 
 
 
@@ -37,5 +39,13 @@ export const KnowledgeBaseServicesImpl: KnowledgeBaseServices = {
     },
     clear: async () => {
         await KnowledgeBaseWriteRepositoriesImpl.truncate()
+    },
+    getLastKnowledgeVersion: async () => {
+        const currentUser = await UserServices.getCurrentUser()
+        const knowledgeBase = await KnowledgeBaseReadRepositoriesImpl.findByUserId(currentUser.id) as LastKnowledgeBase
+        if (!knowledgeBase) {
+            throw new Error("Knowledge base not found")
+        }
+        return mapLastKnowledgeBase(knowledgeBase)
     },
 }

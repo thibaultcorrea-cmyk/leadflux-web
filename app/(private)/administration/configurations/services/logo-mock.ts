@@ -1,3 +1,5 @@
+import { formatLongDate } from "@/lib/date-format";
+import { formatFileSize } from "@/lib/utils";
 import type { LogoFile } from "../types/logo";
 
 /**
@@ -9,8 +11,8 @@ const mockLogoFile: LogoFile = {
   name: "logo-oxiagen.png",
   widthPx: 1024,
   heightPx: 256,
-  sizeLabel: "38 Ko",
-  uploadedAtLabel: "3 juillet 2026",
+  sizeLabel: formatFileSize(38_912),
+  uploadedAtLabel: formatLongDate("2026-07-03"),
   hasTransparentBackground: true,
 };
 

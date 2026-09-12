@@ -193,6 +193,34 @@ type CurrentLogo {
     url: String
 }
 
+type KnowledgeBaseFile {
+    id: String
+    originalName: String!
+    size: Int
+    key: String
+    path: String
+    type: String
+    extension: String
+}
+
+
+type KnowledgeBaseIndexer {
+    name: String!
+    image: String 
+}
+
+type LastKnowledgeVersion {
+    id: String
+    name: String!
+    number: Int
+    file:KnowledgeBaseFile
+    totalIndexed:Int
+    countWords:Int
+    indexedBy:KnowledgeBaseIndexer
+    createdAt: String
+    updatedAt: String
+}
+
 type Query {
     searches: [ProspectSearch!]
     emailsProspects: [EmailProspect!]
@@ -204,6 +232,8 @@ type Query {
     hasReply(threadId: String!): HasReplyResult!
     # Logo actuel
     currentLogo: CurrentLogo!
+    # Last Knowledge Version
+    lastKnowledgeVersion: LastKnowledgeVersion
     
     
 }
