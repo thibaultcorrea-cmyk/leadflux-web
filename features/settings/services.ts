@@ -4,6 +4,8 @@ import { settingsValidator } from "./dto/validator"
 import { SettingsReadRepositoriesImpl } from "./repositories/read"
 import { SettingsWriteRepositoriesImpl } from "./repositories/write"
 import { SettingsServices } from "./entities/services"
+import { FileServicesImpl } from "../files/services"
+import { UploadsServicesImpl } from "../uploads/services"
 
 export const SettingsServicesImpl: SettingsServices = {
     initializeForUser: async (userId: string) => {
@@ -33,7 +35,13 @@ export const SettingsServicesImpl: SettingsServices = {
             throw validated.error
         }
 
-        return SettingsServicesImpl.setForUser(userId, { key: LOGO_SETTING_KEY, value: validated.data })
+
+        //remove older file
+        await cleanUpOldLogoFile()
+        const newLogo = await SettingsServicesImpl.setForUser(userId, { key: LOGO_SETTING_KEY, value: validated.data })
+
+
+        return newLogo
     },
 
     set: async (input: SetSettingDto) => {
@@ -60,4 +68,20 @@ export const SettingsServicesImpl: SettingsServices = {
     clear: async () => {
         await SettingsWriteRepositoriesImpl.truncate()
     },
+}
+
+
+const cleanUpOldLogoFile = async () => {
+    const olderLogo = await SettingsServicesImpl.get(LOGO_SETTING_KEY)
+    if (olderLogo?.value) {
+        const path = (olderLogo.value as { key: string }).key
+        if (path) {
+            const file = await FileServicesImpl.getByPath(path)
+            if (file) {
+                await FileServicesImpl.delete(file.id)
+                await UploadsServicesImpl.deleteFile({ id: file.id, extension: file.extension })
+                console.log("Deleted old logo file", file.id, file.path)
+            }
+        }
+    }
 }
