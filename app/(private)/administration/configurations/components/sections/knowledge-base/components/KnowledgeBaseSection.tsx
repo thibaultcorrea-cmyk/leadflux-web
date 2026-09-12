@@ -14,6 +14,8 @@ import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBase
 import { KnowledgeBasePasteInput } from "./KnowledgeBasePasteInput";
 import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePreview";
 import { KnowledgeBaseFile } from "../../../../types/knowledge-base";
+import { useQueryClient } from "@tanstack/react-query";
+import { KNOWLEDGE_BASE_QUERIES_KEYS } from "../services/queries";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
@@ -29,12 +31,13 @@ type KnowledgeBaseSectionProps = {
 export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBaseSectionProps) {
   const [mode, setMode] = useState<KnowledgeBaseMode>("file");
   const [hasSelectedFile, setHasSelectedFile] = useState(false);
-  const file = knowledgeBaseMock.getCurrentFile();
+  const file = currentKnowledgeBaseFile;
   const version = currentKnowledgeBaseFile;
   const { status, progress, stats, save } = useKnowledgeBaseSave(knowledgeBaseMock.getIndexStats());
   const upload = useKnowledgeBaseUpload();
   const isSaving = status === "saving";
   const isUploading = upload.status === "uploading";
+  const queryClient = useQueryClient();
 
   const handleFileSelected = (selected: File) => {
     upload.selectFile(selected);
@@ -51,6 +54,7 @@ export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBase
       try {
         await upload.uploadAndCreateVersion(`version-${Date.now()}`);
         setHasSelectedFile(false);
+        queryClient.invalidateQueries({ queryKey: [KNOWLEDGE_BASE_QUERIES_KEYS.GET_LAST_KNOWLEDGE_BASE] })
       } catch (error) {
         toast.error({
           title: "Échec de l'envoi",

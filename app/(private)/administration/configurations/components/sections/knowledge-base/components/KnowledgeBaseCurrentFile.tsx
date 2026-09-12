@@ -36,7 +36,7 @@ export function KnowledgeBaseCurrentFile({
           <div className="flex min-w-0 flex-col gap-0.5">
             <p className="truncate text-sm font-semibold text-ink-900">{file.name}</p>
             <p className="text-xs text-ink-500">
-              {file.sizeLabel} · {file.uploadedAtLabel} · {file.wordCount.toLocaleString("fr-FR")} mots
+              {file.sizeLabel} · {file.uploadedAtDatetime} · {file.wordCount.toLocaleString("fr-FR")} mots
               extraits
             </p>
           </div>

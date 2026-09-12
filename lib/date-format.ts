@@ -16,6 +16,19 @@ export const formatLongDate = (date: Date | string) => {
     return target.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
 }
 
+/**
+ * Variante de `formatLongDate` avec l'heure ("12 août 2026 à 14:32"), pour un
+ * horodatage réel (ex. réindexation) plutôt qu'une simple date calendaire :
+ * contrairement à `formatLongDate`, ne fige pas le fuseau sur UTC, la date et
+ * l'heure doivent rester celles du fuseau local du lecteur.
+ */
+export const formatLongDateTime = (date: Date | string) => {
+    const target = typeof date === "string" ? new Date(date) : date
+    const day = target.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
+    const time = target.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+    return `${day} à ${time}`
+}
+
 const MINUTE = 60 * 1000
 const HOUR = 60 * MINUTE
 const DAY = 24 * HOUR

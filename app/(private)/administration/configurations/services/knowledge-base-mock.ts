@@ -1,4 +1,4 @@
-import { formatLongDate } from "@/lib/date-format";
+import { formatLongDate, formatLongDateTime } from "@/lib/date-format";
 import { formatFileSize } from "@/lib/utils";
 import type {
   KnowledgeBaseFile,
@@ -18,6 +18,7 @@ const mockKnowledgeBaseFile: KnowledgeBaseFile = {
   type: "pdf",
   sizeLabel: formatFileSize(43_008),
   uploadedAtLabel: formatLongDate("2026-08-12"),
+  uploadedAtDatetime: formatLongDateTime("2026-08-12T10:00:00Z"),
   wordCount: 1480,
   previewUrl: "/mocks/base-connaissance-oxiagen-v3.pdf",
   extractedText:
@@ -39,7 +40,7 @@ const mockKnowledgeBaseVersion: KnowledgeBaseVersion = {
 
 const mockKnowledgeBaseIndexStats: KnowledgeBaseIndexStats = {
   passagesIndexed: 38,
-  reindexedAtLabel: "12 août 2026 à 14:32",
+  reindexedAtLabel: formatLongDateTime("2026-08-12T14:32:00"),
 };
 
 /**

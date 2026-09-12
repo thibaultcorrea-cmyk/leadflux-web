@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { KNOWLEDGE_BASE_QUERIES_KEYS } from "../services/queries"
 import { fetchCurrentKnowledgeBaseApi } from "../services/api-service"
 import { KnowledgeBaseFile, KnowledgeBaseFileType, KnowledgeBaseVersion } from "../../../../types/knowledge-base"
-import { formatLongDate } from "@/lib/date-format"
+import { formatLongDate, formatLongDateTime } from "@/lib/date-format"
 import { formatFileSize } from "@/lib/utils"
 
 const unknownData = "non renseigné"
@@ -28,6 +28,7 @@ export const useFetchCurrentKnowledgeBase = () => {
         type: data?.lastKnowledgeVersion?.file?.extension as any,
         sizeLabel: formatFileSize(data?.lastKnowledgeVersion?.file?.size ?? 0) ?? unknownData,
         uploadedAtLabel: formatLongDate(data?.lastKnowledgeVersion.createdAt ?? "") ?? unknownData,
+        uploadedAtDatetime: formatLongDateTime(data?.lastKnowledgeVersion.createdAt ?? "") ?? unknownData,
         wordCount: data?.lastKnowledgeVersion?.countWords ?? 0,
         previewUrl: data?.lastKnowledgeVersion?.file?.path ?? "",
         extractedText: ""
