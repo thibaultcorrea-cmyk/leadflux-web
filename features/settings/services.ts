@@ -1,36 +1,44 @@
 import { UserServices } from "../users/services"
-import { SetSettingDto } from "./dto/schema"
+import { LOGO_SETTING_KEY, LogoSettingValueDto, SetSettingDto } from "./dto/schema"
 import { settingsValidator } from "./dto/validator"
 import { SettingsReadRepositoriesImpl } from "./repositories/read"
 import { SettingsWriteRepositoriesImpl } from "./repositories/write"
 import { SettingsServices } from "./entities/services"
 
-/** Cle du logo actif (cf. replace-logo-modal.tsx) : seul reglage existant a ce jour. */
-const LOGO_SETTING_KEY = "logo"
-
 export const SettingsServicesImpl: SettingsServices = {
     initializeForUser: async (userId: string) => {
-        return SettingsWriteRepositoriesImpl.create({
-            userId,
-            key: LOGO_SETTING_KEY,
-            value: null,
-        })
+        return SettingsServicesImpl.setForUser(userId, { key: LOGO_SETTING_KEY, value: null })
     },
 
-    set: async (input: SetSettingDto) => {
+    // Upsert generique par cle : cree la ligne si (userId, key) n'existe pas
+    // encore, la met a jour sinon (onConflictDoUpdate, cf. repositories/write.ts).
+    setForUser: async (userId: string, input: SetSettingDto) => {
         const validated = settingsValidator.validateSet(input)
         if (!validated.success) {
             throw validated.error
         }
 
-        const currentUser = await UserServices.getCurrentUser()
         const { data } = validated
 
         return SettingsWriteRepositoriesImpl.create({
-            userId: currentUser.id,
+            userId,
             key: data.key,
             value: data.value,
         })
+    },
+
+    setLogo: async (userId: string, value: LogoSettingValueDto) => {
+        const validated = settingsValidator.validateLogoValue(value)
+        if (!validated.success) {
+            throw validated.error
+        }
+
+        return SettingsServicesImpl.setForUser(userId, { key: LOGO_SETTING_KEY, value: validated.data })
+    },
+
+    set: async (input: SetSettingDto) => {
+        const currentUser = await UserServices.getCurrentUser()
+        return SettingsServicesImpl.setForUser(currentUser.id, input)
     },
 
     get: async (key: string) => {
