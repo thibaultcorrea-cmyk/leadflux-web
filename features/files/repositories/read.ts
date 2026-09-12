@@ -13,6 +13,11 @@ export const FileReadRepositoriesImpl: IFileReadRepository = {
 
         return result
     },
+    getByPath: async (path: string) => {
+        const [result] = await db.select().from(files).where(eq(files.path, path))
+
+        return result
+    },
     find: async (query: any) => {
         throw new Error("Method not implemented.")
     },

@@ -19,6 +19,8 @@ export type UploadsServices = {
     abort: (input: AbortUploadSessionDto) => Promise<void>
     /** Lit un fichier deja stocke par son fileId (ligne `files`) : verifie l'auth, resout id/extension, renvoie le stream. */
     read: (fileId: string) => Promise<{ file: FileSqlInfer; stream: Readable }>
+    /** Comme `read`, mais resolu par cle de stockage (files.path) plutot que par fileId : utilise par /api/v1/logo, qui resout cette cle depuis le reglage "logo" de l'utilisateur connecte. */
+    readByPath: (path: string) => Promise<{ file: FileSqlInfer; stream: Readable }>
     /** Ecrit un fichier complet (non chunke) directement, sans passer par le protocole de session. */
     writeFile: (input: WriteFileDto & { data: Buffer }) => Promise<{ size: number }>
     /** Supprime un fichier deja stocke sur disque (n'agit pas sur la ligne `files`, cf. features/files). */

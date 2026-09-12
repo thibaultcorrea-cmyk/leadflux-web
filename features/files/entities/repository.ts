@@ -4,6 +4,7 @@ import { FileSqlInfer, FileSqlInsert } from "@/db/schemas"
 
 export interface IFileReadRepository {
     get: (id: string) => Promise<FileSqlInfer>
+    getByPath: (path: string) => Promise<FileSqlInfer | undefined>
     find: (query: any) => Promise<FileSqlInfer[]>
     count?: (query: any) => Promise<number>
 

@@ -123,6 +123,17 @@ export const UploadsServicesImpl: UploadsServices = {
         return { file, stream }
     },
 
+    readByPath: async (path) => {
+        await UserServices.getCurrentUser()
+        const file = await FileServicesImpl.getByPath(path)
+        if (!file) {
+            throw new Error("Fichier introuvable pour cette clé.")
+        }
+
+        const stream = await UploadsReadRepositoriesImpl.readFile({ id: file.id, extension: file.extension })
+        return { file, stream }
+    },
+
     writeFile: async (input) => {
         const validated = uploadsValidator.validateWriteFile(input)
         if (!validated.success) {

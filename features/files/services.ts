@@ -12,6 +12,10 @@ export const FileServicesImpl: FileServices = {
         return FileReadRepositoriesImpl.get(id)
     },
 
+    getByPath: async (path: string) => {
+        return FileReadRepositoriesImpl.getByPath(path)
+    },
+
     create: async (input: CreateFileDto) => {
         const validated = fileValidator.validate(input)
         if (!validated.success) {
