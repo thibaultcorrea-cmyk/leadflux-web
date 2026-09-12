@@ -16,9 +16,12 @@ export const useFetchCurrentKnowledgeBase = () => {
         queryFn: fetchCurrentKnowledgeBaseApi
     })
 
+    const createdAt = data?.lastKnowledgeVersion?.createdAt
+    const fileSize = data?.lastKnowledgeVersion?.file?.size
+
     const currentVersion = {
         name: data?.lastKnowledgeVersion?.name ?? "",
-        indexedAtLabel: formatLongDate(data?.lastKnowledgeVersion?.createdAt ?? "") ?? unknownData,
+        indexedAtLabel: createdAt ? formatLongDate(createdAt) : unknownData,
         author: data?.lastKnowledgeVersion?.indexedBy?.name ?? "Utilisateur inconnu"
     } satisfies KnowledgeBaseVersion
 
@@ -26,10 +29,10 @@ export const useFetchCurrentKnowledgeBase = () => {
     const currentKnowledgeBaseFile = {
         name: data?.lastKnowledgeVersion?.file?.originalName ?? unknownData,
         type: data?.lastKnowledgeVersion?.file?.extension as any,
-        sizeLabel: formatFileSize(data?.lastKnowledgeVersion?.file?.size ?? 0) ?? unknownData,
-        uploadedAtLabel: formatLongDate(data?.lastKnowledgeVersion.createdAt ?? "") ?? unknownData,
-        uploadedAtDatetime: formatLongDateTime(data?.lastKnowledgeVersion.createdAt ?? "") ?? unknownData,
-        distanceDateTime: formatRelativeTime(data?.lastKnowledgeVersion.createdAt ?? "") ?? "",
+        sizeLabel: fileSize ? formatFileSize(fileSize) : unknownData,
+        uploadedAtLabel: createdAt ? formatLongDate(createdAt) : unknownData,
+        uploadedAtDatetime: createdAt ? formatLongDateTime(createdAt) : unknownData,
+        distanceDateTime: createdAt ? formatRelativeTime(createdAt) : "",
         wordCount: data?.lastKnowledgeVersion?.countWords ?? 0,
         previewUrl: data?.lastKnowledgeVersion?.file?.path ?? "",
         extractedText: ""
