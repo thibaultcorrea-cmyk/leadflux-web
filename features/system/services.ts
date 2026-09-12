@@ -1,6 +1,7 @@
 import { SystemWriteRepositoriesImpl } from "./repositories/write"
 import { SystemServices } from "./entities/services"
 import { UserServices } from "../users/services"
+import { UploadsServicesImpl } from "../uploads/services"
 
 export const SystemServicesImpl: SystemServices = {
     clear: async () => {
@@ -10,5 +11,6 @@ export const SystemServicesImpl: SystemServices = {
         }
 
         await SystemWriteRepositoriesImpl.truncate()
+        await UploadsServicesImpl.clearStorage()
     },
 }

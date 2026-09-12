@@ -158,4 +158,8 @@ export const UploadsServicesImpl: UploadsServices = {
         await UserServices.getCurrentUser()
         await UploadsWriteRepositoriesImpl.renameFile(validated.data)
     },
+
+    clearStorage: async () => {
+        await UploadsWriteRepositoriesImpl.clearStorage()
+    },
 }

@@ -1,6 +1,6 @@
 import { mkdir, open, readdir, readFile, rename, rm, writeFile } from "node:fs/promises"
 import { IUploadsWriteRepository } from "../entities/repository"
-import { uploadsChunkPath, uploadsChunksDir, uploadsFinalDir, uploadsFinalPath, uploadsMetaPath, uploadsTmpDir } from "../storage"
+import { getUploadsStorageRoot, uploadsChunkPath, uploadsChunksDir, uploadsFinalDir, uploadsFinalPath, uploadsMetaPath, uploadsTmpDir } from "../storage"
 
 
 
@@ -80,5 +80,10 @@ export const UploadsWriteRepositoriesImpl: IUploadsWriteRepository = {
 
     renameFile: async ({ id, fromExtension, toExtension }) => {
         await rename(uploadsFinalPath(id, fromExtension), uploadsFinalPath(id, toExtension))
+    },
+
+    clearStorage: async () => {
+        await rm(getUploadsStorageRoot(), { recursive: true, force: true })
+        await mkdir(getUploadsStorageRoot(), { recursive: true })
     },
 }

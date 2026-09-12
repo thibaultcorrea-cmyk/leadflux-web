@@ -29,7 +29,10 @@ export const useCreateAdminForm = () => {
       return;
     }
 
-    router.replace("/login");
+    // nextCookies() (lib/auth.ts) a déjà posé le cookie de session pendant
+    // l'appel serveur à auth.api.signUpEmail : l'utilisateur est déjà
+    // connecté, inutile de repasser par /login.
+    router.replace("/tableau");
   };
 
   return { form, onSubmit };

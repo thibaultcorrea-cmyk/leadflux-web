@@ -8,6 +8,9 @@ import { AbortUploadSessionDto, CompleteUploadSessionDto, CreateUploadSessionDto
  * Pas de create/collections/update/delete/deleteMany/clear generiques ici :
  * cette feature n'a pas de table dediee, le dossier tmp/ fait foi pour les
  * sessions en cours (cf. convention-code-metier.md, deviation documentee).
+ * clearStorage n'est pas ce "clear" generique refuse ci-dessus : c'est une
+ * operation distincte et volontairement exceptionnelle (hard reset complet
+ * du disque), sans equivalent par entite.
  */
 export type UploadsServices = {
     createSession: (input: CreateUploadSessionDto) => Promise<{ uploadId: string }>
@@ -24,4 +27,6 @@ export type UploadsServices = {
     moveFile: (input: MoveFileDto) => Promise<void>
     /** Renomme (change l'extension d') un fichier deja stocke, sans changer son id. */
     renameFile: (input: RenameFileDto) => Promise<void>
+    /** Vide tout le stockage disque (hard reset uniquement). */
+    clearStorage: () => Promise<void>
 }

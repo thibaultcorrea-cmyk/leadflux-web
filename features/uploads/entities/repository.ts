@@ -30,4 +30,6 @@ export interface IUploadsWriteRepository {
     moveFile: (params: { fromId: string; fromExtension: string; toId: string; toExtension: string }) => Promise<void>
     /** Renomme (change l'extension) un fichier sans changer son id : cas particulier de moveFile. */
     renameFile: (params: { id: string; fromExtension: string; toExtension: string }) => Promise<void>
+    /** Supprime tout le dossier de stockage (tmp/ + fichiers finaux) et le recree vide. Hard reset uniquement. */
+    clearStorage: () => Promise<void>
 }
