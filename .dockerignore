@@ -5,6 +5,7 @@ node_modules
 .env.local
 .env*.local
 dependencies/volumes
+features/uploads/storage
 tests
 .playwright-mcp
 playwright-report

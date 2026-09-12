@@ -2,6 +2,7 @@ import { FileSqlInfer } from "@/db/schemas"
 import { CreateFileDto } from "../dto/schema"
 
 export type FileServices = {
+    get: (id: string) => Promise<FileSqlInfer>
     create: (file: CreateFileDto) => Promise<FileSqlInfer>
     collections: (query: any) => Promise<FileSqlInfer[]>
     update: (file: Partial<FileSqlInfer>) => Promise<FileSqlInfer>

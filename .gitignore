@@ -40,6 +40,11 @@ yarn-error.log*
 # docker (data persistee des services locaux : postgres, minio)
 /dependencies/volumes/*
 
+# stockage disque des fichiers uploades, colocalise dans features/uploads/ : chunks
+# temporaires (tmp/<uploadId>) et fichiers finaux (<id>/<id>.<ext>), servis en
+# lecture via /api/v1/uploads/... — jamais commite
+/features/uploads/storage/*
+
 # checkpoint du scan IMAP de detection de reponses (features/emails/repositories/scan.ts)
 /checkpointer.json
 

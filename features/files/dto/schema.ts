@@ -18,6 +18,7 @@ export type File = z.infer<typeof FileSchema>
 
 
 export const createFileSchema = z.object({
+    id: z.string().uuid().optional(),
     originalName: z.string().min(1, "originalName est requis"),
     size: z.number().positive("size doit etre positif"),
     type: z.string().min(1, "type est requis"),

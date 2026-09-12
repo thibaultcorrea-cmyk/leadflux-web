@@ -49,6 +49,12 @@ const envSchema = z.object({
     S3_SECRET_ACCESS_KEY: z.string().default("leadflux"),
     S3_BUCKET: z.string().default("leadflux"),
 
+    // Racine de stockage disque des fichiers uploades : colocalisee dans
+    // features/uploads/ (chunks temporaires + fichiers finaux), jamais dans app/
+    // (cf. features/uploads/storage.ts). Relatif => resolu depuis process.cwd() ;
+    // absolu (ex. volume monte en prod) => utilise tel quel.
+    UPLOADS_STORAGE_ROOT: z.string().default("./features/uploads/storage"),
+
 });
 
 export const ENV = envSchema.parse(process.env);
