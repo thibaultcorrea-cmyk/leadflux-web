@@ -54,13 +54,12 @@ export function UploadDropzone({ hint, accept, disabled, onFileSelected }: Uploa
       }}
       onDragLeave={() => setIsDragOver(false)}
       onDrop={handleDrop}
-      className={`flex h-44 w-full flex-col items-center justify-center gap-2.5 rounded-lg border transition-colors ${
-        disabled
+      className={`flex h-44 w-full flex-col items-center justify-center gap-2.5 rounded-lg border transition-colors ${disabled
           ? "cursor-not-allowed border-ink-300 bg-background-100 opacity-60"
           : isDragOver
             ? "cursor-pointer border-accent-500 bg-accent-50"
             : "cursor-pointer border-ink-300 bg-background-100 hover:border-accent-300"
-      }`}
+        }`}
     >
       <input
         ref={inputRef}
@@ -81,7 +80,7 @@ export function UploadDropzone({ hint, accept, disabled, onFileSelected }: Uploa
         <span className="font-medium text-ink-900">Glissez votre fichier ici, ou</span>
         <span className="font-semibold text-accent-700">parcourir vos fichiers</span>
       </span>
-      <span className="text-xs text-ink-500">{hint}</span>
+      <span className="text-xs text-ink-500 text-center">{hint}</span>
     </div>
   );
 }

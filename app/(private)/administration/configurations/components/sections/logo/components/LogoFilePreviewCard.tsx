@@ -36,7 +36,7 @@ export function LogoFilePreviewCard({ file, status, progress, error, onRetry, on
 
   return (
     <div className="flex flex-col gap-3 rounded-md border border-border bg-background-100 p-3">
-      <div className="flex items-center gap-3">
+      <div className="flex min-w-0 items-center gap-3">
         <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-background">
           {/* eslint-disable-next-line @next/next/no-img-element -- aperçu local d'un File pas encore uploadé, jamais une image servie par Next/CDN. */}
           <img src={previewUrl} alt="" className="size-full object-contain" />
