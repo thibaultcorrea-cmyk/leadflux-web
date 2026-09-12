@@ -6,6 +6,7 @@ import * as z from "zod";
 
 import { useAuthenticationClient } from "@/hooks/useAuthenticationClient";
 import { waitDelay } from "@/lib/utils";
+import { resetApplication } from "../services/api-services";
 
 // Typé explicitement en `string` : sans ça, TS infère un type littéral
 // `"confirmer"` à partir de la comparaison dans `.refine()` ci-dessous, ce
@@ -45,8 +46,10 @@ export function useConfirmHardResetForm() {
 
   const hardReset = async () => {
     await waitDelay(1200);
+    await resetApplication()
     localStorage.clear();
     await signOut();
+
   };
 
   return { form, hardReset };

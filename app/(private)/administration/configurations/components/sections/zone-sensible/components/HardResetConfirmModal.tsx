@@ -32,7 +32,7 @@ export function HardResetConfirmModal() {
       messages={RESET_MESSAGES}
       // Le formulaire de connexion remplace ce contenu : pas besoin de
       // fermer la modale nous-mêmes ni d'afficher de message de succès.
-      closeOnConfirm={false}
+      closeOnConfirm={true}
       onConfirm={() => form.handleSubmit(hardReset)()}
     >
       <Field>
