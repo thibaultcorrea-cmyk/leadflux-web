@@ -5,4 +5,5 @@ export type LogoFile = {
   sizeLabel: string;
   uploadedAtLabel: string;
   hasTransparentBackground: boolean;
+  url: string;
 };

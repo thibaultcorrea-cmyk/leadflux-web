@@ -8,12 +8,13 @@ import type { LogoFile } from "../types/logo";
  * À remplacer par un vrai service une fois l'upload (Uppy) intégré.
  */
 const mockLogoFile: LogoFile = {
-  name: "logo-oxiagen.png",
+  name: "logo-leadflux.png",
   widthPx: 1024,
   heightPx: 256,
   sizeLabel: formatFileSize(38_912),
   uploadedAtLabel: formatLongDate("2026-07-03"),
   hasTransparentBackground: true,
+  url: "/images/logo-leadflux.png",
 };
 
 export const logoMock = {

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { logoMock } from "../../../../services/logo-mock";
 import { useReplaceLogoAction } from "../hooks/useReplaceLogoAction";
 import { LogoPreviewSwatch } from "./LogoPreviewSwatch";
+import LogoLightPreview from "./LogoLightPreview";
 
 /**
  * Corps de la section "Logo de l'entreprise" (maquette "Logo Card") :
@@ -21,8 +22,7 @@ export function LogoSection() {
   return (
     <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-6 sm:flex-row">
       <div className="flex shrink-0 gap-3">
-        <LogoPreviewSwatch variant="dark" caption="Sur fond sombre" />
-        <LogoPreviewSwatch variant="light" caption="Sur fond clair" />
+        <LogoLightPreview src={logo.url} alt={logo.name} />
       </div>
 
       <div className="flex w-full flex-col gap-3">
