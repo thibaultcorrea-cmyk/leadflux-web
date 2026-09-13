@@ -21,6 +21,8 @@ export type UploadsServices = {
     read: (fileId: string) => Promise<{ file: FileSqlInfer; stream: Readable }>
     /** Comme `read`, mais resolu par cle de stockage (files.path) plutot que par fileId : utilise par /api/v1/logo, qui resout cette cle depuis le reglage "logo" de l'utilisateur connecte. */
     readByPath: (path: string) => Promise<{ file: FileSqlInfer; stream: Readable }>
+    /** Comme `read`, mais sans verification d'auth : utilise pour les medias publics. */
+    readByPathPublic: (path: string) => Promise<{ file: FileSqlInfer; stream: Readable }>
     /** Lit largeur/hauteur (px) d'un fichier image deja assemble, par id/extension (files.id / files.extension). */
     readDimensions: (params: { id: string; extension: string }) => Promise<{ width: number; height: number }>
     /** Ecrit un fichier complet (non chunke) directement, sans passer par le protocole de session. */

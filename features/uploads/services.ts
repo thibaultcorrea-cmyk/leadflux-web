@@ -133,6 +133,15 @@ export const UploadsServicesImpl: UploadsServices = {
         const stream = await UploadsReadRepositoriesImpl.readFile({ id: file.id, extension: file.extension })
         return { file, stream }
     },
+    readByPathPublic: async (path) => {
+        const file = await FileServicesImpl.getByPath(path)
+        if (!file) {
+            throw new Error("Fichier introuvable pour cette clé.")
+        }
+
+        const stream = await UploadsReadRepositoriesImpl.readFile({ id: file.id, extension: file.extension })
+        return { file, stream }
+    },
 
     readDimensions: async ({ id, extension }) => {
         await UserServices.getCurrentUser()

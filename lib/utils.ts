@@ -28,8 +28,10 @@ export const formatFileSize = (bytes: number) => {
 
 export const getLogoFromCompany = async (logoApiUrl: string) => {
   const res = await fetch(logoApiUrl)
+
   if (res.ok) {
     return logoApiUrl
   }
+  console.log(await res.json());
   return `${process.env.NEXT_PUBLIC_APP_URL}/images/leadflux-logo.png`
 }

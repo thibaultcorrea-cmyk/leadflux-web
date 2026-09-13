@@ -13,14 +13,13 @@ interface IProps {
 export const GET = async (request: NextRequest, { params }: IProps) => {
     try {
         const { path, filename } = await params
-
         const key = `${path}/${filename}`
-        const { stream, file } = await UploadsServicesImpl.readByPath(key)
+        const { stream, file } = await UploadsServicesImpl.readByPathPublic(key)
         return new NextResponse(Readable.toWeb(stream) as ReadableStream, {
             headers: {
                 "Content-Type": file.type,
                 "Content-Length": file.size.toString(),
-                "Content-Disposition": `inline; filename="${file.originalName}"`
+                "Content-Disposition": `inline; filename="${filename}"`
             }
         })
     } catch (error) {

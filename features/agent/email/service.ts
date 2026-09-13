@@ -8,6 +8,8 @@ import { SendEmailDto } from "@/features/smtp/dto/schema"
 import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
 import { renderProspectEmailHtml } from "@/features/emails/templates/render-email-html"
 import { KnowledgeBaseServicesImpl } from "@/features/knowledge-bases/services"
+import { getLogoFromCompany } from "@/lib/utils"
+import { SystemServicesImpl } from "@/features/system/services"
 
 const UNKNOWN_VERSION = "Version non renseignée"
 
@@ -53,7 +55,9 @@ export const AgentEmailService = {
         }
     },
     sendEmail: async (input: AgentEmailSendInput): Promise<AgentEmailSendResult> => {
-        const logo = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1/logo`
+        const currentLogo = await SystemServicesImpl.currentLogo()
+        const key = currentLogo.key
+        const logo = await getLogoFromCompany(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/medias/${key}`)
         const html = await renderProspectEmailHtml(input.body, logo)
 
         const payload = {
