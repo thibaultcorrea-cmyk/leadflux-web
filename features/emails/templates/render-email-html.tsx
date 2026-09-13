@@ -12,6 +12,6 @@ import { ProspectEmailTemplatePremium } from "./prospect-email-template-premium"
  * besoin d'un endpoint HTTP dédié entre les deux, ce sont deux appels de la
  * même fonction dans le même process.
  */
-export function renderProspectEmailHtml(body: string): Promise<string> {
-  return render(<ProspectEmailTemplatePremium body={body} />);
+export function renderProspectEmailHtml(body: string, logo?: string): Promise<string> {
+  return render(<ProspectEmailTemplatePremium body={body} logo={logo} />);
 }

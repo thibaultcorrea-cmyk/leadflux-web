@@ -1,6 +1,7 @@
 type ProspectEmailTemplatePremiumProps = {
   /** Corps de l'email au format HTML (paragraphes, listes, gras/italique/souligné). */
   body: string;
+  logo?: string;
 };
 
 /**
@@ -34,7 +35,7 @@ const FONT_UI = "'Helvetica Neue', Helvetica, Arial, sans-serif";
  * conçue pour être lue telle quelle des deux côtés (Next.js l'inline
  * statiquement dans les deux bundles).
  */
-const BRAND_MARK_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/images/company-logo-placeholder.png`;
+const BRAND_MARK_URL = `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/images/logo-leadflux.png`;
 
 /**
  * Placeholder : aucune adresse de contact réelle n'est encore actée pour
@@ -90,8 +91,10 @@ function toPreviewText(html: string, maxLength: number): string {
  */
 export function ProspectEmailTemplatePremium({
   body,
+  logo,
 }: ProspectEmailTemplatePremiumProps) {
   const previewText = toPreviewText(body, 110);
+  const COMPANY_LOGO_URL = logo ?? BRAND_MARK_URL
 
   return (
     <html lang="fr">
@@ -173,7 +176,7 @@ export function ProspectEmailTemplatePremium({
                       <td style={{ paddingRight: 12, verticalAlign: "middle" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element -- un client email doit recevoir une balise <img> classique avec une URL absolue, pas le composant next/image (optimisation et lazy-load côté serveur Next, sans objet ici). */}
                         <img
-                          src={BRAND_MARK_URL}
+                          src={COMPANY_LOGO_URL}
                           alt="Leadflux"
                           width={40}
                           height={40}
@@ -229,7 +232,7 @@ export function ProspectEmailTemplatePremium({
                     marginBottom: 4,
                   }}
                 >
-                  Leadflux, agent de prospection d&apos;OxIAgen
+                  Leadflux, agent de prospection d&apos;Leadflux
                 </div>
                 <div style={{ fontSize: 12, lineHeight: 1.5, color: "#77656C" }}>
                   Aucun envoi n&apos;est automatique : cet email est toujours

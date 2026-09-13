@@ -7,11 +7,15 @@ import { SMTPServiceImpl } from "@/features/smtp/services"
 import { SendEmailDto } from "@/features/smtp/dto/schema"
 import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
 import { renderProspectEmailHtml } from "@/features/emails/templates/render-email-html"
+import { KnowledgeBaseServicesImpl } from "@/features/knowledge-bases/services"
+import { SystemServicesImpl } from "@/features/system/services"
+import { ENV } from "@/core/env"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
 
         const prospect = await ProspectServicesImpl.find(inputs.prospectId)
+        const knowledgeBase = await KnowledgeBaseServicesImpl.getLastKnowledgeVersion()
         const payload: AgentEmailGenerateApiInput = mapProspectFromRelationsToPayload(prospect)
         const result = await AgentEmailWriteRepository.generate(payload)
         const { subject, content } = result
@@ -19,7 +23,7 @@ export const AgentEmailService = {
         return {
             subject,
             body: content,
-            knowledgeVersion: "1.0.0",
+            knowledgeVersion: knowledgeBase.name,
             payload
         }
 
@@ -47,7 +51,8 @@ export const AgentEmailService = {
         }
     },
     sendEmail: async (input: AgentEmailSendInput): Promise<AgentEmailSendResult> => {
-        const html = await renderProspectEmailHtml(input.body)
+        const logo = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1/logo`
+        const html = await renderProspectEmailHtml(input.body, logo)
 
         const payload = {
             to: input.to,
