@@ -13,7 +13,7 @@ export const EmailVersionServicesImpl: EmailVersionServices = {
             throw validated.error
         }
 
-        return EmailVersionWriteRepositoriesImpl.create(validated.data as any)
+        return EmailVersionWriteRepositoriesImpl.create(validated.data)
     },
 
     collections: async (query: any) => {
