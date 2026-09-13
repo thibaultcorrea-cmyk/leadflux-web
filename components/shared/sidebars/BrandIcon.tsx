@@ -14,7 +14,7 @@ export const BrandIcon = ({ Icon, className }: { Icon?: LucideIcon, className?: 
 
     const DefaultIcon = Icon;
 
-    const LOGO_URL = currentLogo?.key ? `/api/v1/logo?key=${currentLogo.key}` : undefined
+    const LOGO_URL = currentLogo?.key ? `/api/v1/logo?key=${currentLogo.key}` : `/images/leadflux-logo.png`
 
     if (isLoading) return <LogoSkeleton />
 

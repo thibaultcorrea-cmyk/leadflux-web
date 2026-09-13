@@ -24,3 +24,12 @@ export const formatFileSize = (bytes: number) => {
   const go = mo / 1024;
   return `${go < 10 ? go.toFixed(1) : Math.round(go)} Go`;
 };
+
+
+export const getLogoFromCompany = async (logoApiUrl: string) => {
+  const res = await fetch(logoApiUrl)
+  if (res.ok) {
+    return logoApiUrl
+  }
+  return `${process.env.NEXT_PUBLIC_APP_URL}/images/leadflux-logo.png`
+}
