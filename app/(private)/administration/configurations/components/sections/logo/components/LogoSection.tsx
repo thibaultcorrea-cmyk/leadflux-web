@@ -75,19 +75,9 @@ export function LogoSection({ currentLogo, isLoading }: LogoSectionProps) {
       </div>
     );
   }
-  return <div>
-    <p>No logo uploaded</p>
-    <Button
-      type="button"
-      variant="outline"
-      size="lg"
-      className="h-10 gap-2 px-4 text-sm font-medium text-ink-900"
-      onClick={openReplaceLogo}
-    >
-      <Upload className="size-[15px]" aria-hidden />
-      Remplacer le logo
-    </Button>
-  </div>
+
+  return <EmptyLogoSection />
+
 }
 
 
@@ -105,4 +95,43 @@ export const LoadingLogoSection = () => {
       </div>
     </div>
   );
+}
+
+
+const EmptyLogoSection = () => {
+  const { openReplaceLogo } = useReplaceLogoAction();
+  return <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-6 sm:flex-row">
+
+
+    <div className="flex w-full flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary-50">
+          <ImageIcon className="size-[18px] text-primary-700" aria-hidden />
+        </span>
+        <div className="flex flex-col gap-0.5">
+          <p className="text-sm font-semibold text-ink-900">Uploader votre logo</p>
+        </div>
+      </div>
+
+      <p className="text-xs leading-normal text-ink-500">
+        PNG, JPEG ou WebP · 2 Mo max · fond transparent recommandé.
+        Pas de SVG.
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className="h-10 gap-2 px-4 text-sm font-medium text-ink-900"
+          onClick={openReplaceLogo}
+        >
+          <Upload className="size-[15px]" aria-hidden />
+          Remplacer le logo
+        </Button>
+
+      </div>
+    </div>
+
+  </div>
 }
