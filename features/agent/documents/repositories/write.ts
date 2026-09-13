@@ -11,7 +11,11 @@ export const AgentDocumentWriteRepository: IAgentDocumentWriteRepository = {
             method: "POST",
             body: formData,
         })
-        return response.json()
+        const json = await response.json()
+        if (!response.ok) {
+            throw json
+        }
+        return json
     }
 
 }

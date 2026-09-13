@@ -11,7 +11,7 @@ import { LastKnowledgeBase } from "./entities/generic"
 
 export const KnowledgeBaseServicesImpl: KnowledgeBaseServices = {
     create: async (input: CreateKnowledgeBaseDto) => {
-        const validated = knowledgeBaseValidator.validate(input)
+        const validated = knowledgeBaseValidator.create(input)
         if (!validated.success) {
             throw validated.error
         }

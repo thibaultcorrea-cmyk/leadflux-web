@@ -27,4 +27,12 @@ export const createKnowledgeBaseSchema = z.object({
     description: z.string().optional(),
 })
 
+export const InsertKnowledgeBaseSchema = z.object({
+    name: z.string().default(`version ${Date.now()}`),
+    fileId: z.string().min(1, "fileId est requis"),
+    description: z.string().optional(),
+})
+
+export type InsertKnowledgeBaseDto = z.infer<typeof InsertKnowledgeBaseSchema>
+
 export type CreateKnowledgeBaseDto = z.infer<typeof createKnowledgeBaseSchema>

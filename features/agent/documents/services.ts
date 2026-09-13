@@ -17,7 +17,7 @@ export const AgentDocumentServiceImpl: IAgentDocumentService = {
         const response = await AgentDocumentWriteRepository.ingestDocuments(knowledgeBaseFile)
 
 
-        console.log(response);
+
 
 
 

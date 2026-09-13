@@ -1,6 +1,7 @@
-import { createKnowledgeBaseSchema } from "./schema"
+import { InsertKnowledgeBaseSchema, createKnowledgeBaseSchema } from "./schema"
 
 
 export const knowledgeBaseValidator = {
-    validate: (data: unknown) => createKnowledgeBaseSchema.safeParse(data),
+    insert: (data: unknown) => InsertKnowledgeBaseSchema.safeParse(data),
+    create: (data: unknown) => createKnowledgeBaseSchema.safeParse(data),
 }
