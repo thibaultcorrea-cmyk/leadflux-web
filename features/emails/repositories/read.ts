@@ -1,5 +1,5 @@
 import { db } from "@/db"
-import { emails, emailVersions } from "@/db/schemas"
+import { emails, emailVersions, knowledgeBase } from "@/db/schemas"
 import { asc, desc, eq, inArray } from "drizzle-orm"
 import { IEmailReadRepository } from "../entities/repository"
 import { emailFromRow } from "../factory/email-factory"
@@ -23,7 +23,20 @@ export const EmailReadRepositoriesImpl: IEmailReadRepository = {
             return []
         }
 
-        const versionRows = await db.select().from(emailVersions)
+        const versionRows = await db
+            .select({
+                id: emailVersions.id,
+                emailId: emailVersions.emailId,
+                subject: emailVersions.subject,
+                body: emailVersions.body,
+                knowledgeBaseId: emailVersions.knowledgeBaseId,
+                generatedAt: emailVersions.generatedAt,
+                createdAt: emailVersions.createdAt,
+                updatedAt: emailVersions.updatedAt,
+                knowledgeVersion: knowledgeBase.name,
+            })
+            .from(emailVersions)
+            .innerJoin(knowledgeBase, eq(emailVersions.knowledgeBaseId, knowledgeBase.id))
             .where(inArray(emailVersions.emailId, emailRows.map((row) => row.id)))
             .orderBy(asc(emailVersions.generatedAt))
 

@@ -21,6 +21,8 @@ const mockKnowledgeBaseFile: KnowledgeBaseFile = {
   uploadedAtDatetime: formatLongDateTime("2026-08-12T10:00:00Z"),
   distanceDateTime: formatRelativeTime("2026-08-12T10:00:00Z"),
   wordCount: 1480,
+  totalIndexed: 2,
+
   previewUrl: "/mocks/base-connaissance-oxiagen-v3.pdf",
   extractedText:
     "Base de connaissance OxIAgen\n\n" +

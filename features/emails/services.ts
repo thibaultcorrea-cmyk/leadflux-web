@@ -71,7 +71,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             knowledgeBaseId: knowledgeBase.id,
         })
         await ProspectServicesImpl.markAsProspected(inputs.prospectId)
-        const emailRow = emailFromRow(email, [version])
+        const emailRow = emailFromRow(email, [{ ...version, knowledgeVersion: knowledgeBase.name }])
         return emailRow
 
 
