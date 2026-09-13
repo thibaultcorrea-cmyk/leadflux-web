@@ -1,9 +1,6 @@
 
 
 export const mapLastKnowledgeBase = (knowledgeBase: any) => {
-
-    console.log(knowledgeBase);
-
     return {
         id: knowledgeBase.id,
         name: knowledgeBase.name,
