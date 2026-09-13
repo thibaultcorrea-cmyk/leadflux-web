@@ -94,7 +94,7 @@ export function LogoSection({ currentLogo, isLoading }: LogoSectionProps) {
 export const LoadingLogoSection = () => {
   return (
     <div className="flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6 sm:flex-row">
-      <Skeleton className="size-[50px]" />
+      <Skeleton className="size-[80px]" />
 
       <div className="flex w-full flex-col gap-3">
         {
