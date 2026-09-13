@@ -4,6 +4,7 @@ import { FunnelPanel } from "./components/funnel-panel";
 import { SavedSearchesPanel } from "./components/SaveSearches/saved-searches-panel";
 import { RecentActivityPanel } from "./components/table/recent-activity-panel";
 import KpiHeaderSection from "./components/KpiHeaderSection/KpiHeaderSection";
+import { RefreshButton } from "./components/RefreshButton/RefreshButton";
 
 
 export default function TableauPage() {
@@ -26,7 +27,10 @@ export default function TableauPage() {
           </div>
         </div>
 
-        <NewSearchButton redirect={true} />
+        <div className="flex items-center gap-2">
+          <RefreshButton />
+          <NewSearchButton redirect={true} />
+        </div>
       </header>
 
       <KpiHeaderSection />
