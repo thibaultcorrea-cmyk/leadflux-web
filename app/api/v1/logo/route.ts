@@ -26,6 +26,7 @@ export const GET = async (_request: NextRequest) => {
         })
     } catch (error) {
         return errorApiHandler(error)
+
     }
 }
 
