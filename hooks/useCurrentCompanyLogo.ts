@@ -25,7 +25,6 @@ export const fetchCurrentCompanyLogo = async () => {
         }
     `
     const queryResult = await request<{ currentLogo: CurrentLogo }>(GRAPHQL_BASE_URL, query)
-    await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/v1/logo`)
     return queryResult.currentLogo
 
 }

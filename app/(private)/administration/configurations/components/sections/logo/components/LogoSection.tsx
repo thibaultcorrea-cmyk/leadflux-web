@@ -66,10 +66,10 @@ export function LogoSection({ currentLogo, isLoading }: LogoSectionProps) {
               <Upload className="size-[15px]" aria-hidden />
               Remplacer le logo
             </Button>
-            <Button type="button" variant="outline" size="lg" className="h-10 gap-2 px-4 text-sm font-medium text-ink-900">
+            {/*   <Button type="button" variant="outline" size="lg" className="h-10 gap-2 px-4 text-sm font-medium text-ink-900">
               <Trash2 className="size-[15px]" aria-hidden />
               Supprimer
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

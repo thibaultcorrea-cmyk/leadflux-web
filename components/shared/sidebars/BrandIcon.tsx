@@ -5,7 +5,7 @@ import { useCurrentCompanyLogo } from "@/hooks/useCurrentCompanyLogo"
 import { cn } from "@/lib/utils"
 import { LucideIcon } from "lucide-react"
 
-const LOGO_URL = "/api/v1/logo"
+
 
 
 
@@ -14,9 +14,11 @@ export const BrandIcon = ({ Icon, className }: { Icon?: LucideIcon, className?: 
 
     const DefaultIcon = Icon;
 
+    const LOGO_URL = currentLogo?.key ? `/api/v1/logo?key=${currentLogo.key}` : undefined
+
     if (isLoading) return <LogoSkeleton />
 
-    if (currentLogo?.key) {
+    if (LOGO_URL) {
         return (
             <div key={currentLogo?.key} className="relative  size-8 flex items-center justify-cente">
                 <img src={`${LOGO_URL}`} alt={`current logo of your company`} className={cn("w-full rounded", className)} width={256} height={256} />
