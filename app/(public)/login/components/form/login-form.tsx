@@ -75,7 +75,7 @@ export function LoginForm() {
           key="remember-me-checkbox"
           id="remember-me"
           name="remember-me"
-          checked={form.watch("rememberMe")}
+          defaultChecked={form.watch("rememberMe")}
           onCheckedChange={handleCheckedRememberMe}
         />
         <Label htmlFor="remember-me" className="font-normal text-ink-700">
