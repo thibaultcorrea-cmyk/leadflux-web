@@ -24,6 +24,7 @@ export function useEmailPreviewHtml(emailId: string) {
   // Gardé avec l'id de version qui l'a produit : évite d'exposer un HTML
   // rendu pour la version précédente le temps que le nouveau rendu arrive.
   const [rendered, setRendered] = useState<{ versionId: string; html: string } | null>(null);
+  const logo = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1/logo`;
 
   useEffect(() => {
     if (!version) {
@@ -32,7 +33,7 @@ export function useEmailPreviewHtml(emailId: string) {
 
     let cancelled = false;
 
-    renderProspectEmailHtml(version.body).then((result) => {
+    renderProspectEmailHtml(version.body, logo).then((result) => {
       if (!cancelled) {
         setRendered({ versionId: version.id, html: result });
       }

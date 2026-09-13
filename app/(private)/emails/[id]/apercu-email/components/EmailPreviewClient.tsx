@@ -108,7 +108,11 @@ export function EmailPreviewClient({ emailId }: { emailId: string }) {
           <iframe
             title={`Aperçu de l'email pour ${email.contactName}`}
             srcDoc={html ?? undefined}
-            sandbox=""
+            // allow-same-origin (sans allow-scripts) : aucun script ne peut
+            // s'exécuter, mais les ressources de la page (ex. /api/v1/logo,
+            // protégé par la session) se chargent avec les cookies au lieu
+            // d'être traitées comme une origine opaque tierce.
+            sandbox="allow-same-origin"
             className="min-h-[70vh] w-full rounded-xl border border-border bg-background-100"
           />
         </div>
