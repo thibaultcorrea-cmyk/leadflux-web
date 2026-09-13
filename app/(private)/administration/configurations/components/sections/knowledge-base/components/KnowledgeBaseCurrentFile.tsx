@@ -5,16 +5,15 @@ import { Download, Eye, FileText } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTextPreviewAction } from "../hooks/useTextPreviewAction";
-import type { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
+import type { KnowledgeBaseFile } from "../../../../types/knowledge-base";
 import { KnowledgeBaseIndexStatsView } from "./KnowledgeBaseIndexStatsView";
 import { KnowledgeBaseSaveProgress } from "./KnowledgeBaseSaveProgress";
-import { formatRelativeTime } from "@/lib/date-format";
 
 type KnowledgeBaseCurrentFileProps = {
   file: KnowledgeBaseFile;
   isSaving: boolean;
   progress: number;
-  stats: KnowledgeBaseIndexStats;
+
 };
 
 const ACTION_BUTTON_CLASSNAME = "h-[34px] gap-1.5 px-3 text-[13px] font-medium text-ink-900";
@@ -23,7 +22,7 @@ export function KnowledgeBaseCurrentFile({
   file,
   isSaving,
   progress,
-  stats,
+
 }: KnowledgeBaseCurrentFileProps) {
   const { openTextPreview } = useTextPreviewAction();
 
@@ -75,7 +74,7 @@ export function KnowledgeBaseCurrentFile({
       {isSaving ? (
         <KnowledgeBaseSaveProgress progress={progress} />
       ) : (
-        <KnowledgeBaseIndexStatsView stats={stats} />
+        <KnowledgeBaseIndexStatsView file={file} />
       )}
     </div>
   );

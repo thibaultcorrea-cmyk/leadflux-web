@@ -2,12 +2,10 @@
 
 import { Save } from "lucide-react";
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import { toast } from "@/lib/toaster";
 import { useKnowledgeBaseSave } from "../hooks/useKnowledgeBaseSave";
 import { useKnowledgeBaseUpload } from "../hooks/useKnowledgeBaseUpload";
-import { knowledgeBaseMock } from "../../../../services/knowledge-base-mock";
 import { UploadDropzone } from "../../../shared/UploadDropzone";
 import { KnowledgeBaseCurrentFile } from "./KnowledgeBaseCurrentFile";
 import { KnowledgeBaseModeToggle, type KnowledgeBaseMode } from "./KnowledgeBaseModeToggle";
@@ -16,7 +14,6 @@ import { KnowledgeBaseSelectedFilePreview } from "./KnowledgeBaseSelectedFilePre
 import { KnowledgeBaseFile, KnowledgeBaseIndexStats } from "../../../../types/knowledge-base";
 import { useQueryClient } from "@tanstack/react-query";
 import { KNOWLEDGE_BASE_QUERIES_KEYS } from "../services/queries";
-import { formatRelativeTime } from "@/lib/date-format";
 
 /**
  * Corps de la section "Base de connaissances" (maquette "KB Card") : mode
@@ -101,7 +98,7 @@ export function KnowledgeBaseSection({ currentKnowledgeBaseFile }: KnowledgeBase
           disabled={isUploading}
         />
       ) : (
-        <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} stats={stats} />
+        <KnowledgeBaseCurrentFile file={file} isSaving={isSaving} progress={progress} />
       )}
 
       <div className="flex flex-col  gap-4 border-t border-border pt-5">
