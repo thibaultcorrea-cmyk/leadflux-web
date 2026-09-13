@@ -30,6 +30,7 @@ describe("EmailVersionServicesImpl.create", () => {
             emailId: "email_1",
             subject: "Un mot sur votre prospection",
             body: "<p>Bonjour Marion,</p><p>Thibault Correa, OxIAgen</p>",
+            knowledgeBaseId: "knowledge_base_1",
         })
 
         expect(createMock).toHaveBeenCalledWith(
