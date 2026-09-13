@@ -24,7 +24,7 @@ type LogoSectionProps = {
 export function LogoSection({ currentLogo, isLoading }: LogoSectionProps) {
   const logo = currentLogo;
   const { openReplaceLogo } = useReplaceLogoAction();
-  if (isLoading || !logo) {
+  if (isLoading) {
     return <LoadingLogoSection />
   }
 
