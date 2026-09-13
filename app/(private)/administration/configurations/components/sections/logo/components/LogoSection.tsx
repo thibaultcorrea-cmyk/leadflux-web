@@ -7,6 +7,7 @@ import { logoMock } from "../../../../services/logo-mock";
 import { useReplaceLogoAction } from "../hooks/useReplaceLogoAction";
 import { LogoPreviewSwatch } from "./LogoPreviewSwatch";
 import LogoLightPreview from "./LogoLightPreview";
+import { LogoFile } from "../../../../types/logo";
 
 /**
  * Corps de la section "Logo de l'entreprise" (maquette "Logo Card") :
@@ -15,7 +16,10 @@ import LogoLightPreview from "./LogoLightPreview";
  * aussi l'upload réel dépend d'Uppy, pas encore intégré (cf. section Base
  * de connaissances). "Supprimer" n'est pas câblé : pas de stockage branché.
  */
-export function LogoSection() {
+type LogoSectionProps = {
+  currentLogo: LogoFile;
+}
+export function LogoSection({ currentLogo }: LogoSectionProps) {
   const logo = logoMock.getCurrentLogo();
   const { openReplaceLogo } = useReplaceLogoAction();
 
@@ -34,14 +38,13 @@ export function LogoSection() {
             <p className="text-sm font-semibold text-ink-900">{logo.name}</p>
             <p className="text-xs text-ink-500">
               {logo.widthPx.toLocaleString("fr-FR")} × {logo.heightPx.toLocaleString("fr-FR")} px ·{" "}
-              {logo.sizeLabel} · {logo.hasTransparentBackground ? "fond transparent" : "fond opaque"} ·
-              importé le {logo.uploadedAtLabel}
+              {logo.sizeLabel} · importé le {logo.uploadedAtLabel}
             </p>
           </div>
         </div>
 
         <p className="text-xs leading-normal text-ink-500">
-          PNG, JPEG ou WebP · 2 Mo max · 512 px de large minimum · fond transparent recommandé.
+          PNG, JPEG ou WebP · 2 Mo max · fond transparent recommandé.
           Pas de SVG.
         </p>
 

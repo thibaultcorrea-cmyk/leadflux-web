@@ -8,6 +8,8 @@ export interface IUploadsReadRepository {
     listReceivedChunks: (uploadId: string) => Promise<number[]>
     readFile: (params: { id: string; extension: string }) => Promise<Readable>
     fileExists: (params: { id: string; extension: string }) => Promise<boolean>
+    /** Lit largeur/hauteur (px) d'une image deja assemblee sur disque, sans la charger entierement en memoire. */
+    readImageDimensions: (params: { id: string; extension: string }) => Promise<{ width: number; height: number }>
 }
 
 export interface IUploadsWriteRepository {

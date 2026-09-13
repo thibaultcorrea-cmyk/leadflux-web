@@ -1,5 +1,6 @@
 import { createReadStream } from "node:fs"
 import { readdir, readFile, stat } from "node:fs/promises"
+import { imageSizeFromFile } from "image-size/fromFile"
 import { IUploadsReadRepository } from "../entities/repository"
 import { UploadSessionMeta } from "../entities/type"
 import { uploadsChunksDir, uploadsFinalPath, uploadsMetaPath } from "../storage"
@@ -38,5 +39,14 @@ export const UploadsReadRepositoriesImpl: IUploadsReadRepository = {
         } catch {
             return false
         }
+    },
+
+    readImageDimensions: async ({ id, extension }) => {
+        const finalPath = uploadsFinalPath(id, extension)
+        const { width, height } = await imageSizeFromFile(finalPath)
+        if (!width || !height) {
+            throw new Error(`Dimensions illisibles pour ${id}.${extension}`)
+        }
+        return { width, height }
     },
 }

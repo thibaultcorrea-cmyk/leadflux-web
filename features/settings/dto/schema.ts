@@ -31,6 +31,11 @@ export const LOGO_SETTING_KEY = "logo"
  */
 export const logoSettingValueSchema = z.object({
     key: z.string().min(1, "La clé de stockage du logo est requise"),
+    name: z.string().optional(),
+    size: z.number().optional(),
+    height: z.number().optional(),
+    width: z.number().optional(),
+
 })
 
 export type LogoSettingValueDto = z.infer<typeof logoSettingValueSchema>

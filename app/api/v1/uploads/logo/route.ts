@@ -35,9 +35,16 @@ export const PUT = async (request: NextRequest) => {
     try {
         const uploadId = request.nextUrl.searchParams.get("uploadId") ?? ""
         const file = await UploadsServicesImpl.complete({ uploadId })
+        const { width, height } = await UploadsServicesImpl.readDimensions({ id: file.id, extension: file.extension })
 
         const currentUser = await UserServices.getCurrentUser()
-        await SettingsServicesImpl.setLogo(currentUser.id, { key: file.path })
+        await SettingsServicesImpl.setLogo(currentUser.id, {
+            key: file.path,
+            name: file.originalName,
+            size: file.size,
+            width,
+            height,
+        })
 
         return NextResponse.json({ file, url: `/api/v1/uploads/${file.id}/${file.id}.${file.extension}` })
     } catch (error) {

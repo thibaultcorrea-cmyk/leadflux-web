@@ -134,6 +134,11 @@ export const UploadsServicesImpl: UploadsServices = {
         return { file, stream }
     },
 
+    readDimensions: async ({ id, extension }) => {
+        await UserServices.getCurrentUser()
+        return UploadsReadRepositoriesImpl.readImageDimensions({ id, extension })
+    },
+
     writeFile: async (input) => {
         const validated = uploadsValidator.validateWriteFile(input)
         if (!validated.success) {
