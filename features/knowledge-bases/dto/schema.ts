@@ -25,6 +25,10 @@ export const createKnowledgeBaseSchema = z.object({
     name: z.string().min(1, "name est requis"),
     fileId: z.string().min(1, "fileId est requis"),
     description: z.string().optional(),
+    totalIndexed: z.number().optional().default(0),
+    countWords: z.number().optional().default(0),
+    status: z.enum(KNOWLEDGE_BASE_STATUSES).default(KNOWLEDGE_BASE_STATUSES[0]),
+
 })
 
 export const InsertKnowledgeBaseSchema = z.object({

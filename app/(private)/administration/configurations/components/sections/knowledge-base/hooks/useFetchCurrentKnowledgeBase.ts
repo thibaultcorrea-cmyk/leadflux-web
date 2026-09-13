@@ -32,8 +32,9 @@ export const useFetchCurrentKnowledgeBase = () => {
         sizeLabel: fileSize ? formatFileSize(fileSize) : unknownData,
         uploadedAtLabel: createdAt ? formatLongDate(createdAt) : unknownData,
         uploadedAtDatetime: createdAt ? formatLongDateTime(createdAt) : unknownData,
-        distanceDateTime: createdAt ? formatRelativeTime(createdAt) : "",
         wordCount: data?.lastKnowledgeVersion?.countWords ?? 0,
+        totalIndexed: data?.lastKnowledgeVersion?.totalIndexed ?? 0,
+        distanceDateTime: createdAt ? formatRelativeTime(createdAt) : "",
         previewUrl: data?.lastKnowledgeVersion?.file?.path ?? "",
         extractedText: ""
     } satisfies KnowledgeBaseFile

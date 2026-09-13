@@ -7,7 +7,10 @@ export const POST = async (request: NextRequest) => {
     try {
         const body = await request.json()
         // Demarrer le traitement d'indexation 
-        await AgentDocumentServiceImpl.ingestDocuments(body)
+        const ingestData = await AgentDocumentServiceImpl.ingestDocuments(body)
+        body.totalIndexed = ingestData.totalIndexed
+        body.countWords = ingestData.wordsCount
+        body.status = ingestData.status
         const created = await KnowledgeBaseServicesImpl.create(body)
         return NextResponse.json(created, { status: 201 })
     } catch (error) {

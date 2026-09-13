@@ -7,6 +7,7 @@ export type KnowledgeBaseFile = {
   uploadedAtLabel: string;
   uploadedAtDatetime: string;
   distanceDateTime: string;
+  totalIndexed: number;
   wordCount: number;
   /** Fichier source à afficher dans l'aperçu PDF (react-pdf). */
   previewUrl?: string;

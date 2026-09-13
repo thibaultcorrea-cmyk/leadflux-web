@@ -6,21 +6,30 @@ import { IndexedChunk } from "./entities/type";
 import { AgentDocumentWriteRepository } from "./repositories/write";
 import { UploadsServicesImpl } from "@/features/uploads/services";
 import { buffer } from "stream/consumers";
+import { KNOWLEDGE_BASE_STATUSES } from "@/db/schemas";
 
 export const AgentDocumentServiceImpl: IAgentDocumentService = {
     ingestDocuments: async (inputs) => {
-        const inputvalidate = agentDocumentValidator.ingestData(inputs)
-        if (!inputvalidate.success) throw inputvalidate.error
-        const { fileId } = inputvalidate.data
-        const fileEntity = await FileServicesImpl.get(fileId)
-        const knowledgeBaseFile = await generateFileFromFileId(fileEntity.id)
+        try {
+            const inputvalidate = agentDocumentValidator.ingestData(inputs)
+            if (!inputvalidate.success) throw inputvalidate.error
+            const { fileId } = inputvalidate.data
+            const fileEntity = await FileServicesImpl.get(fileId)
+            const knowledgeBaseFile = await generateFileFromFileId(fileEntity.id)
+            const response = await AgentDocumentWriteRepository.ingestDocuments(knowledgeBaseFile)
+            const originalText = mergeChunksFactory(response)
 
-        const response = await AgentDocumentWriteRepository.ingestDocuments(knowledgeBaseFile)
-        const originalText = mergeChunksFactory(response)
-
-        return {
-            wordsCount: originalText.split(/\s+/).filter(Boolean).length,
-            indexedCount: response.length,
+            return {
+                wordsCount: originalText.split(/\s+/).filter(Boolean).length,
+                totalIndexed: response.length,
+                status: KNOWLEDGE_BASE_STATUSES[1]
+            }
+        } catch (error) {
+            return {
+                wordsCount: 0,
+                totalIndexed: 0,
+                status: KNOWLEDGE_BASE_STATUSES[2]
+            }
         }
     }
 }

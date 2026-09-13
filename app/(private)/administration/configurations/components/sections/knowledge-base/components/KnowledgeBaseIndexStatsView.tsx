@@ -9,7 +9,7 @@ type KnowledgeBaseIndexStatsViewProps = {
 export function KnowledgeBaseIndexStatsView({ file }: KnowledgeBaseIndexStatsViewProps) {
 
   const stats: KnowledgeBaseIndexStats = {
-    passagesIndexed: file.wordCount,
+    passagesIndexed: file.totalIndexed || 0,
     reindexedAtLabel: `il y a ${file.distanceDateTime}`
   }
 
