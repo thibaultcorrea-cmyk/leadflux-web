@@ -21,7 +21,8 @@ export const createEmailVersionSchema = z.object({
     emailId: z.string().min(1, "emailId est requis"),
     subject: z.string().min(1, "L'objet est requis"),
     body: z.string().min(1, "Le corps de l'email est requis"),
-    knowledgeVersion: z.string().optional(),
+    knowledgeBaseId: z.string().nullable(),
+    generatedAt: z.coerce.date().default(() => new Date()),
 })
 
 export type CreateEmailVersionDto = z.infer<typeof createEmailVersionSchema>
