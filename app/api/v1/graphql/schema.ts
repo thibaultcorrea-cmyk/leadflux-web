@@ -189,8 +189,14 @@ type HasReplyResult {
 
 type CurrentLogo {
     id:String
+    name: String
+    size: Int
+    width: Int
+    height: Int
     key:String!
     url: String
+    createdAt: String
+
 }
 
 type KnowledgeBaseFile {

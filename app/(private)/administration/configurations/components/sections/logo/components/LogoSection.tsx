@@ -8,6 +8,7 @@ import { useReplaceLogoAction } from "../hooks/useReplaceLogoAction";
 import { LogoPreviewSwatch } from "./LogoPreviewSwatch";
 import LogoLightPreview from "./LogoLightPreview";
 import { LogoFile } from "../../../../types/logo";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Corps de la section "Logo de l'entreprise" (maquette "Logo Card") :
@@ -17,11 +18,30 @@ import { LogoFile } from "../../../../types/logo";
  * de connaissances). "Supprimer" n'est pas câblé : pas de stockage branché.
  */
 type LogoSectionProps = {
-  currentLogo: LogoFile;
+  currentLogo: LogoFile | undefined;
+  isLoading: boolean;
 }
-export function LogoSection({ currentLogo }: LogoSectionProps) {
-  const logo = logoMock.getCurrentLogo();
+export function LogoSection({ currentLogo, isLoading }: LogoSectionProps) {
+  const logo = currentLogo;
   const { openReplaceLogo } = useReplaceLogoAction();
+  if (isLoading) {
+    return <LoadingLogoSection />
+  }
+  if (!logo && !isLoading) {
+    return <div>
+      <p>No logo uploaded</p>
+      <Button
+        type="button"
+        variant="outline"
+        size="lg"
+        className="h-10 gap-2 px-4 text-sm font-medium text-ink-900"
+        onClick={openReplaceLogo}
+      >
+        <Upload className="size-[15px]" aria-hidden />
+        Remplacer le logo
+      </Button>
+    </div>
+  }
 
   return (
     <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-6 sm:flex-row">
@@ -64,6 +84,26 @@ export function LogoSection({ currentLogo }: LogoSectionProps) {
             Supprimer
           </Button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+
+export const LoadingLogoSection = () => {
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6 sm:flex-row">
+      <Skeleton className="size-[50px]" />
+
+      <div className="flex w-full flex-col gap-3">
+        {
+          [...Array(3)].map((_, i) => (
+            <Skeleton key={i} className="size-full rounded h-3" />
+          ))
+        }
+
+
+
       </div>
     </div>
   );

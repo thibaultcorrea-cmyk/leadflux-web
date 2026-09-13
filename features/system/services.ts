@@ -1,5 +1,5 @@
 import { SystemWriteRepositoriesImpl } from "./repositories/write"
-import { SystemServices } from "./entities/services"
+import { CurrentLogoFile, SystemServices } from "./entities/services"
 import { UserServices } from "../users/services"
 import { UploadsServicesImpl } from "../uploads/services"
 import { SettingsServicesImpl } from "../settings/services"
@@ -17,7 +17,13 @@ export const SystemServicesImpl: SystemServices = {
             throw new Error("Aucun logo n'est configuré.")
         }
         const { file } = await UploadsServicesImpl.readByPath(validated.data.key)
-        return file
+        return {
+            name: validated.data.name ?? file.originalName,
+            height: validated.data.height ?? 0,
+            width: validated.data.width ?? 0,
+            key: validated.data.key ?? "",
+            ...file,
+        } satisfies CurrentLogoFile
 
     },
 

@@ -13,7 +13,6 @@ const mockLogoFile: LogoFile = {
   heightPx: 256,
   sizeLabel: formatFileSize(38_912),
   uploadedAtLabel: formatLongDate("2026-07-03"),
-  hasTransparentBackground: true,
   url: "/images/logo-leadflux.png",
 };
 

@@ -23,6 +23,11 @@ const resolvers = {
                 id: file.id,
                 key: file.path,
                 url: `/api/v1/logo?key=${file.path}`,
+                name: file.originalName,
+                size: file.size,
+                width: file.width,
+                height: file.height,
+                createdAt: file.createdAt.toISOString(),
             }
         },
         lastKnowledgeVersion: async (_: any, args: any) => {

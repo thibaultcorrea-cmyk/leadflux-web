@@ -13,6 +13,8 @@ import { KnowledgeBaseVersionBar } from "./sections/knowledge-base/components/Kn
 import { LogoSection } from "./sections/logo/components/LogoSection";
 import { ZoneSensibleSection } from "./sections/zone-sensible/components/ZoneSensibleSection";
 import { useFetchCurrentKnowledgeBase } from "./sections/knowledge-base/hooks/useFetchCurrentKnowledgeBase";
+import useFetchSettings from "../hooks/useFetchSettings";
+import { currentLogoFileFactoryFromQuery } from "./sections/logo/factory/currentLogo";
 
 const ADMIN_SECTIONS: AdminSection[] = [
   {
@@ -54,6 +56,9 @@ const ADMIN_SECTION_IDS = ADMIN_SECTIONS.map((section) => section.id);
 export function AdminSectionsLayout() {
   const activeId = useScrollSpy(ADMIN_SECTION_IDS);
   const { currentVersion, currentKnowledgeBaseFile } = useFetchCurrentKnowledgeBase()
+  const { currentLogoQuery: { data, isLoading } } = useFetchSettings()
+
+  const currentLogoFile = data?.currentLogo ? currentLogoFileFactoryFromQuery(data?.currentLogo) : undefined
 
 
 
@@ -79,7 +84,7 @@ export function AdminSectionsLayout() {
                 <KnowledgeBaseFormattingHelp />
               </>
             )}
-            {section.id === "logo-de-lentreprise" && <LogoSection />}
+            {section.id === "logo-de-lentreprise" && <LogoSection logoFile={currentLogoFile} isLoading={true} />}
             {section.id === "zone-sensible" && <ZoneSensibleSection />}
           </AdminSectionShell>
         ))}
