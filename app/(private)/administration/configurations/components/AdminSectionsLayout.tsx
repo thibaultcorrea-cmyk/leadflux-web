@@ -62,6 +62,7 @@ export function AdminSectionsLayout() {
 
 
 
+
   return (
     <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-7">
       <AdminSectionsNav sections={ADMIN_SECTIONS} activeId={activeId} />
@@ -84,7 +85,7 @@ export function AdminSectionsLayout() {
                 <KnowledgeBaseFormattingHelp />
               </>
             )}
-            {section.id === "logo-de-lentreprise" && <LogoSection logoFile={currentLogoFile} isLoading={true} />}
+            {section.id === "logo-de-lentreprise" && <LogoSection currentLogo={currentLogoFile} isLoading={isLoading} />}
             {section.id === "zone-sensible" && <ZoneSensibleSection />}
           </AdminSectionShell>
         ))}
