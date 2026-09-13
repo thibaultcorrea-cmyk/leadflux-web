@@ -18,15 +18,15 @@ export const useEmailMutation = () => {
     // sans invalidation explicite ici, il reste fige sur ses anciennes valeurs
     // tant qu'il n'est pas demonte/remonte (changement de page).
     const invalidateTableauQueries = () => {
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_KPIS] });
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_FUNNEL_STEP] });
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_RECENTLY_ACTIVITY] });
+        queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
+        //queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_KPIS] });
+        //queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_FUNNEL_STEP] });
+        //queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_RECENTLY_ACTIVITY] });
     };
 
     const updateMutation = useMutation({
         mutationFn: async (data: UpdateEmailMutationParams) => updateEmailApi(data),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
             invalidateTableauQueries();
 
         },
@@ -35,7 +35,6 @@ export const useEmailMutation = () => {
     const removeMutation = useMutation({
         mutationFn: async ({ ids }: RemoveEmailMutationParams) => removeEmailApi(ids),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
             invalidateTableauQueries();
 
         },
@@ -44,7 +43,6 @@ export const useEmailMutation = () => {
     const regenerateMutation = useMutation({
         mutationFn: async ({ id }: { id: string }) => regenerateEmailApi(id),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
             invalidateTableauQueries();
         },
     })
@@ -52,7 +50,6 @@ export const useEmailMutation = () => {
     const validateSendEmailMutation = useMutation({
         mutationFn: async ({ id }: { id: string }) => validateSendEmailApi(id),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
             invalidateTableauQueries();
         },
     })
@@ -60,7 +57,6 @@ export const useEmailMutation = () => {
     const validateSendEmailsManyMutation = useMutation({
         mutationFn: async ({ ids }: { ids: string[] }) => validateSendEmailsManyApi(ids),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_EMAIL_PROSPECTS] })
             invalidateTableauQueries();
         },
     })

@@ -19,16 +19,16 @@ export function useProspectMutation() {
     // tant qu'il n'est pas demonte/remonte (changement de page), meme si le
     // staleTime par defaut de React Query est 0.
     const invalidateTableauQueries = () => {
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_KPIS] });
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_FUNNEL_STEP] });
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_SAVED_SEARCH] });
-        queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_RECENTLY_ACTIVITY] });
+        queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] })
+        // queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_KPIS] });
+        // queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_FUNNEL_STEP] });
+        //queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_SAVED_SEARCH] });
+        // queryClient.invalidateQueries({ queryKey: [TableauQueryKey.GET_RECENTLY_ACTIVITY] });
     };
 
     const createSearchProspectsMutation = useMutation({
         mutationFn: (params: LeadFinderFormSchemaType) => createSearchProspects(params),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] })
             invalidateTableauQueries();
 
         }
@@ -36,7 +36,6 @@ export function useProspectMutation() {
     const sendProspectEmailMutation = useMutation({
         mutationFn: (prospects: Prospect[]) => sendProspectEmail(prospects),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] });
             invalidateTableauQueries();
         },
     });
@@ -44,7 +43,6 @@ export function useProspectMutation() {
     const deleteProspectMutation = useMutation({
         mutationFn: (prospectIds: string[]) => deleteProspects(prospectIds),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] });
             invalidateTableauQueries();
         },
     });
@@ -52,7 +50,6 @@ export function useProspectMutation() {
     const truncateProspectsMutation = useMutation({
         mutationFn: () => truncateProspects(),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [QueryKey.GET_SEARCH_PROSPECTS_RESULTS] });
             invalidateTableauQueries();
         },
     });
