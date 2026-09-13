@@ -14,11 +14,12 @@ export function useRenderEmailHtml(body: string) {
   // Gardé avec le body qui l'a produit : évite d'exposer un HTML rendu pour
   // le corps précédent le temps que le nouveau rendu arrive.
   const [rendered, setRendered] = useState<{ body: string; html: string } | null>(null);
+  const logo = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1/logo`
 
   useEffect(() => {
     let cancelled = false;
 
-    renderProspectEmailHtml(body).then((result) => {
+    renderProspectEmailHtml(body, logo).then((result) => {
       if (!cancelled) {
         setRendered({ body, html: result });
       }
