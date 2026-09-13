@@ -180,7 +180,7 @@ export function ProspectEmailTemplatePremium({
                           alt="Leadflux"
                           width={40}
                           height={40}
-                          style={{ display: "block", borderRadius: 9999 }}
+                          style={{ display: "block", borderRadius: "0.25rem" }}
                         />
                       </td>
                       <td style={{ verticalAlign: "middle" }}>
