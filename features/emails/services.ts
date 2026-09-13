@@ -15,6 +15,7 @@ import { ProspectServicesImpl } from "../prospects/services"
 import { FindReplyByThreadIdDto } from "../imap/dto/schema"
 import { IMAPServiceImpl } from "../imap/services"
 import { EmailScanRepositoriesImpl } from "./repositories/scan"
+import { KnowledgeBaseServicesImpl } from "../knowledge-bases/services"
 
 
 
@@ -30,7 +31,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
 
     generate: async (inputs: CreateEmailByProspectIdDto) => {
         const currentUser = await UserServices.getCurrentUser()
-
+        const knowledgeBase = await KnowledgeBaseServicesImpl.getLastKnowledgeVersion()
         const prospect = await ProspectReadRepositoriesImpl.getWithRelations(inputs.prospectId)
 
         if (!prospect) {
@@ -67,7 +68,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             body: agentResponse.body,
             subject: agentResponse.subject,
             generatedAt: new Date(),
-            knowledgeVersion: agentResponse.knowledgeVersion,
+            knowledgeBaseId: knowledgeBase.id,
         })
         await ProspectServicesImpl.markAsProspected(inputs.prospectId)
         const emailRow = emailFromRow(email, [version])
@@ -155,6 +156,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
 
     regenerate: async (id: string) => {
         const email = await EmailReadRepositoriesImpl.get(id)
+        const knowledgeBase = await KnowledgeBaseServicesImpl.getLastKnowledgeVersion()
         if (!email) {
             throw new Error("Email not found")
         }
@@ -165,7 +167,7 @@ export const EmailProspectsServicesImpl: EmailProspectsServices = {
             body: agentResponse.body,
             subject: agentResponse.subject,
             generatedAt: new Date(),
-            knowledgeVersion: agentResponse.knowledgeVersion,
+            knowledgeBaseId: knowledgeBase.id,
         })
         //update generation input in email table
         await EmailProspectsServicesImpl.updateGenerationInput(email.id, agentResponse.payload)

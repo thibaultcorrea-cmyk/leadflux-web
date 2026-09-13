@@ -1,6 +1,5 @@
 import { ENV } from "@/core/env";
 import { AgentEmailGenerateApiInput, AgentEmailGenerateApiOutput } from "../entities/agentEmail"
-import { EmailAgentMock } from "../../mocks/email-contents";
 
 
 

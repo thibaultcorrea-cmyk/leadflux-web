@@ -8,8 +8,8 @@ import { SendEmailDto } from "@/features/smtp/dto/schema"
 import { EmailReadRepositoriesImpl } from "@/features/emails/repositories/read"
 import { renderProspectEmailHtml } from "@/features/emails/templates/render-email-html"
 import { KnowledgeBaseServicesImpl } from "@/features/knowledge-bases/services"
-import { SystemServicesImpl } from "@/features/system/services"
-import { ENV } from "@/core/env"
+
+const UNKNOWN_VERSION = "Version non renseignée"
 
 export const AgentEmailService = {
     generate: async (inputs: CreateEmailDto): Promise<AgentEmailGenerateOutput> => {
@@ -23,7 +23,7 @@ export const AgentEmailService = {
         return {
             subject,
             body: content,
-            knowledgeVersion: knowledgeBase.name,
+            knowledgeVersion: knowledgeBase.name ?? UNKNOWN_VERSION,
             payload
         }
 
@@ -31,6 +31,8 @@ export const AgentEmailService = {
     },
     regenerate: async (emailId: string): Promise<AgentEmailGenerateOutput> => {
         const email = await EmailReadRepositoriesImpl.get(emailId)
+        const knowledgeBase = await KnowledgeBaseServicesImpl.getLastKnowledgeVersion()
+
         if (!email) {
             throw new Error("Email not found")
         }
@@ -46,7 +48,7 @@ export const AgentEmailService = {
         return {
             subject,
             body: content,
-            knowledgeVersion: "1.0.0",
+            knowledgeVersion: knowledgeBase.name ?? UNKNOWN_VERSION,
             payload
         }
     },
